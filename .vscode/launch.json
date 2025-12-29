@@ -1,0 +1,161 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "method-d1-ml1",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--dataset", "dataset_one",
+                "--proxy_model", "ML1_proxy4b1_probability",
+                "--oracle_model", "ML1_oracle1_probability",
+                "--run_times", "10"
+            ]
+        },
+        {
+            "name": "method-d1-skewhigh",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--dataset", "dataset_one",
+                "--proxy_model", "Dist_SkewHigh_proxy2",
+                "--oracle_model", "Dist_SkewHigh_oracle_prob",
+                "--run_times", "20"
+            ]
+        },
+        {
+            "name": "method-d1-skewlow",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--dataset", "dataset_one",
+                "--proxy_model", "Dist_SkewLow_proxy2",
+                "--oracle_model", "Dist_SkewLow_oracle_prob",
+                "--run_times", "20"
+            ]
+        },
+        {
+            "name": "method-d1-normal",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            // "console": "externalTerminal",
+            "args": [
+                "--dataset", "dataset_one",
+                "--proxy_model", "Dist_Normal_proxy2",
+                "--oracle_model", "Dist_Normal_oracle_prob",
+                "--run_times", "20"
+            ]
+        },
+        {
+            "name": "method-d1-uniform",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--dataset", "dataset_one",
+                "--proxy_model", "Dist_Uniform_proxy2",
+                "--oracle_model", "Dist_Uniform_oracle_prob",
+                "--run_times", "20"
+            ]
+        },
+        {
+            "name": "method-d1-Bimodal",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--dataset", "dataset_one",
+                "--proxy_model", "Dist_Bimodal_proxy2",
+                "--oracle_model", "Dist_Bimodal_oracle_prob",
+                "--run_times", "20"
+            ]
+        },
+        {
+            "name": "method-d3-skewhigh",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--dataset", "dataset_three",
+                "--proxy_model", "Dist_SkewHigh_proxy2",
+                "--oracle_model", "Dist_SkewHigh_oracle_prob",
+                "--run_times", "20"
+            ],
+            "noDebug": true
+        },
+        {
+            "name": "method-d3-skewlow",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--dataset", "dataset_three",
+                "--proxy_model", "Dist_SkewLow_proxy2",
+                "--oracle_model", "Dist_SkewLow_oracle_prob",
+                "--run_times", "20"
+            ]
+        },
+        {
+            "name": "method-d3-normal",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            // "console": "externalTerminal",
+            "args": [
+                "--dataset", "dataset_three",
+                "--proxy_model", "Dist_Normal_proxy2",
+                "--oracle_model", "Dist_Normal_oracle_prob",
+                "--run_times", "20"
+            ]
+        },
+        {
+            "name": "method-d3-uniform",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--dataset", "dataset_three",
+                "--proxy_model", "Dist_Uniform_proxy2",
+                "--oracle_model", "Dist_Uniform_oracle_prob",
+                "--run_times", "20"
+            ]
+        },
+        {
+            "name": "method-d3-Bimodal",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--dataset", "dataset_three",
+                "--proxy_model", "Dist_Bimodal_proxy2",
+                "--oracle_model", "Dist_Bimodal_oracle_prob",
+                "--run_times", "20"
+            ]
+        },
+    ],
+    "compounds": [
+        {
+            "name": "Run ALL Experiments",
+            "configurations": ["method-d3-skewhigh", "method-d3-skewlow", "method-d3-normal", "method-d3-uniform", "method-d3-Bimodal"]
+        }
+    ]
+}
