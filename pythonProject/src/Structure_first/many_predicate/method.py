@@ -9,11 +9,6 @@ from typing import List, Dict, Tuple
 import pandas as pd
 import numpy as np
 import json
-import shutil
-import pandas as pd
-from datetime import datetime
-import argparse 
-
 project_root = "/home/wangshuo/projects/Neo4j_Exp"
 if project_root not in sys.path:
     sys.path.append(project_root)
@@ -21,406 +16,270 @@ from pythonProject.src.Structure_first.fastest_pipeline import FastestGraphConve
 from pythonProject.src.Structure_first.graph_sample import FastestRunner
 from pythonProject.src.Structure_first.precision_submatching import ExactSubgraphMatcher
 from pythonProject.src.Structure_first.proxy_sample import ProxyStratifiedSampler, compute_T_true
-from pythonProject.src.Structure_first.proxy_sample import ProxyStratifiedSampler, compute_T_true
-from pythonProject.src.Structure_first.proxy_sample import compute_T_true_polars
 
-# ===========================
-# 1: 定义参数解析函数
-# ===========================
-def parse_args():
-    parser = argparse.ArgumentParser(description="Run method3 pipeline with custom dataset, proxy model, and oracle model.")
-    parser.add_argument("--dataset", type=str, default="dataset_two", help="Name of the dataset (e.g., dataset_one, dataset_three)")
-    parser.add_argument("--proxy_model", type=str, default="ML1_proxy4b1_probability", help="Name of the proxy model column")
-    parser.add_argument("--oracle_model", type=str, default="ML1_oracle1_probability", help="Name of the oracle model column")  # 新增参数
-    parser.add_argument("--run_times", type=int, default=20, help="Number of runs for each query")
-    return parser.parse_args()
-
-# 获取命令行参数
-args = parse_args()
-# ===========================
-# ✅ 修改点 2: 使用参数动态配置路径
-# ===========================
 # 一级测试数据集
 datasets_name = "parler_data"
 # 一级数据集下根据查询和图结构的差异划分的子测试数据集
-dataset_name = args.dataset  
-proxy_model_name = args.proxy_model
-oracle_model_name = args.oracle_model
-run_times_config = args.run_times
-
-print(f"🚀 Running with Dataset: {dataset_name}, Proxy Model: {proxy_model_name}, Run Times: {run_times_config}")
-
-
+# dataset_name = "dataset_test"
+dataset_name = "dataset_test2"
 # 原始CSV数据路径
 CSV_BASE_DIR = f"/home/wangshuo/resource/datasets/{datasets_name}/{dataset_name}/csv_data"
 # 转换后GraphLib数据存放路径
 Graph_Lib_Dir = f"/home/wangshuo/resource/datasets/{datasets_name}/{dataset_name}/data_graph"
-
-# 初始化 Runner
+# converter = FastestGraphConverter(CSV_BASE_DIR,Graph_Lib_Dir)
+# converter.run_without_author_user_post()
+# converter.remove_edge_labels()
+# dataset_name = "dataset_one"
 runner = FastestRunner(build_dir="/home/wangshuo/projects/FaSTest-main/build")
-# 评估参数
-RUN_TIMES = 1  # 每种方法重复次数
-
-
-current_budget = 40000
-infer_label = 1  # 对应 Post 节点的标签
-
-# 调用 run 方法
-code, output = runner.run(
-    dataset=dataset_name,
-    root_label=infer_label,           # 必须指定推理节点的标签
-    sample_budget=current_budget,     # 设置预算
-    # estimate_with_predicate=True      # <--- 开启单推理谓词模式
-    estimate_with_predicate=False      # <--- 关闭单推理谓词模式
-)
-
-
-# ===========================
-# = 配置区域（按需修改） =
-# ===========================
-
 print(dataset_name)
+sample_budget = 20000
+# 默认执行 ./Fastest -d parler --ROOT_LABEL 1 (表示推理谓词所在节点的标签)
+code, output = runner.run(dataset=dataset_name, root_label=-1,sample_budget=sample_budget)
+import pandas as pd
+import os
 
-# Fastest对所有查询图的估计结果文件保存路径
-SV_FILE = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}/results/in_estimateW_result.txt"
-# 用户指定每个查询图中推理谓词节点
-INFER_NODE_FILE = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}/data_graph/infer_node.txt"
-# 图中节点 ID 与原始CSV文件中数据id的映射关系文件
-IDMAP_FILE = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}/data_graph/id_mapping.csv"
-# 原始 post.csv 文件路径
-POST_CSV = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}/csv_data/post.csv"
-# 存放真实结果的目录
-GT_RESULT_DIR = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}/ground_truth/structure_result"
-# 存放本原型系统结果的目录
-OUTPUT_DIR = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}/results"
-# 输出的包含每个查询post估计值w（x）的 post CSV 文件路径
-POST_WITH_ESTIMATE_CSV = os.path.join(OUTPUT_DIR, "post_with_estimate.csv")
-# 各方法结果的总结文件路径
-SUMMARY_CSV = os.path.join(OUTPUT_DIR, "results_summary.csv")
-SUMMARY_TXT = os.path.join(OUTPUT_DIR, "results_summary.txt")
-# 是否保留临时 CSV（用于调试）
-KEEP_TEMP = False  
-# ===========================
+def split_results_by_query(input_file_path, output_dir):
+    """
+    拆分多查询的结果文件为单查询的结果文件。
 
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+    Args:
+        input_file_path (str): 输入的 ins_estimateW_result.csv 文件路径。
+        output_dir (str): 拆分后的小文件要保存的目录。
+    """
+    print(f"--- 开始处理文件: {input_file_path} ---")
 
+    # 检查输入文件是否存在
+    if not os.path.exists(input_file_path):
+        print(f"[错误] 输入文件不存在: {input_file_path}")
+        return
 
-# 定义统计结果保存路径 (确保是全局变量或在函数内定义)
-SAMPLED_COUNT_FILE = os.path.join(OUTPUT_DIR, "efficiency/sampled_node_count.csv")
+    # 检查输出目录是否存在，如果不存在则创建
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+        print(f"创建输出目录: {output_dir}")
 
-# ---------------------------
-# Main pipeline
-# ---------------------------
-
-
-print("[BEGIN] multi-query pipeline")
-
-merger = FastestEstimateMerger(
-    sv_file=SV_FILE,
-    map_file=IDMAP_FILE,
-    post_file=POST_CSV,
-    output_file=POST_WITH_ESTIMATE_CSV
-)
-# 1) parse sv multi
-sv_df = merger.parse_sv_multi(SV_FILE)
-if sv_df is None or sv_df.empty:
-    print("[ERROR] No sv records parsed. Exiting.")
-
-# 2) read infer node list
-infer_nodes = merger.read_infer_node_list(INFER_NODE_FILE)
-
-# 3) build post_with_estimate.csv
-merged_df = merger.build_post_with_estimates(sv_df=sv_df, idmap_file=IDMAP_FILE, post_csv=POST_CSV,
-                                     out_csv=POST_WITH_ESTIMATE_CSV)
-
-def save_node_counts(records: List[Dict]):
-    """辅助函数：将节点计数追加到 CSV"""
-    if not records: return
-    df = pd.DataFrame(records)
-    header = not os.path.exists(SAMPLED_COUNT_FILE)
     try:
-        df.to_csv(SAMPLED_COUNT_FILE, mode='a', index=False, header=header)
+        # 使用 Pandas 读取整个 CSV 文件
+        df = pd.read_csv(input_file_path)
+        print(f"成功读取 {len(df)} 行数据。")
+
+        # 检查 'query_name' 列是否存在
+        if 'query_name' not in df.columns:
+            print("[错误] CSV文件中缺少 'query_name' 列。请检查文件格式。")
+            return
+
+        # 按照 'query_name' 列的值进行分组
+        grouped = df.groupby('query_name')
+        
+        num_files_created = 0
+        for query_name, group_df in grouped:
+            # 1. 构造输出文件名
+            base_name = os.path.splitext(query_name)[0]
+            
+            # +++ 修改下面这行，将后缀名从 .txt 改为 .csv +++
+            output_filename = f"{base_name}.csv"
+            
+            output_filepath = os.path.join(output_dir, output_filename)
+            
+            print(f"  正在处理查询 '{query_name}' -> 输出到 '{output_filepath}'...")
+
+            # 2. 准备要写入的数据
+            output_df = group_df.drop('query_name', axis=1)
+
+            # 3. 将处理后的数据写入新的 CSV 文件
+            output_df.to_csv(output_filepath, index=False)
+            
+            num_files_created += 1
+
+        print(f"\n--- 处理完成 ---")
+        print(f"总共拆分出 {num_files_created} 个查询文件。")
+
     except Exception as e:
-        print(f"[错误] 写入节点统计失败: {e}")
+        print(f"[严重错误] 处理过程中发生异常: {e}")
 
-def evaluate_queries(
-    merged_df: pd.DataFrame,
-    sv_df: pd.DataFrame,
-    infer_nodes: List[str],
-    idmap_file: str,
-    post_csv: str,
-    gt_result_dir: str,
-    output_dir: str,
-    run_times: int = 50,  # ✅ 默认改为 50 次
-    new_workload: bool = False,
-    proxy_model = 'ML1_proxy4b1_probability',
-    oracle_model = "ML1_oracle1_probability",  
-    T_true_cache_file: str = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}/ground_truth/T_true.txt"
-)  -> Tuple[pd.DataFrame, pd.DataFrame]:
-    """
-    对每个 query：
-      - 运行 run_times 次采样。
-      - 每次运行的结果直接保存到 output_dir/result_summarys/results_summary_run_{t}.csv 中。
-    """
-    print('[check proxy_model]', proxy_model)
-    print('[check oracle_model]', oracle_model)
-    print('[check T_true_cache_file]', T_true_cache_file)
-    # ✅ 1. 准备保存分次结果的目录
-    summarys_dir = os.path.join(output_dir, "result_summarys", proxy_model)
-    os.makedirs(summarys_dir, exist_ok=True)
-    print(f"[INFO] 分次实验结果将保存至: {summarys_dir}")
+# ===================================================================
+# --- Jupyter Notebook 配置区 ---
+# 请在这里修改您的输入文件路径和输出目录路径
+# ===================================================================
 
-    # ✅ 2. 初始化/清空这 run_times 个文件 (如果需要覆盖旧结果)
-    # 也可以选择追加模式，这里为了清晰，假设每次运行前清空或新建
-    # 我们将在循环中以 'a' (append) 模式写入，所以先写入表头
-    csv_headers = "query_index,query_basename,gt_match_col,T_true,method,T_hat,Qerror,n_post,n_comment\n"
-    for t in range(run_times):
-        run_file = os.path.join(summarys_dir, f"results_summary_run_{t+1}.csv")
-        with open(run_file, "w") as f:
-            f.write(csv_headers)
+# 假设您的数据集名称是 'dataset_test'
+dataset_name = 'dataset_test2'
 
-    rows = [] # 用于计算汇总均值（可选）
-    txt_lines = []
-    all_node_stats_records = []
+# 构造输入文件和输出目录的路径
+# 请确保这里的路径与您的实际文件结构一致
+base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}/results/"
+input_csv_path = os.path.join(base_path, "ins_estimateW_result.csv")
+# 将拆分后的文件保存到 'structure_estimate' 子目录中
+output_directory = os.path.join(base_path, "structure_estimate/")
+
+# 调用主函数
+split_results_by_query(input_csv_path, output_directory)
+
+# ===================================================================
+
+import pandas as pd
+import os
+from typing import Dict
+
+# ... (load_and_prepare_mappings 和 load_source_csvs 函数保持不变) ...
+def load_and_prepare_mappings(id_mapping_path: str) -> pd.DataFrame:
+    """读取id_mapping.csv并准备好用于连接的DataFrame。"""
+    if not os.path.exists(id_mapping_path):
+        raise FileNotFoundError(f"ID映射文件不存在: {id_mapping_path}")
+        
+    id_map_df = pd.read_csv(id_mapping_path, dtype={'internal_id': str, 'orig_id': str, 'type': str})
+    id_map_df.rename(columns={'internal_id': 'node_id'}, inplace=True)
     
-    # Step 1: 读取/初始化 T_true 缓存
-    # ...existing code...
-    if os.path.exists(T_true_cache_file) and not new_workload:
-        with open(T_true_cache_file, "r") as f:
-            try:
-                T_true_cache = json.load(f)
-                print(f"[INFO] 已加载缓存的 T_true，共 {len(T_true_cache)} 条。")
-            except json.JSONDecodeError:
-                print(f"[WARN] {T_true_cache_file} 格式错误，将重新计算所有 T_true。")
-                T_true_cache = {}
+    print(f"加载了 {len(id_map_df)} 条ID映射记录。")
+    return id_map_df
+
+def load_source_csvs(post_csv_path: str, comment_csv_path: str) -> Dict[str, pd.DataFrame]:
+    """读取原始的 post.csv 和 comment.csv 文件。"""
+    if not os.path.exists(post_csv_path):
+        raise FileNotFoundError(f"post.csv 文件不存在: {post_csv_path}")
+    if not os.path.exists(comment_csv_path):
+        raise FileNotFoundError(f"comment.csv 文件不存在: {comment_csv_path}")
+        
+    post_df = pd.read_csv(post_csv_path, dtype=str)
+    comment_df = pd.read_csv(comment_csv_path, dtype=str)
+    
+    if 'id:ID' in post_df.columns:
+        post_df.rename(columns={'id:ID': 'orig_id'}, inplace=True)
+    if 'id:ID' in comment_df.columns:
+        comment_df.rename(columns={'id:ID': 'orig_id'}, inplace=True)
+        
+    print(f"加载了 {len(post_df)} 行 post 数据和 {len(comment_df)} 行 comment 数据。")
+    return {"Post": post_df, "Comment": comment_df}
+
+
+def process_single_query_file_correctly(query_file_path: str, id_map_df: pd.DataFrame, sources: Dict[str, pd.DataFrame], output_dir: str):
+    """
+    处理单个长格式查询文件，聚合 ML 值和【节点ID列表】。
+    """
+    query_basename = os.path.basename(query_file_path).replace("_estimateW_result.csv", "")
+    print(f"\n--- 正在处理查询: {query_basename} ---")
+    
+    instance_df = pd.read_csv(query_file_path)
+    if instance_df.empty:
+        print("文件为空，跳过。")
+        return
+        
+    instance_df['node_id'] = instance_df['node_id'].astype(str)
+    
+    # 1. 连接ID映射
+    merged_with_map = pd.merge(instance_df, id_map_df, on='node_id', how='left')
+
+    # 2. 定义期望的 ML 列
+    expected_ml1_cols = ['ML1_oracle1_probability', 'ML1_proxy4b1_probability', 'ML1_proxy2b1_probability']
+    expected_ml2_cols = ['ML2_oracle2_probability', 'ML2_proxy2d2_probability', 'ML2_proxy4d2_probability', 'ML2_proxy1_probability']
+    
+    # 3. 分别处理 Post 和 Comment 数据流
+    
+    # --- Post 数据流 ---
+    posts_data = merged_with_map[merged_with_map['type'] == 'Post'].copy()
+    posts_joined = pd.merge(posts_data, sources['Post'], on='orig_id', how='left')
+    
+    # --- Comment 数据流 ---
+    comments_data = merged_with_map[merged_with_map['type'] == 'Comment'].copy()
+    comments_joined = pd.merge(comments_data, sources['Comment'], on='orig_id', how='left')
+    
+    # 4. 最终组装与聚合
+    
+    # --- 分别对 Post 和 Comment 进行聚合 ---
+    
+    # === 【修改点 1】：聚合 Post 数据（增加 orig_id） ===
+    actual_ml1_cols = [col for col in expected_ml1_cols if col in posts_joined.columns]
+    if not posts_joined.empty:
+        # 定义聚合字典：ML列聚合为列表，orig_id 也聚合为列表
+        agg_dict = {col: list for col in actual_ml1_cols}
+        agg_dict['orig_id'] = list  # +++ 新增：收集节点ID +++
+        
+        agg_posts = posts_joined.groupby('instance_id').agg(agg_dict).reset_index()
+        # 重命名 orig_id 为 post_id_list
+        agg_posts.rename(columns={'orig_id': 'post_id_list'}, inplace=True) # +++ 重命名 +++
     else:
-        T_true_cache = {}
+        # 如果为空，创建带有所需列的空 DataFrame
+        agg_posts = pd.DataFrame(columns=['instance_id', 'post_id_list'] + actual_ml1_cols)
 
-    # order queries by index
-    q_order = sv_df[["query_index", "query_basename"]].drop_duplicates().sort_values("query_index")
-    q_order = q_order.reset_index(drop=True)
-
-    n_queries = len(q_order)
-    if len(infer_nodes) < n_queries:
-        print(f"[WARN] infer_nodes length {len(infer_nodes)} < number of parsed queries {n_queries}. We'll map as many as available and default 'u1' for missing.")
+    # === 【修改点 2】：聚合 Comment 数据（增加 orig_id） ===
+    actual_ml2_cols = [col for col in expected_ml2_cols if col in comments_joined.columns]
+    if not comments_joined.empty:
+        agg_dict = {col: list for col in actual_ml2_cols}
+        agg_dict['orig_id'] = list  # +++ 新增：收集节点ID +++
+        
+        agg_comments = comments_joined.groupby('instance_id').agg(agg_dict).reset_index()
+        # 重命名 orig_id 为 comment_id_list
+        agg_comments.rename(columns={'orig_id': 'comment_id_list'}, inplace=True) # +++ 重命名 +++
+    else:
+        agg_comments = pd.DataFrame(columns=['instance_id', 'comment_id_list'] + actual_ml2_cols)
+        
+    # 创建基础表
+    base_agg_df = instance_df[['instance_id', 'estimateW', 'global_estimateW']].groupby('instance_id').first().reset_index()
     
-    # Step 2: 遍历每个 query
-    for i, r in q_order.iterrows():
-        qi = int(r["query_index"])
-        qbase = r["query_basename"]
-        colname = f"estimate__{qi}__{qbase}"
-        print("\n" + "="*60)
-        print(f"[STEP] Query index={qi}, basename={qbase}, estimate column={colname}")
+    # --- 合并聚合后的结果 ---
+    final_df = pd.merge(base_agg_df, agg_posts, on='instance_id', how='left')
+    final_df = pd.merge(final_df, agg_comments, on='instance_id', how='left')
 
-        # choose gt_match_col
-        gt_match_col = infer_nodes[i] if i < len(infer_nodes) else "u1"
-        print(f"[INFO] Using gt_match_col = {gt_match_col} for query #{qi}")
+    print(f"聚合完成，生成 {len(final_df)} 条实例记录。")
 
-        # Step 3: 读取或计算 T_true
-        # ...existing code...
-        if (not new_workload) and (qbase in T_true_cache):
-            T_true = float(T_true_cache[qbase])
-            print(f"[CACHE] 读取缓存 T_true={T_true:.4f} for {qbase}")
-        else:
-            # locate GT file for this query
-            candidates = [
-                os.path.join(gt_result_dir, f"{qbase}_matches.csv"),
-                os.path.join(gt_result_dir, f"{qbase}.graph_matches.csv"),
-                os.path.join(gt_result_dir, f"{qbase}.matches.csv"),
-                os.path.join(gt_result_dir, qbase),
-            ]
-            gt_path = None
-            for p in candidates:
-                if p and os.path.exists(p):
-                    gt_path = p
-                    break
-            if gt_path is None:
-                for fname in os.listdir(gt_result_dir):
-                    if qbase in fname:
-                        cand = os.path.join(gt_result_dir, fname)
-                        if os.path.isfile(cand):
-                            gt_path = cand
-                            break
-            if gt_path is None:
-                print(f"[WARN] Ground-truth file for query {qbase} not found in {gt_result_dir}. Will use T_true=0.")
-                T_true = 0.0
-            else:
-                try:
-                    T_true = compute_T_true_polars(
-                        gt_path=gt_path,
-                        id_mapping_path=idmap_file,
-                        post_csv_path=post_csv,
-                        gt_match_col=gt_match_col,
-                        prob_col=oracle_model,
-                        prob_threshold=0.5
-                    )
-                except Exception as e:
-                    print(f"[ERROR] compute_T_true_polars failed for {qbase} with gt_match_col={gt_match_col}: {e}")
-                    traceback.print_exc()
-                    T_true = 0.0
-            # 写入缓存
-            T_true_cache[qbase] = float(T_true)
-            with open(T_true_cache_file, "w") as f:
-                json.dump(T_true_cache, f, indent=2)
-            print(f"[CACHE] 已更新缓存: {qbase} -> {T_true:.4f}")
-            
-        # Step 4: 临时 CSV prepare temp CSV for sampler
-        if colname not in merged_df.columns:
-            print(f"[WARN] estimate column {colname} not found in merged_df. Using zeros.")
-            tmp_df = merged_df.copy()
-            tmp_df["estimate"] = 0.0
-        else:
-            tmp_df = merged_df.copy()
-            tmp_df["estimate"] = tmp_df[colname].astype(float).fillna(0.0)
-
-        # create temp csv file
-        tmp_csv = os.path.join(output_dir, f"tmp_post_with_estimate_q{qi}__{qbase}_{proxy_model}.csv")
-        # ✅ 新增逻辑：检查缓存文件是否存在
-        if os.path.exists(tmp_csv):
-            print(f"[CACHE] Found existing estimate file, skipping generation: {tmp_csv}")
-        else:
-            # 文件不存在，从 merged_df 中提取并生成
-            if colname not in merged_df.columns:
-                print(f"[WARN] estimate column {colname} not found in merged_df. Using zeros.")
-                tmp_df = merged_df.copy()
-                tmp_df["estimate"] = 0.0
-            else:
-                tmp_df = merged_df.copy()
-                tmp_df["estimate"] = tmp_df[colname].astype(float).fillna(0.0)
-
-            print(f"[INFO] Creating new estimate file: {tmp_csv}")
-            tmp_df.to_csv(tmp_csv, index=False)
-        if not KEEP_TEMP:
-            remove_tmp = True
-        else:
-            remove_tmp = False
-
-        # instantiate sampler
-        sampler = ProxyStratifiedSampler(csv_path=tmp_csv, T_true=T_true,
-                                         is_multi_predicate=False,
-                                         post_proxy=proxy_model,
-                                         post_oracle=oracle_model,
-                                        total_budget_frac=0.1,
-                                         c_stage=0.15
-                                        )
-
-        methods = {
-            "baseline_uniform": sampler.run_baseline_uniform,
-            "baseline_proxy": sampler.run_baseline_proxy,
-            "baseline_proxy_a": sampler.run_baseline_proxy_a,
-            "baseline_graph_only": sampler.run_baseline_graph_only,
-            "proxy_importance": sampler.run_proxy_importance,
-            "proxy_mab": sampler.run_mab_sampling,
-            "proxyE_importance": sampler.run_proxyE_importance,
-            "pa_optimal": sampler.run_pa_optimal
-        }
-
-        for mname, func in methods.items():
-            T_list = []
-            Q_list = []
-            post_cnt_list = []
-            comment_cnt_list = []
-            
-            print(f"\n--- Running {mname} for {run_times} times ---")
-            for t in range(run_times):
-                try:
-                    out = func()
-                    T_hat = float(out.get("T_hat", 0.0))
-                    Qerror = float(out.get("Qerror", 1.0))
-                    n_post = out.get("n_post", 0)
-                    n_comment = out.get("n_comment", 0)
-                    
-                    T_list.append(T_hat)
-                    Q_list.append(Qerror)
-                    post_cnt_list.append(n_post)
-                    comment_cnt_list.append(n_comment)
-                    
-                    # ✅ 核心修改：将第 t 次的结果直接写入对应的文件
-                    run_file = os.path.join(summarys_dir, f"results_summary_run_{t+1}.csv")
-                    with open(run_file, "a") as f:
-                        # "query_index,query_basename,gt_match_col,T_true,method,T_hat,Qerror,n_post,n_comment"
-                        line = f"{qi},{qbase},{gt_match_col},{T_true},{mname},{T_hat},{Qerror},{n_post},{n_comment}\n"
-                        f.write(line)
-                        
-                except Exception as e:
-                    print(f"❌ {mname} 第 {t+1} 次执行失败: {repr(e)}")
-                    traceback.print_exc()
-                    T_list.append(0.0)
-                    Q_list.append(1.0)
-
-            # 计算均值与标准差 (仅用于控制台输出和汇总文件，不影响分次文件)
-            def trimmed_mean_std(lst):
-                if len(lst) <= 2:
-                    return np.mean(lst), np.std(lst)
-                sorted_lst = sorted(lst)
-                trimmed = sorted_lst[1:-1]
-                return np.mean(trimmed), np.std(trimmed)
-            
-            T_mean, T_std = trimmed_mean_std(T_list)
-            Q_mean, Q_std = trimmed_mean_std(Q_list)
-            avg_post = int(np.mean(post_cnt_list))
-            avg_comment = int(np.mean(comment_cnt_list))
-
-            print(f"✅ {mname} 平均结果: T_hat={T_mean:.4f}±{T_std:.4f},  Qerror={Q_mean:.6f}±{Q_std:.6f}")
-            
-            # 写入汇总结果表 (保留原有逻辑)
-            rows.append({
-                "query_index": qi,
-                "query_basename": qbase,
-                "gt_match_col": gt_match_col,
-                "T_true": float(T_true),
-                "method": mname,
-                "T_hat_mean": T_mean,
-                "T_hat_std": T_std,
-                "Qerror_mean": Q_mean,
-                "Qerror_std": Q_std
-            })
-
-            txt_lines.append(
-                f"{qbase} {gt_match_col} {mname} "
-                f"T_hat={T_mean:.6f}±{T_std:.6f} "
-                f"Qerror={Q_mean:.6f}±{Q_std:.6f}"
-            )
-            all_node_stats_records.append({
-                "query_name": qbase,
-                "method": mname,
-                "post_sampled_cnt": avg_post,
-                "comment_sampled_cnt": avg_comment
-            })
-
-        # cleanup tmp csv
-        if remove_tmp:
-            try:
-                os.remove(tmp_csv)
-                print(f"[INFO] Removed temp file: {tmp_csv}")
-            except Exception:
-                pass
-
-    # write summary files
-    df_summary = pd.DataFrame(rows)
-    df_summary.to_csv(SUMMARY_CSV, index=False)
-    with open(SUMMARY_TXT, "w") as f:
-        for ln in txt_lines:
-            f.write(ln + "\n")
-    if all_node_stats_records:
-        save_node_counts(all_node_stats_records)
+    # 5. 保存结果
+    output_filename = f"aggregated_list_{query_basename}.csv"
+    output_filepath = os.path.join(output_dir, output_filename)
     
-    print(f"[INFO] evaluate_queries: wrote summary to {SUMMARY_CSV}")
-    print(f"[INFO] 分次详细结果已保存至 {summarys_dir} (共 {run_times} 个文件)")
-    return df_summary, all_node_stats_records
+    # === 【修改点 3】：更新最终列顺序，加入 ID 列表列 ===
+    final_columns_order = [
+        'instance_id', 'estimateW', 'global_estimateW', 
+        'post_id_list', 'comment_id_list' # +++ 确保这两列被包含 +++
+    ] + expected_ml1_cols + expected_ml2_cols
+    
+    final_df = final_df.reindex(columns=final_columns_order)
+    
+    final_df.to_csv(output_filepath, index=False)
+    print(f"[完成] 结果已保存到: {output_filepath}")
 
-# ✅ 直接调用 evaluate_queries，设置 run_times=50
-evaluate_queries(
-    merged_df=merged_df,
-    sv_df=sv_df,
-    infer_nodes=infer_nodes,
-    idmap_file=IDMAP_FILE,
-    post_csv=POST_CSV,
-    gt_result_dir=GT_RESULT_DIR,
-    output_dir=OUTPUT_DIR,
-    run_times=run_times_config,  # ✅ 这里设置为 50
-    new_workload=False, 
-    proxy_model=proxy_model_name,
-    oracle_model=oracle_model_name,
-    T_true_cache_file=f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}/ground_truth/T_true_{oracle_model_name}.txt"
-)
+
+
+dataset_name = 'dataset_test2'
+"""主执行函数"""
+print(f"====== 开始处理数据集: {dataset_name} ======")
+
+# --- 路径配置 ---
+base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
+estimate_dir = os.path.join(base_path, "results", "structure_estimate")
+id_mapping_path = os.path.join(base_path, "data_graph", "id_mapping.csv")
+post_csv_path = os.path.join(base_path, "csv_data", "post.csv")
+comment_csv_path = os.path.join(base_path, "csv_data", "comment.csv")
+output_dir = os.path.join(base_path, "results", "aggregated_results")
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+    print(f"创建输出目录: {output_dir}")
+
+# --- 执行流程 ---
+try:
+    id_map_df = load_and_prepare_mappings(id_mapping_path)
+    sources = load_source_csvs(post_csv_path, comment_csv_path)
+
+    query_files = [f for f in os.listdir(estimate_dir) if f.endswith('.csv')]
+    if not query_files:
+        print(f"[警告] 在目录 {estimate_dir} 中没有找到任何 .csv 结果文件。")
+        
+    for query_file in sorted(query_files):
+        query_file_path = os.path.join(estimate_dir, query_file)
+        # 调用新的、正确的处理函数
+        process_single_query_file_correctly(query_file_path, id_map_df, sources, output_dir)
+        
+    print(f"\n====== 数据集 {dataset_name} 处理完毕 ======")
+
+except FileNotFoundError as e:
+    print(f"[严重错误] 依赖文件未找到: {e}")
+except Exception as e:
+    print(f"[严重错误] 处理过程中发生未知异常: {e}")
+
+
+
+from pythonProject.src.Structure_first.proxy_sample import multi_predicate_evaluation
+from pythonProject.src.Structure_first.proxy_sample import evaluate_graph_only_baseline
+# ===========================
+dataset_to_process = 'dataset_test2'
+# multi_predicate_evaluation(dataset_to_process)
+multi_predicate_evaluation(dataset_name=dataset_to_process, run_times=20)

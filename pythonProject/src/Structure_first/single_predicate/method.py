@@ -308,11 +308,12 @@ def evaluate_queries(
             "baseline_uniform": sampler.run_baseline_uniform,
             "baseline_proxy": sampler.run_baseline_proxy,
             "baseline_proxy_a": sampler.run_baseline_proxy_a,
-            "baseline_graph_only": sampler.run_baseline_graph_only,
-            "proxy_importance": sampler.run_proxy_importance,
+            "baseline_proxy_a": sampler.run_baseline_proxy_a,
+            "baseline_proxy_a_unbiased_test1": sampler.run_baseline_proxy_a_unbiased_test1,
+            # "proxy_importance": sampler.run_proxy_importance,
             "proxy_mab": sampler.run_mab_sampling,
             "proxyE_importance": sampler.run_proxyE_importance,
-            "pa_optimal": sampler.run_pa_optimal
+            # "pa_optimal": sampler.run_pa_optimal
         }
 
         for mname, func in methods.items():

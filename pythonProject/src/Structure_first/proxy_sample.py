@@ -341,158 +341,193 @@ class ProxyStratifiedSampler:
         alloc = {k: max(1, int(N2 * weights[k] / total_w)) for k in stats}
         return alloc
 
-    # @staticmethod
-    # def allocate_second_stage(stats: Dict[int, dict], N2: int) -> Dict[int, int]:
-    #     """
-    #     第二阶段样本分配策略 (混合分配：Neyman + Proportional)。
-    #     解决 Pilot 阶段因稀疏性导致的零方差和低估问题。
-    #     """
-        
-    #     # 1. Neyman 分配权重 (基于 Pilot 观测方差)
-    #     # 引入平滑项，防止 p_hat 或 sigma_hat 为 0 导致分配为 0
-    #     # p_hat 平滑：假设至少有 5% 的正样本概率，避免完全忽略某层
-    #     smoothed_p = {k: max(st["p_hat"], 0.05) for k, st in stats.items()} 
-    #     # sigma_hat 平滑：避免方差为 0
-    #     smoothed_sigma = {k: max(st["sigma_hat"], 1e-6) for k, st in stats.items()}
-        
-    #     neyman_weights = {k: math.sqrt(smoothed_p[k] * smoothed_sigma[k]) for k in stats}
-    #     sum_neyman = sum(neyman_weights.values()) or 1e-12
-        
-    #     # 2. 比例分配权重 (基于层总权重 W_k)
-    #     # 这是一种“保守”策略：层越大/越重要，分的样本越多，不依赖 Pilot 结果
-    #     prop_weights = {k: st["W_k"] for k, st in stats.items()}
-    #     sum_prop = sum(prop_weights.values()) or 1e-12
-        
-    #     # 3. 混合分配 (例如 50% Neyman + 50% Proportional)
-    #     # alpha 越小，越依赖先验权重，越稳定；alpha 越大，越依赖 Pilot 优化，方差越小但风险越高
-    #     alpha = 0.8 
-    #     final_weights = {}
-    #     for k in stats:
-    #         w_neyman = neyman_weights[k] / sum_neyman
-    #         w_prop = prop_weights[k] / sum_prop
-    #         final_weights[k] = alpha * w_neyman + (1 - alpha) * w_prop
-            
-    #     # 计算最终分配
-    #     alloc = {k: max(1, int(N2 * final_weights[k])) for k in stats}
-    #     print(f'[Check_allocate_second_stage_mixed_strategy]{alpha}')
-    #     return alloc
-    
     # ----------------------------
     # 第二阶段采样与估计
     # ----------------------------
-    #  v1.0: 重要性采样有放回抽样
+  
+    # #  v0.0: 重要性采样无放回抽样
     # @staticmethod
     # def second_stage_and_estimate(posts: pd.DataFrame, pilots: Dict[int, pd.DataFrame],
-        #                           alloc: Dict[int, int], sampling: str = "uniform") -> Dict:
-        # combined = {}
-        # summaries = {}
-        # all_sampled_frames = []
-        # print(f'[Check_sampling_method_in_second_stage_ws] {sampling}')
-        # for k, grp in posts.groupby("stratum"):
-        #     # 1. 获取 Pilot 样本
-        #     # 关键修正：Pilot 样本是完全观测的，它们代表自己，所以 pi = 1.0
-        #     pilot = pilots.get(k, pd.DataFrame(columns=posts.columns)).copy()
-        #     pilot["pi"] = 1.0
-            
-        #     pilot_ids = set(pilot["id:ID"].tolist()) if not pilot.empty else set()
-        #     remaining = grp[~grp["id:ID"].isin(pilot_ids)]
-            
-        #     n2 = alloc.get(k, 0)
-            
-        #     # 2. 第二阶段采样 (针对 Remaining 部分)
-        #     if n2 > 0 and not remaining.empty:
-        #         # 优化：如果预算足够覆盖剩余所有样本，直接全采（零方差）
-        #         if n2 >= len(remaining):
-        #             add_sample = remaining.copy()
-        #             add_sample["pi"] = 1.0
-        #         else:
-        #             if sampling == "uniform":
-        #                 # 均匀采样 (无放回)
-        #                 # 估计量: (N_rem / n2) * sum(y)
-        #                 # 对应的 pi = n2 / N_rem
-        #                 add_sample = remaining.sample(n=n2, replace=False).copy()
-        #                 add_sample["pi"] = n2 / len(remaining)
-        #             else:  # importance
-        #                 # 重要性采样 (有放回)
-        #                 # 估计量: (1/n2) * sum(y / p)  (Hansen-Hurwitz)
-        #                 # 对应的 pi = n2 * p
-        #                 weights = np.sqrt(remaining["proxy"].values * remaining["a"].values + 1e-10)
-        #                 if weights.sum() == 0:
-        #                     probs = np.ones(len(remaining)) / len(remaining)
-        #                 else:
-        #                     probs = weights / weights.sum()
-                        
-        #                 rng = np.random.default_rng()
-        #                 # 关键修正：使用有放回采样，且不截断 pi
-        #                 idx = rng.choice(len(remaining), size=n2, replace=True, p=probs)
-        #                 add_sample = remaining.iloc[idx].copy()
-        #                 add_sample["pi"] = n2 * probs[idx]
-        #     else:
-        #         add_sample = pd.DataFrame(columns=posts.columns)
+    #                               alloc: Dict[int, int], sampling: str = "uniform") -> Dict:
+    #     combined = {}
+    #     summaries = {}
+    #     all_sampled_frames = []
 
-        #     # 3. 合并与估计
-        #     final = pd.concat([pilot, add_sample], ignore_index=True, sort=False)
-        #     final["Y"] = final["a"] * final["oracle"]
-            
-        #     # T_hat = sum(Y / pi)
-        #     # Pilot 部分: sum(Y / 1) = sum(Y_pilot)  (确定的贡献)
-        #     # Add 部分: sum(Y / (n*p)) = Y_rem_est (剩余部分的估计)
-        #     # 总估计量 = Y_pilot + Y_rem_est (无偏)
-        #     T_hat_k = np.sum(final["Y"] / final["pi"])
-            
-        #     summaries[k] = {"T_hat": T_hat_k}
-        #     combined[k] = final
-        #     all_sampled_frames.append(final)
+    #     for k, grp in posts.groupby("stratum"):
+    #         pilot = pilots.get(k, pd.DataFrame(columns=posts.columns))
+    #         pilot_ids = set(pilot["id:ID"].tolist()) if not pilot.empty else set()
+    #         remaining = grp[~grp["id:ID"].isin(pilot_ids)]
+    #         n2 = alloc.get(k, 0)
+    #         if sampling == "uniform":
+    #             add_sample = remaining.sample(min(n2, len(remaining)), replace=False)
+    #             pi = len(add_sample) / len(remaining)
+    #             add_sample["pi"] = pi
+    #         else:  # importance sampling √(proxy*a)
+    #             weights = np.sqrt(remaining["proxy"].values * remaining["a"].values + 1e-10)
+    #             # if len(weights) > 0: print(
+    #             #     f"Stratum {k} Weights -> Min: {np.min(weights):.6f}, Max: {np.max(weights):.6f}, Mean: {np.mean(weights):.6f}")
+    #             probs = weights / weights.sum() if weights.sum() > 0 else np.ones(len(remaining)) / len(remaining)
+    #             # if len(probs) > 0:
+    #             #     print(
+    #             #         f"[stratum={k}] probs stats: "
+    #             #         f"min={probs.min():.6g}, max={probs.max():.6g}, "
+    #             #         f"mean={probs.mean():.6g}, std={probs.std():.6g}"
+    #             #     )
+    #             rng = np.random.default_rng()
+    #             idx = rng.choice(len(remaining), size=min(n2, len(remaining)), replace=False, p=probs)
+    #             add_sample = remaining.iloc[idx].copy()
+    #             pi = np.minimum(1.0, n2 * probs[idx]) if len(probs) > 0 else np.array([])
+    #             add_sample["pi"] = pi
 
-        # T_hat = sum(v["T_hat"] for v in summaries.values())
-        # full_sample = pd.concat(all_sampled_frames) if all_sampled_frames else pd.DataFrame()
-        # return {"T_hat": T_hat, "full_sample": full_sample}
-    #  v0.0: 重要性采样无放回抽样
+    #         final = pd.concat([pilot, add_sample], ignore_index=True, sort=False)
+    #         final["Y"] = final["a"] * final["oracle"]
+    #         if "pi" not in final:
+    #             pi_pilot = len(pilot) / len(grp) if len(grp) > 0 else 1.0
+    #             final["pi"] = pi_pilot
+    #         T_hat_k = np.sum(final["Y"] / final["pi"])
+    #         summaries[k] = {"T_hat": T_hat_k}
+    #         combined[k] = final
+    #         all_sampled_frames.append(final)
+
+    #     T_hat = sum(v["T_hat"] for v in summaries.values())
+    #     full_sample = pd.concat(all_sampled_frames) if all_sampled_frames else pd.DataFrame()
+    #     return {"T_hat": T_hat, "full_sample": full_sample}
+
+    # v0.0: 重要性采样有放回抽样 + 预算去重优化
     @staticmethod
     def second_stage_and_estimate(posts: pd.DataFrame, pilots: Dict[int, pd.DataFrame],
                                   alloc: Dict[int, int], sampling: str = "uniform") -> Dict:
+        """
+        Stage 2 采样。
+        修改：如果是 'importance' 采样，使用有放回 (With Replacement) + 预算去重优化，以保证无偏性并减小方差。
+        """
         combined = {}
         summaries = {}
         all_sampled_frames = []
 
         for k, grp in posts.groupby("stratum"):
+            # 1. 准备 Pilot 数据
             pilot = pilots.get(k, pd.DataFrame(columns=posts.columns))
             pilot_ids = set(pilot["id:ID"].tolist()) if not pilot.empty else set()
+            
+            # 2. 准备剩余集合 (Remaining)用于 Stage 2
+            # 逻辑：Stage 2 补充采样，不应该与 Pilot 重复。
+            # 严格双阶段独立采样：Stage 2 应该在由 Remaining 组成的总集中独立采样。
             remaining = grp[~grp["id:ID"].isin(pilot_ids)]
-            n2 = alloc.get(k, 0)
-            if sampling == "uniform":
-                add_sample = remaining.sample(min(n2, len(remaining)), replace=False)
-                pi = len(add_sample) / len(remaining)
-                add_sample["pi"] = pi
-            else:  # importance sampling √(proxy*a)
-                weights = np.sqrt(remaining["proxy"].values * remaining["a"].values + 1e-10)
-                # if len(weights) > 0: print(
-                #     f"Stratum {k} Weights -> Min: {np.min(weights):.6f}, Max: {np.max(weights):.6f}, Mean: {np.mean(weights):.6f}")
-                probs = weights / weights.sum() if weights.sum() > 0 else np.ones(len(remaining)) / len(remaining)
-                # if len(probs) > 0:
-                #     print(
-                #         f"[stratum={k}] probs stats: "
-                #         f"min={probs.min():.6g}, max={probs.max():.6g}, "
-                #         f"mean={probs.mean():.6g}, std={probs.std():.6g}"
-                #     )
-                rng = np.random.default_rng()
-                idx = rng.choice(len(remaining), size=min(n2, len(remaining)), replace=False, p=probs)
-                add_sample = remaining.iloc[idx].copy()
-                pi = np.minimum(1.0, n2 * probs[idx]) if len(probs) > 0 else np.array([])
-                add_sample["pi"] = pi
+            n2_budget = alloc.get(k, 0) # 这是分配给 Stage 2 的物理预算 (Unique Count)
 
-            final = pd.concat([pilot, add_sample], ignore_index=True, sort=False)
-            final["Y"] = final["a"] * final["oracle"]
-            if "pi" not in final:
-                pi_pilot = len(pilot) / len(grp) if len(grp) > 0 else 1.0
-                final["pi"] = pi_pilot
-            T_hat_k = np.sum(final["Y"] / final["pi"])
+            add_sample = pd.DataFrame()
+            T_hat_stage2 = 0.0
+            
+            # 如果没有预算或没有数据，Stage 2 贡献为 0
+            if n2_budget > 0 and not remaining.empty:
+                if sampling == "uniform":
+                    # 均匀采样保持原样 (简单随机无放回是无偏的，只要用 N/n 加权)
+                    actual_n2 = min(n2_budget, len(remaining))
+                    add_sample = remaining.sample(actual_n2, replace=False)
+                    # HT 权重 = N_rem / n2
+                    weight = len(remaining) / actual_n2
+                    
+                    # 暂存 pi 以兼容旧逻辑 (均匀采样下 pi = 1/weight)
+                    add_sample["pi"] = 1.0 / weight
+                    
+                    # 计算 HT 估计值
+                    add_sample["Y"] = add_sample["a"] * add_sample["oracle"]
+                    T_hat_stage2 = add_sample["Y"].sum() * weight
+
+                else:  # importance sampling
+                    # --- 【关键修改】有放回 + 预算优化 ---
+                    
+                    # 1. 计算分布
+                    # weights = sqrt(proxy * a) 推荐
+                    w = np.sqrt(remaining["proxy"].values * remaining["a"].values + 1e-10)
+                    sum_w = w.sum()
+                    if sum_w == 0:
+                        probs = np.ones(len(remaining)) / len(remaining)
+                    else:
+                        probs = w / sum_w
+
+                    # 2. 循环采样 (有放回)
+                    rng = np.random.default_rng()
+                    unique_indices = set()
+                    sampled_indices = [] # 记录所有 trial
+                    
+                    # 批量采样优化
+                    # 初始批量稍微大一点，假设有一半是新的
+                    batch_size = max(50, int(n2_budget * 1.5))
+                    
+                    while len(unique_indices) < n2_budget:
+                        # 还需要多少个 unique
+                        needed = n2_budget - len(unique_indices)
+                        curr_batch = max(needed, 50)
+                        
+                        # 有放回抽取
+                        raw_idx = rng.choice(len(remaining), size=curr_batch, replace=True, p=probs)
+                        
+                        for idx in raw_idx:
+                            # 预算逻辑：只对新样本扣费
+                            if idx not in unique_indices:
+                                if len(unique_indices) >= n2_budget:
+                                    break # 预算满，该样本不能算入
+                                unique_indices.add(idx)
+                            
+                            # 统计逻辑：所有试(Trial)都算 (Hansen-Hurwitz)
+                            # 只要预算没被截断，这个样本就是有效的统计点
+                            sampled_indices.append(idx)
+                        
+                        # 这次循环如果预算满了 break 出去的，最外层 while 也会检测到并退出
+                        
+                        # 简单防死循环 (如剩余权重全为0或仅剩极少有效样本)
+                        if len(sampled_indices) > n2_budget * 200 and len(unique_indices) < n2_budget:
+                            break
+
+                    # 3. 构造样本 DataFrame (包含重复行)
+                    add_sample = remaining.iloc[sampled_indices].copy()
+                    sample_probs = probs[sampled_indices]
+                    
+                    # 4. 计算 Hansen-Hurwitz 估计量 (仅针对 Remaining 部分！)
+                    # (1/n) * sum( y_i / p_i )
+                    Y_vals = add_sample["a"].values * add_sample["oracle"].values
+                    n_trials = len(sampled_indices)
+                    
+                    if n_trials > 0:
+                        # 这是对 "Remaining集合总值" 的估计
+                        T_hat_stage2 = np.sum(Y_vals / sample_probs) / n_trials
+                    else:
+                        T_hat_stage2 = 0.0
+                    
+                    # 为了兼容后续可能的 pi 访问 (虽然 HH 不需要 pi)
+                    add_sample["pi"] = 1.0 
+
+            # ==========================================
+            # 合并估计结果 (Stratified Estimator)
+            # Total = Total_Pilot + Total_Stage2
+            # ==========================================
+            
+            # 1. Pilot 部分的贡献 (Census of Pilot samples)
+            # Pilot 是无放回采的，且我们后续不回采，所以它也是这一层总量的一部分
+            Y_pilot_sum = 0.0
+            if not pilot.empty:
+                # 确保计算正确
+                pilot["Y"] = pilot["a"] * pilot["oracle"]
+                Y_pilot_sum = pilot["Y"].sum()
+                
+            # 2. 层总估计
+            T_hat_k = Y_pilot_sum + T_hat_stage2
+            
             summaries[k] = {"T_hat": T_hat_k}
+            
+            # 3. 合并样本数据用于返回 (只用于分析，不用于重算 T_hat)
+            # 注意：add_sample 可能包含重复行，这对于后续分析 (unique nodes) 没问题，会自动去重
+            final = pd.concat([pilot, add_sample], ignore_index=True, sort=False)
+            
             combined[k] = final
             all_sampled_frames.append(final)
 
+        # 汇总所有层
         T_hat = sum(v["T_hat"] for v in summaries.values())
         full_sample = pd.concat(all_sampled_frames) if all_sampled_frames else pd.DataFrame()
+        
         return {"T_hat": T_hat, "full_sample": full_sample}
 
     # ----------------------------
@@ -547,61 +582,6 @@ class ProxyStratifiedSampler:
 
     def run_proxyE_uniform(self):
         return self.run("proxyE", "uniform")
-
-    def run_baseline_proxy_a_unbiased(self, budget_frac: float = None, eps: float = 1e-10):
-        posts = self.posts.copy()
-        N = len(posts)  # 总体大小
-
-        # 计算采样次数 n
-        budget = int(budget_frac * N) if budget_frac else int(self.total_budget_frac * N)
-        n = max(1, budget)  # 采样次数
-
-        # 1. 计算选择概率 (probs)
-        print('[Check_running_baseline_proxy_a_unbiased]')
-        # 建议去掉 sqrt 以获得理论最优方差，但保留 sqrt 也是无偏的，只是方差大
-        weights = np.sqrt(posts["proxy"].values * posts["a"].values + eps)
-        # weights = posts["proxy"].values * posts["a"].values + eps  # 推荐：线性权重
-
-        weights = np.nan_to_num(weights, nan=0.0, posinf=0.0, neginf=0.0)
-        total_weight = weights.sum()
-        if total_weight == 0:
-            return {"T_hat": 0.0, "T_true": self.T_true, "Qerror": 0.0, "n_post": 0, "n_comment": 0}
-
-        probs = weights / total_weight
-
-        # 2. 【关键】有放回采样 (replace=True)
-        rng = np.random.default_rng()
-        # 这里 sample_idx 可能包含重复的索引，比如 [0, 5, 0, 12, 5]
-        sample_idx = rng.choice(N, size=n, replace=True, p=probs)
-
-        # 提取样本，不去重！保留所有行，哪怕是重复的
-        sample = posts.iloc[sample_idx].copy()
-
-        # 获取对应的单次选中概率 p_i
-        sample_probs = probs[sample_idx]
-
-        # 3. 【关键】计算 T_hat (保留重复项计算)
-        # 公式: (1/n) * sum( y_i / p_i )
-        # y_i = a * oracle
-        y_values = sample["a"].values * sample["oracle"].values
-
-        # Hansen-Hurwitz 估计量
-        # 即使某一行出现了10次，这里也加10次，每次都除以它自己的 p_i
-        estimate_sum = np.sum(y_values / sample_probs)
-        T_hat = (1.0 / n) * estimate_sum
-
-        # 4. 【关键】计算开销 (去重统计)
-        # 虽然计算用了重复样本，但物理上只需要访问唯一的节点
-        n_post, n_comment = self._count_unique_nodes(sample)
-        # 注意：_count_unique_nodes 内部是用 set() 实现的，会自动去重，符合逻辑
-
-        Qerror = abs(T_hat - self.T_true) / (self.T_true if self.T_true != 0 else 1.0)
-
-        # 统计 pi 信息 (这里展示 p_i * n，即期望选中次数)
-        pi_stats = self._calc_pi_stats(sample_probs * n)
-
-        return {"T_hat": T_hat, "T_true": self.T_true, "Qerror": Qerror,
-                "n_post": n_post, "n_comment": n_comment, **pi_stats}
 
     def run_mab_sampling(self, K: int = 10, budget_frac: float = None, batch_size: int = 10, ucb_scale: float = 1.0):
         """
@@ -837,6 +817,162 @@ class ProxyStratifiedSampler:
         n_post, n_comment = self._count_unique_nodes(sample)
         pi_stats = self._calc_pi_stats(pi)
         return {"T_hat": T_hat, "T_true": self.T_true, "Qerror": Qerror, "n_post": n_post, "n_comment": n_comment,**pi_stats}
+
+    def run_baseline_proxy_a_unbiased(self, budget_frac: float = None, eps: float = 1e-10):
+        """
+        [无偏版本] proxy×a 采样 (有放回 + Hansen-Hurwitz)
+        """
+        if self.posts.empty:
+            return {"T_hat": 0.0, "T_true": self.T_true, "Qerror": 0.0, "n_post": 0, "n_comment": 0}
+
+        posts = self.posts.copy()
+        N = len(posts)
+        
+        # 计算样本量
+        budget = int(budget_frac * N) if budget_frac else int(self.total_budget_frac * N)
+        n = max(1, budget) # 确保至少采样1次
+
+        # 1. 计算权重 (p ∝ sqrt(proxy * a)) - 这是方差最优分布
+        weights = np.sqrt(posts["proxy"].values * posts["a"].values + eps)
+        weights = np.nan_to_num(weights, nan=0.0, posinf=0.0, neginf=0.0)
+        
+        sum_weights = weights.sum()
+        if sum_weights == 0:
+             return {"T_hat": 0.0, "T_true": self.T_true, "Qerror": 0.0, 
+                "n_post": 0, "n_comment": 0, "pi_min": 0, "pi_max": 0, "pi_mean": 0}
+             
+        probs = weights / sum_weights
+
+        # 2. 【修改点1】有放回采样 (replace=True)
+        rng = np.random.default_rng(np.random.randint(1 << 30))
+        # 注意：这里可能会抽到重复的索引
+        sample_idx = rng.choice(N, size=n, replace=True, p=probs)
+        
+        sample = posts.iloc[sample_idx].copy()
+        
+        # 3. 【修改点2】获取对应的单次选中概率 p_i
+        sample_probs = probs[sample_idx]
+
+        # 4. 【修改点3】Hansen-Hurwitz 无偏估计
+        # 公式: (1/n) * sum( y_i / p_i )
+        # y_i = a * oracle
+        y_values = sample["a"].values * sample["oracle"].values
+        
+        # 这里的 mean() 等价于 (1/n) * sum(...)
+        # 注意：即使有重复样本，也要重复计算，不能去重，否则就引入偏差了
+        estimate_terms = y_values / sample_probs
+        T_hat = np.mean(estimate_terms) # 或者 np.sum(estimate_terms) / n
+
+        Qerror = abs(T_hat - self.T_true) / (self.T_true if self.T_true != 0 else 1.0)
+
+        # 5. 统计开销 (物理开销去重，数学计算不去重)
+        # 虽然数学上我们利用了重复样本来保证无偏，但实际上Oracle只需要对唯一节点跑一次
+        n_post, n_comment = self._count_unique_nodes(sample)
+        
+        # 统计 pi (这里展示期望选中次数 n * p_i)
+        pi_stats = self._calc_pi_stats(sample_probs * n)
+
+        return {"T_hat": T_hat, "T_true": self.T_true, "Qerror": Qerror, 
+                "n_post": n_post, "n_comment": n_comment, **pi_stats}
+
+    def run_baseline_proxy_a_unbiased_test1(self, budget_frac: float = None, eps: float = 1e-10):
+        """
+        [无偏版本 - 预算优化] proxy×a 采样 (有放回 + Hansen-Hurwitz)
+        优化逻辑：当抽到重复样本时，不消耗 Oracle 预算，从而允许进行更多的采样尝试 (Trials)，
+        以在相同预算下获得更低的方差。
+        """
+        # print('[Check_running_baseline_proxy_a_unbiased_optimized]')
+        if self.posts.empty:
+            return {"T_hat": 0.0, "T_true": self.T_true, "Qerror": 0.0, "n_post": 0, "n_comment": 0}
+
+        posts = self.posts.copy()
+        N = len(posts)
+        
+        # 1. 确定预算 (这里指的是唯一 Oracle 调用的上限)
+        budget = int(budget_frac * N) if budget_frac else int(self.total_budget_frac * N)
+        if budget <= 0:
+             return {"T_hat": 0.0, "T_true": self.T_true, "Qerror": 0.0, "n_post": 0, "n_comment": 0}
+
+        # 2. 计算权重 (p ∝ sqrt(proxy * a))
+        weights = np.sqrt(posts["proxy"].values * posts["a"].values + eps)
+        weights = np.nan_to_num(weights, nan=0.0, posinf=0.0, neginf=0.0)
+        
+        sum_weights = weights.sum()
+        if sum_weights == 0:
+             return {"T_hat": 0.0, "T_true": self.T_true, "Qerror": 0.0, 
+                "n_post": 0, "n_comment": 0, "pi_min": 0, "pi_max": 0, "pi_mean": 0}
+             
+        probs = weights / sum_weights
+
+        # 3. 执行自适应采样循环
+        rng = np.random.default_rng(np.random.randint(1 << 30))
+        
+        unique_indices = set()
+        all_sampled_indices = [] # 记录每一次采样尝试（包括重复的）
+        current_trials = 0
+        
+        # 优化：批量采样以减少循环开销
+        # 初始批量稍微大一点，假设有一半是新的
+        batch_size = max(100, int(budget * 1.5))
+        
+        while len(unique_indices) < budget:
+            # 动态调整步长
+            remaining_budget = budget - len(unique_indices)
+            next_batch = max(remaining_budget, 100)
+            
+            # 批量生成随机索引
+            new_idx_batch = rng.choice(N, size=next_batch, replace=True, p=probs)
+            
+            for idx in new_idx_batch:
+                # 无论是否重复，都是一次有效的统计Trial
+                # 只有当样本是新的时，才检查预算是否超标
+                if idx not in unique_indices:
+                    if len(unique_indices) >= budget:
+                        # 预算已满，产生的新样本无法被"支付"，停止采样
+                        # 注意：这次尝试因为没有完成（被丢弃），不计入 all_sampled_indices
+                        break
+                    else:
+                        # 预算未满，支付预算，接纳新样本
+                        unique_indices.add(idx)
+                
+                # 如果是旧样本（免费），或者新样本且预算未超（付费），都记录
+                all_sampled_indices.append(idx)
+                current_trials += 1
+
+            # 防止死循环：如果 probs 分布极其集中，可能所有非零概率的样本都采完了还填不满预算
+            # 简单保护：如果连续采了很多都没有新样本，可能已经遍历完有效集
+            if current_trials > budget * 50 and len(unique_indices) < budget:
+                # 检查是否还有漏网之鱼太耗时，直接break
+                break
+
+        # 4. 计算估计量
+        # 必须使用完整的 trial 序列，包含重复项
+        if current_trials == 0:
+            return {"T_hat": 0.0, "T_true": self.T_true, "Qerror": 0.0, "n_post": 0, "n_comment": 0}
+
+        final_sample_idx = np.array(all_sampled_indices)
+        sample = posts.iloc[final_sample_idx].copy()
+        sample_probs = probs[final_sample_idx]
+
+        # Hansen-Hurwitz 估计量: (1/n) * sum( y_i / p_i )
+        y_values = sample["a"].values * sample["oracle"].values
+        estimate_terms = y_values / sample_probs
+        T_hat = np.mean(estimate_terms) # sum / current_trials
+
+        Qerror = abs(T_hat - self.T_true) / (self.T_true if self.T_true != 0 else 1.0)
+
+        # 5. 统计开销 (基于 Unique 样本)
+        # 用 unique_indices 对应的子集来统计准确的节点开销
+        unique_sample_df = posts.iloc[list(unique_indices)]
+        n_post, n_comment = self._count_unique_nodes(unique_sample_df)
+
+        # 统计 pi 信息 (基于 budget的等效 n)
+        # 这里只是为了输出日志对齐，其实数学上真正生效的 n 是 current_trials
+        # 我们可以输出实际 trials 的统计
+        pi_stats = self._calc_pi_stats(sample_probs * current_trials)
+
+        return {"T_hat": T_hat, "T_true": self.T_true, "Qerror": Qerror, 
+                "n_post": n_post, "n_comment": n_comment, **pi_stats}
 
 
     # --- 理论最优基线 (Optimal for Sum Estimation with Proxy) ---
@@ -1166,12 +1302,117 @@ def compute_T_true_polars(
 # ==========================================================
 # === 主函数：遍历 aggregated_results 目录并执行评估 ===
 # ==========================================================
+# def run_evaluation_for_query(
+#         aggregated_csv_path: str,
+#         T_true: float,  # +++ 增加 T_true 参数 +++
+#         post_proxy: str,
+#         comment_proxy: str,
+#         runs: int = 1
+# ):
+#     """
+#     对单个聚合后的查询文件运行所有采样方法并打印结果。
+#     """
+#     query_basename = os.path.basename(aggregated_csv_path).replace("aggregated_list_", "").replace(".csv", "")
+#     print(f"\n\n{'=' * 20} 评估查询: {query_basename} {'=' * 20}")
+#     print(f"  (使用 T_true = {T_true})")
+
+
+#     # --- 将 T_true 传递给 Sampler ---
+#     sampler = ProxyStratifiedSampler(
+#         csv_path=aggregated_csv_path,
+#         is_multi_predicate=True,
+#         post_proxy=post_proxy,
+#         comment_proxy=comment_proxy,
+#         T_true=T_true  # +++ 将接收到的 T_true 传入 +++
+#     )
+
+#     if sampler.posts.empty:
+#         print("没有可供采样的数据 (所有实例的 a <= 0)。")
+#         return None
+#     # 如果运行次数小于等于2，去极值就没有意义了。
+#     if runs <= 2:
+#         print(f"[警告] 运行次数 (runs={runs}) 小于等于2，无法移除最大和最小值。将按常规方式计算统计。")
+#         trim_extremes = False
+#     else:
+#         trim_extremes = True
+#     run_times = runs
+#     all_methods = {
+#         "proxy_importance": sampler.run_proxy_importance,
+#         "proxy_uniform": sampler.run_proxy_uniform,
+#         "proxyE_importance": sampler.run_proxyE_importance,
+#         "proxyE_uniform": sampler.run_proxyE_uniform,
+#         "baseline_uniform": sampler.run_baseline_uniform,
+#         "baseline_proxy": sampler.run_baseline_proxy,
+#         "baseline_proxy_a": sampler.run_baseline_proxy_a
+#     }
+
+#     results = {}
+#     print(f"将为 {len(all_methods)} 种方法，每种运行 {run_times} 次...")
+
+#     node_stats_records = []
+#     for name, func in all_methods.items():
+#         T_list, Q_list = [], []
+#         post_cnts = []
+#         comment_cnts = []
+#         # print(f"  -> 正在运行: {name}") # 可以简化打印
+#         for _ in range(run_times):
+#             out = func()
+#             T_list.append(out["T_hat"])
+#             Q_list.append(out["Qerror"])
+#             post_cnts.append(out.get("n_post", 0))
+#             comment_cnts.append(out.get("n_comment", 0))
+#         T_list_trimmed = list(T_list)
+#         Q_list_trimmed = list(Q_list)
+#         if trim_extremes:
+#             # 先对列表进行排序
+#             T_list_trimmed.sort()
+#             Q_list_trimmed.sort()
+#             # 切片操作，移除第一个（最小值）和最后一个（最大值）元素
+#             T_list_trimmed = T_list_trimmed[1:-1]
+#             Q_list_trimmed = Q_list_trimmed[1:-1]
+#         # +++ 计算平均采样节点数 (取整) +++
+#         avg_post = int(np.mean(post_cnts))
+#         avg_comment = int(np.mean(comment_cnts))
+#         results[name] = {
+#             "T_hat_mean": np.mean(T_list_trimmed),
+#             "T_hat_std": np.std(T_list_trimmed),
+#             "Qerror_mean": np.mean(Q_list_trimmed),  # +++ 收集 Qerror +++
+#             "Qerror_std": np.std(Q_list_trimmed),
+#             "n_post_mean": avg_post,
+#             "n_comment_mean": avg_comment
+#         }
+#         node_stats_records.append({
+#             "query_name": query_basename,
+#             "method": name,
+#             "post_sampled_cnt": avg_post,
+#             "comment_sampled_cnt": avg_comment
+#         })
+
+#     # +++ 更新打印格式 +++
+#     print("\n--- 估算结果总结 ---")
+#     # 调整表头宽度，增加一列
+#     print(f"{'Method':20s} | {'T_hat (mean ± std)':25s} | {'Qerror (mean ± std)':25s} | {'Samples(Post/Cmt)':18s}")
+#     print("-" * 100)
+#     for name, res in results.items():
+#         print(
+#             f"{name:20s} | "
+#             f"{res['T_hat_mean']:>10.3f} ± {res['T_hat_std']:<10.3f} | "
+#             f"{res['Qerror_mean']:>10.4f} ± {res['Qerror_std']:<10.4f} | "
+#             # +++ 新增：打印采样数量 +++
+#             f"{res['n_post_mean']:>6d} / {res['n_comment_mean']:<6d}"
+#         )
+#     save_node_counts(node_stats_records)
+#     return results
+
 def run_evaluation_for_query(
         aggregated_csv_path: str,
-        T_true: float,  # +++ 增加 T_true 参数 +++
+        T_true: float,
         post_proxy: str,
         comment_proxy: str,
-        runs: int = 1
+        runs: int = 50,           # ✅ 修改默认值为 50
+        summarys_dir: str = None, # ✅ 新增参数：分次结果保存目录
+        query_index: int = -1,    # ✅ 新增参数：查询索引
+        gt_match_col: str = "",   # ✅ 新增参数：GT匹配列名
 ):
     """
     对单个聚合后的查询文件运行所有采样方法并打印结果。
@@ -1180,67 +1421,92 @@ def run_evaluation_for_query(
     print(f"\n\n{'=' * 20} 评估查询: {query_basename} {'=' * 20}")
     print(f"  (使用 T_true = {T_true})")
 
-
     # --- 将 T_true 传递给 Sampler ---
     sampler = ProxyStratifiedSampler(
         csv_path=aggregated_csv_path,
         is_multi_predicate=True,
         post_proxy=post_proxy,
         comment_proxy=comment_proxy,
-        T_true=T_true  # +++ 将接收到的 T_true 传入 +++
+        T_true=T_true
     )
 
     if sampler.posts.empty:
         print("没有可供采样的数据 (所有实例的 a <= 0)。")
         return None
+
     # 如果运行次数小于等于2，去极值就没有意义了。
     if runs <= 2:
-        print(f"[警告] 运行次数 (runs={runs}) 小于等于2，无法移除最大和最小值。将按常规方式计算统计。")
         trim_extremes = False
     else:
         trim_extremes = True
-    run_times = runs
+
     all_methods = {
-        "proxy_importance": sampler.run_proxy_importance,
-        "proxy_uniform": sampler.run_proxy_uniform,
+        # "proxy_importance": sampler.run_proxy_importance,
+        # "proxy_uniform": sampler.run_proxy_uniform,
         "proxyE_importance": sampler.run_proxyE_importance,
-        "proxyE_uniform": sampler.run_proxyE_uniform,
+        # "proxyE_uniform": sampler.run_proxyE_uniform,
         "baseline_uniform": sampler.run_baseline_uniform,
-        "baseline_proxy": sampler.run_baseline_proxy,
-        "baseline_proxy_a": sampler.run_baseline_proxy_a
+        # "baseline_proxy": sampler.run_baseline_proxy,
+        "baseline_proxy_a": sampler.run_baseline_proxy_a,
+        "baseline_proxy_a_unbiased": sampler.run_baseline_proxy_a_unbiased,
+        "baseline_proxy_a_unbiased_test1": sampler.run_baseline_proxy_a_unbiased_test1,
     }
 
     results = {}
-    print(f"将为 {len(all_methods)} 种方法，每种运行 {run_times} 次...")
+    print(f"将为 {len(all_methods)} 种方法，每种运行 {runs} 次...")
 
     node_stats_records = []
+    
     for name, func in all_methods.items():
         T_list, Q_list = [], []
-        post_cnts = []
-        comment_cnts = []
-        # print(f"  -> 正在运行: {name}") # 可以简化打印
-        for _ in range(run_times):
-            out = func()
-            T_list.append(out["T_hat"])
-            Q_list.append(out["Qerror"])
-            post_cnts.append(out.get("n_post", 0))
-            comment_cnts.append(out.get("n_comment", 0))
+        post_cnts, comment_cnts = [], []
+        
+        # --- ✅ 修改点：分次执行循环 ---
+        for t in range(runs):
+            try:
+                out = func()
+                
+                # 收集用于计算汇总均值的数据
+                T_hat = out["T_hat"]
+                Qerror = out["Qerror"]
+                n_post = out.get("n_post", 0)
+                n_comment = out.get("n_comment", 0)
+                
+                T_list.append(T_hat)
+                Q_list.append(Qerror)
+                post_cnts.append(n_post)
+                comment_cnts.append(n_comment)
+
+                # --- ✅ 修改点：保存单次运行结果到对应文件 ---
+                if summarys_dir:
+                    run_file = os.path.join(summarys_dir, f"results_summary_run_{t+1}.csv")
+                    # 使用追加模式 'a'
+                    with open(run_file, "a") as f:
+                        # 格式: query_index,query_basename,gt_match_col,T_true,method,T_hat,Qerror,n_post,n_comment
+                        line = f"{query_index},{query_basename},{gt_match_col},{T_true},{name},{T_hat},{Qerror},{n_post},{n_comment}\n"
+                        f.write(line)
+                        
+            except Exception as e:
+                print(f"[ERROR] 方法 {name} 第 {t+1} 次运行失败: {e}")
+                T_list.append(0.0)
+                Q_list.append(1.0)
+        
+        # --- 下面是原来的汇总统计逻辑 ---
         T_list_trimmed = list(T_list)
         Q_list_trimmed = list(Q_list)
-        if trim_extremes:
-            # 先对列表进行排序
+        if trim_extremes and len(T_list_trimmed) > 2:
             T_list_trimmed.sort()
             Q_list_trimmed.sort()
-            # 切片操作，移除第一个（最小值）和最后一个（最大值）元素
             T_list_trimmed = T_list_trimmed[1:-1]
             Q_list_trimmed = Q_list_trimmed[1:-1]
-        # +++ 计算平均采样节点数 (取整) +++
-        avg_post = int(np.mean(post_cnts))
-        avg_comment = int(np.mean(comment_cnts))
+            
+        avg_post = int(np.mean(post_cnts)) if post_cnts else 0
+        avg_comment = int(np.mean(comment_cnts)) if comment_cnts else 0
+        
         results[name] = {
             "T_hat_mean": np.mean(T_list_trimmed),
             "T_hat_std": np.std(T_list_trimmed),
-            "Qerror_mean": np.mean(Q_list_trimmed),  # +++ 收集 Qerror +++
+            "Qerror_mean": np.mean(Q_list_trimmed),
             "Qerror_std": np.std(Q_list_trimmed),
             "n_post_mean": avg_post,
             "n_comment_mean": avg_comment
@@ -1252,9 +1518,8 @@ def run_evaluation_for_query(
             "comment_sampled_cnt": avg_comment
         })
 
-    # +++ 更新打印格式 +++
+    # 打印估算结果总结 (保持不变)
     print("\n--- 估算结果总结 ---")
-    # 调整表头宽度，增加一列
     print(f"{'Method':20s} | {'T_hat (mean ± std)':25s} | {'Qerror (mean ± std)':25s} | {'Samples(Post/Cmt)':18s}")
     print("-" * 100)
     for name, res in results.items():
@@ -1262,7 +1527,6 @@ def run_evaluation_for_query(
             f"{name:20s} | "
             f"{res['T_hat_mean']:>10.3f} ± {res['T_hat_std']:<10.3f} | "
             f"{res['Qerror_mean']:>10.4f} ± {res['Qerror_std']:<10.4f} | "
-            # +++ 新增：打印采样数量 +++
             f"{res['n_post_mean']:>6d} / {res['n_comment_mean']:<6d}"
         )
     save_node_counts(node_stats_records)
@@ -1270,19 +1534,135 @@ def run_evaluation_for_query(
 
 
 
-def multi_predicate_evaluation(dataset_name: str):
+# def multi_predicate_evaluation(dataset_name: str):
+#     """
+#     主评估流程：加载/计算T_true，运行采样，生成最终的详细CSV报告（修复路径匹配问题）。
+#     """
+#     print(f"\n{'=' * 10} 开始对数据集 '{dataset_name}' 进行多谓词采样评估 {'=' * 10}")
+
+#     # --- 1. 获取 T_true (从缓存或通过计算) ---
+#     print("\n>>> 步骤 1: 获取所有查询的 T_true...")
+#     # 1. 实例化 GroundTruthManager 类
+#     gt_manager = GroundTruthManager(dataset_name=dataset_name)
+#     # 2. 调用实例的 get_all 方法
+#     all_T_true_results = gt_manager.get_all()
+#     # +++【修改结束】+++
+#     if not all_T_true_results:
+#         print("[错误] 未能获取 T_true，评估无法继续。")
+#         return
+
+#     # --- 路径配置 ---
+#     base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
+#     aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
+#     core_config_path = os.path.join(base_path, "data_graph", "core_nodes_config.json")
+#     final_report_path = os.path.join(base_path, "results", "results_summary2.csv")
+
+#     # --- 代理模型配置 ---
+#     POST_PROXY_COL = "ML1_proxy4b1_probability"
+#     COMMENT_PROXY_COL = "ML2_proxy1_probability"
+
+#     try:
+#         with open(core_config_path, 'r') as f:
+#             core_nodes_config = json.load(f)
+#     except FileNotFoundError:
+#         print(f"[错误] 核心节点配置文件不存在: {core_config_path}")
+#         return
+
+#     # --- 2. 遍历【真实存在】的聚合文件并进行评估 ---
+#     print("\n>>> 步骤 2: 运行采样评估...")
+#     if not os.path.exists(aggregated_dir):
+#         print(f"[错误] 聚合结果目录不存在: {aggregated_dir}")
+#         return
+
+#     agg_files = [f for f in os.listdir(aggregated_dir) if f.endswith('.csv')]
+#     if not agg_files:
+#         print(f"[警告] 在目录 {aggregated_dir} 中没有找到任何聚合结果文件。")
+#         return
+
+#     final_report_records = []
+
+#     # 为了 query_index 的稳定性，我们对 T_true 的键进行排序
+#     sorted_query_basenames = sorted(list(all_T_true_results.keys()))
+
+#     for agg_file in sorted(agg_files):
+#         # --- 【核心修复】从文件名中解析出 query_basename ---
+#         # 假设文件名是 aggregated_list_query_dense_1_1.csv 或 aggregated_wide_query_dense_1_1.csv
+#         # 我们需要提取 'query_dense_1_1' 这部分并重新加上 '.graph'
+
+#         # 移除前缀和后缀
+#         if agg_file.startswith("aggregated_list_"):
+#             base = agg_file.replace("aggregated_list_", "")
+#         elif agg_file.startswith("aggregated_wide_"):
+#             base = agg_file.replace("aggregated_wide_", "")
+#         else:  # 如果有其他前缀，可以继续添加
+#             base = agg_file
+
+#         query_basename = base.replace(".csv", "") + ".graph"
+
+#         # --- 用解析出的 query_basename 去查找 T_true ---
+#         T_true_for_query = all_T_true_results.get(query_basename)
+
+#         if T_true_for_query is None:
+#             print(f"[警告] 在 T_true 缓存中没有找到查询 '{query_basename}' 的值，跳过评估。")
+#             continue
+
+#         filepath = os.path.join(aggregated_dir, agg_file)
+
+#         query_results = run_evaluation_for_query(
+#             aggregated_csv_path=filepath,
+#             T_true=T_true_for_query,
+#             post_proxy=POST_PROXY_COL,
+#             comment_proxy=COMMENT_PROXY_COL
+#         )
+
+#         # --- 3. 整理并收集报告行 ---
+#         if query_results:
+#             try:
+#                 query_index = sorted_query_basenames.index(query_basename)
+#             except ValueError:
+#                 query_index = -1  # 如果 T_true 结果里没有，给个默认值
+
+#             core_nodes = core_nodes_config.get(query_basename, {})
+#             gt_match_col_str = ";".join([f"u{vid}" for label in core_nodes for vid in core_nodes[label]])
+
+#             for method_name, metrics in query_results.items():
+#                 record = {
+#                     "query_index": query_index,
+#                     "query_basename": query_basename,
+#                     "gt_match_col": gt_match_col_str,
+#                     "T_true": T_true_for_query,
+#                     "method": method_name,
+#                     "T_hat_mean": metrics["T_hat_mean"],
+#                     "T_hat_std": metrics["T_hat_std"],
+#                     "Qerror_mean": metrics["Qerror_mean"],
+#                     "Qerror_std": metrics["Qerror_std"],
+#                 }
+#                 final_report_records.append(record)
+
+#     # --- 4. 生成并保存最终的CSV报告 ---
+#     if not final_report_records:
+#         print("\n[完成] 没有生成任何评估结果。")
+#         return
+
+#     report_df = pd.DataFrame.from_records(final_report_records)
+#     # 按 query_index 和 method 排序，让报告更规整
+#     report_df.sort_values(by=['query_index', 'method'], inplace=True)
+#     report_df.to_csv(final_report_path, index=False)
+
+#     print(f"\n\n{'=' * 15} 最终评估报告 {'=' * 15}")
+#     print(f"✅ 详细评估报告已保存到: {final_report_path}")
+#     print(report_df.head(10).to_string())  # 打印前10行预览
+
+def multi_predicate_evaluation(dataset_name: str, run_times: int = 20): # ✅ 增加 run_times 参数
     """
-    主评估流程：加载/计算T_true，运行采样，生成最终的详细CSV报告（修复路径匹配问题）。
+    主评估流程：加载/计算T_true，运行采样，生成最终的详细CSV报告。
     """
     print(f"\n{'=' * 10} 开始对数据集 '{dataset_name}' 进行多谓词采样评估 {'=' * 10}")
 
     # --- 1. 获取 T_true (从缓存或通过计算) ---
     print("\n>>> 步骤 1: 获取所有查询的 T_true...")
-    # 1. 实例化 GroundTruthManager 类
     gt_manager = GroundTruthManager(dataset_name=dataset_name)
-    # 2. 调用实例的 get_all 方法
     all_T_true_results = gt_manager.get_all()
-    # +++【修改结束】+++
     if not all_T_true_results:
         print("[错误] 未能获取 T_true，评估无法继续。")
         return
@@ -1297,6 +1677,19 @@ def multi_predicate_evaluation(dataset_name: str):
     POST_PROXY_COL = "ML1_proxy4b1_probability"
     COMMENT_PROXY_COL = "ML2_proxy1_probability"
 
+    # ✅ --- 准备保存分次结果的目录与文件初始化 ---
+    summarys_dir = os.path.join(base_path, "results", "result_summarys", POST_PROXY_COL)
+    os.makedirs(summarys_dir, exist_ok=True)
+    print(f"[INFO] 分次实验结果将保存至: {summarys_dir}")
+
+    # 初始化 run_times 个文件 (写表头)
+    csv_headers = "query_index,query_basename,gt_match_col,T_true,method,T_hat,Qerror,n_post,n_comment\n"
+    for t in range(run_times):
+        run_file = os.path.join(summarys_dir, f"results_summary_run_{t+1}.csv")
+        with open(run_file, "w") as f:
+            f.write(csv_headers)
+
+    # --- 加载核心节点配置 ---
     try:
         with open(core_config_path, 'r') as f:
             core_nodes_config = json.load(f)
@@ -1316,51 +1709,47 @@ def multi_predicate_evaluation(dataset_name: str):
         return
 
     final_report_records = []
-
-    # 为了 query_index 的稳定性，我们对 T_true 的键进行排序
     sorted_query_basenames = sorted(list(all_T_true_results.keys()))
 
     for agg_file in sorted(agg_files):
-        # --- 【核心修复】从文件名中解析出 query_basename ---
-        # 假设文件名是 aggregated_list_query_dense_1_1.csv 或 aggregated_wide_query_dense_1_1.csv
-        # 我们需要提取 'query_dense_1_1' 这部分并重新加上 '.graph'
-
-        # 移除前缀和后缀
+        # 解析 query_basename
         if agg_file.startswith("aggregated_list_"):
             base = agg_file.replace("aggregated_list_", "")
         elif agg_file.startswith("aggregated_wide_"):
             base = agg_file.replace("aggregated_wide_", "")
-        else:  # 如果有其他前缀，可以继续添加
+        else:
             base = agg_file
-
         query_basename = base.replace(".csv", "") + ".graph"
 
-        # --- 用解析出的 query_basename 去查找 T_true ---
+        # 查找 T_true
         T_true_for_query = all_T_true_results.get(query_basename)
-
         if T_true_for_query is None:
             print(f"[警告] 在 T_true 缓存中没有找到查询 '{query_basename}' 的值，跳过评估。")
             continue
 
         filepath = os.path.join(aggregated_dir, agg_file)
 
+        # ✅ --- 提前计算 query_index 和 gt_match_col 以便传给子函数 ---
+        try:
+            query_index = sorted_query_basenames.index(query_basename)
+        except ValueError:
+            query_index = -1
+        core_nodes = core_nodes_config.get(query_basename, {})
+        gt_match_col_str = ";".join([f"u{vid}" for label in core_nodes for vid in core_nodes[label]])
+
+        # 调用修改后的 run_evaluation_for_query
         query_results = run_evaluation_for_query(
             aggregated_csv_path=filepath,
             T_true=T_true_for_query,
             post_proxy=POST_PROXY_COL,
-            comment_proxy=COMMENT_PROXY_COL
+            comment_proxy=COMMENT_PROXY_COL,
+            runs=run_times,              # ✅ 传入次数
+            summarys_dir=summarys_dir,   # ✅ 传入保存目录
+            query_index=query_index,     # ✅ 传入索引
+            gt_match_col=gt_match_col_str # ✅ 传入GT列
         )
 
-        # --- 3. 整理并收集报告行 ---
         if query_results:
-            try:
-                query_index = sorted_query_basenames.index(query_basename)
-            except ValueError:
-                query_index = -1  # 如果 T_true 结果里没有，给个默认值
-
-            core_nodes = core_nodes_config.get(query_basename, {})
-            gt_match_col_str = ";".join([f"u{vid}" for label in core_nodes for vid in core_nodes[label]])
-
             for method_name, metrics in query_results.items():
                 record = {
                     "query_index": query_index,
@@ -1375,20 +1764,18 @@ def multi_predicate_evaluation(dataset_name: str):
                 }
                 final_report_records.append(record)
 
-    # --- 4. 生成并保存最终的CSV报告 ---
+    # --- 3. 生成并保存最终的CSV报告 ---
     if not final_report_records:
         print("\n[完成] 没有生成任何评估结果。")
         return
 
     report_df = pd.DataFrame.from_records(final_report_records)
-    # 按 query_index 和 method 排序，让报告更规整
     report_df.sort_values(by=['query_index', 'method'], inplace=True)
     report_df.to_csv(final_report_path, index=False)
 
     print(f"\n\n{'=' * 15} 最终评估报告 {'=' * 15}")
     print(f"✅ 详细评估报告已保存到: {final_report_path}")
-    print(report_df.head(10).to_string())  # 打印前10行预览
-
+    print(f"✅ 分次详细数据已保存至: {summarys_dir} (共 {run_times} 个 run_*.csv 文件)")
 
 from tqdm import tqdm  # 导入进度条库
 

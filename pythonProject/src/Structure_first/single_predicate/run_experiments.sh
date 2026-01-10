@@ -3,6 +3,7 @@
 # 定义项目根目录
 PROJECT_ROOT="/home/wangshuo/projects/Neo4j_Exp"
 SCRIPT_PATH="$PROJECT_ROOT/pythonProject/src/Structure_first/single_predicate/method.py"
+# DATASET="dataset_three"
 DATASET="dataset_one"
 # 激活环境 (如果有 conda)
 # source activate your_env_name
@@ -17,13 +18,13 @@ tasks=(
     # "Dist_Extreme_Mix_proxy3 Dist_Extreme_Mix_oracle_prob"
     
 
-    # "Dist_Bimodal_origin_proxy3 Dist_Bimodal_origin_oracle_prob"
-    # "Dist_Bimodal_left_proxy3 Dist_Bimodal_left_oracle_prob"
-    # "Dist_Bimodal_right_proxy3 Dist_Bimodal_right_oracle_prob"
+    # "Dist_Bimodal_origin_proxy2 Dist_Bimodal_origin_oracle_prob"
+    # "Dist_Bimodal_left_proxy2 Dist_Bimodal_left_oracle_prob"
+    # "Dist_Bimodal_right_proxy2 Dist_Bimodal_right_oracle_prob"
 
-    # "Dist_Beta_U_proxy3 Dist_Beta_U_oracle_prob"
-    # "Dist_Asym_LeftHigh_proxy3 Dist_Asym_LeftHigh_oracle_prob"
-    # "Dist_Asym_RightHigh_proxy3 Dist_Asym_RightHigh_oracle_prob"
+    # "Dist_Beta_U_proxy2 Dist_Beta_U_oracle_prob"
+    # "Dist_Asym_LeftHigh_proxy2 Dist_Asym_LeftHigh_oracle_prob"
+    # "Dist_Asym_RightHigh_proxy2 Dist_Asym_RightHigh_oracle_prob"
     
     
     # "Dist_Normal_proxy2 Dist_Normal_oracle_prob"
@@ -41,7 +42,7 @@ for task in "${tasks[@]}"; do
         --dataset "$DATASET" \
         --proxy_model "$1" \
         --oracle_model "$2" \
-        --run_times 10 \
+        --run_times 20 \
         > "logs/${DATASET}_${1}.log" 2>&1 &
 done
 
