@@ -15,6 +15,13 @@ from typing import Dict, List
 from pythonProject.src.Structure_first.compute_truth import GroundTruthManager
 
 
+# ==========================================================
+# === 部分 1: 代理分数和结构权重主导的重要性采样和分层采样 ===
+# ==========================================================
+# ==========================================================
+# === xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ===
+# ==========================================================
+
 class ProxyStratifiedSampler:
 
     def __init__(self, csv_path: str,
@@ -603,163 +610,6 @@ class ProxyStratifiedSampler:
     def run_proxyE_uniform(self):
         return self.run("proxyE", "uniform")
 
-    def run_mab_sampling_old(self, K: int = 10, budget_frac: float = None, batch_size: int = 10, ucb_scale: float = 1.0):
-        """
-        基于多臂赌博机 (MAB) 的自适应分层采样 (修正为有放回采样以保证无偏性)。
-        """
-        # 1. 准备数据与分层 (Arms)
-        # print('[Check_running_mab_sampling_ws3]')
-        if self.posts.empty:
-            return {"T_hat": 0.0, "T_true": self.T_true, "Qerror": 0.0, "n_post": 0, "n_comment": 0}
-        
-        posts = self.posts.copy()
-        posts = self.stratify_by_expected_contrib(posts, K)
-        
-        N = len(posts)
-        budget = int(budget_frac * N) if budget_frac else int(self.total_budget_frac * N)
-        
-        # 2. 初始化状态
-        arm_state = {}
-        groups = posts.groupby("stratum")
-        eps = 1e-10
-        
-        for k, grp in groups:
-            # 计算层内全局概率 (p_i)
-            weights = np.sqrt(grp["proxy"].values * grp["a"].values + eps)
-            weights = np.nan_to_num(weights, nan=0.0, posinf=0.0, neginf=0.0)
-            total_w = weights.sum()
-            if total_w > 0:
-                probs = weights / total_w
-            else:
-                probs = np.ones(len(grp)) / len(grp)
-            
-            arm_state[k] = {
-                "N_k": len(grp),
-                # 必须保留原始数据用于有放回采样
-                "data": {
-                    "a": grp["a"].values,
-                    "oracle": grp["oracle"].values,
-                    "prob": probs,
-                    "orig_id": grp.index.tolist() # 或其他唯一标识
-                },
-                "n_k": 0,
-                "sum_z": 0.0,
-                "sum_sq_z": 0.0,
-                "mean": 0.0,
-                "std": 0.0,
-                "sampled_ids": set() # 用于统计唯一节点开销
-            }
-
-        # 3. MAB 循环
-        current_sample_count = 0
-        
-        # 初始每个臂采一点
-        init_samples = 2
-        for k in arm_state:
-            self._mab_sample_batch(arm_state[k], init_samples, replace=True)
-            current_sample_count += init_samples
-
-        while current_sample_count < budget:
-            best_arm = -1
-            max_score = -1.0
-            total_n = current_sample_count
-            
-            # UCB 选择
-            for k, state in arm_state.items():
-                # UCB Score = N_k * (sigma_hat + exploration)
-                exploration = ucb_scale * np.sqrt(2 * np.log(total_n) / state["n_k"])
-                sigma_hat = state["std"]
-                score = state["N_k"] * (sigma_hat + exploration)
-                
-                if score > max_score:
-                    max_score = score
-                    best_arm = k
-            
-            if best_arm == -1: break
-            
-            # 批量采样
-            n_batch = min(batch_size, budget - current_sample_count)
-            self._mab_sample_batch(arm_state[best_arm], n_batch, replace=True)
-            current_sample_count += n_batch
-
-        # 4. 最终估计
-        T_hat = 0.0
-        total_unique_nodes = 0
-        
-        # 收集所有采样到的唯一ID用于统计开销
-        all_sampled_indices = []
-        
-        for k, state in arm_state.items():
-            if state["n_k"] > 0:
-                # Hansen-Hurwitz: T_hat_k = N_k * mean(z)
-                # 注意：这里的 mean 已经是 sum(z)/n_k，即 E[y/p]
-                # 但标准公式是 (1/n) * sum(y/p)。
-                # 这里的 state["mean"] 存储的是 mean(z)。
-                # 而 z = y/p。
-                # 所以 T_hat_k = mean(z) * N_k 是不对的。
-                # 应该是 T_hat_k = mean(z)。因为 sum(p)=1，所以 E[y/p] = T_total。
-                # 修正：
-                # Hansen-Hurwitz 估计的是总和 Y_total。
-                # estimator = (1/n) * sum(y_i / p_i)
-                # 所以 T_hat_k = state["mean"] (如果 mean 存的是 mean(z))
-                
-                # 让我们再检查一下 state["mean"] 的计算：
-                # z_bar = state["sum_z"] / state["n_k"]
-                # state["mean"] = z_bar 
-                
-                T_hat += state["mean"] # 直接累加各层的估计总和
-                
-                all_sampled_indices.extend(list(state["sampled_ids"]))
-
-        # 5. 统计开销 (基于唯一节点)
-        if all_sampled_indices:
-            full_sample = posts.loc[all_sampled_indices]
-            n_post, n_comment = self._count_unique_nodes(full_sample)
-        else:
-            n_post, n_comment = 0, 0
-            
-        Qerror = abs(T_hat - self.T_true) / (self.T_true if self.T_true != 0 else 1.0)
-        
-        return {"T_hat": T_hat, "T_true": self.T_true, "Qerror": Qerror, 
-                "n_post": n_post, "n_comment": n_comment}
-
-    def _mab_sample_batch_old(self, state, n_batch, replace=True):
-        """辅助函数：执行批量采样并更新状态"""
-        data = state["data"]
-        N_pool = len(data["a"])
-        
-        # 有放回采样
-        indices = np.random.choice(N_pool, size=n_batch, replace=True, p=data["prob"])
-        
-        # 提取数据
-        a_vals = data["a"][indices]
-        oracle_vals = data["oracle"][indices]
-        p_vals = data["prob"][indices]
-        orig_ids = np.array(data["orig_id"])[indices]
-        
-        # 计算 Hansen-Hurwitz 变量 z = y / p
-        y_vals = a_vals * oracle_vals
-        z_vals = y_vals / (p_vals + 1e-12)
-        
-        # 更新统计量
-        state["n_k"] += n_batch
-        state["sum_z"] += np.sum(z_vals)
-        state["sum_sq_z"] += np.sum(z_vals ** 2)
-        
-        # 更新均值和标准差
-        # 注意：这里的 mean 估计的是该层的 Total Value，而不是 Mean Value
-        z_bar = state["sum_z"] / state["n_k"]
-        state["mean"] = z_bar 
-        
-        if state["n_k"] > 1:
-            var_z = (state["sum_sq_z"] - state["n_k"] * (z_bar ** 2)) / (state["n_k"] - 1)
-            state["std"] = np.sqrt(max(1e-12, var_z))
-        else:
-            state["std"] = state["mean"] # 启发式
-            
-        # 记录唯一ID用于开销统计
-        state["sampled_ids"].update(orig_ids)
-    
     def run_mab_sampling(self, K: int = 10, budget_frac: float = None, batch_size: int = 10, ucb_scale: float = 1.0):
         """
         基于多臂赌博机 (MAB) 的自适应分层采样。
@@ -1263,50 +1113,6 @@ class ProxyStratifiedSampler:
         Qerror = abs(T_hat - self.T_true) / (self.T_true if self.T_true != 0 else 1.0)
         return {"T_hat": T_hat, "T_true": self.T_true, "Qerror": Qerror, "n_post": n_post, "n_comment": n_comment}
 
-    # ---  基于 proxy * a 进行加权采样 ---
-    def run_baseline_proxy_mul_a(self, budget_frac: float = None, eps: float = 1e-10):
-        """
-        基线方法：proxy * a 采样。
-        采样概率正比于 proxy * a。
-        适用场景：认为最终贡献值直接正比于 (图估计 * 谓词概率)。这是理论上的最优重要性分布。
-        """
-        # print('[Check_running_baseline_a2]')
-        # 1. 健壮性检查
-        if self.posts.empty:
-            return {"T_hat": 0.0, "T_true": self.T_true, "Qerror": 0.0, "n_post": 0, "n_comment": 0}
-
-        posts = self.posts.copy()
-        N = len(posts)
-
-        # 2. 确定样本量
-        budget = int(budget_frac * N) if budget_frac else int(self.total_budget_frac * N)
-        n = min(budget, N)
-
-        # 3. 计算权重 (权重 = proxy * a)
-        # 之前的 baseline_proxy_a 是 sqrt(proxy * a)，这里去掉了 sqrt
-        weights =posts["proxy"].values * posts["a"].values + eps
-        weights = np.nan_to_num(weights, nan=0.0, posinf=0.0, neginf=0.0)
-
-        # 4. 计算选择概率
-        total_weight = weights.sum()
-        probs = weights / (total_weight if total_weight > 0 else 1e-12)
-
-        # 5. 执行采样
-        rng = np.random.default_rng(np.random.randint(1 << 30))
-        sample_idx = rng.choice(N, size=n, replace=False, p=probs)
-        sample = posts.iloc[sample_idx]
-
-        # 6. 计算包含概率 pi
-        pi = np.minimum(1.0, n * probs[sample_idx])
-
-        # 7. 统计节点开销
-        n_post, n_comment = self._count_unique_nodes(sample)
-
-        # 8. Horvitz-Thompson 无偏估计
-        T_hat = np.sum((sample["a"].values * sample["oracle"].values) / pi)
-
-        Qerror = abs(T_hat - self.T_true) / (self.T_true if self.T_true != 0 else 1.0)
-        return {"T_hat": T_hat, "T_true": self.T_true, "Qerror": Qerror, "n_post": n_post, "n_comment": n_comment}
 
     # ==========================================================
     # === 🧩 主基线1（Fastest估计节点或核心集的频率 + Oralce） ===
@@ -1348,6 +1154,68 @@ class ProxyStratifiedSampler:
             "pi_mean": float(np.mean(pis))
         }
 
+    # ==========================================================
+    # === 🧩 用于测试效率和误差曲线 ===
+    # ==========================================================
+    def run_baseline_proxy_a_checkpoints(self, budget_fracs, eps: float = 1e-10, seed: int = None):
+        """
+        FOIS_nrs 的检查点版本：
+        - 在最大预算下先一次采样顺序
+        - 对不同 budget_frac 取前缀估计
+        """
+        if self.posts.empty:
+            return []
+
+        posts = self.posts.copy()
+        N = len(posts)
+
+        # 预算序列处理
+        budget_fracs = sorted(list(set(budget_fracs)))
+        max_frac = max(budget_fracs)
+        max_n = min(int(max_frac * N), N)
+        if max_n <= 0:
+            return []
+
+        # 重要性分布 (FOIS_nrs: sqrt(proxy * a))
+        weights = np.sqrt(posts["proxy"].values * posts["a"].values + eps)
+        weights = np.nan_to_num(weights, nan=0.0, posinf=0.0, neginf=0.0)
+        probs = weights / (weights.sum() or 1e-12)
+
+        rng = np.random.default_rng(seed if seed is not None else np.random.randint(1 << 30))
+        sample_idx = rng.choice(N, size=max_n, replace=False, p=probs)
+
+        # 预取数组
+        a_vals = posts["a"].values[sample_idx]
+        oracle_vals = posts["oracle"].values[sample_idx]
+        p_vals = probs[sample_idx]
+
+        results = []
+        for frac in budget_fracs:
+            n = max(1, int(frac * N))
+            n = min(n, max_n)
+
+            # 前缀估计
+            pi = np.minimum(1.0, n * p_vals[:n])
+            T_hat = np.sum((a_vals[:n] * oracle_vals[:n]) / (pi + 1e-12))
+
+            Qerror = abs(T_hat - self.T_true) / (self.T_true if self.T_true != 0 else 1.0)
+
+            # oracle 预算（唯一 Post + Comment）
+            sample_prefix = posts.iloc[sample_idx[:n]]
+            n_post, n_comment = self._count_unique_nodes(sample_prefix)
+            oracle_cost = n_post + n_comment
+
+            results.append({
+                "budget_frac": frac,
+                "budget_n": n,
+                "T_hat": float(T_hat),
+                "Qerror": float(Qerror),
+                "n_post": int(n_post),
+                "n_comment": int(n_comment),
+                "oracle_cost": int(oracle_cost),
+            })
+        return results
+    
 
 def compute_T_true(
         gt_path: str,
@@ -1406,8 +1274,6 @@ def compute_T_true(
     print(f"✅ 计算完成: T_true = {T_true:.3f}")
 
     return T_true
-
-
 
 
 def compute_T_true_polars(
@@ -1484,12 +1350,8 @@ def compute_T_true_polars(
 
 
 
-
-
-
-
 # ==========================================================
-# === 部分 3: 采样评估与报告生成 ===
+# === 部分 2: 采样评估与报告生成 ===
 # ==========================================================
 # ==========================================================
 # === 主函数：遍历 aggregated_results 目录并执行评估 ===
@@ -1540,9 +1402,9 @@ def run_evaluation_for_query(
         # "proxy_uniform": sampler.run_proxy_uniform,
         
         # "proxyE_uniform": sampler.run_proxyE_uniform,
-        "UN": sampler.run_baseline_uniform,
-        "PO": sampler.run_baseline_proxy,
-        "MAB": sampler.run_mab_sampling,
+        # "UN": sampler.run_baseline_uniform,
+        # "PO": sampler.run_baseline_proxy,
+        # "MAB": sampler.run_mab_sampling,
 
         # "FaSTestO": sampler.run_baseline_graph_only,
 
@@ -1924,7 +1786,6 @@ def evaluate_graph_only_baseline(dataset_name: str):
         save_node_counts(node_stats_records)
         print(f"✅ 节点采样统计已追加到: {SAMPLED_COUNT_FILE}")
 
-
 # 结果保存路径
 SAMPLED_COUNT_FILE = "/home/wangshuo/resource/datasets/parler_data/dataset_test/results/efficiency/sampled_node_count.csv"
 def save_node_counts(records: List[Dict]):
@@ -1937,6 +1798,126 @@ def save_node_counts(records: List[Dict]):
         df.to_csv(SAMPLED_COUNT_FILE, mode='a', index=False, header=header)
     except Exception as e:
         print(f"[错误] 写入节点统计失败: {e}")
+
+
+# ==========================================================
+# === 部分 3: 误差与oracle预算曲线评估测试 ===
+# ==========================================================
+# ==========================================================
+# === xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ===
+# ==========================================================
+
+def run_fois_budget_curve_multi_predicate(
+    dataset_name: str,
+    budget_fracs: List[float],
+    run_times: int = 5,
+    post_proxy_col: str = "ML1_proxy4b_probability",
+    comment_proxy_col: str = "ML2_proxy1_probability",
+    post_oracle_col: str = "ML1_oracle2_probability",
+    comment_oracle_col: str = "ML2_oracle2_probability",
+):
+    """
+    只运行 FOIS_nrs (proxy×a) 的预算曲线评估（多谓词）。
+    输出：每个 query 的多个 budget checkpoint 结果。
+    """
+    print(f"\n====== 预算曲线评估 (FOIS_nrs) : {dataset_name} ======")
+
+    gt_manager = GroundTruthManager(dataset_name=dataset_name,
+                                    post_oracle_col=post_oracle_col,
+                                    comment_oracle_col=comment_oracle_col)
+    all_T_true_results = gt_manager.get_all()
+    if not all_T_true_results:
+        print("[Error] 未获取到 T_true")
+        return None
+
+    base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
+    aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
+    if not os.path.exists(aggregated_dir):
+        print(f"[Error] 聚合目录不存在: {aggregated_dir}")
+        return None
+
+    agg_files = [f for f in os.listdir(aggregated_dir) if f.endswith(".csv")]
+    if not agg_files:
+        print("[Warn] 没有聚合文件")
+        return None
+
+    records = []
+    
+    # 使用 sorted 保证顺序一致
+    for agg_file in sorted(agg_files):
+        if agg_file.startswith("aggregated_list_"):
+            base = agg_file.replace("aggregated_list_", "")
+        else:
+            base = agg_file
+        query_basename = base.replace(".csv", "") + ".graph"
+
+        T_true = all_T_true_results.get(query_basename)
+        if T_true is None or T_true == 0:
+            continue
+
+        filepath = os.path.join(aggregated_dir, agg_file)
+        sampler = ProxyStratifiedSampler(
+            csv_path=filepath,
+            is_multi_predicate=True,
+            post_proxy=post_proxy_col,
+            comment_proxy=comment_proxy_col,
+            post_oracle=post_oracle_col,
+            comment_oracle=comment_oracle_col,
+            T_true=T_true,
+            total_budget_frac=max(budget_fracs)
+        )
+
+        if sampler.posts.empty:
+            continue
+
+        # --- [修改点 1] 初始化临时字典，用于存储当前查询在各预算下的误差列表 ---
+        # 结构: { 0.05: [err1, err2...], 0.1: [err1, err2...] }
+        temp_budget_errors = {b: [] for b in budget_fracs}
+
+        for run_id in range(run_times):
+            ckpts = sampler.run_baseline_proxy_a_checkpoints(budget_fracs)
+            for rec in ckpts:
+                # 记录数据到最终列表
+                records.append({
+                    "query_basename": query_basename,
+                    "run_id": run_id + 1,
+                    "budget_frac": rec["budget_frac"],
+                    "budget_n": rec["budget_n"],
+                    "T_true": T_true,
+                    "T_hat": rec["T_hat"],
+                    "Qerror": rec["Qerror"],
+                    "n_post": rec["n_post"],
+                    "n_comment": rec["n_comment"],
+                    "oracle_cost": rec["oracle_cost"],
+                    "method": "FOIS_nrs"
+                })
+                
+                # --- [修改点 2] 收集当前 budget 的误差以便后续打印 ---
+                if rec["budget_frac"] in temp_budget_errors:
+                    temp_budget_errors[rec["budget_frac"]].append(rec["Qerror"])
+
+        # --- [修改点 3] 当前查询的所有 Run 结束后，打印平均误差 ---
+        print(f"Query: {query_basename:<35} | T_true: {int(T_true)}")
+        # 格式化输出：Budget -> Avg QError
+        stats_str = "  | ".join([
+            f"B={b:.2f}: Err={np.mean(errs):.4f}" 
+            for b, errs in temp_budget_errors.items() if errs
+        ])
+        print(f"  -> {stats_str}")
+
+    if not records:
+        print("[Warn] 无结果生成")
+        return None
+
+    df = pd.DataFrame(records)
+    out_dir = os.path.join(base_path, "results", "budget_curve")
+    os.makedirs(out_dir, exist_ok=True)
+    out_path = os.path.join(out_dir, "FOIS_nrs_budget_curve.csv")
+    df.to_csv(out_path, index=False)
+    print(f"\n[OK] 保存预算曲线结果: {out_path}")
+    return df
+
+
 
 if __name__ == '__main__':
     dataset_to_process = 'dataset_test'
