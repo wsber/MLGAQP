@@ -1,0 +1,18 @@
+🚀 Running with Dataset: dataset_three, Proxy Model: Dist_Bimodal_left_proxy2, Run Times: 20
+dataset_three
+[BEGIN] multi-query pipeline
+[WARN] parse_sv_multi: no records parsed from sv file.
+[ERROR] No sv records parsed. Exiting.
+[INFO] read_infer_node_list: loaded 246 infer nodes (first 10): ['u1', 'u1', 'u0', 'u1', 'u1', 'u2', 'u2', 'u1', 'u0', 'u1']
+Traceback (most recent call last):
+  File "/home/wangshuo/projects/Neo4j_Exp/pythonProject/src/Structure_first/single_predicate/method.py", line 133, in <module>
+    merged_df = merger.build_post_with_estimates(sv_df=sv_df, idmap_file=IDMAP_FILE, post_csv=POST_CSV,
+  File "/home/wangshuo/projects/Neo4j_Exp/pythonProject/src/Structure_first/fastest_pipeline.py", line 812, in build_post_with_estimates
+    q_order = sv_df[["query_index", "query_basename"]].drop_duplicates().sort_values("query_index")
+  File "/home/wangshuo/software/anaconda3/envs/iogs/lib/python3.8/site-packages/pandas/core/frame.py", line 3767, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+  File "/home/wangshuo/software/anaconda3/envs/iogs/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 5877, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "/home/wangshuo/software/anaconda3/envs/iogs/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 5938, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['query_index', 'query_basename'], dtype='object')] are in the [columns]"

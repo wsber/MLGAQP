@@ -1,0 +1,31 @@
+🚀 Running with Dataset: dataset_one, Proxy Model: Dist_Bimodal_left_proxy2, Run Times: 20
+dataset_one
+[BEGIN] multi-query pipeline
+[INFO] parse_sv_multi: parsed 222994 node records across 16 queries.
+[INFO] read_infer_node_list: loaded 16 infer nodes (first 10): ['u1', 'u2', 'u2', 'u1', 'u2', 'u1', 'u2', 'u2', 'u1', 'u2']
+[INFO] build_post_with_estimates: wrote /home/wangshuo/resource/datasets/parler_data/dataset_one/results/post_with_estimate.csv, total rows=24082
+[check proxy_model] Dist_Bimodal_left_proxy2
+[check oracle_model] Dist_Bimodal_left_oracle_prob
+[check T_true_cache_file] /home/wangshuo/resource/datasets/parler_data/dataset_one/ground_truth/T_true_Dist_Bimodal_left_oracle_prob.txt
+[INFO] 分次实验结果将保存至: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/result_summarys/Dist_Bimodal_left_proxy2
+[INFO] 已加载缓存的 T_true，共 1 条。
+
+============================================================
+[STEP] Query index=0, basename=query_dense_1_1.graph, estimate column=estimate__0__query_dense_1_1.graph
+[INFO] Using gt_match_col = u1 for query #0
+[CACHE] 读取缓存 T_true=0.0000 for query_dense_1_1.graph
+[CACHE] Found existing estimate file, skipping generation: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q0__query_dense_1_1.graph_Dist_Bimodal_left_proxy2.csv
+Traceback (most recent call last):
+  File "/home/wangshuo/projects/Neo4j_Exp/pythonProject/src/Structure_first/single_predicate/method.py", line 414, in <module>
+    evaluate_queries(
+  File "/home/wangshuo/projects/Neo4j_Exp/pythonProject/src/Structure_first/single_predicate/method.py", line 299, in evaluate_queries
+    sampler = ProxyStratifiedSampler(csv_path=tmp_csv, T_true=T_true,
+  File "/home/wangshuo/projects/Neo4j_Exp/pythonProject/src/Structure_first/proxy_sample.py", line 60, in __init__
+    self.posts = self.prepare_posts(df, proxy_model=post_proxy,oracle_model=post_oracle)
+  File "/home/wangshuo/projects/Neo4j_Exp/pythonProject/src/Structure_first/proxy_sample.py", line 195, in prepare_posts
+    "proxy": g[proxy_model].first().values.astype(float),
+  File "/home/wangshuo/software/anaconda3/envs/iogs/lib/python3.8/site-packages/pandas/core/groupby/generic.py", line 1771, in __getitem__
+    return super().__getitem__(key)
+  File "/home/wangshuo/software/anaconda3/envs/iogs/lib/python3.8/site-packages/pandas/core/base.py", line 244, in __getitem__
+    raise KeyError(f"Column not found: {key}")
+KeyError: 'Column not found: Dist_Bimodal_left_proxy2'

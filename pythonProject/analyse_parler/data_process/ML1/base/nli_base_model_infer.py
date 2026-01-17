@@ -6,14 +6,14 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from tqdm.auto import tqdm
 
 # —————— 配置 ——————
-# model_name = 'deberta-v3-xsmall-binary-epoch20'
+model_name = 'deberta-v3-xsmall-binary-epoch20'
 # model_name = 'distilbert-base-uncased-finetuned-mnli'
 # model_name = 'deberta-v3-base-binary'
-model_name = 'bert-mini-binary-epoch20'
+# model_name = 'bert-mini-binary-epoch20'
 # MODEL_DIR = f"/home/wangshuo/resource/AIModels/NLP/NLI/{model_name}"  # 你的模型与 tokenizer 保存目录
 MODEL_DIR = f"/home/wangshuo/resource/AIModels/Finetune/NLI/base/{model_name}"  # 你的模型与 tokenizer 保存目录
-INPUT_CSV = "/home/wangshuo/resource/datasets/parler_data/dataset_one/csv_data/post_t.csv"  # 待推理的文件
-OUTPUT_CSV = "/home/wangshuo/resource/datasets/parler_data/dataset_one/csv_data/post_t.csv"  # 覆盖写回
+INPUT_CSV = "/home/wangshuo/resource/datasets/parler_data/dataset_three/csv_data/post.csv"  # 待推理的文件
+OUTPUT_CSV = "/home/wangshuo/resource/datasets/parler_data/dataset_three/csv_data/post.csv"  # 覆盖写回
 BATCH_SIZE = 32
 MAX_LEN = 256
 DEVICE = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
@@ -68,6 +68,6 @@ avg_throughput = 1 / avg_time  # 平均吞吐
 print(f"每个 batch 推理耗时 (s)：最短={min_time:.4f}, 最长={max_time:.4f}, 平均={avg_time:.4f}")
 print(f"吞吐量 (batch/s)：最大={max_throughput:.2f}, 最小={min_throughput:.2f}, 平均={avg_throughput:.2f}")
 # —————— 写回结果 ——————
-df['ML1_proxy1b_probability'] = proxy_probs
+df['ML1_proxy6b_probability'] = proxy_probs
 df.to_csv(OUTPUT_CSV, index=False)
 print(f"✅ 推理完成，结果保存到 {OUTPUT_CSV}")

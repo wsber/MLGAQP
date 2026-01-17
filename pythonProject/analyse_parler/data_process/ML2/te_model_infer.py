@@ -6,20 +6,25 @@ import torch
 from scipy.special import softmax
 from tqdm import tqdm
 
-# 1. 模型路径
-model_name = 'distill_oracle2_roberta-base-SST-2_epoch5'
-# model_name = 'roberta-large-sst2'
+# 1. 输出配置
+# model_name = 'distill_oracle2_roberta-base-SST-2_epoch5'
+model_name = 'roberta-large-sst2'
 proxy_model_dir_pre = '/home/wangshuo/resource/AIModels/Finetune/TE/sst2/'
 model_dir_pre = '/home/wangshuo/resource/AIModels/NLP/TE/'
-MODEL_PATH = proxy_model_dir_pre + model_name
-# MODEL_PATH = model_dir_pre + model_name
+# MODEL_PATH = proxy_model_dir_pre + model_name
+MODEL_PATH = model_dir_pre + model_name
+model_label = 'oracle3'
+datadir = "/home/wangshuo/resource/datasets/parler_data/dataset_three/csv_data"
+file_name = "comment.csv"
+
 
 # 2. 手动加载 tokenizer 和 model
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
 model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
 device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
-model.half()
+# model.half()
 model.to(device).eval()
+
 
 # 3. 手动写标签映射（sst2 两分类）
 id2label = {
@@ -36,10 +41,8 @@ def preprocess(text: str) -> str:
 
 # 5. 读取 CSV
 # datadir = "/home/wangshuo/resource/datasets/parler_data/30W_valid_user/10-10-5"
-datadir = "/home/wangshuo/resource/datasets/parler_data/dataset_test/csv_data"
-file_name = "comment_new.csv"
 in_csv = f"{datadir}/{file_name}"
-out_csv = f"{datadir}/{file_name}"
+out_csv = f"{datadir}/test_{file_name}"
 df = pd.read_csv(in_csv)
 texts = df['body'].fillna("").astype(str).tolist()
 
@@ -90,7 +93,7 @@ print(f"吞吐量 (batch/s)：最大={max_throughput:.2f}, 最小={min_throughpu
 
 # 8. 写回 CSV
 # model_label = 'proxy2d2'
-model_label = 'proxy1d1'
+
 # model_label = 'proxy1'
 df[f'ML2_{model_label}_probability'] = all_scores
 df.to_csv(out_csv, index=False, encoding="utf-8-sig")

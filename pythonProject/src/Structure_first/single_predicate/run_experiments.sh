@@ -3,28 +3,28 @@
 # 定义项目根目录
 PROJECT_ROOT="/home/wangshuo/projects/Neo4j_Exp"
 SCRIPT_PATH="$PROJECT_ROOT/pythonProject/src/Structure_first/single_predicate/method.py"
-# DATASET="dataset_three"
-DATASET="dataset_one"
+DATASET="dataset_three"
+# DATASET="dataset_test"
 # 激活环境 (如果有 conda)
 # source activate your_env_name
 
 # 定义任务列表
 # 格式: "dataset proxy_model oracle_model"
 tasks=(
-    # "Dist_SkewHigh_proxy3 Dist_SkewHigh_oracle_prob"
-    # "Dist_SkewLow_proxy2 Dist_SkewLow_oracle_prob"
-    "ML1_proxy4b_probability ML1_oracle1_probability"
-    # "Dist_Extreme_Mix_proxy2 Dist_Extreme_Mix_oracle_prob"
-    # "Dist_Extreme_Mix_proxy3 Dist_Extreme_Mix_oracle_prob"
+    # "Dist_SkewHigh_proxy4 Dist_SkewHigh_oracle_prob"
+    # "Dist_SkewLow_proxy4 Dist_SkewLow_oracle_prob"
+
+    "ML1_proxy2b_probability ML1_oracle2_probability"
+    # "Dist_Extreme_Mix_proxy4 Dist_Extreme_Mix_oracle_prob"
     
 
     # "Dist_Bimodal_origin_proxy2 Dist_Bimodal_origin_oracle_prob"
-    # "Dist_Bimodal_left_proxy2 Dist_Bimodal_left_oracle_prob"
-    # "Dist_Bimodal_right_proxy2 Dist_Bimodal_right_oracle_prob"
+    # "Dist_Bimodal_left_proxy4 Dist_Bimodal_left_oracle_prob"
+    # "Dist_Bimodal_right_proxy4 Dist_Bimodal_right_oracle_prob"
 
-    # "Dist_Beta_U_proxy2 Dist_Beta_U_oracle_prob"
-    # "Dist_Asym_LeftHigh_proxy2 Dist_Asym_LeftHigh_oracle_prob"
-    # "Dist_Asym_RightHigh_proxy2 Dist_Asym_RightHigh_oracle_prob"
+    # "Dist_Beta_U_proxy4 Dist_Beta_U_oracle_prob"
+    # "Dist_Asym_LeftHigh_proxy4 Dist_Asym_LeftHigh_oracle_prob"
+    # "Dist_Asym_RightHigh_proxy4 Dist_Asym_RightHigh_oracle_prob"
     
     
     # "Dist_Normal_proxy2 Dist_Normal_oracle_prob"

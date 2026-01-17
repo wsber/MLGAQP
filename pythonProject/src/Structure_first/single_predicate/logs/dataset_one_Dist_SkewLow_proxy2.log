@@ -1,0 +1,733 @@
+🚀 Running with Dataset: dataset_one, Proxy Model: Dist_SkewLow_proxy2, Run Times: 20
+dataset_one
+[BEGIN] multi-query pipeline
+[INFO] parse_sv_multi: parsed 222994 node records across 16 queries.
+[INFO] read_infer_node_list: loaded 16 infer nodes (first 10): ['u1', 'u2', 'u2', 'u1', 'u2', 'u1', 'u2', 'u2', 'u1', 'u2']
+[INFO] build_post_with_estimates: wrote /home/wangshuo/resource/datasets/parler_data/dataset_one/results/post_with_estimate.csv, total rows=24082
+[check proxy_model] Dist_SkewLow_proxy2
+[check oracle_model] Dist_SkewLow_oracle_prob
+[check T_true_cache_file] /home/wangshuo/resource/datasets/parler_data/dataset_one/ground_truth/T_true_Dist_SkewLow_oracle_prob.txt
+[INFO] 分次实验结果将保存至: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/result_summarys/Dist_SkewLow_proxy2
+[INFO] 已加载缓存的 T_true，共 16 条。
+
+============================================================
+[STEP] Query index=0, basename=query_dense_1_1.graph, estimate column=estimate__0__query_dense_1_1.graph
+[INFO] Using gt_match_col = u1 for query #0
+[CACHE] 读取缓存 T_true=13491.0000 for query_dense_1_1.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q0__query_dense_1_1.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=4164.5068±942.6843,  Qerror=0.691312±0.069875
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=3764.1397±748.3824,  Qerror=0.720989±0.055473
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=3713.7069±357.3528,  Qerror=0.724727±0.026488
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=3696.2034±439.2590,  Qerror=0.726025±0.032559
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=2654.1039±1333.1910,  Qerror=0.803269±0.098821
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=3940.2618±290.9749,  Qerror=0.707934±0.021568
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q0__query_dense_1_1.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=1, basename=query_dense_1_2.graph, estimate column=estimate__1__query_dense_1_2.graph
+[INFO] Using gt_match_col = u2 for query #1
+[CACHE] 读取缓存 T_true=2556.0000 for query_dense_1_2.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q1__query_dense_1_2.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=630.4446±246.7156,  Qerror=0.753347±0.096524
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=899.9325±321.5913,  Qerror=0.647914±0.125818
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=706.8609±101.7051,  Qerror=0.723450±0.039791
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=724.5170±168.2443,  Qerror=0.716543±0.065823
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=320.4396±325.6022,  Qerror=0.874632±0.127387
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=782.8476±119.1374,  Qerror=0.693722±0.046611
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q1__query_dense_1_2.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=2, basename=query_dense_1_3.graph, estimate column=estimate__2__query_dense_1_3.graph
+[INFO] Using gt_match_col = u2 for query #2
+[CACHE] 读取缓存 T_true=527710.0000 for query_dense_1_3.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q2__query_dense_1_3.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=89601.2333±72211.3472,  Qerror=0.830207±0.136839
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=215404.3776±300299.9762,  Qerror=0.811827±0.165131
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=202548.2243±17424.9791,  Qerror=0.616175±0.033020
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=208363.9232±49218.6645,  Qerror=0.605154±0.093268
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=23070.8176±43315.2901,  Qerror=0.956281±0.082082
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=183279.2579±108261.6084,  Qerror=0.652689±0.205154
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q2__query_dense_1_3.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=3, basename=query_path_4_0.graph, estimate column=estimate__3__query_path_4_0.graph
+[INFO] Using gt_match_col = u1 for query #3
+[CACHE] 读取缓存 T_true=573575.0000 for query_path_4_0.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q3__query_path_4_0.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=286742.6101±453170.1981,  Qerror=0.901636±0.313143
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=132541.1126±174415.7910,  Qerror=0.820422±0.117885
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=217342.6010±10081.9511,  Qerror=0.621074±0.017577
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=181576.6758±64825.0438,  Qerror=0.683430±0.113019
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=67161.3670±99798.6097,  Qerror=0.882907±0.173994
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=126620.9433±121918.7525,  Qerror=0.779243±0.212559
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q3__query_path_4_0.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=4, basename=query_path_4_2.graph, estimate column=estimate__4__query_path_4_2.graph
+[INFO] Using gt_match_col = u2 for query #4
+[CACHE] 读取缓存 T_true=326437.0000 for query_path_4_2.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q4__query_path_4_2.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=65536.3522±50831.7044,  Qerror=0.799237±0.155717
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=88029.0889±69032.4595,  Qerror=0.730334±0.211473
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=67606.4619±14326.1719,  Qerror=0.792896±0.043886
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=89914.0544±23340.9793,  Qerror=0.724559±0.071502
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=18347.5306±25439.5118,  Qerror=0.943795±0.077931
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=73891.1619±43801.1827,  Qerror=0.805048±0.111586
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q4__query_path_4_2.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=5, basename=query_path_4_4.graph, estimate column=estimate__5__query_path_4_4.graph
+[INFO] Using gt_match_col = u1 for query #5
+[CACHE] 读取缓存 T_true=573575.0000 for query_path_4_4.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q5__query_path_4_4.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=148465.0372±359005.0271,  Qerror=0.967622±0.210226
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=222933.9440±289564.1823,  Qerror=0.789466±0.117512
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=230103.7806±13676.2122,  Qerror=0.598825±0.023844
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=198631.6290±77780.9612,  Qerror=0.653695±0.135607
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=183772.8076±100539.4433,  Qerror=0.679601±0.175286
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=214075.4334±139939.4594,  Qerror=0.626770±0.243978
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q5__query_path_4_4.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=6, basename=query_path_6_0.graph, estimate column=estimate__6__query_path_6_0.graph
+[INFO] Using gt_match_col = u2 for query #6
+[CACHE] 读取缓存 T_true=11205029.0000 for query_path_6_0.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q6__query_path_6_0.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=12063612.3532±22994014.1578,  Qerror=1.500476±1.415377
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=10812290.4511±14354712.8667,  Qerror=1.179036±0.529227
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=6896986.0458±1657684.2024,  Qerror=0.384474±0.147941
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=7573350.3098±1701536.8486,  Qerror=0.327410±0.145775
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=3244091.9727±3954417.7068,  Qerror=0.710479±0.352915
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=7031979.5002±3117496.6765,  Qerror=0.423110±0.214192
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q6__query_path_6_0.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=7, basename=query_path_6_1.graph, estimate column=estimate__7__query_path_6_1.graph
+[INFO] Using gt_match_col = u2 for query #7
+[CACHE] 读取缓存 T_true=195495.0000 for query_path_6_1.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q7__query_path_6_1.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=32310.9063±44276.6032,  Qerror=0.878558±0.167927
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=128286.8012±195538.9222,  Qerror=1.036170±0.270565
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=114240.8802±4509.2249,  Qerror=0.415633±0.023066
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=130523.0078±32251.1848,  Qerror=0.355311±0.135585
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=31941.9131±57086.1125,  Qerror=0.836610±0.292008
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=81377.6135±52089.4134,  Qerror=0.589894±0.255510
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q7__query_path_6_1.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=8, basename=query_path_6_2.graph, estimate column=estimate__8__query_path_6_2.graph
+[INFO] Using gt_match_col = u1 for query #8
+[CACHE] 读取缓存 T_true=584575.0000 for query_path_6_2.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q8__query_path_6_2.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=2716680.5162±9686420.6453,  Qerror=4.471647±16.368125
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=9390530.2364±10325976.4079,  Qerror=15.111222±17.623707
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=5845554.9579±136655.7778,  Qerror=8.999666±0.233769
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=5534086.0759±1402737.0576,  Qerror=8.466854±2.399584
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=2548542.5789±3161420.5828,  Qerror=4.436289±4.567311
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=4799702.0882±2788854.8068,  Qerror=7.430911±4.423501
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q8__query_path_6_2.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=9, basename=query_path_6_3.graph, estimate column=estimate__9__query_path_6_3.graph
+[INFO] Using gt_match_col = u2 for query #9
+[CACHE] 读取缓存 T_true=150566.0000 for query_path_6_3.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q9__query_path_6_3.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=58470.2472±27516.4262,  Qerror=0.611664±0.182753
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=55509.0985±19483.9575,  Qerror=0.631330±0.129405
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=50343.6025±6063.9711,  Qerror=0.665638±0.040275
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=59537.7989±15559.6439,  Qerror=0.604573±0.103341
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=18688.6640±21172.8029,  Qerror=0.875877±0.140621
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=51757.4299±23600.0678,  Qerror=0.693119±0.150413
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q9__query_path_6_3.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=10, basename=query_path_8_2.graph, estimate column=estimate__10__query_path_8_2.graph
+[INFO] Using gt_match_col = u3 for query #10
+[CACHE] 读取缓存 T_true=555204.0000 for query_path_8_2.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q10__query_path_8_2.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=153259.3742±212775.7685,  Qerror=0.823183±0.118453
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=313331.4409±233718.6338,  Qerror=0.496533±0.353656
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=252081.1313±43912.2331,  Qerror=0.545967±0.079092
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=274118.6430±111001.8153,  Qerror=0.508398±0.196157
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=72966.8580±105532.6155,  Qerror=0.868576±0.190079
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=276375.1285±123420.0025,  Qerror=0.505729±0.218107
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q10__query_path_8_2.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=11, basename=query_path_8_3.graph, estimate column=estimate__11__query_path_8_3.graph
+[INFO] Using gt_match_col = u2 for query #11
+[CACHE] 读取缓存 T_true=3226116.0000 for query_path_8_3.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q11__query_path_8_3.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=447560.7304±818134.4568,  Qerror=0.910787±0.177379
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=3719274.9516±5550948.7540,  Qerror=1.497455±0.884034
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=2735703.4342±95711.2717,  Qerror=0.152013±0.029668
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=2630636.1779±778510.7452,  Qerror=0.274196±0.159115
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=1433870.9517±1306170.0861,  Qerror=0.574751±0.379105
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=2019713.1733±1507162.8310,  Qerror=0.549750±0.332950
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q11__query_path_8_3.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=12, basename=query_tree_4_0.graph, estimate column=estimate__12__query_tree_4_0.graph
+[INFO] Using gt_match_col = u1 for query #12
+[CACHE] 读取缓存 T_true=573575.0000 for query_tree_4_0.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q12__query_tree_4_0.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=364841.2717±578526.3787,  Qerror=1.017195±0.398447
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=267911.0212±357949.2468,  Qerror=0.823990±0.112464
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=235667.3988±12076.0391,  Qerror=0.589125±0.021054
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=245133.0686±59325.9735,  Qerror=0.572622±0.103432
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=71437.8115±104196.9103,  Qerror=0.875452±0.181662
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=225492.6542±81394.8137,  Qerror=0.606865±0.141908
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q12__query_tree_4_0.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=13, basename=query_tree_4_1.graph, estimate column=estimate__13__query_tree_4_1.graph
+[INFO] Using gt_match_col = u1 for query #13
+[CACHE] 读取缓存 T_true=4103.0000 for query_tree_4_1.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q13__query_tree_4_1.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=1156.3092±440.3979,  Qerror=0.718180±0.107336
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=1281.8328±421.0762,  Qerror=0.687586±0.102626
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=1253.4754±183.1147,  Qerror=0.694498±0.044629
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=1468.8134±260.1870,  Qerror=0.642015±0.063414
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=738.3239±600.0170,  Qerror=0.820053±0.146239
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=1359.9960±219.3090,  Qerror=0.668536±0.053451
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q13__query_tree_4_1.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=14, basename=query_tree_4_2.graph, estimate column=estimate__14__query_tree_4_2.graph
+[INFO] Using gt_match_col = u1 for query #14
+[CACHE] 读取缓存 T_true=573575.0000 for query_tree_4_2.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q14__query_tree_4_2.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=81192.7046±77292.0209,  Qerror=0.890106±0.087240
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=226572.5335±277040.4644,  Qerror=0.764867±0.144073
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=218191.6565±12426.1463,  Qerror=0.619594±0.021664
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=230054.6881±66241.8777,  Qerror=0.598911±0.115489
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=50997.7956±98748.5144,  Qerror=0.911088±0.172163
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=233717.8592±76883.2513,  Qerror=0.592524±0.134042
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q14__query_tree_4_2.graph_Dist_SkewLow_proxy2.csv
+
+============================================================
+[STEP] Query index=15, basename=query_tree_4_3.graph, estimate column=estimate__15__query_tree_4_3.graph
+[INFO] Using gt_match_col = u2 for query #15
+[CACHE] 读取缓存 T_true=326437.0000 for query_tree_4_3.graph
+[INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q15__query_tree_4_3.graph_Dist_SkewLow_proxy2.csv
+
+--- Running baseline_uniform for 20 times ---
+✅ baseline_uniform 平均结果: T_hat=85461.0748±113008.3189,  Qerror=0.796697±0.192706
+
+--- Running baseline_proxy for 20 times ---
+✅ baseline_proxy 平均结果: T_hat=83006.3209±67272.6325,  Qerror=0.745720±0.206082
+
+--- Running baseline_proxy_a for 20 times ---
+✅ baseline_proxy_a 平均结果: T_hat=67408.4259±14253.9201,  Qerror=0.793502±0.043665
+
+--- Running baseline_proxy_a_unbiased_test1 for 20 times ---
+✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=69994.0293±21029.6904,  Qerror=0.785582±0.064422
+
+--- Running proxy_mab for 20 times ---
+✅ proxy_mab 平均结果: T_hat=19833.3018±27025.3187,  Qerror=0.939243±0.082789
+
+--- Running proxyE_importance for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ proxyE_importance 平均结果: T_hat=64176.0048±45188.4534,  Qerror=0.803405±0.138429
+[INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q15__query_tree_4_3.graph_Dist_SkewLow_proxy2.csv
+[INFO] evaluate_queries: wrote summary to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/results_summary.csv
+[INFO] 分次详细结果已保存至 /home/wangshuo/resource/datasets/parler_data/dataset_one/results/result_summarys/Dist_SkewLow_proxy2 (共 20 个文件)

@@ -28,6 +28,9 @@ class FastestRunner:
             root_label=-1,
             sample_budget=None,
             estimate_with_predicate=False,  # +++ 新增参数：是否启用谓词检查 +++
+            post_oracle_col="ML1_oracle2_probability",
+            comment_oracle_col="ML2_oracle2_probability",
+            multi_proxy_prob=None,
             extra_args=None,
             timeout=None):
         """
@@ -51,7 +54,14 @@ class FastestRunner:
         # +++ 参数：启用谓词检查 +++
         if estimate_with_predicate:
             args.append("--ESTIMATE_WITH_PREDICATE")
+            # [Mod] 只有开启谓词检查模式时才传递这两个参数（或者是直接传也没问题，C++如果不解析会忽略）
+            if post_oracle_col:
+                args.extend(["--POST_ORACLE_COL", str(post_oracle_col)])
+            if comment_oracle_col:
+                args.extend(["--COMMENT_ORACLE_COL", str(comment_oracle_col)])
 
+        if multi_proxy_prob:
+             args.extend(["--MULTI_PROXY_PROB", str(multi_proxy_prob)])
         # 其他额外参数
         if extra_args:
             args.extend(extra_args)

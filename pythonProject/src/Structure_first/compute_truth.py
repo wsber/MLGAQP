@@ -13,7 +13,9 @@ class GroundTruthManager:
     并内置了缓存机制以避免重复计算。
     """
 
-    def __init__(self, dataset_name: str):
+    def __init__(self, dataset_name: str,
+                 post_oracle_col: str = "ML1_oracle1_probability",
+                 comment_oracle_col: str = "ML2_oracle2_probability"):
         """
         初始化 GroundTruthManager。
 
@@ -21,9 +23,19 @@ class GroundTruthManager:
             dataset_name (str): 数据集的名称，用于构建所有相关文件路径。
         """
         self.dataset_name = dataset_name
+        self.post_oracle_col = post_oracle_col
+        self.comment_oracle_col = comment_oracle_col
+
         # --- 集中管理所有路径 ---
         self.base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
-        self.cache_path = os.path.join(self.base_path, "results", "T_true.json")
+        
+        safe_post = post_oracle_col.replace("/", "_")
+        safe_comment = comment_oracle_col.replace("/", "_")
+        self.cache_path = os.path.join(
+            self.base_path, "results", 
+            f"T_true_{safe_post}_{safe_comment}.json"
+        )
+
         self.gt_dir = os.path.join(self.base_path, "ground_truth", "structure_result")
         self.core_config_path = os.path.join(self.base_path, "data_graph", "core_nodes_config.json")
         self.id_mapping_path = os.path.join(self.base_path, "data_graph", "id_mapping.csv")
@@ -94,16 +106,38 @@ class GroundTruthManager:
         except Exception as e:
             raise FileNotFoundError(f"无法扫描输入文件: {e}")
 
+        # 2. 预处理 id_mapping
         idmap_df = idmap_df.select(
             pl.col("internal_id"), pl.col("orig_id"), pl.col("type").str.to_lowercase().alias("type")
         )
+
+        # 3. 动态处理 Post 数据（修复报错的位置）
+        # 使用 collect_schema().names() 来检查列是否存在，而不是用 meta.is_literal
+        post_cols = post_df.collect_schema().names()
+        
+        if self.post_oracle_col in post_cols:
+            post_prob_expr = pl.col(self.post_oracle_col)
+        else:
+            print(f"[警告] post.csv 缺少列 '{self.post_oracle_col}'，该表的 oracle_prob 将全部填 0。")
+            post_prob_expr = pl.lit(0.0)
+
         post_df = post_df.select(
             pl.col("id:ID").alias("orig_id"),
-            pl.col("ML1_oracle1_probability").cast(pl.Float64).fill_null(0.0).alias("oracle_prob")
+            post_prob_expr.cast(pl.Float64).fill_null(0.0).alias("oracle_prob")
         ).with_columns(pl.lit("post").alias("type"))
+
+        # 4. 动态处理 Comment 数据
+        comment_cols = comment_df.collect_schema().names()
+        
+        if self.comment_oracle_col in comment_cols:
+            comment_prob_expr = pl.col(self.comment_oracle_col)
+        else:
+            print(f"[警告] comment.csv 缺少列 '{self.comment_oracle_col}'，该表的 oracle_prob 将全部填 0。")
+            comment_prob_expr = pl.lit(0.0)
+
         comment_df = comment_df.select(
             pl.col("id:ID").alias("orig_id"),
-            pl.col("ML2_oracle2_probability").cast(pl.Float64).fill_null(0.0).alias("oracle_prob")
+            comment_prob_expr.cast(pl.Float64).fill_null(0.0).alias("oracle_prob")
         ).with_columns(pl.lit("comment").alias("type"))
 
         oracle_source = pl.concat([post_df, comment_df])

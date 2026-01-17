@@ -1,11 +1,12 @@
 🚀 Running with Dataset: dataset_one, Proxy Model: ML1_proxy4b_probability, Run Times: 20
-🚀 正在运行: /home/wangshuo/projects/FaSTest-main/build/Fastest -d dataset_one --ROOT_LABEL 1 --SAMPLE_BUDGET 40000
+🚀 正在运行: /home/wangshuo/projects/FaSTest-main/build/Fastest -d dataset_one --ROOT_LABEL 1 --SAMPLE_BUDGET 20000
 
 [CLI] Root label set to 1
-[CLI] Sample budget set to 40000
-[info] SAMPLE_BUDGET:40000
+[CLI] Sample budget set to 20000
+[info] SAMPLE_BUDGET:20000
 [Info] Cleared old estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[info] args:0x7ffcdc377108
+[info] args:0x7ffd9cab1618
+[info] summary_run1_path:/home/wangshuo/resource/datasets/parler_data/dataset_one/results/result_summarys/ML1_proxy4b_probability/results_summary_run_1.csv
 /home/wangshuo/resource/datasets/parler_data/dataset_one/ground_truth/parler_ans.txt
 [Info] Reading core labels configuration from: /home/wangshuo/resource/datasets/parler_data/dataset_one/data_graph/user_custom_labels.txt
 [Info] Core labels configuration file not found. Running in global estimation mode only.
@@ -18,272 +19,272 @@ Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_o
 [Check] Sum(node_est) = 129165, est_total = 129165, ratio = 1
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_dense_1_1.graph = 3332.9384 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_dense_1_1.graph = 2491.4730 ms
   [Result] #CSVertex           : 191445
   [Result] #CSEdge             : 712622
   [Result] #CandTree           : 1.292e+05
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 40000
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 20000
   [Result] Truth               : 653720106.0000
   [Result] Est                 : 129165.0000
   [Result] logQError           : -3.7042
-  [Result] CSBuildTime         : 802.7182
-  [Result] TreeCountTime       : 102.2146
-  [Result] TreeSampleTime      : 2428.0055
+  [Result] CSBuildTime         : 914.3163
+  [Result] TreeCountTime       : 102.0112
+  [Result] TreeSampleTime      : 1475.1455
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 3332.9384
+  [Result] QueryTime           : 2491.4730
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_dense_1_1.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_dense_1_2.graph
 [Info] Using user-specified root label 1 -> query node 2
-[Check] Sum(node_est) = 24765.3768, est_total = 24765.3768, ratio = 1.0000
+[Check] Sum(node_est) = 24802.7169, est_total = 24802.7169, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_dense_1_2.graph = 1625.9873 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_dense_1_2.graph = 1410.6305 ms
   [Result] #CSVertex           : 80545
   [Result] #CSEdge             : 306208
   [Result] #CandTree           : 3.556e+04
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 27856
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 13949
   [Result] Truth               : 657245938.0000
-  [Result] Est                 : 24765.3768
-  [Result] logQError           : -4.4239
-  [Result] CSBuildTime         : 740.4417
-  [Result] TreeCountTime       : 74.2619
-  [Result] TreeSampleTime      : 811.2837
+  [Result] Est                 : 24802.7169
+  [Result] logQError           : -4.4232
+  [Result] CSBuildTime         : 856.1561
+  [Result] TreeCountTime       : 71.3085
+  [Result] TreeSampleTime      : 483.1659
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 1625.9873
+  [Result] QueryTime           : 1410.6305
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_dense_1_2.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_dense_1_3.graph
 [Info] Using user-specified root label 1 -> query node 2
-[Check] Sum(node_est) = 3778908.1627, est_total = 3778908.1627, ratio = 1.0000
+[Check] Sum(node_est) = 3790649.0199, est_total = 3790649.0199, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_dense_1_3.graph = 3554.7947 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_dense_1_3.graph = 2939.9153 ms
   [Result] #CSVertex           : 343326
   [Result] #CSEdge             : 1355640
   [Result] #CandTree           : 4.12e+06
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 36692
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 18403
   [Result] Truth               : 661566564.0000
-  [Result] Est                 : 3778908.1627
-  [Result] logQError           : -2.2432
-  [Result] CSBuildTime         : 1418.8003
-  [Result] TreeCountTime       : 191.4997
-  [Result] TreeSampleTime      : 1944.4947
+  [Result] Est                 : 3790649.0199
+  [Result] logQError           : -2.2419
+  [Result] CSBuildTime         : 1604.8360
+  [Result] TreeCountTime       : 189.6344
+  [Result] TreeSampleTime      : 1145.4448
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 3554.7947
+  [Result] QueryTime           : 2939.9153
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_dense_1_3.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_4_0.graph
 [Info] Using user-specified root label 1 -> query node 1
-[Check] Sum(node_est) = 4081483.0361, est_total = 4081483.0361, ratio = 1.0000
+[Check] Sum(node_est) = 4076751.6742, est_total = 4076751.6743, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_4_0.graph = 3319.6122 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_4_0.graph = 2436.3524 ms
   [Result] #CSVertex           : 310586
   [Result] #CSEdge             : 945784
   [Result] #CandTree           : 4.206e+06
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 38819
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 19387
   [Result] Truth               : 110135393.0000
-  [Result] Est                 : 4081483.0361
-  [Result] logQError           : -1.4311
-  [Result] CSBuildTime         : 946.5399
-  [Result] TreeCountTime       : 148.2257
-  [Result] TreeSampleTime      : 2224.8466
+  [Result] Est                 : 4076751.6743
+  [Result] logQError           : -1.4316
+  [Result] CSBuildTime         : 1056.9019
+  [Result] TreeCountTime       : 147.6204
+  [Result] TreeSampleTime      : 1231.8301
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 3319.6122
+  [Result] QueryTime           : 2436.3524
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_4_0.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_4_2.graph
 [Info] Using user-specified root label 1 -> query node 2
-[Check] Sum(node_est) = 2870465.7926, est_total = 2870465.7926, ratio = 1.0000
+[Check] Sum(node_est) = 2872636.4753, est_total = 2872636.4753, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_4_2.graph = 3645.4239 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_4_2.graph = 2623.2599 ms
   [Result] #CSVertex           : 216563
   [Result] #CSEdge             : 859244
   [Result] #CandTree           : 2.994e+06
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 38349
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 19189
   [Result] Truth               : 6896392.0000
-  [Result] Est                 : 2870465.7926
-  [Result] logQError           : -0.3807
-  [Result] CSBuildTime         : 1405.3593
-  [Result] TreeCountTime       : 121.4111
-  [Result] TreeSampleTime      : 2118.6535
+  [Result] Est                 : 2872636.4753
+  [Result] logQError           : -0.3803
+  [Result] CSBuildTime         : 1358.4309
+  [Result] TreeCountTime       : 120.6987
+  [Result] TreeSampleTime      : 1144.1303
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 3645.4239
+  [Result] QueryTime           : 2623.2599
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_4_2.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_4_4.graph
 [Info] Using user-specified root label 1 -> query node 1
-[Check] Sum(node_est) = 4080536.7638, est_total = 4080536.7637, ratio = 1.0000
+[Check] Sum(node_est) = 4078223.6535, est_total = 4078223.6535, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_4_4.graph = 3259.7294 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_4_4.graph = 2370.3728 ms
   [Result] #CSVertex           : 310586
   [Result] #CSEdge             : 945784
   [Result] #CandTree           : 4.206e+06
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 38810
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 19394
   [Result] Truth               : 252727544.0000
-  [Result] Est                 : 4080536.7637
-  [Result] logQError           : -1.7919
-  [Result] CSBuildTime         : 922.4650
-  [Result] TreeCountTime       : 123.1495
-  [Result] TreeSampleTime      : 2214.1149
+  [Result] Est                 : 4078223.6535
+  [Result] logQError           : -1.7922
+  [Result] CSBuildTime         : 1018.2020
+  [Result] TreeCountTime       : 122.0426
+  [Result] TreeSampleTime      : 1230.1282
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 3259.7294
+  [Result] QueryTime           : 2370.3728
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_4_4.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_0.graph
 [Info] Using user-specified root label 1 -> query node 2
-[Check] Sum(node_est) = 67599181.7594, est_total = 67599181.7594, ratio = 1.0000
+[Check] Sum(node_est) = 67573477.5625, est_total = 67573477.5625, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_0.graph = 4475.0601 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_0.graph = 3749.4287 ms
   [Result] #CSVertex           : 399404
   [Result] #CSEdge             : 1414902
   [Result] #CandTree           : 1.142e+08
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 23669
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 11830
   [Result] Truth               : 338662298.0000
-  [Result] Est                 : 67599181.7594
-  [Result] logQError           : -0.6998
-  [Result] CSBuildTime         : 2134.8074
-  [Result] TreeCountTime       : 186.3013
-  [Result] TreeSampleTime      : 2153.9513
+  [Result] Est                 : 67573477.5625
+  [Result] logQError           : -0.7000
+  [Result] CSBuildTime         : 2417.2869
+  [Result] TreeCountTime       : 185.8966
+  [Result] TreeSampleTime      : 1146.2452
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 4475.0601
+  [Result] QueryTime           : 3749.4287
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_0.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_1.graph
 [Info] Using user-specified root label 1 -> query node 2
-[Check] Sum(node_est) = 1033444.8684, est_total = 1033444.8684, ratio = 1.0000
+[Check] Sum(node_est) = 1040209.9750, est_total = 1040209.9750, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_1.graph = 2684.8203 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_1.graph = 2475.7386 ms
   [Result] #CSVertex           : 172505
   [Result] #CSEdge             : 669504
   [Result] #CandTree           : 1.197e+06
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 34524
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 17375
   [Result] Truth               : 319959093.0000
-  [Result] Est                 : 1033444.8684
-  [Result] logQError           : -2.4908
-  [Result] CSBuildTime         : 1600.6199
-  [Result] TreeCountTime       : 134.3944
-  [Result] TreeSampleTime      : 949.8060
+  [Result] Est                 : 1040209.9750
+  [Result] logQError           : -2.4880
+  [Result] CSBuildTime         : 1838.7578
+  [Result] TreeCountTime       : 133.9812
+  [Result] TreeSampleTime      : 502.9996
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 2684.8203
+  [Result] QueryTime           : 2475.7386
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_1.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_2.graph
 [Info] Using user-specified root label 1 -> query node 1
-[Check] Sum(node_est) = 43426197.7500, est_total = 43426197.7500, ratio = 1.0000
+[Check] Sum(node_est) = 43406177.5368, est_total = 43406177.5368, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_2.graph = 3204.6861 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_2.graph = 2540.9847 ms
   [Result] #CSVertex           : 268664
   [Result] #CSEdge             : 738950
   [Result] #CandTree           : 4.711e+07
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 36875
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 18429
   [Result] Truth               : 723554568.0000
-  [Result] Est                 : 43426197.7500
-  [Result] logQError           : -1.2217
-  [Result] CSBuildTime         : 1131.9133
-  [Result] TreeCountTime       : 107.2554
-  [Result] TreeSampleTime      : 1965.5174
+  [Result] Est                 : 43406177.5368
+  [Result] logQError           : -1.2219
+  [Result] CSBuildTime         : 1332.3018
+  [Result] TreeCountTime       : 106.8543
+  [Result] TreeSampleTime      : 1101.8287
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 3204.6861
+  [Result] QueryTime           : 2540.9847
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_2.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_3.graph
 [Info] Using user-specified root label 1 -> query node 2
-[Check] Sum(node_est) = 1632132.2318, est_total = 1632132.2318, ratio = 1.0000
+[Check] Sum(node_est) = 1624448.9581, est_total = 1624448.9581, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_3.graph = 1908.2370 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_3.graph = 1697.5558 ms
   [Result] #CSVertex           : 145923
   [Result] #CSEdge             : 479584
   [Result] #CandTree           : 2.049e+06
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 31864
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 15857
   [Result] Truth               : 519981682.0000
-  [Result] Est                 : 1632132.2318
-  [Result] logQError           : -2.5032
-  [Result] CSBuildTime         : 981.9747
-  [Result] TreeCountTime       : 80.6117
-  [Result] TreeSampleTime      : 845.6506
+  [Result] Est                 : 1624448.9581
+  [Result] logQError           : -2.5053
+  [Result] CSBuildTime         : 1152.2202
+  [Result] TreeCountTime       : 81.7601
+  [Result] TreeSampleTime      : 463.5755
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 1908.2370
+  [Result] QueryTime           : 1697.5558
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_6_3.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_8_2.graph
 [Info] Using user-specified root label 1 -> query node 3
-[Check] Sum(node_est) = 4595780.8038, est_total = 4595780.8038, ratio = 1.0000
+[Check] Sum(node_est) = 4687634.8418, est_total = 4687634.8417, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_8_2.graph = 1941.0271 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_8_2.graph = 1725.6749 ms
   [Result] #CSVertex           : 141527
   [Result] #CSEdge             : 492264
   [Result] #CandTree           : 1.026e+07
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 17912
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 9135
   [Result] Truth               : 41131985.0000
-  [Result] Est                 : 4595780.8038
-  [Result] logQError           : -0.9518
-  [Result] CSBuildTime         : 990.4059
-  [Result] TreeCountTime       : 78.3274
-  [Result] TreeSampleTime      : 872.2938
+  [Result] Est                 : 4687634.8417
+  [Result] logQError           : -0.9432
+  [Result] CSBuildTime         : 1169.4022
+  [Result] TreeCountTime       : 78.4438
+  [Result] TreeSampleTime      : 477.8288
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 1941.0271
+  [Result] QueryTime           : 1725.6749
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_8_2.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_8_3.graph
 [Info] Using user-specified root label 1 -> query node 2
-[Check] Sum(node_est) = 13907049.1331, est_total = 13907049.1330, ratio = 1.0000
+[Check] Sum(node_est) = 13784838.9069, est_total = 13784838.9069, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_8_3.graph = 2336.9527 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_8_3.graph = 2167.4023 ms
   [Result] #CSVertex           : 174569
   [Result] #CSEdge             : 612062
   [Result] #CandTree           : 2.373e+07
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 23442
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 11618
   [Result] Truth               : 696980008.0000
-  [Result] Est                 : 13907049.1330
-  [Result] logQError           : -1.7000
-  [Result] CSBuildTime         : 1369.5012
-  [Result] TreeCountTime       : 100.8122
-  [Result] TreeSampleTime      : 866.6393
+  [Result] Est                 : 13784838.9069
+  [Result] logQError           : -1.7038
+  [Result] CSBuildTime         : 1602.6735
+  [Result] TreeCountTime       : 99.7791
+  [Result] TreeSampleTime      : 464.9496
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 2336.9527
+  [Result] QueryTime           : 2167.4023
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_path_8_3.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_0.graph
 [Info] Using user-specified root label 1 -> query node 1
-[Check] Sum(node_est) = 4075700.2605, est_total = 4075700.2605, ratio = 1.0000
+[Check] Sum(node_est) = 4080116.1982, est_total = 4080116.1982, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_0.graph = 3263.9245 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_0.graph = 2418.2991 ms
   [Result] #CSVertex           : 310586
   [Result] #CSEdge             : 945784
   [Result] #CandTree           : 4.206e+06
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 38764
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 19403
   [Result] Truth               : 50537513.0000
-  [Result] Est                 : 4075700.2605
-  [Result] logQError           : -1.0934
-  [Result] CSBuildTime         : 916.9565
-  [Result] TreeCountTime       : 120.0482
-  [Result] TreeSampleTime      : 2226.9198
+  [Result] Est                 : 4080116.1982
+  [Result] logQError           : -1.0929
+  [Result] CSBuildTime         : 1065.1054
+  [Result] TreeCountTime       : 119.8598
+  [Result] TreeSampleTime      : 1233.3340
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 3263.9245
+  [Result] QueryTime           : 2418.2991
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_0.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_1.graph
@@ -291,62 +292,62 @@ Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_o
 [Check] Sum(node_est) = 39025.0000, est_total = 39025.0000, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_1.graph = 1507.7167 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_1.graph = 1286.3072 ms
   [Result] #CSVertex           : 78383
   [Result] #CSEdge             : 297304
   [Result] #CandTree           : 3.902e+04
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 40000
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 20000
   [Result] Truth               : 596752149.0000
   [Result] Est                 : 39025.0000
   [Result] logQError           : -4.1845
-  [Result] CSBuildTime         : 584.7437
-  [Result] TreeCountTime       : 73.3241
-  [Result] TreeSampleTime      : 849.6489
+  [Result] CSBuildTime         : 661.9426
+  [Result] TreeCountTime       : 73.4731
+  [Result] TreeSampleTime      : 550.8915
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 1507.7167
+  [Result] QueryTime           : 1286.3072
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_1.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_2.graph
 [Info] Using user-specified root label 1 -> query node 1
-[Check] Sum(node_est) = 4076436.2501, est_total = 4076436.2501, ratio = 1.0000
+[Check] Sum(node_est) = 4074648.8467, est_total = 4074648.8468, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_2.graph = 3183.4018 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_2.graph = 2534.5159 ms
   [Result] #CSVertex           : 310586
   [Result] #CSEdge             : 945784
   [Result] #CandTree           : 4.206e+06
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 38771
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 19377
   [Result] Truth               : 22703233.0000
-  [Result] Est                 : 4076436.2501
-  [Result] logQError           : -0.7458
-  [Result] CSBuildTime         : 887.7357
-  [Result] TreeCountTime       : 102.6852
-  [Result] TreeSampleTime      : 2192.9809
+  [Result] Est                 : 4074648.8468
+  [Result] logQError           : -0.7460
+  [Result] CSBuildTime         : 1109.9756
+  [Result] TreeCountTime       : 101.7419
+  [Result] TreeSampleTime      : 1322.7984
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 3183.4018
+  [Result] QueryTime           : 2534.5159
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_2.graph Finished!
 
 Start Processing (Global) /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_3.graph
 [Info] Using user-specified root label 1 -> query node 2
-[Check] Sum(node_est) = 2868444.8123, est_total = 2868444.8122, ratio = 1.0000
+[Check] Sum(node_est) = 2870241.2393, est_total = 2870241.2393, ratio = 1.0000
 [INFO] sv_out_path /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
 [Info] Node-level estimates written to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/in_estimateW_result.txt
-[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_3.graph = 3487.6692 ms
+[INFO] QueryTime for /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_3.graph = 3075.4365 ms
   [Result] #CSVertex           : 216563
   [Result] #CSEdge             : 859244
   [Result] #CandTree           : 2.994e+06
-  [Result] #TreeTrials         : 40000
-  [Result] #TreeSuccess        : 38322
+  [Result] #TreeTrials         : 20000
+  [Result] #TreeSuccess        : 19173
   [Result] Truth               : 110375524.0000
-  [Result] Est                 : 2868444.8122
-  [Result] logQError           : -1.5852
-  [Result] CSBuildTime         : 1260.2004
-  [Result] TreeCountTime       : 120.9116
-  [Result] TreeSampleTime      : 2106.5571
+  [Result] Est                 : 2870241.2393
+  [Result] logQError           : -1.5850
+  [Result] CSBuildTime         : 1822.0106
+  [Result] TreeCountTime       : 122.1655
+  [Result] TreeSampleTime      : 1131.2604
   [Result] GraphSampleTime     : 0.0000
-  [Result] QueryTime           : 3487.6692
+  [Result] QueryTime           : 3075.4365
 /home/wangshuo/resource/datasets/parler_data/dataset_one/query_graph/query_tree_4_3.graph Finished!
 
 ✅ Fastest 运行结束，退出码: 0
@@ -356,409 +357,729 @@ dataset_one
 [INFO] read_infer_node_list: loaded 16 infer nodes (first 10): ['u1', 'u2', 'u2', 'u1', 'u2', 'u1', 'u2', 'u2', 'u1', 'u2']
 [INFO] build_post_with_estimates: wrote /home/wangshuo/resource/datasets/parler_data/dataset_one/results/post_with_estimate.csv, total rows=24082
 [check proxy_model] ML1_proxy4b_probability
-[check oracle_model] ML1_oracle1_probability
-[check T_true_cache_file] /home/wangshuo/resource/datasets/parler_data/dataset_one/ground_truth/T_true_ML1_oracle1_probability.txt
+[check oracle_model] ML1_oracle2_probability
+[check T_true_cache_file] /home/wangshuo/resource/datasets/parler_data/dataset_one/ground_truth/T_true_ML1_oracle2_probability.txt
 [INFO] 分次实验结果将保存至: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/result_summarys/ML1_proxy4b_probability
-[INFO] 已加载缓存的 T_true，共 21 条。
+[INFO] 已加载缓存的 T_true，共 16 条。
 
 ============================================================
 [STEP] Query index=0, basename=query_dense_1_1.graph, estimate column=estimate__0__query_dense_1_1.graph
 [INFO] Using gt_match_col = u1 for query #0
-[CACHE] 读取缓存 T_true=16656.0000 for query_dense_1_1.graph
+[CACHE] 读取缓存 T_true=10681.0000 for query_dense_1_1.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q0__query_dense_1_1.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=17520.1179±2149.0586,  Qerror=0.133977±0.066827
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=10945.3650±1601.6610,  Qerror=0.142793±0.079704
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=16336.3294±934.6563,  Qerror=0.055297±0.033888
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=9330.8905±545.5288,  Qerror=0.126403±0.051075
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=16279.8356±426.6433,  Qerror=0.027995±0.020199
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=9613.2514±2300.0980,  Qerror=0.158494±0.203401
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=16843.4756±520.7459,  Qerror=0.026193±0.023651
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=9569.2913±172.1847,  Qerror=0.104083±0.016121
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=15531.2422±1329.0701,  Qerror=0.102798±0.054467
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=10117.0547±360.4068,  Qerror=0.052998±0.033475
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=16000.6411±444.2929,  Qerror=0.040224±0.025418
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=10233.2037±344.5420,  Qerror=0.051481±0.020909
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q0__query_dense_1_1.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=1, basename=query_dense_1_2.graph, estimate column=estimate__1__query_dense_1_2.graph
 [INFO] Using gt_match_col = u2 for query #1
-[CACHE] 读取缓存 T_true=2704.0000 for query_dense_1_2.graph
+[CACHE] 读取缓存 T_true=1620.0000 for query_dense_1_2.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q1__query_dense_1_2.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=2629.7853±336.2802,  Qerror=0.122454±0.065498
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=1601.9639±252.6317,  Qerror=0.135495±0.103020
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=2494.8491±209.4655,  Qerror=0.101078±0.047471
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=1487.1766±55.4737,  Qerror=0.081990±0.034243
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=2528.7532±132.1469,  Qerror=0.074579±0.036874
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=1456.8788±395.2235,  Qerror=0.195216±0.246378
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=2715.0784±220.7717,  Qerror=0.061063±0.058499
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=1495.3329±76.1886,  Qerror=0.080090±0.041885
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=2433.3602±330.1272,  Qerror=0.146372±0.070062
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=1639.2144±94.8708,  Qerror=0.056015±0.034612
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=2426.7420±96.1966,  Qerror=0.102536±0.035576
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=1628.4260±93.0154,  Qerror=0.054159±0.036222
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q1__query_dense_1_2.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=2, basename=query_dense_1_3.graph, estimate column=estimate__2__query_dense_1_3.graph
 [INFO] Using gt_match_col = u2 for query #2
-[CACHE] 读取缓存 T_true=463744.0000 for query_dense_1_3.graph
+[CACHE] 读取缓存 T_true=357282.0000 for query_dense_1_3.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q2__query_dense_1_3.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=462673.6712±208712.0274,  Qerror=0.403802±0.250791
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=391732.4731±199102.7627,  Qerror=0.488083±0.332560
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=468648.9555±66287.5256,  Qerror=0.133925±0.091889
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=374053.0701±59029.4192,  Qerror=0.163985±0.092172
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=487698.0035±13363.5460,  Qerror=0.051654±0.028817
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=371788.7195±20438.2489,  Qerror=0.060703±0.063574
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=480871.6306±39799.1324,  Qerror=0.069056±0.066226
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=362468.3675±10861.2419,  Qerror=0.029365±0.020423
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=425249.6952±117900.0189,  Qerror=0.132839±0.233495
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=361476.6668±35802.2684,  Qerror=0.090005±0.057070
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=472807.6345±13233.0590,  Qerror=0.032262±0.016429
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=363180.8273±26154.1650,  Qerror=0.075701±0.046816
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q2__query_dense_1_3.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=3, basename=query_path_4_0.graph, estimate column=estimate__3__query_path_4_0.graph
 [INFO] Using gt_match_col = u1 for query #3
-[CACHE] 读取缓存 T_true=491800.0000 for query_path_4_0.graph
+[CACHE] 读取缓存 T_true=375950.0000 for query_path_4_0.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q3__query_path_4_0.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=414107.8932±204368.1056,  Qerror=0.427933±0.187579
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=294708.7501±159012.7458,  Qerror=0.461886±0.203630
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=510009.5982±91719.7619,  Qerror=0.166518±0.112646
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=319590.8311±57350.6562,  Qerror=0.190715±0.126306
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=511640.3175±19903.7191,  Qerror=0.048860±0.031236
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=289808.6610±148548.8813,  Qerror=0.260716±0.376068
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=498808.6961±29306.8102,  Qerror=0.055296±0.037665
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=368994.1939±11340.6813,  Qerror=0.032815±0.017304
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=494785.3411±28778.2643,  Qerror=0.061330±0.030603
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=387445.1330±21879.6490,  Qerror=0.059614±0.041897
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=508229.8076±18497.5397,  Qerror=0.048329±0.034453
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=365386.0099±23858.4404,  Qerror=0.063070±0.041676
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q3__query_path_4_0.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=4, basename=query_path_4_2.graph, estimate column=estimate__4__query_path_4_2.graph
 [INFO] Using gt_match_col = u2 for query #4
-[CACHE] 读取缓存 T_true=370871.0000 for query_path_4_2.graph
+[CACHE] 读取缓存 T_true=283607.0000 for query_path_4_2.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q4__query_path_4_2.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=373215.2398±171983.5807,  Qerror=0.441235±0.230780
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=236121.7020±178287.1894,  Qerror=0.620389±0.276876
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=330131.7991±58961.8039,  Qerror=0.171791±0.099546
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=262672.9600±44149.6910,  Qerror=0.159304±0.097870
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=376248.4941±10660.0501,  Qerror=0.031976±0.015207
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=237785.3102±103258.8242,  Qerror=0.191465±0.350341
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=363973.4859±21632.8199,  Qerror=0.054447±0.038370
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=282730.0390±9302.1931,  Qerror=0.029943±0.019463
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=327139.9704±91581.0570,  Qerror=0.149112±0.231598
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=293068.3897±18721.5268,  Qerror=0.070569±0.047738
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=373230.9674±15688.6016,  Qerror=0.039870±0.030864
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=294014.9357±20564.0352,  Qerror=0.071572±0.069297
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q4__query_path_4_2.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=5, basename=query_path_4_4.graph, estimate column=estimate__5__query_path_4_4.graph
 [INFO] Using gt_match_col = u1 for query #5
-[CACHE] 读取缓存 T_true=491800.0000 for query_path_4_4.graph
+[CACHE] 读取缓存 T_true=375950.0000 for query_path_4_4.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q5__query_path_4_4.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=398637.8230±193053.0979,  Qerror=0.423981±0.200431
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=356357.1140±216308.7337,  Qerror=0.558324±0.228374
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=417970.4935±55612.9522,  Qerror=0.172731±0.086394
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=331199.4954±47424.5128,  Qerror=0.151234±0.101753
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=502704.5017±17927.8533,  Qerror=0.030561±0.031838
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=341296.3208±80131.6231,  Qerror=0.093782±0.212461
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=485801.4208±24911.6514,  Qerror=0.046907±0.033521
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=379503.0848±11226.5568,  Qerror=0.030830±0.017861
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=458780.2894±125810.8744,  Qerror=0.167756±0.228967
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=369284.3592±24941.6080,  Qerror=0.057549±0.047546
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=501430.5307±15893.4890,  Qerror=0.033045±0.023285
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=372024.4538±20359.8555,  Qerror=0.051631±0.030342
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q5__query_path_4_4.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=6, basename=query_path_6_0.graph, estimate column=estimate__6__query_path_6_0.graph
 [INFO] Using gt_match_col = u2 for query #6
-[CACHE] 读取缓存 T_true=5454872.0000 for query_path_6_0.graph
+[CACHE] 读取缓存 T_true=3999965.0000 for query_path_6_0.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q6__query_path_6_0.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=4904366.0301±1299440.5640,  Qerror=0.230968±0.144769
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=3953114.1786±1324247.0591,  Qerror=0.300300±0.208631
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=5018920.0761±422648.6728,  Qerror=0.097348±0.061938
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=3740577.7703±397345.1294,  Qerror=0.100696±0.075652
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=5635266.7089±827076.7937,  Qerror=0.099486±0.121409
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=3569602.9249±784544.9602,  Qerror=0.109519±0.195264
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=5342578.2890±279597.1749,  Qerror=0.059450±0.039069
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=4047529.5245±266230.6919,  Qerror=0.056324±0.047025
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=4209721.2982±1812633.0004,  Qerror=0.240226±0.325783
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=4054768.7792±341620.1092,  Qerror=0.073781±0.058446
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=5303206.4496±236512.1604,  Qerror=0.046533±0.030488
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=4181041.4247±389197.6959,  Qerror=0.102282±0.062260
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q6__query_path_6_0.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=7, basename=query_path_6_1.graph, estimate column=estimate__7__query_path_6_1.graph
 [INFO] Using gt_match_col = u2 for query #7
-[CACHE] 读取缓存 T_true=111915.0000 for query_path_6_1.graph
+[CACHE] 读取缓存 T_true=81954.0000 for query_path_6_1.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q7__query_path_6_1.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=116693.1148±58884.4366,  Qerror=0.493854±0.270575
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=61195.1682±33463.5649,  Qerror=0.459325±0.223719
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=98779.6916±15469.5899,  Qerror=0.170258±0.107379
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=73547.3500±10502.2266,  Qerror=0.143625±0.088614
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=117554.1107±4766.6551,  Qerror=0.056262±0.036892
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=53252.2127±35607.8040,  Qerror=0.366508±0.421216
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=114942.8914±7836.8900,  Qerror=0.064531±0.045411
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=84178.1461±2365.7553,  Qerror=0.037546±0.019854
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=109296.3908±9975.7508,  Qerror=0.088890±0.060946
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=82437.1690±5444.9786,  Qerror=0.069102±0.038610
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=114502.4228±5646.5366,  Qerror=0.051370±0.029205
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=81423.7261±5532.4388,  Qerror=0.065430±0.035064
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q7__query_path_6_1.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=8, basename=query_path_6_2.graph, estimate column=estimate__8__query_path_6_2.graph
 [INFO] Using gt_match_col = u1 for query #8
-[CACHE] 读取缓存 T_true=2399067.0000 for query_path_6_2.graph
+[CACHE] 读取缓存 T_true=608451.0000 for query_path_6_2.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q8__query_path_6_2.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=2085482.3816±650673.0395,  Qerror=0.256917±0.183276
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=1770183.2587±503982.7049,  Qerror=1.909328±0.828305
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=2204177.0164±203125.1003,  Qerror=0.113976±0.047835
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=1367641.3458±157581.5533,  Qerror=1.247743±0.258988
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=2438720.9586±109647.6268,  Qerror=0.046914±0.034460
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=1070170.1015±625221.0838,  Qerror=1.264372±0.218663
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=2301715.5814±125467.5044,  Qerror=0.064270±0.026249
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=1564968.5739±111466.8535,  Qerror=1.572054±0.183198
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=2206395.9827±228780.4971,  Qerror=0.113030±0.063990
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=1563558.0310±109184.5376,  Qerror=1.569735±0.179447
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=2370335.9494±170074.1091,  Qerror=0.052563±0.054746
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=1559329.2130±80577.9221,  Qerror=1.562785±0.132431
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q8__query_path_6_2.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=9, basename=query_path_6_3.graph, estimate column=estimate__9__query_path_6_3.graph
 [INFO] Using gt_match_col = u2 for query #9
-[CACHE] 读取缓存 T_true=116775.0000 for query_path_6_3.graph
+[CACHE] 读取缓存 T_true=71286.0000 for query_path_6_3.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q9__query_path_6_3.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=118262.5191±27699.1075,  Qerror=0.234193±0.136519
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=53896.7639±17230.7830,  Qerror=0.324961±0.187375
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=108531.9483±10409.8446,  Qerror=0.116911±0.079675
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=63228.2899±4895.2751,  Qerror=0.129526±0.049770
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=112244.3189±4711.9252,  Qerror=0.051952±0.032579
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=59637.2810±25911.9919,  Qerror=0.236145±0.338263
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=112724.0557±5614.0503,  Qerror=0.058152±0.031250
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=66504.2196±2147.5368,  Qerror=0.067079±0.030126
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=111850.5375±12045.3729,  Qerror=0.123224±0.093336
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=71471.0411±5802.5260,  Qerror=0.075365±0.043976
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=112382.4533±3909.6286,  Qerror=0.050984±0.032807
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=71151.6118±6185.3132,  Qerror=0.080786±0.048931
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q9__query_path_6_3.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=10, basename=query_path_8_2.graph, estimate column=estimate__10__query_path_8_2.graph
 [INFO] Using gt_match_col = u3 for query #10
-[CACHE] 读取缓存 T_true=306497.0000 for query_path_8_2.graph
+[CACHE] 读取缓存 T_true=216478.0000 for query_path_8_2.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q10__query_path_8_2.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=246786.6323±72811.6868,  Qerror=0.292904±0.150012
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=204558.6484±78528.5200,  Qerror=0.367403±0.206794
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=266286.9198±25196.6622,  Qerror=0.148643±0.049976
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=194895.3709±20515.5659,  Qerror=0.111598±0.081747
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=311395.6697±31479.5169,  Qerror=0.093283±0.069891
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=207768.4595±9103.6110,  Qerror=0.061952±0.058326
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=316589.7964±16722.3491,  Qerror=0.054053±0.040217
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=207990.8727±8276.1374,  Qerror=0.050444±0.034268
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=272080.9208±67437.2493,  Qerror=0.143865±0.211867
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=215378.8024±13308.2516,  Qerror=0.056928±0.032444
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=308065.5056±13505.0962,  Qerror=0.041700±0.027729
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=234227.0220±21481.3527,  Qerror=0.108826±0.075447
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q10__query_path_8_2.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=11, basename=query_path_8_3.graph, estimate column=estimate__11__query_path_8_3.graph
 [INFO] Using gt_match_col = u2 for query #11
-[CACHE] 读取缓存 T_true=634306.0000 for query_path_8_3.graph
+[CACHE] 读取缓存 T_true=396355.0000 for query_path_8_3.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q11__query_path_8_3.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=517449.0844±136111.9117,  Qerror=0.267094±0.142591
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=286739.2889±155319.5561,  Qerror=0.458781±0.244393
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=570858.5054±66877.7281,  Qerror=0.125780±0.082375
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=342836.3093±51016.7305,  Qerror=0.168092±0.088501
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=629897.0473±31830.9214,  Qerror=0.047642±0.035647
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=227910.5327±172242.6049,  Qerror=0.465778±0.395749
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=658004.5945±67818.2694,  Qerror=0.086513±0.086272
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=385440.5535±35182.4433,  Qerror=0.091032±0.039120
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=521162.5181±125951.8965,  Qerror=0.191516±0.193929
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=378667.6576±30840.9784,  Qerror=0.082341±0.048331
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=636731.3488±44359.4354,  Qerror=0.067270±0.049309
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=364507.3140±52379.6439,  Qerror=0.141102±0.091477
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q11__query_path_8_3.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=12, basename=query_tree_4_0.graph, estimate column=estimate__12__query_tree_4_0.graph
 [INFO] Using gt_match_col = u1 for query #12
-[CACHE] 读取缓存 T_true=491800.0000 for query_tree_4_0.graph
+[CACHE] 读取缓存 T_true=375950.0000 for query_tree_4_0.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q12__query_tree_4_0.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=398636.8930±180173.5534,  Qerror=0.400576±0.220439
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=333536.7049±160733.8748,  Qerror=0.411047±0.229509
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=453911.7328±63774.8768,  Qerror=0.138656±0.072517
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=394300.5109±45179.9493,  Qerror=0.123995±0.076681
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=492336.3102±17925.6578,  Qerror=0.036854±0.014995
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=305936.2929±131398.0331,  Qerror=0.206694±0.338292
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=464860.2534±28884.9232,  Qerror=0.074972±0.056239
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=366435.2473±12118.5210,  Qerror=0.040088±0.014068
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=450363.0037±35209.2376,  Qerror=0.094728±0.061314
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=360661.3894±27847.3058,  Qerror=0.076859±0.049403
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=482349.9171±13585.7804,  Qerror=0.029111±0.019055
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=351880.2965±32212.4505,  Qerror=0.104948±0.057551
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q12__query_tree_4_0.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=13, basename=query_tree_4_1.graph, estimate column=estimate__13__query_tree_4_1.graph
 [INFO] Using gt_match_col = u1 for query #13
-[CACHE] 读取缓存 T_true=4396.0000 for query_tree_4_1.graph
+[CACHE] 读取缓存 T_true=2636.0000 for query_tree_4_1.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q13__query_tree_4_1.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=4284.5433±579.9970,  Qerror=0.121476±0.085544
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=2515.6153±400.3913,  Qerror=0.132098±0.121373
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=4256.8632±213.3455,  Qerror=0.056399±0.036689
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=2384.9490±157.8708,  Qerror=0.103752±0.048481
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=4344.4097±285.7856,  Qerror=0.060438±0.039967
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=1834.6748±991.7659,  Qerror=0.311989±0.369665
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=4455.2211±210.5863,  Qerror=0.048521±0.028017
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=2377.7852±110.2718,  Qerror=0.097957±0.041833
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=4056.0701±277.3979,  Qerror=0.098772±0.048384
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=2629.9423±137.1893,  Qerror=0.050621±0.029450
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=4221.0718±172.0527,  Qerror=0.052716±0.036575
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=2521.0838±124.7520,  Qerror=0.063520±0.025270
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q13__query_tree_4_1.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=14, basename=query_tree_4_2.graph, estimate column=estimate__14__query_tree_4_2.graph
 [INFO] Using gt_match_col = u1 for query #14
-[CACHE] 读取缓存 T_true=491800.0000 for query_tree_4_2.graph
+[CACHE] 读取缓存 T_true=375950.0000 for query_tree_4_2.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q14__query_tree_4_2.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=515554.1297±208062.9898,  Qerror=0.397471±0.215909
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=262993.6271±154688.1054,  Qerror=0.482756±0.254836
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=471662.6933±67351.9428,  Qerror=0.126931±0.081146
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=351570.2216±52130.8721,  Qerror=0.131599±0.089092
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=494202.0907±17314.6334,  Qerror=0.034699±0.021165
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=366573.4379±20954.0001,  Qerror=0.061340±0.062386
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=477169.5039±28268.2904,  Qerror=0.057204±0.035255
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=380323.9312±12616.0068,  Qerror=0.031201±0.021140
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=450898.4605±107895.8952,  Qerror=0.100536±0.212400
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=370231.6749±24104.4846,  Qerror=0.064168±0.029618
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=491427.2385±19868.0369,  Qerror=0.035356±0.029525
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=378428.3846±22518.2748,  Qerror=0.060711±0.035666
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q14__query_tree_4_2.graph_ML1_proxy4b_probability.csv
 
 ============================================================
 [STEP] Query index=15, basename=query_tree_4_3.graph, estimate column=estimate__15__query_tree_4_3.graph
 [INFO] Using gt_match_col = u2 for query #15
-[CACHE] 读取缓存 T_true=370871.0000 for query_tree_4_3.graph
+[CACHE] 读取缓存 T_true=283607.0000 for query_tree_4_3.graph
 [INFO] Creating new estimate file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q15__query_tree_4_3.graph_ML1_proxy4b_probability.csv
 
---- Running baseline_uniform for 20 times ---
-✅ baseline_uniform 平均结果: T_hat=376723.8442±167750.0555,  Qerror=0.388795±0.276165
+--- Running UN for 20 times ---
+✅ UN 平均结果: T_hat=286208.0818±206198.6348,  Qerror=0.610929±0.434245
 
---- Running baseline_proxy for 20 times ---
-✅ baseline_proxy 平均结果: T_hat=364037.7048±62571.8985,  Qerror=0.164297±0.089045
+--- Running PO for 20 times ---
+✅ PO 平均结果: T_hat=270027.5709±56176.0560,  Qerror=0.185515±0.120350
 
---- Running baseline_proxy_a for 20 times ---
-✅ baseline_proxy_a 平均结果: T_hat=387997.8621±13197.3593,  Qerror=0.052715±0.028871
+--- Running MAB for 20 times ---
+✅ MAB 平均结果: T_hat=238965.8705±103032.1234,  Qerror=0.187519±0.349358
 
---- Running baseline_proxy_a_unbiased_test1 for 20 times ---
-✅ baseline_proxy_a_unbiased_test1 平均结果: T_hat=354937.6846±19076.1265,  Qerror=0.057343±0.044189
+--- Running FOIS_nrs for 20 times ---
+✅ FOIS_nrs 平均结果: T_hat=283432.8389±8120.2024,  Qerror=0.026460±0.016978
 
---- Running proxy_mab for 20 times ---
-✅ proxy_mab 平均结果: T_hat=349573.2102±23769.6476,  Qerror=0.070913±0.050299
+--- Running FOIS_rs for 20 times ---
+✅ FOIS_rs 平均结果: T_hat=290132.3794±19994.5394,  Qerror=0.066851±0.045236
 
---- Running proxyE_importance for 20 times ---
-✅ proxyE_importance 平均结果: T_hat=367267.4342±20565.2372,  Qerror=0.048048±0.045394
+--- Running POSS for 20 times ---
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+[WS check second stage sampling unbaised]
+✅ POSS 平均结果: T_hat=284210.0200±23158.8641,  Qerror=0.075609±0.045039
 [INFO] Removed temp file: /home/wangshuo/resource/datasets/parler_data/dataset_one/results/tmp_post_with_estimate_q15__query_tree_4_3.graph_ML1_proxy4b_probability.csv
 [INFO] evaluate_queries: wrote summary to /home/wangshuo/resource/datasets/parler_data/dataset_one/results/results_summary.csv
 [INFO] 分次详细结果已保存至 /home/wangshuo/resource/datasets/parler_data/dataset_one/results/result_summarys/ML1_proxy4b_probability (共 20 个文件)

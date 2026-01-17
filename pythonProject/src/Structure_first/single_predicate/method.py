@@ -29,9 +29,9 @@ from pythonProject.src.Structure_first.proxy_sample import compute_T_true_polars
 # ===========================
 def parse_args():
     parser = argparse.ArgumentParser(description="Run method3 pipeline with custom dataset, proxy model, and oracle model.")
-    parser.add_argument("--dataset", type=str, default="dataset_two", help="Name of the dataset (e.g., dataset_one, dataset_three)")
+    parser.add_argument("--dataset", type=str, default="dataset_one", help="Name of the dataset (e.g., dataset_one, dataset_three)")
     parser.add_argument("--proxy_model", type=str, default="ML1_proxy4b1_probability", help="Name of the proxy model column")
-    parser.add_argument("--oracle_model", type=str, default="ML1_oracle1_probability", help="Name of the oracle model column")  # 新增参数
+    parser.add_argument("--oracle_model", type=str, default="ML1_oracle2_probability", help="Name of the oracle model column")  # 新增参数
     parser.add_argument("--run_times", type=int, default=20, help="Number of runs for each query")
     return parser.parse_args()
 
@@ -57,22 +57,21 @@ CSV_BASE_DIR = f"/home/wangshuo/resource/datasets/{datasets_name}/{dataset_name}
 Graph_Lib_Dir = f"/home/wangshuo/resource/datasets/{datasets_name}/{dataset_name}/data_graph"
 
 # 初始化 Runner
-runner = FastestRunner(build_dir="/home/wangshuo/projects/FaSTest-main/build")
+
 # 评估参数
 RUN_TIMES = 1  # 每种方法重复次数
 
-
-current_budget = 40000
+current_budget = 20000
 infer_label = 1  # 对应 Post 节点的标签
-
-# 调用 run 方法
-code, output = runner.run(
-    dataset=dataset_name,
-    root_label=infer_label,           # 必须指定推理节点的标签
-    sample_budget=current_budget,     # 设置预算
-    # estimate_with_predicate=True      # <--- 开启单推理谓词模式
-    estimate_with_predicate=False      # <--- 关闭单推理谓词模式
-)
+# runner = FastestRunner(build_dir="/home/wangshuo/projects/FaSTest-main/build")
+# # 调用 run 方法
+# code, output = runner.run(
+#     dataset=dataset_name,
+#     root_label=infer_label,           # 必须指定推理节点的标签
+#     sample_budget=current_budget,     # 设置预算
+#     # estimate_with_predicate=True      # <--- 开启单推理谓词模式
+#     estimate_with_predicate=False      # <--- 关闭单推理谓词模式
+# )
 
 
 # ===========================
@@ -305,15 +304,14 @@ def evaluate_queries(
                                         )
 
         methods = {
-            "baseline_uniform": sampler.run_baseline_uniform,
-            "baseline_proxy": sampler.run_baseline_proxy,
-            "baseline_proxy_a": sampler.run_baseline_proxy_a,
-            "baseline_proxy_a": sampler.run_baseline_proxy_a,
-            "baseline_proxy_a_unbiased_test1": sampler.run_baseline_proxy_a_unbiased_test1,
-            # "proxy_importance": sampler.run_proxy_importance,
-            "proxy_mab": sampler.run_mab_sampling,
-            "proxyE_importance": sampler.run_proxyE_importance,
             # "pa_optimal": sampler.run_pa_optimal
+            "UN": sampler.run_baseline_uniform,
+            "PO": sampler.run_baseline_proxy,
+            "MAB": sampler.run_mab_sampling,
+
+            "FOIS_nrs": sampler.run_baseline_proxy_a,
+            "FOIS_rs": sampler.run_baseline_proxy_a_unbiased_test1,
+            "POSS": sampler.run_proxyE_importance,
         }
 
         for mname, func in methods.items():

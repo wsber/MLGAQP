@@ -8,20 +8,21 @@ from tqdm import tqdm
 # ————————————————
 # 1. 配置部分
 # ————————————————
-model_name = 'deberta-v3-base-binary'
-# model_name = 'distilbart-mnli-12-6'
+# model_name = 'deberta-v3-base-binary'
+model_dir = '/home/wangshuo/resource/AIModels/NLP/NLI/'
+model_name = 'deberta-v3-xsmall-binary-epoch20'
 proxy_model_dir_pre = '/home/wangshuo/resource/AIModels/Finetune/NLI/base/'
 
 model_dir = proxy_model_dir_pre + model_name
 
 # data_dir = '/home/wangshuo/resource/datasets/parler_data/30W_valid_user/10-10-5'
-data_dir = '/home/wangshuo/resource/datasets/parler_data/dataset_one/csv_data'
-file_name = 'post_t.csv'
+data_dir = '/home/wangshuo/resource/datasets/parler_data/dataset_three/csv_data'
+file_name = 'post.csv'
 input_csv = data_dir + f'/{file_name}'
 output_csv = data_dir + f'/{file_name}'
 
 THRESHOLD = 0.3
-BATCH_SIZE = 32
+BATCH_SIZE = 1
 topic = "I support Trump"
 
 # ————————————————
@@ -60,9 +61,9 @@ def check_nli_batch(topic, posts):
         logits = model(**encoding).logits
 
     # 只取 contradiction(0) 和 entailment(2) 的 logits
-    ec_probs = logits[:, [0, 1]].softmax(dim=1)
+    ec_probs = logits[:, [0, 2]].softmax(dim=1)
     # 返回 entailment（index=1）的概率
-    return ec_probs[:, 1].cpu().numpy()
+    return ec_probs[:, 0].cpu().numpy()
 
 
 # ————————————————
@@ -99,6 +100,6 @@ print(f"吞吐量 (batch/s)：最大={max_throughput:.2f}, 最小={min_throughpu
 # ————————————————
 # 6. 保存结果到 CSV
 # ————————————————
-df['ML1_proxy4b_probability'] = results
+df['ML1_proxy6b_probability'] = results
 df.to_csv(output_csv, index=False)
 print(f"推理结果已保存到 {output_csv}")
