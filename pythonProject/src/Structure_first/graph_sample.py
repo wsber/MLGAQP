@@ -31,6 +31,9 @@ class FastestRunner:
             post_oracle_col="ML1_oracle2_probability",
             comment_oracle_col="ML2_oracle2_probability",
             multi_proxy_prob=None,
+            fastesto_budget_curve=False,
+            fastesto_runs=1,
+            fastesto_budget_curve_out=None,
             extra_args=None,
             timeout=None):
         """
@@ -62,6 +65,13 @@ class FastestRunner:
 
         if multi_proxy_prob:
              args.extend(["--MULTI_PROXY_PROB", str(multi_proxy_prob)])
+        
+        if fastesto_budget_curve:
+            args.append("--FASTESTO_BUDGET_CURVE")
+            args.extend(["--FASTESTO_RUNS", str(fastesto_runs)])
+            if fastesto_budget_curve_out:
+                args.extend(["--FASTESTO_BUDGET_CURVE_OUT", str(fastesto_budget_curve_out)])
+                
         # 其他额外参数
         if extra_args:
             args.extend(extra_args)

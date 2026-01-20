@@ -39,10 +39,10 @@ class ProxyStratifiedSampler:
         # print(f'[Check_c_stage] {c_stage}')
         # print(f'[Check_K] {K}')
         # print(f'[Check_is_multi_predicate] {is_multi_predicate}')
-        print(f'[Check_post_proxy] {post_proxy}')
-        print(f'[Check_comment_proxy] {comment_proxy}')
-        print(f'[Check_post_oracle] {post_oracle}')
-        print(f'[Check_comment_oracle] {comment_oracle}')
+        # print(f'[Check_post_proxy] {post_proxy}')
+        # print(f'[Check_comment_proxy] {comment_proxy}')
+        # print(f'[Check_post_oracle] {post_oracle}')
+        # print(f'[Check_comment_oracle] {comment_oracle}')
         """
         is_multi_predicate: 如果为 True，则使用新的多谓词处理逻辑。
         """
@@ -1216,6 +1216,116 @@ class ProxyStratifiedSampler:
             })
         return results
     
+    def run_baseline_proxy_a_unbiased_checkpoints(self, budget_fracs, eps: float = 1e-10, seed: int = None):
+        """
+        FOIS_rs 的检查点版本 (unbiased, with replacement)
+        """
+        if self.posts.empty:
+            return []
+
+        posts = self.posts.copy()
+        N = len(posts)
+
+        budget_fracs = sorted(list(set(budget_fracs)))
+        max_frac = max(budget_fracs)
+        max_n = min(int(max_frac * N), N)
+        if max_n <= 0:
+            return []
+
+        # p ∝ sqrt(proxy * a)
+        weights = np.sqrt(posts["proxy"].values * posts["a"].values + eps)
+        weights = np.nan_to_num(weights, nan=0.0, posinf=0.0, neginf=0.0)
+        probs = weights / (weights.sum() or 1e-12)
+
+        rng = np.random.default_rng(seed if seed is not None else np.random.randint(1 << 30))
+        # 有放回采样
+        sample_idx = rng.choice(N, size=max_n, replace=True, p=probs)
+
+        a_vals = posts["a"].values[sample_idx]
+        oracle_vals = posts["oracle"].values[sample_idx]
+        p_vals = probs[sample_idx]
+
+        results = []
+        for frac in budget_fracs:
+            n = max(1, int(frac * N))
+            n = min(n, max_n)
+
+            # Hansen–Hurwitz estimator
+            y_vals = a_vals[:n] * oracle_vals[:n]
+            T_hat = np.mean(y_vals / (p_vals[:n] + 1e-12))
+
+            Qerror = abs(T_hat - self.T_true) / (self.T_true if self.T_true != 0 else 1.0)
+
+            # Oracle cost 依然按 unique 节点统计
+            sample_prefix = posts.iloc[sample_idx[:n]]
+            n_post, n_comment = self._count_unique_nodes(sample_prefix)
+            oracle_cost = n_post + n_comment
+
+            results.append({
+                "budget_frac": frac,
+                "budget_n": n,
+                "T_hat": float(T_hat),
+                "Qerror": float(Qerror),
+                "n_post": int(n_post),
+                "n_comment": int(n_comment),
+                "oracle_cost": int(oracle_cost),
+            })
+        return results
+
+    def run_proxyE_importance_checkpoints(self, budget_fracs, eps: float = 1e-10, seed: int = None):
+        """
+        POSS (proxyE_importance) 的检查点版本
+        """
+        if self.posts.empty:
+            return []
+
+        posts = self.posts.copy()
+        N = len(posts)
+
+        budget_fracs = sorted(list(set(budget_fracs)))
+        max_frac = max(budget_fracs)
+        max_n = min(int(max_frac * N), N)
+        if max_n <= 0:
+            return []
+
+        # proxyE_importance (现有实现是 p ∝ proxy * a 的变体)
+        # 这里按常规 proxyE_importance 的权重来走
+        weights = posts["proxy"].values * posts["a"].values + eps
+        weights = np.nan_to_num(weights, nan=0.0, posinf=0.0, neginf=0.0)
+        probs = weights / (weights.sum() or 1e-12)
+
+        rng = np.random.default_rng(seed if seed is not None else np.random.randint(1 << 30))
+        sample_idx = rng.choice(N, size=max_n, replace=False, p=probs)
+
+        a_vals = posts["a"].values[sample_idx]
+        oracle_vals = posts["oracle"].values[sample_idx]
+        p_vals = probs[sample_idx]
+
+        results = []
+        for frac in budget_fracs:
+            n = max(1, int(frac * N))
+            n = min(n, max_n)
+
+            pi = np.minimum(1.0, n * p_vals[:n])
+            T_hat = np.sum((a_vals[:n] * oracle_vals[:n]) / (pi + 1e-12))
+
+            Qerror = abs(T_hat - self.T_true) / (self.T_true if self.T_true != 0 else 1.0)
+
+            sample_prefix = posts.iloc[sample_idx[:n]]
+            n_post, n_comment = self._count_unique_nodes(sample_prefix)
+            oracle_cost = n_post + n_comment
+
+            results.append({
+                "budget_frac": frac,
+                "budget_n": n,
+                "T_hat": float(T_hat),
+                "Qerror": float(Qerror),
+                "n_post": int(n_post),
+                "n_comment": int(n_comment),
+                "oracle_cost": int(oracle_cost),
+            })
+        return results
+
 
 def compute_T_true(
         gt_path: str,
@@ -1492,8 +1602,6 @@ def run_evaluation_for_query(
         )
     save_node_counts(node_stats_records)
     return results
-
-
 
 def multi_predicate_evaluation(dataset_name: str, run_times: int = 20,
     post_proxy_col="ML1_proxy4b1_probability",
@@ -1918,9 +2026,347 @@ def run_fois_budget_curve_multi_predicate(
     return df
 
 
+def run_budget_curve_multi_predicate_fast(
+    dataset_name: str,
+    budget_fracs: List[float],
+    run_times: int = 5,
+    post_proxy_col: str = "ML1_proxy4b_probability",
+    comment_proxy_col: str = "ML2_proxy1_probability",
+    post_oracle_col: str = "ML1_oracle2_probability",
+    comment_oracle_col: str = "ML2_oracle2_probability",
+):
+    """
+    同时生成 FOIS_nrs / FOIS_rs / POSS 的预算曲线
+    并输出每种方法针对每个 Query 的中间平均误差结果。
+    """
+    print(f"\n====== Budget Curve (FOIS_nrs / FOIS_rs / POSS): {dataset_name} ======")
 
-if __name__ == '__main__':
-    dataset_to_process = 'dataset_test'
-    # multi_predicate_evaluation(dataset_to_process)
-    evaluate_graph_only_baseline(dataset_to_process)
+    gt_manager = GroundTruthManager(dataset_name=dataset_name,
+                                    post_oracle_col=post_oracle_col,
+                                    comment_oracle_col=comment_oracle_col)
+    all_T_true_results = gt_manager.get_all()
+    if not all_T_true_results:
+        print("[Error] 未获取到 T_true")
+        return None
 
+    base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
+    aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
+    if not os.path.exists(aggregated_dir):
+        print(f"[Error] 聚合目录不存在: {aggregated_dir}")
+        return None
+
+    agg_files = [f for f in os.listdir(aggregated_dir) if f.endswith(".csv")]
+    if not agg_files:
+        print("[Warn] 没有聚合文件")
+        return None
+
+    records = []
+    
+    # 按照文件名排序，保证输出顺序稳定
+    for agg_file in sorted(agg_files):
+        if agg_file.startswith("aggregated_list_"):
+            base = agg_file.replace("aggregated_list_", "")
+        else:
+            base = agg_file
+        query_basename = base.replace(".csv", "") + ".graph"
+
+        T_true = all_T_true_results.get(query_basename)
+        if T_true is None or T_true == 0:
+            continue
+
+        filepath = os.path.join(aggregated_dir, agg_file)
+        sampler = ProxyStratifiedSampler(
+            csv_path=filepath,
+            is_multi_predicate=True,
+            post_proxy=post_proxy_col,
+            comment_proxy=comment_proxy_col,
+            post_oracle=post_oracle_col,
+            comment_oracle=comment_oracle_col,
+            T_true=T_true,
+            total_budget_frac=max(budget_fracs)
+        )
+
+        if sampler.posts.empty:
+            continue
+
+        # --- [新增模块 1] 初始化当前查询的临时统计容器 ---
+        # 结构: { "FOIS_nrs": {0.01: [], 0.05: []}, "FOIS_rs": {...}, "POSS": {...} }
+        method_names = ["FOIS_nrs", "FOIS_rs", "POSS"]
+        temp_method_errors = {
+            m: {b: [] for b in budget_fracs} 
+            for m in method_names
+        }
+
+        for run_id in range(run_times):
+            # 1. 运行 FOIS_nrs
+            res_nrs = sampler.run_baseline_proxy_a_checkpoints(budget_fracs)
+            # 2. 运行 FOIS_rs
+            res_rs = sampler.run_baseline_proxy_a_unbiased_checkpoints(budget_fracs)
+            # 3. 运行 POSS
+            # res_poss = sampler.run_proxyE_importance_checkpoints(budget_fracs)
+
+            # --- [新增模块 2] 收集数据 & 填充临时统计 ---
+            
+            # 处理 FOIS_nrs
+            for rec in res_nrs:
+                records.append({
+                    "query_basename": query_basename,
+                    "run_id": run_id + 1,
+                    "budget_frac": rec["budget_frac"],
+                    "budget_n": rec["budget_n"],
+                    "T_true": T_true,
+                    "T_hat": rec["T_hat"],
+                    "Qerror": rec["Qerror"],
+                    "n_post": rec["n_post"],
+                    "n_comment": rec["n_comment"],
+                    "oracle_cost": rec["oracle_cost"],
+                    "method": "FOIS_nrs"
+                })
+                # 记录误差用于打印
+                if rec["budget_frac"] in temp_method_errors["FOIS_nrs"]:
+                    temp_method_errors["FOIS_nrs"][rec["budget_frac"]].append(rec["Qerror"])
+
+            # 处理 FOIS_rs
+            for rec in res_rs:
+                records.append({
+                    "query_basename": query_basename,
+                    "run_id": run_id + 1,
+                    "budget_frac": rec["budget_frac"],
+                    "budget_n": rec["budget_n"],
+                    "T_true": T_true,
+                    "T_hat": rec["T_hat"],
+                    "Qerror": rec["Qerror"],
+                    "n_post": rec["n_post"],
+                    "n_comment": rec["n_comment"],
+                    "oracle_cost": rec["oracle_cost"],
+                    "method": "FOIS_rs"
+                })
+                # 记录误差用于打印
+                if rec["budget_frac"] in temp_method_errors["FOIS_rs"]:
+                    temp_method_errors["FOIS_rs"][rec["budget_frac"]].append(rec["Qerror"])
+
+            # # 处理 POSS
+            # for rec in res_poss:
+            #     records.append({
+            #         "query_basename": query_basename,
+            #         "run_id": run_id + 1,
+            #         "budget_frac": rec["budget_frac"],
+            #         "budget_n": rec["budget_n"],
+            #         "T_true": T_true,
+            #         "T_hat": rec["T_hat"],
+            #         "Qerror": rec["Qerror"],
+            #         "n_post": rec["n_post"],
+            #         "n_comment": rec["n_comment"],
+            #         "oracle_cost": rec["oracle_cost"],
+            #         "method": "POSS"
+            #     })
+            #     # 记录误差用于打印
+            #     if rec["budget_frac"] in temp_method_errors["POSS"]:
+            #         temp_method_errors["POSS"][rec["budget_frac"]].append(rec["Qerror"])
+
+        # --- [新增模块 3] 当前查询的所有 Run 结束后，格式化打印每种方法的平均误差 ---
+        print(f"Query: {query_basename:<35} | T_true: {int(T_true)}")
+        
+        for m in method_names:
+            # 构建该方法在不同 budget 下的误差字符串
+            stats_str_list = []
+            for b in budget_fracs:
+                errs = temp_method_errors[m][b]
+                if errs:
+                    avg_err = np.mean(errs)
+                    stats_str_list.append(f"B={b:.2f}: {avg_err:.4f}")
+            
+            # 打印单行: [Method Name] B=0.01: 0.xxx | B=0.05: 0.xxx
+            final_str = " | ".join(stats_str_list)
+            print(f"  [{m:<8}] {final_str}")
+            
+        print("-" * 80) # 分隔线
+
+    if not records:
+        print("[Warn] 无结果生成")
+        return None
+
+    df = pd.DataFrame(records)
+    out_dir = os.path.join(base_path, "results", "efficiency")
+    os.makedirs(out_dir, exist_ok=True)
+    out_path = os.path.join(out_dir, "FOIS_rs_POSS_budget_curve.csv")
+    file_exists = os.path.exists(out_path)
+    df.to_csv(out_path, index=False, mode='a', header=not file_exists)
+    action_str = "追加到" if file_exists else "创建新文件"
+    print(f"\n[OK] 结果已{action_str}: {out_path}")
+    return df
+
+
+
+def run_budget_curve_multi_predicate(
+    dataset_name: str,
+    budget_fracs: List[float],
+    run_times: int = 5,
+    post_proxy_col: str = "ML1_proxy4b_probability",
+    comment_proxy_col: str = "ML2_proxy1_probability",
+    post_oracle_col: str = "ML1_oracle2_probability",
+    comment_oracle_col: str = "ML2_oracle2_probability",
+):
+    """
+    同时生成 FOIS_nrs / FOIS_rs / POSS 的预算曲线
+    并输出每种方法针对每个 Query 的中间平均误差结果。
+    【改进】：每处理完一个 Query，立即将结果追加写入文件。
+    """
+    print(f"\n====== Budget Curve (FOIS_nrs / FOIS_rs / POSS): {dataset_name} ======")
+
+    # 1. 准备 Ground Truth
+    gt_manager = GroundTruthManager(dataset_name=dataset_name,
+                                    post_oracle_col=post_oracle_col,
+                                    comment_oracle_col=comment_oracle_col)
+    all_T_true_results = gt_manager.get_all()
+    if not all_T_true_results:
+        print("[Error] 未获取到 T_true")
+        return None
+
+    # 2. 准备路径
+    base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
+    aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
+    if not os.path.exists(aggregated_dir):
+        print(f"[Error] 聚合目录不存在: {aggregated_dir}")
+        return None
+
+    agg_files = [f for f in os.listdir(aggregated_dir) if f.endswith(".csv")]
+    if not agg_files:
+        print("[Warn] 没有聚合文件")
+        return None
+
+    # --- [修改点 1] 提前定义输出路径，以便在循环中访问 ---
+    out_dir = os.path.join(base_path, "results", "efficiency")
+    os.makedirs(out_dir, exist_ok=True)
+    out_path = os.path.join(out_dir, "FOIS_rs_POSS_budget_curve.csv")
+    
+    # 如果你想每次重新跑都清空旧文件，取消下面注释：
+    # if os.path.exists(out_path):
+    #     os.remove(out_path)
+
+    all_records = [] # 用于最后返回完整 DataFrame
+    
+    # 3. 开始遍历查询
+    for agg_file in sorted(agg_files):
+        # 解析文件名
+        if agg_file.startswith("aggregated_list_"):
+            base = agg_file.replace("aggregated_list_", "")
+        else:
+            base = agg_file
+        query_basename = base.replace(".csv", "") + ".graph"
+
+        T_true = all_T_true_results.get(query_basename)
+        if T_true is None or T_true == 0:
+            continue
+
+        filepath = os.path.join(aggregated_dir, agg_file)
+        sampler = ProxyStratifiedSampler(
+            csv_path=filepath,
+            is_multi_predicate=True,
+            post_proxy=post_proxy_col,
+            comment_proxy=comment_proxy_col,
+            post_oracle=post_oracle_col,
+            comment_oracle=comment_oracle_col,
+            T_true=T_true,
+            total_budget_frac=max(budget_fracs)
+        )
+
+        if sampler.posts.empty:
+            continue
+
+        # 初始化统计容器
+        method_names = ["FOIS_nrs", "FOIS_rs", "POSS"]
+        temp_method_errors = {
+            m: {b: [] for b in budget_fracs} 
+            for m in method_names
+        }
+        
+        # --- [修改点 2] 当前查询的临时结果列表 ---
+        current_records = []
+
+        for run_id in range(run_times):
+            # 1. 运行 FOIS_nrs
+            res_nrs = sampler.run_baseline_proxy_a_checkpoints(budget_fracs)
+            # 2. 运行 FOIS_rs
+            res_rs = sampler.run_baseline_proxy_a_unbiased_checkpoints(budget_fracs)
+            # 3. 运行 POSS (目前注释掉)
+            # res_poss = sampler.run_proxyE_importance_checkpoints(budget_fracs)
+
+            # --- 收集 FOIS_nrs ---
+            for rec in res_nrs:
+                row = {
+                    "query_basename": query_basename,
+                    "run_id": run_id + 1,
+                    "budget_frac": rec["budget_frac"],
+                    "budget_n": rec["budget_n"],
+                    "T_true": T_true,
+                    "T_hat": rec["T_hat"],
+                    "Qerror": rec["Qerror"],
+                    "n_post": rec["n_post"],
+                    "n_comment": rec["n_comment"],
+                    "oracle_cost": rec["oracle_cost"],
+                    "method": "FOIS_nrs"
+                }
+                current_records.append(row)
+                if rec["budget_frac"] in temp_method_errors["FOIS_nrs"]:
+                    temp_method_errors["FOIS_nrs"][rec["budget_frac"]].append(rec["Qerror"])
+
+            # --- 收集 FOIS_rs ---
+            for rec in res_rs:
+                row = {
+                    "query_basename": query_basename,
+                    "run_id": run_id + 1,
+                    "budget_frac": rec["budget_frac"],
+                    "budget_n": rec["budget_n"],
+                    "T_true": T_true,
+                    "T_hat": rec["T_hat"],
+                    "Qerror": rec["Qerror"],
+                    "n_post": rec["n_post"],
+                    "n_comment": rec["n_comment"],
+                    "oracle_cost": rec["oracle_cost"],
+                    "method": "FOIS_rs"
+                }
+                current_records.append(row)
+                if rec["budget_frac"] in temp_method_errors["FOIS_rs"]:
+                    temp_method_errors["FOIS_rs"][rec["budget_frac"]].append(rec["Qerror"])
+
+            # --- 收集 POSS (如果启用) ---
+            # for rec in res_poss:
+            #     row = { ... }
+            #     current_records.append(row)
+            #     ...
+
+        # 将当前查询结果加入总结果
+        all_records.extend(current_records)
+
+        # 打印控制台统计
+        print(f"Query: {query_basename:<35} | T_true: {int(T_true)}")
+        for m in method_names:
+            stats_str_list = []
+            for b in budget_fracs:
+                errs = temp_method_errors[m][b]
+                if errs:
+                    avg_err = np.mean(errs)
+                    stats_str_list.append(f"B={b:.2f}: {avg_err:.4f}")
+            final_str = " | ".join(stats_str_list)
+            # 只有当该方法有数据时才打印 (避免 POSS 被注释掉时打印空行)
+            if final_str:
+                print(f"  [{m:<8}] {final_str}")
+        
+        # --- [修改点 3] 立即写入文件 (追加模式) ---
+        if current_records:
+            df_chunk = pd.DataFrame(current_records)
+            # 检查文件是否存在，决定是否写表头
+            file_exists = os.path.exists(out_path)
+            # mode='a' 表示追加，header=not file_exists 表示仅在文件新建时写表头
+            df_chunk.to_csv(out_path, index=False, mode='a', header=not file_exists)
+            print(f"[Saved] appended to {out_path}")
+            
+        print("-" * 80)
+
+    if not all_records:
+        print("[Warn] 无结果生成")
+        return None
+
+    print(f"\n[Done] 所有查询处理完毕。最终文件: {out_path}")
+    return pd.DataFrame(all_records)
