@@ -11,6 +11,7 @@ from sklearn.preprocessing import StandardScaler
 import polars as pl
 import os
 import json
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import Dict, List
 from pythonProject.src.Structure_first.compute_truth import GroundTruthManager
 
@@ -358,6 +359,70 @@ class ProxyStratifiedSampler:
         return stats, pilots
 
     # ----------------------------
+    # 新增：基于 Proxy 和 Weight 的启发式分配 (不需要 Pilot 统计)
+    # ----------------------------
+    @staticmethod
+    def allocate_second_stage_heuristic(posts: pd.DataFrame, N2: int, strategy: str = "root_wp") -> Dict[int, int]:
+        """
+        根据全局的 proxy 和 a (weight) 直接计算分配权重，不需要 Pilot 的采样方差。
+        """
+        alloc_weights = {}
+        
+        # 遍历每一层
+        for k, grp in posts.groupby("stratum"):
+            if grp.empty:
+                alloc_weights[k] = 0.0
+                continue
+                
+            a_vals = grp["a"].values
+            p_vals = grp["proxy"].values
+            
+            if strategy == "root_wp":
+                # 方法 1: sum( w * sqrt(p) )
+                # 对应理论上的 sum( sqrt(Var_i) )，假设 Var_i ∝ w^2 * p * (1-p) ≈ w^2 * p
+                # 开根号后即 w * sqrt(p)
+                w_h = np.sum(a_vals * np.sqrt(p_vals + 1e-12))
+                
+            elif strategy == "w_root_mean_p":
+                # 方法 2: sum(w) * sqrt( mean(p) )
+                sum_w = np.sum(a_vals)
+                mean_p = np.mean(p_vals)
+                w_h = sum_w * np.sqrt(mean_p + 1e-12)
+            else:
+                w_h = 0.0
+            
+            alloc_weights[k] = w_h
+
+        # 标准化并分配 N2
+        total_w = sum(alloc_weights.values())
+        if total_w <= 0:
+            # 如果全是0，均匀分配
+            n_strata = len(alloc_weights)
+            return {k: int(N2 / n_strata) for k in alloc_weights}
+
+        final_alloc = {}
+        remainder = N2
+        
+        # 第一次向下取整分配
+        for k in alloc_weights:
+            share = (alloc_weights[k] / total_w) * N2
+            count = int(math.floor(share))
+            final_alloc[k] = max(1, count) # 确保每层至少分1个(如果有预算)
+            remainder -= final_alloc[k]
+            
+        # 如果预算超了（因为max(1)），简单扣减；如果少了，补给权重最大的
+        # 这里简化处理：按权重排序补齐剩余
+        if remainder > 0:
+            sorted_strata = sorted(alloc_weights.keys(), key=lambda x: alloc_weights[x], reverse=True)
+            for i in range(remainder):
+                k = sorted_strata[i % len(sorted_strata)]
+                final_alloc[k] += 1
+        
+        return final_alloc
+
+
+
+    # ----------------------------
     # 第二阶段分配
     # ----------------------------
     # V1.0
@@ -560,11 +625,18 @@ class ProxyStratifiedSampler:
     # ----------------------------
     # 核心执行函数
     # ----------------------------
-    def run(self, stratify_mode: str = "proxy", sampling: str = "uniform") -> Dict:
+    def run(self, stratify_mode: str = "proxy", sampling: str = "uniform", alloc_strategy: str = "neyman_pilot") -> Dict:
+        """
+        alloc_strategy: 
+          - "neyman_pilot": 使用 Pilot 样本的方差估计 (原方法)
+          - "root_wp": 使用 sum(w * sqrt(p))
+          - "w_root_mean_p": 使用 sum(w) * sqrt(mean(p))
+        """
         if self.posts.empty:
             return {"T_hat": 0.0, "T_true": self.T_true, "Qerror": 0.0, "n_post": 0, "n_comment": 0} # +++ 返回 0 计数
         posts = self.posts.copy()
 
+        # 1. 分层
         if stratify_mode == "proxy":
             posts = self.stratify_by_proxy(posts, self.K)
         elif stratify_mode == "proxyE":
@@ -572,18 +644,30 @@ class ProxyStratifiedSampler:
         else:
             raise ValueError("Unsupported stratify_mode")
 
+        # 2. 预算划分
         N_total = int(math.floor(self.total_budget_frac * len(posts)))
         N1_total = int(math.floor(self.c_stage * N_total))
         N2 = N_total - N1_total
 
+        # 3. Pilot 采样 (第一阶段)
         stats_init = {k: {"N_k": len(g), "W_k": g["a"].sum()} for k, g in posts.groupby("stratum")}
         pilot_alloc = self.allocate_pilot_budget(stats_init, N1_total)
         stats, pilots = self.pilot_stats(posts, pilot_alloc)
-        alloc2 = self.allocate_second_stage(stats, N2)
+
+        # 4. 第二阶段分配 (核心修改点)
+        if alloc_strategy == "neyman_pilot":
+            # 原方法：基于 Pilot 的 stats 计算
+            alloc2 = self.allocate_second_stage(stats, N2)
+        else:
+            # 新方法：基于全局 Proxy 和 Weight 计算
+            alloc2 = self.allocate_second_stage_heuristic(posts, N2, strategy=alloc_strategy)
+
+        
         res = self.second_stage_and_estimate(posts, pilots, alloc2, sampling=sampling)
 
         full_sample = res.get('full_sample', pd.DataFrame())
         n_post, n_comment = self._count_unique_nodes(full_sample)
+
         # === 计算 PI 统计信息 ===
         # 注意：如果没有样本，pi_stats 会全是 0
         if not full_sample.empty and "pi" in full_sample.columns:
@@ -609,6 +693,16 @@ class ProxyStratifiedSampler:
 
     def run_proxyE_uniform(self):
         return self.run("proxyE", "uniform")
+    
+    # 方法 5: Alloc-Root-WP
+    def run_proxyE_alloc_root_wp(self):
+        # 分层: ProxyE (p*a), 层内: Importance, 分配: root_wp
+        return self.run(stratify_mode="proxyE", sampling="importance", alloc_strategy="root_wp")
+
+    # 方法 6: Alloc-W-Root-MeanP
+    def run_proxyE_alloc_w_root_pbar(self):
+        # 分层: ProxyE (p*a), 层内: Importance, 分配: w_root_mean_p
+        return self.run(stratify_mode="proxyE", sampling="importance", alloc_strategy="w_root_mean_p")
 
     def run_mab_sampling(self, K: int = 10, budget_frac: float = None, batch_size: int = 10, ucb_scale: float = 1.0):
         """
@@ -1154,6 +1248,8 @@ class ProxyStratifiedSampler:
             "pi_mean": float(np.mean(pis))
         }
 
+
+
     # ==========================================================
     # === 🧩 用于测试效率和误差曲线 ===
     # ==========================================================
@@ -1216,7 +1312,7 @@ class ProxyStratifiedSampler:
             })
         return results
     
-    def run_baseline_proxy_a_unbiased_checkpoints(self, budget_fracs, eps: float = 1e-10, seed: int = None):
+    def run_baseline_proxy_a_unbiased_checkpoints_origin(self, budget_fracs, eps: float = 1e-10, seed: int = None):
         """
         FOIS_rs 的检查点版本 (unbiased, with replacement)
         """
@@ -1272,58 +1368,122 @@ class ProxyStratifiedSampler:
             })
         return results
 
-    def run_proxyE_importance_checkpoints(self, budget_fracs, eps: float = 1e-10, seed: int = None):
+    def run_baseline_proxy_a_unbiased_checkpoints(self, budget_fracs, eps: float = 1e-10, seed: int = None):
         """
-        POSS (proxyE_importance) 的检查点版本
+        FOIS_rs (有放回) 的检查点版本：
+        - 采样对象：核心集 (Rows)
+        - 预算控制：budget_frac 对应唯一核心集数量 (Unique Core Sets)。
+        - 逻辑：一直有放回采样，直到凑齐指定数量的唯一核心集。
+        - 估计：使用总采样次数 (Trials) 进行 Hansen-Hurwitz 估计。
         """
+        # print('[Check_running_baseline_proxy_a_unbiased_checkpoints]')
         if self.posts.empty:
             return []
 
         posts = self.posts.copy()
         N = len(posts)
 
+        # 1. 确定最大目标 (Unique Core Sets)
         budget_fracs = sorted(list(set(budget_fracs)))
         max_frac = max(budget_fracs)
-        max_n = min(int(max_frac * N), N)
-        if max_n <= 0:
+        target_max_unique = min(int(max_frac * N), N)
+        
+        if target_max_unique <= 0:
             return []
 
-        # proxyE_importance (现有实现是 p ∝ proxy * a 的变体)
-        # 这里按常规 proxyE_importance 的权重来走
-        weights = posts["proxy"].values * posts["a"].values + eps
+        # 2. 计算权重
+        weights = np.sqrt(posts["proxy"].values * posts["a"].values + eps)
         weights = np.nan_to_num(weights, nan=0.0, posinf=0.0, neginf=0.0)
         probs = weights / (weights.sum() or 1e-12)
 
         rng = np.random.default_rng(seed if seed is not None else np.random.randint(1 << 30))
-        sample_idx = rng.choice(N, size=max_n, replace=False, p=probs)
 
-        a_vals = posts["a"].values[sample_idx]
-        oracle_vals = posts["oracle"].values[sample_idx]
-        p_vals = probs[sample_idx]
+        # 3. 动态采样循环
+        seen_indices = set()
+        budget_cutoffs = {} # 记录达成每个 frac 时所需的 trials
+        target_fracs_queue = sorted(budget_fracs)
+        
+        all_sampled_indices = [] # 记录每一次 Trial 的索引 (含重复)
+        
+        batch_size = 50000 
+        total_trials = 0
+        max_trials_limit = N * 500 # 防止死循环的熔断机制
+
+        while target_fracs_queue and total_trials < max_trials_limit:
+            # 批量生成
+            batch_indices = rng.choice(N, size=batch_size, replace=True, p=probs)
+            
+            for idx in batch_indices:
+                all_sampled_indices.append(idx)
+                total_trials += 1
+                
+                # 检查是否是新的核心集
+                if idx not in seen_indices:
+                    seen_indices.add(idx)
+                    
+                    # 检查是否满足目标
+                    while target_fracs_queue:
+                        target_f = target_fracs_queue[0]
+                        target_count = int(target_f * N)
+                        
+                        if len(seen_indices) >= target_count:
+                            # 记录截止点：为了凑齐 target_count 个唯一核心集，我们一共抽了 total_trials 次
+                            budget_cutoffs[target_f] = total_trials
+                            target_fracs_queue.pop(0)
+                        else:
+                            break
+                
+                if not target_fracs_queue:
+                    break
+            
+            # 动态调整步长
+            if len(target_fracs_queue) > 0 and batch_size < 1000000:
+                batch_size = min(batch_size * 2, 1000000)
+
+        # 4. 准备计算数据
+        final_indices = np.array(all_sampled_indices[:total_trials])
+        a_vals_all = posts["a"].values[final_indices]
+        oracle_vals_all = posts["oracle"].values[final_indices]
+        p_vals_all = probs[final_indices]
 
         results = []
         for frac in budget_fracs:
-            n = max(1, int(frac * N))
-            n = min(n, max_n)
+            if frac not in budget_cutoffs:
+                continue
 
-            pi = np.minimum(1.0, n * p_vals[:n])
-            T_hat = np.sum((a_vals[:n] * oracle_vals[:n]) / (pi + 1e-12))
-
+            # n_trials: 为了达到 frac 比例的唯一核心集，实际进行的采样总次数
+            n_trials = budget_cutoffs[frac]
+            
+            # --- 估计量计算 (Hansen-Hurwitz) ---
+            # 公式: (1/n) * sum( y_i / p_i )
+            # 必须使用前 n_trials 次所有的采样结果 (包含重复)
+            y_subset = a_vals_all[:n_trials] * oracle_vals_all[:n_trials]
+            p_subset = p_vals_all[:n_trials]
+            
+            T_hat = np.mean(y_subset / (p_subset + 1e-12))
             Qerror = abs(T_hat - self.T_true) / (self.T_true if self.T_true != 0 else 1.0)
 
-            sample_prefix = posts.iloc[sample_idx[:n]]
-            n_post, n_comment = self._count_unique_nodes(sample_prefix)
+            # --- Oracle Cost 统计 ---
+            # 统计前 n_trials 次采样中，涉及到的唯一核心集的节点消耗
+            # 先找到这 n_trials 次中包含的唯一行索引
+            unique_rows_in_prefix = np.unique(final_indices[:n_trials])
+            
+            # 取出这些唯一行进行节点统计
+            subset_df = posts.iloc[unique_rows_in_prefix]
+            n_post, n_comment = self._count_unique_nodes(subset_df)
             oracle_cost = n_post + n_comment
 
             results.append({
                 "budget_frac": frac,
-                "budget_n": n,
+                "budget_n": int(frac * N), # 这是目标的唯一核心集数
+                "trials": n_trials,        # 实际采样次数
                 "T_hat": float(T_hat),
                 "Qerror": float(Qerror),
                 "n_post": int(n_post),
                 "n_comment": int(n_comment),
                 "oracle_cost": int(oracle_cost),
             })
+            
         return results
 
 
@@ -1915,115 +2075,6 @@ def save_node_counts(records: List[Dict]):
 # === xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ===
 # ==========================================================
 
-def run_fois_budget_curve_multi_predicate(
-    dataset_name: str,
-    budget_fracs: List[float],
-    run_times: int = 5,
-    post_proxy_col: str = "ML1_proxy4b_probability",
-    comment_proxy_col: str = "ML2_proxy1_probability",
-    post_oracle_col: str = "ML1_oracle2_probability",
-    comment_oracle_col: str = "ML2_oracle2_probability",
-):
-    """
-    只运行 FOIS_nrs (proxy×a) 的预算曲线评估（多谓词）。
-    输出：每个 query 的多个 budget checkpoint 结果。
-    """
-    print(f"\n====== 预算曲线评估 (FOIS_nrs) : {dataset_name} ======")
-
-    gt_manager = GroundTruthManager(dataset_name=dataset_name,
-                                    post_oracle_col=post_oracle_col,
-                                    comment_oracle_col=comment_oracle_col)
-    all_T_true_results = gt_manager.get_all()
-    if not all_T_true_results:
-        print("[Error] 未获取到 T_true")
-        return None
-
-    base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
-    aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
-    if not os.path.exists(aggregated_dir):
-        print(f"[Error] 聚合目录不存在: {aggregated_dir}")
-        return None
-
-    agg_files = [f for f in os.listdir(aggregated_dir) if f.endswith(".csv")]
-    if not agg_files:
-        print("[Warn] 没有聚合文件")
-        return None
-
-    records = []
-    
-    # 使用 sorted 保证顺序一致
-    for agg_file in sorted(agg_files):
-        if agg_file.startswith("aggregated_list_"):
-            base = agg_file.replace("aggregated_list_", "")
-        else:
-            base = agg_file
-        query_basename = base.replace(".csv", "") + ".graph"
-
-        T_true = all_T_true_results.get(query_basename)
-        if T_true is None or T_true == 0:
-            continue
-
-        filepath = os.path.join(aggregated_dir, agg_file)
-        sampler = ProxyStratifiedSampler(
-            csv_path=filepath,
-            is_multi_predicate=True,
-            post_proxy=post_proxy_col,
-            comment_proxy=comment_proxy_col,
-            post_oracle=post_oracle_col,
-            comment_oracle=comment_oracle_col,
-            T_true=T_true,
-            total_budget_frac=max(budget_fracs)
-        )
-
-        if sampler.posts.empty:
-            continue
-
-        # --- [修改点 1] 初始化临时字典，用于存储当前查询在各预算下的误差列表 ---
-        # 结构: { 0.05: [err1, err2...], 0.1: [err1, err2...] }
-        temp_budget_errors = {b: [] for b in budget_fracs}
-
-        for run_id in range(run_times):
-            ckpts = sampler.run_baseline_proxy_a_checkpoints(budget_fracs)
-            for rec in ckpts:
-                # 记录数据到最终列表
-                records.append({
-                    "query_basename": query_basename,
-                    "run_id": run_id + 1,
-                    "budget_frac": rec["budget_frac"],
-                    "budget_n": rec["budget_n"],
-                    "T_true": T_true,
-                    "T_hat": rec["T_hat"],
-                    "Qerror": rec["Qerror"],
-                    "n_post": rec["n_post"],
-                    "n_comment": rec["n_comment"],
-                    "oracle_cost": rec["oracle_cost"],
-                    "method": "FOIS_nrs"
-                })
-                
-                # --- [修改点 2] 收集当前 budget 的误差以便后续打印 ---
-                if rec["budget_frac"] in temp_budget_errors:
-                    temp_budget_errors[rec["budget_frac"]].append(rec["Qerror"])
-
-        # --- [修改点 3] 当前查询的所有 Run 结束后，打印平均误差 ---
-        print(f"Query: {query_basename:<35} | T_true: {int(T_true)}")
-        # 格式化输出：Budget -> Avg QError
-        stats_str = "  | ".join([
-            f"B={b:.2f}: Err={np.mean(errs):.4f}" 
-            for b, errs in temp_budget_errors.items() if errs
-        ])
-        print(f"  -> {stats_str}")
-
-    if not records:
-        print("[Warn] 无结果生成")
-        return None
-
-    df = pd.DataFrame(records)
-    out_dir = os.path.join(base_path, "results", "budget_curve")
-    os.makedirs(out_dir, exist_ok=True)
-    out_path = os.path.join(out_dir, "FOIS_nrs_budget_curve.csv")
-    df.to_csv(out_path, index=False)
-    print(f"\n[OK] 保存预算曲线结果: {out_path}")
-    return df
 
 
 def run_budget_curve_multi_predicate_fast(
@@ -2196,8 +2247,6 @@ def run_budget_curve_multi_predicate_fast(
     print(f"\n[OK] 结果已{action_str}: {out_path}")
     return df
 
-
-
 def run_budget_curve_multi_predicate(
     dataset_name: str,
     budget_fracs: List[float],
@@ -2290,7 +2339,6 @@ def run_budget_curve_multi_predicate(
             # 2. 运行 FOIS_rs
             res_rs = sampler.run_baseline_proxy_a_unbiased_checkpoints(budget_fracs)
             # 3. 运行 POSS (目前注释掉)
-            # res_poss = sampler.run_proxyE_importance_checkpoints(budget_fracs)
 
             # --- 收集 FOIS_nrs ---
             for rec in res_nrs:
@@ -2370,3 +2418,538 @@ def run_budget_curve_multi_predicate(
 
     print(f"\n[Done] 所有查询处理完毕。最终文件: {out_path}")
     return pd.DataFrame(all_records)
+
+
+def run_adaptive_sampling_experiment(
+    dataset_name: str = "dataset_test",
+    run_times: int = 5
+):
+    """
+    按照指定的 budget_frac 列表，对 run_proxy_importance 和 run_proxyE_importance 
+    进行两阶段自适应采样评估。结果包含每次运行的详细数据。
+    """
+    # === 1. 配置参数与路径 ===
+    TARGET_TICKS = [0.05, 0.1, 0.2, 0.15, 0.3, 0.4]
+    # 为了逻辑清晰，我们在内部排个序，或者保持原样遍历皆可。这里保持原样遍历。
+    
+    base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
+    aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
+    
+    # T_true JSON 路径
+    t_true_path = os.path.join(base_path, "results", "T_true_ML1_oracle2_probability_ML2_oracle2_probability.json")
+    
+    # 输出 CSV 路径
+    output_dir = os.path.join(base_path, "results", "efficiency")
+    os.makedirs(output_dir, exist_ok=True)
+    output_csv = os.path.join(output_dir, "two_stage_adaptive_results.csv")
+    
+    # 代理列名配置 (根据 Dataset_test 的常规配置)
+    POST_PROXY = "ML1_proxy4b_probability"
+    COMMENT_PROXY = "ML2_proxy1_probability"
+    POST_ORACLE = "ML1_oracle2_probability"
+    COMMENT_ORACLE = "ML2_oracle2_probability"
+
+    print(f"\n{'='*10} 开始两阶段自适应采样评估 (Adaptive Sampling) {'='*10}")
+    print(f"Target Ticks: {TARGET_TICKS}")
+    print(f"Output File: {output_csv}")
+
+    # === 2. 加载 T_true ===
+    if not os.path.exists(t_true_path):
+        print(f"[Error] T_true 文件未找到: {t_true_path}")
+        return
+
+    with open(t_true_path, 'r') as f:
+        all_t_true = json.load(f)
+    print(f"成功加载 {len(all_t_true)} 个查询的 T_true 值。")
+
+    # === 3. 准备结果文件头 ===
+    # 如果文件不存在，写入表头
+    headers = ["query_basename", "run_id", "budget_frac", "budget_n", "T_true", "T_hat", "Qerror", "n_post", "n_comment", "oracle_cost", "method"]
+    if not os.path.exists(output_csv):
+        pd.DataFrame(columns=headers).to_csv(output_csv, index=False)
+
+    # === 4. 遍历聚合文件 ===
+    if not os.path.exists(aggregated_dir):
+        print(f"[Error] 聚合目录不存在: {aggregated_dir}")
+        return
+
+    agg_files = sorted([f for f in os.listdir(aggregated_dir) if f.endswith(".csv")])
+    
+    for file_idx, agg_file in enumerate(agg_files):
+        # --- 解析文件名得到 query_basename ---
+        # 逻辑：去除前缀，去除后缀，加上 .graph
+        if agg_file.startswith("aggregated_list_"):
+            base = agg_file.replace("aggregated_list_", "")
+        elif agg_file.startswith("aggregated_wide_"):
+            base = agg_file.replace("aggregated_wide_", "")
+        else:
+            base = agg_file
+        query_basename = base.replace(".csv", "") + ".graph"
+
+        # 获取 T_true
+        T_true = all_t_true.get(query_basename)
+        if T_true is None:
+            # print(f"[Skip] {query_basename} 在 JSON 中没有对应的 T_true")
+            continue
+
+        print(f"\n[{file_idx+1}/{len(agg_files)}] Processing: {query_basename} (T_true={T_true})")
+
+        # --- 初始化 Sampler (只加载一次 CSV) ---
+        filepath = os.path.join(aggregated_dir, agg_file)
+        # 初始 budget 设为 1.0 (全量)，后续我们会动态修改
+        sampler = ProxyStratifiedSampler(
+            csv_path=filepath,
+            is_multi_predicate=True,
+            post_proxy=POST_PROXY,
+            comment_proxy=COMMENT_PROXY,
+            post_oracle=POST_ORACLE,
+            comment_oracle=COMMENT_ORACLE,
+            T_true=T_true,
+            total_budget_frac=1.0 
+        )
+
+        if sampler.posts.empty:
+            print("   -> Data Empty, skipping.")
+            continue
+
+        total_instances = len(sampler.posts)
+        
+        # 定义要运行的方法映射
+        # 方法名 -> (函数引用)
+        methods_map = {
+            "run_proxy_importance": sampler.run_proxy_importance,
+            "run_proxyE_importance": sampler.run_proxyE_importance
+        }
+
+        # === 5. 遍历采样率 (Ticks) ===
+        for tick in TARGET_TICKS:
+            # 计算对应的 budget_n (物理行数预算)
+            budget_n = int(math.floor(tick * total_instances))
+            
+            # --- !!! 关键步骤：动态更新 Sampler 的预算比例 !!! ---
+            # 因为 run_proxy_importance 内部使用 self.total_budget_frac
+            sampler.total_budget_frac = tick
+
+            # === 6. 遍历方法 ===
+            for method_name, run_func in methods_map.items():
+                
+                batch_records = []
+                qerrors = []
+
+                # === 7. 重复运行 n 次 ===
+                for r in range(run_times):
+                    run_id = r + 1
+                    
+                    try:
+                        # 执行采样
+                        res = run_func()
+                        
+                        T_hat = res["T_hat"]
+                        Qerror = res["Qerror"]
+                        n_post = res.get("n_post", 0)
+                        n_comment = res.get("n_comment", 0)
+                        
+                        # 计算 oracle_cost (这里定义为唯一节点之和)
+                        oracle_cost = n_post + n_comment
+
+                        # 记录数据
+                        record = {
+                            "query_basename": query_basename,
+                            "run_id": run_id,
+                            "budget_frac": tick,
+                            "budget_n": budget_n,
+                            "T_true": T_true,
+                            "T_hat": T_hat,
+                            "Qerror": Qerror,
+                            "n_post": n_post,
+                            "n_comment": n_comment,
+                            "oracle_cost": oracle_cost,
+                            "method": method_name
+                        }
+                        batch_records.append(record)
+                        qerrors.append(Qerror)
+                        
+                    except Exception as e:
+                        print(f"   [Error] {method_name} run {run_id} failed: {e}")
+
+                # === 8. 保存当前 batch (5次运行) 到 CSV ===
+                if batch_records:
+                    df_batch = pd.DataFrame(batch_records)
+                    # 追加模式写入，不写表头
+                    df_batch.to_csv(output_csv, mode='a', header=False, index=False)
+
+                # === 9. 打印平均误差 (作为控制台反馈) ===
+                avg_q = np.mean(qerrors) if qerrors else 0.0
+                print(f"   -> {method_name:<22} | Tick: {tick:<4} | Avg Qerror: {avg_q:.4f}")
+
+    print(f"\n[Done] 所有实验完成。结果已保存至: {output_csv}")
+
+# ==========================================================
+# === 部分 4: 多线程优化执行 ===
+# ==========================================================
+# ==========================================================
+# === xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ===
+# ==========================================================
+
+def _process_budget_curve_worker(
+    agg_file: str,
+    base_path: str,
+    aggregated_dir: str,
+    all_t_true: dict,
+    budget_fracs: List[float],
+    run_times: int,
+    config: dict
+):
+    """
+    [Worker 函数] 处理单个聚合文件，运行 FOIS_nrs / FOIS_rs 等基线方法。
+    """
+    # 1. 解析文件名
+    if agg_file.startswith("aggregated_list_"):
+        base = agg_file.replace("aggregated_list_", "")
+    elif agg_file.startswith("aggregated_wide_"):
+        base = agg_file.replace("aggregated_wide_", "")
+    else:
+        base = agg_file
+    query_basename = base.replace(".csv", "") + ".graph"
+
+    # 2. 获取 T_true
+    T_true = all_t_true.get(query_basename)
+    if T_true is None or T_true == 0:
+        return []  # Skip
+
+    filepath = os.path.join(aggregated_dir, agg_file)
+    
+    # 3. 初始化 Sampler
+    try:
+        sampler = ProxyStratifiedSampler(
+            csv_path=filepath,
+            is_multi_predicate=True,
+            post_proxy=config["post_proxy"],
+            comment_proxy=config["comment_proxy"],
+            post_oracle=config["post_oracle"],
+            comment_oracle=config["comment_oracle"],
+            T_true=T_true,
+            total_budget_frac=max(budget_fracs) # 初始化时只需给最大预算
+        )
+    except Exception as e:
+        # print(f"[Worker Error] Init failed for {agg_file}: {e}")
+        return []
+
+    if sampler.posts.empty:
+        return []
+
+    file_records = []
+
+    # 4. 循环运行多次
+    for r in range(run_times):
+        run_id = r + 1
+        
+        # --- A. 运行 FOIS_nrs (无放回) ---
+        try:
+            res_nrs = sampler.run_baseline_proxy_a_checkpoints(budget_fracs)
+            for rec in res_nrs:
+                file_records.append({
+                    "query_basename": query_basename,
+                    "run_id": run_id,
+                    "budget_frac": rec["budget_frac"],
+                    "budget_n": rec["budget_n"],
+                    "T_true": T_true,
+                    "T_hat": rec["T_hat"],
+                    "Qerror": rec["Qerror"],
+                    "n_post": rec["n_post"],
+                    "n_comment": rec["n_comment"],
+                    "oracle_cost": rec["oracle_cost"],
+                    "method": "FOIS_nrs"
+                })
+        except Exception as e:
+            pass # 忽略单个方法错误
+
+        # --- B. 运行 FOIS_rs (有放回/无偏) ---
+        try:
+            res_rs = sampler.run_baseline_proxy_a_unbiased_checkpoints(budget_fracs)
+            for rec in res_rs:
+                file_records.append({
+                    "query_basename": query_basename,
+                    "run_id": run_id,
+                    "budget_frac": rec["budget_frac"],
+                    "budget_n": rec["budget_n"],
+                    "T_true": T_true,
+                    "T_hat": rec["T_hat"],
+                    "Qerror": rec["Qerror"],
+                    "n_post": rec["n_post"],
+                    "n_comment": rec["n_comment"],
+                    "oracle_cost": rec["oracle_cost"],
+                    "method": "FOIS_rs"
+                })
+        except Exception as e:
+            pass
+            
+
+    return file_records
+
+def run_budget_curve_multi_predicate_fast(
+    dataset_name: str,
+    budget_fracs: List[float],
+    run_times: int = 5,
+    post_proxy_col: str = "ML1_proxy4b_probability",
+    comment_proxy_col: str = "ML2_proxy1_probability",
+    post_oracle_col: str = "ML1_oracle2_probability",
+    comment_oracle_col: str = "ML2_oracle2_probability",
+    max_workers: int = None
+):
+    """
+    [多进程加速版] Budget Curve Generator (FOIS_nrs / FOIS_rs)
+    """
+    print(f"\n====== [Fast MP] Budget Curve (FOIS): {dataset_name} ======")
+
+    # 1. 准备 Ground Truth
+    # 注意：这里在主进程统一加载一次 T_true，然后传给子进程，避免子进程重复计算
+    print("Loading Ground Truth...")
+    gt_manager = GroundTruthManager(dataset_name=dataset_name,
+                                    post_oracle_col=post_oracle_col,
+                                    comment_oracle_col=comment_oracle_col)
+    all_T_true_results = gt_manager.get_all()
+    
+    if not all_T_true_results:
+        print("[Error] 未获取到 T_true")
+        return None
+
+    # 2. 准备路径
+    base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
+    aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
+    
+    if not os.path.exists(aggregated_dir):
+        print(f"[Error] 聚合目录不存在: {aggregated_dir}")
+        return None
+
+    agg_files = sorted([f for f in os.listdir(aggregated_dir) if f.endswith(".csv")])
+    if not agg_files:
+        print("[Warn] 没有聚合文件")
+        return None
+
+    out_dir = os.path.join(base_path, "results", "efficiency")
+    os.makedirs(out_dir, exist_ok=True)
+    out_path = os.path.join(out_dir, "FOIS_rs_FOSS_nrs_budget_curve_fast.csv")
+    
+    # 3. 初始化 CSV (写入表头)
+    headers = ["query_basename", "run_id", "budget_frac", "budget_n", "T_true", "T_hat", "Qerror", "n_post", "n_comment", "oracle_cost", "method"]
+    pd.DataFrame(columns=headers).to_csv(out_path, index=False)
+
+    # 4. 封装配置
+    config = {
+        "post_proxy": post_proxy_col,
+        "comment_proxy": comment_proxy_col,
+        "post_oracle": post_oracle_col,
+        "comment_oracle": comment_oracle_col
+    }
+
+    # 5. 多进程执行
+    if max_workers is None:
+        max_workers = max(1, os.cpu_count() - 2)
+    
+    print(f"Starting Process Pool with {max_workers} workers...")
+    print(f"Total files to process: {len(agg_files)}")
+
+    with ProcessPoolExecutor(max_workers=max_workers) as executor:
+        futures = []
+        for agg_file in agg_files:
+            futures.append(
+                executor.submit(
+                    _process_budget_curve_worker,
+                    agg_file, base_path, aggregated_dir, all_T_true_results,
+                    budget_fracs, run_times, config
+                )
+            )
+        
+        # 收集结果
+        for future in tqdm(as_completed(futures), total=len(futures), desc="Processing Queries"):
+            try:
+                records = future.result()
+                if records:
+                    # 立即写入文件
+                    df_chunk = pd.DataFrame(records)
+                    # 确保列顺序一致
+                    df_chunk = df_chunk[headers] 
+                    df_chunk.to_csv(out_path, mode='a', header=False, index=False)
+            except Exception as e:
+                print(f"Job failed: {e}")
+
+    print(f"\n[Done] 加速运行结束。结果已保存至: {out_path}")
+
+
+
+def _process_single_query_file(
+    agg_file: str,
+    base_path: str,
+    aggregated_dir: str,
+    all_t_true: dict,
+    target_ticks: list,
+    run_times: int,
+    config: dict
+):
+    """
+    内部工作函数：处理单个聚合文件，完成所有 tick 和 run 的计算。
+    返回该文件生成的所有结果记录列表。
+    """
+    # --- 解析文件名 ---
+    if agg_file.startswith("aggregated_list_"):
+        base = agg_file.replace("aggregated_list_", "")
+    elif agg_file.startswith("aggregated_wide_"):
+        base = agg_file.replace("aggregated_wide_", "")
+    else:
+        base = agg_file
+    query_basename = base.replace(".csv", "") + ".graph"
+
+    # 获取 T_true
+    T_true = all_t_true.get(query_basename)
+    if T_true is None:
+        return []  # Skip
+
+    filepath = os.path.join(aggregated_dir, agg_file)
+    
+    # --- 初始化 Sampler ---
+    # 注意：这里在子进程中初始化，避免跨进程传递大对象
+    try:
+        sampler = ProxyStratifiedSampler(
+            csv_path=filepath,
+            is_multi_predicate=True,
+            post_proxy=config["POST_PROXY"],
+            comment_proxy=config["COMMENT_PROXY"],
+            post_oracle=config["POST_ORACLE"],
+            comment_oracle=config["COMMENT_ORACLE"],
+            T_true=T_true,
+            total_budget_frac=1.0 # 初始值，后面会覆盖
+        )
+    except Exception as e:
+        # print(f"[Warn] Init failed for {agg_file}: {e}")
+        return []
+
+    if sampler.posts.empty:
+        return []
+
+    total_instances = len(sampler.posts)
+    file_records = []
+    
+    methods_map = {
+        "run_proxy_importance": sampler.run_proxy_importance,
+        "run_proxyE_importance": sampler.run_proxyE_importance
+    }
+
+    # === 遍历采样率 (Ticks) ===
+    for tick in target_ticks:
+        budget_n = int(math.floor(tick * total_instances))
+        sampler.total_budget_frac = tick  # 动态更新预算
+
+        # === 遍历方法 ===
+        for method_name, run_func in methods_map.items():
+            # === 重复运行 n 次 ===
+            for r in range(run_times):
+                run_id = r + 1
+                try:
+                    res = run_func()
+                    
+                    oracle_cost = res.get("n_post", 0) + res.get("n_comment", 0)
+                    
+                    record = {
+                        "query_basename": query_basename,
+                        "run_id": run_id,
+                        "budget_frac": tick,
+                        "budget_n": budget_n,
+                        "T_true": T_true,
+                        "T_hat": res["T_hat"],
+                        "Qerror": res["Qerror"],
+                        "n_post": res.get("n_post", 0),
+                        "n_comment": res.get("n_comment", 0),
+                        "oracle_cost": oracle_cost,
+                        "method": method_name
+                    }
+                    file_records.append(record)
+                except Exception:
+                    # 忽略单个错误的运行，避免整个进程崩溃
+                    pass
+                    
+    return file_records
+
+def run_adaptive_sampling_experiment_fast(
+    dataset_name: str = "dataset_test",
+    run_times: int = 5,
+    max_workers: int = None  # 默认使用 CPU 核心数
+):
+    """
+    [多进程加速版] 
+    按照指定的 budget_frac 列表，对 run_proxy_importance 和 run_proxyE_importance 
+    进行两阶段自适应采样评估。
+    """
+    # === 1. 配置参数与路径 ===
+    TARGET_TICKS = [0.05, 0.1, 0.2, 0.15, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+    
+    base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
+    aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
+    t_true_path = os.path.join(base_path, "results", "T_true_ML1_oracle2_probability_ML2_oracle2_probability.json")
+    
+    output_dir = os.path.join(base_path, "results", "efficiency")
+    os.makedirs(output_dir, exist_ok=True)
+    output_csv = os.path.join(output_dir, "two_stage_adaptive_results_fast.csv")
+    
+    # 封装配置字典传给子进程
+    config = {
+        "POST_PROXY": "ML1_proxy4b_probability",
+        "COMMENT_PROXY": "ML2_proxy1_probability",
+        "POST_ORACLE": "ML1_oracle2_probability",
+        "COMMENT_ORACLE": "ML2_oracle2_probability"
+    }
+
+    print(f"\n{'='*10} 开始两阶段自适应采样评估 (多进程加速版) {'='*10}")
+    
+    # === 2. 加载 T_true ===
+    if not os.path.exists(t_true_path):
+        print(f"[Error] T_true 文件未找到: {t_true_path}")
+        return
+    with open(t_true_path, 'r') as f:
+        all_t_true = json.load(f)
+
+    # === 3. 准备文件列表 ===
+    if not os.path.exists(aggregated_dir):
+        print(f"[Error] 聚合目录不存在: {aggregated_dir}")
+        return
+    agg_files = sorted([f for f in os.listdir(aggregated_dir) if f.endswith(".csv")])
+    print(f"待处理文件数: {len(agg_files)}")
+
+    # === 4. 初始化输出文件 ===
+    headers = ["query_basename", "run_id", "budget_frac", "budget_n", "T_true", "T_hat", "Qerror", "n_post", "n_comment", "oracle_cost", "method"]
+    # 覆盖模式（如果不想覆盖，改为 'a' 并添加 header 判断逻辑）
+    pd.DataFrame(columns=headers).to_csv(output_csv, index=False)
+
+    # === 5. 多进程并行执行 ===
+    # max_workers 建议设置为 CPU 核心数 - 2，防止系统卡顿
+    if max_workers is None:
+        max_workers = max(1, os.cpu_count() - 2)
+
+    print(f"启动进程池: {max_workers} workers")
+    
+    with ProcessPoolExecutor(max_workers=max_workers) as executor:
+        # 提交任务
+        futures = []
+        for agg_file in agg_files:
+            futures.append(
+                executor.submit(
+                    _process_single_query_file,
+                    agg_file, base_path, aggregated_dir, all_t_true, 
+                    TARGET_TICKS, run_times, config
+                )
+            )
+        
+        # 使用 tqdm 显示进度并收集结果
+        # as_completed 会在任务完成时立刻返回，不用等所有都做完
+        for future in tqdm(as_completed(futures), total=len(futures), desc="Sampling Progress"):
+            try:
+                result_records = future.result()
+                if result_records:
+                    # === 批量写入结果 ===
+                    # 每次完成一个文件，就将该文件的所有结果追加写入 CSV
+                    df_chunk = pd.DataFrame(result_records)
+                    df_chunk.to_csv(output_csv, mode='a', header=False, index=False)
+            except Exception as e:
+                print(f"Worker Error: {e}")
+
+    print(f"\n[Done] 加速评估完成。结果已保存至: {output_csv}")
