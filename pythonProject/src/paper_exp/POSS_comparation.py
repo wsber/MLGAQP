@@ -66,12 +66,16 @@ def _process_comparison_single_file(
     # 4. run_proxyE_alloc_w_root_pbar: P*A分层 + 启发式分配2 (sum w * sqrt(mean p))
     
     methods_map = {
-        "1_Proxy_Imp_Pilot": sampler.run_proxy_importance,
-        "2_ProxyE_Imp_Pilot": sampler.run_proxyE_importance,
-        "3_ProxyE_Imp_RootWP": sampler.run_proxyE_alloc_root_wp,
-        "4_ProxyE_Imp_WRootMeanP": sampler.run_proxyE_alloc_w_root_pbar
+        # "1_Proxy_Imp_Pilot": sampler.run_proxy_importance,
+        # "2_ProxyE_Imp_Pilot": sampler.run_proxyE_importance,
+        # "3_ProxyE_Imp_RootWP": sampler.run_proxyE_alloc_root_wp,
+        # "4_ProxyE_Imp_WRootMeanP": sampler.run_proxyE_alloc_w_root_pbar,
+        "5_ProxyE_Imp_Sqrt_WP": sampler.run_proxyE_alloc_sqrt_wp,      # 新策略1 (解决 w 偏差)
+        # "6_ProxyE_Imp_Neyman": sampler.run_proxyE_alloc_neyman,        # 新策略2 (关注不确定性)
+        "7_ProxyE_Imp_Sqrt_WP_NRS": sampler.run_proxyE_alloc_sqrt_wp_nrs ,  # 新策略3 (无放回重要性采样)
+        "8_POSSA": sampler.run_possa,  # 综合方法 POSSA
     }
-
+    methods_requiring_pilot = {"1_Proxy_Imp_Pilot", "2_ProxyE_Imp_Pilot"}
     # 3. 循环采样率
     for tick in target_ticks:
         budget_n = int(math.floor(tick * total_instances))
@@ -79,6 +83,11 @@ def _process_comparison_single_file(
 
         # 4. 循环方法
         for method_name, run_func in methods_map.items():
+            if method_name in methods_requiring_pilot:
+                sampler.c_stage = 0.2
+            else:
+                sampler.c_stage = 0.0
+            sampler.K = min(5, budget_n)  # 动态调整层数
             # 5. 重复运行
             for r in range(run_times):
                 try:
@@ -115,7 +124,7 @@ def run_allocation_strategy_comparison(
     """
     # 采样率配置
     # TARGET_TICKS = [0.05, 0.1, 0.2, 0.3, 0.4] 
-    TARGET_TICKS = [0.01, 0.05, 0.1, 0.15,0.2,0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+    TARGET_TICKS = [0.01, 0.05, 0.1, 0.15,0.2,0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,0.95]
     
     base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
     aggregated_dir = os.path.join(base_path, "results", "aggregated_results")

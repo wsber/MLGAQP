@@ -13,7 +13,7 @@ from pythonProject.src.Structure_first.proxy_sample import ProxyStratifiedSample
 
 
 run_budget_curve_multi_predicate_fast(
-    dataset_name="dataset_test",
-    budget_fracs=[0.01, 0.05, 0.1, 0.15,0.2,0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    dataset_name="dataset_test3",
+    budget_fracs=[0.01, 0.05,0.075, 0.1,0.125, 0.15,0.2,0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,0.95],
     run_times=5
 )
