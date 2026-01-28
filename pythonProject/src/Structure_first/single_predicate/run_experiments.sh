@@ -14,7 +14,7 @@ tasks=(
     # "Dist_SkewHigh_proxy4 Dist_SkewHigh_oracle_prob"
     # "Dist_SkewLow_proxy4 Dist_SkewLow_oracle_prob"
 
-    "ML1_proxy2b_probability ML1_oracle2_probability"
+    "ML1_proxy4b_probability ML1_oracle2_probability"
     # "Dist_Extreme_Mix_proxy4 Dist_Extreme_Mix_oracle_prob"
     
 

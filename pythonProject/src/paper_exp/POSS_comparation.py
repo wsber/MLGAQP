@@ -124,7 +124,7 @@ def run_allocation_strategy_comparison(
     """
     # 采样率配置
     # TARGET_TICKS = [0.05, 0.1, 0.2, 0.3, 0.4] 
-    TARGET_TICKS = [0.01, 0.05, 0.1, 0.15,0.2,0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,0.95]
+    TARGET_TICKS = [0.01, 0.05,0.075, 0.1,0.125, 0.15,0.2,0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,0.95]
     
     base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
     aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
@@ -189,4 +189,4 @@ def run_allocation_strategy_comparison(
     print(f"\n[Done] 结果已保存至: {output_csv}")
 
 if __name__ == "__main__":
-    run_allocation_strategy_comparison(dataset_name = "dataset_three" ,run_times=5)
+    run_allocation_strategy_comparison(dataset_name = "dataset_test" ,run_times=5)

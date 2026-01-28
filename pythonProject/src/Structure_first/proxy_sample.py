@@ -554,7 +554,7 @@ class ProxyStratifiedSampler:
                                   alloc: Dict[int, int], sampling: str = "uniform") -> Dict:
         """
         Stage 2 采样。
-        修改：如果是 'importance' 采样，使用有放回 (With Replacement) + 预算去重优化，以保证无偏性并减小方差。
+        修改：如果是 'importance' 采样，使用有放回 / 无放回 + 预算去重优化，以保证无偏性并减小方差。
         """
         combined = {}
         summaries = {}
@@ -589,48 +589,6 @@ class ProxyStratifiedSampler:
                     # 计算 HT 估计值
                     add_sample["Y"] = add_sample["a"] * add_sample["oracle"]
                     T_hat_stage2 = add_sample["Y"].sum() * weight
-                # elif sampling == "importance_nrs":
-                #                     # 1. 计算权重
-                #     eps = 1e-10
-                #     # p ∝ sqrt(proxy * a)
-                #     w = np.sqrt(remaining["proxy"].values * remaining["a"].values + eps)
-                #     w = np.nan_to_num(w, nan=0.0, posinf=0.0, neginf=0.0)
-                #     sum_w = w.sum()
-                #     probs = w / (sum_w if sum_w > 0 else 1e-12)
-                    
-                #     # 2. 确定采样量 (不能超过剩余总量)
-                #     n = min(n2_budget, len(remaining))
-                    
-                #     if n > 0:
-                #         # 3. 无放回采样
-                #         # 注意：如果权重的支撑集小于 n (即非零权重的个数 < n)，replace=False 会报错
-                #         # 需要做一个简单的容错：只在 prob > 0 的集合里采
-                #         valid_indices = np.where(probs > 0)[0]
-                #         if len(valid_indices) < n:
-                #             # 极端情况：非零样本不够采，直接全采非零的，剩下的随机补或忽略
-                #             # 简单处理：退化为全量 (Census)
-                #             sample_idx = valid_indices
-                #             n = len(valid_indices)
-                #         else:
-                #             rng = np.random.default_rng()
-                #             sample_idx = rng.choice(len(remaining), size=n, replace=False, p=probs)
-                        
-                #         # 4. 提取数据
-                #         add_sample = remaining.iloc[sample_idx].copy()
-                #         sample_probs = probs[sample_idx]
-                        
-                #         # 5. 计算包含概率 pi (近似)
-                #         # 无放回加权采样的 pi ≈ n * p_i
-                #         pi_vals = np.minimum(1.0, n * sample_probs)
-                        
-                #         # 6. Horvitz-Thompson 估计: sum( y_i / pi_i )
-                #         y_vals = add_sample["a"].values * add_sample["oracle"].values
-                #         estimate_terms = y_vals / (pi_vals + 1e-12)
-                #         T_hat_stage2 = np.sum(estimate_terms)
-                        
-                #         add_sample["pi"] = pi_vals # 用于外部统计
-                #     else:
-                #         T_hat_stage2 = 0.0
                 elif sampling == "importance_nrs":
                     # print('[check systematic sampling in second stage]')
                     # 1. 准备基础权重
@@ -806,7 +764,8 @@ class ProxyStratifiedSampler:
     # ----------------------------
     # 核心执行函数
     # ----------------------------
-    def run(self, stratify_mode: str = "proxy", sampling: str = "uniform", alloc_strategy: str = "neyman_pilot") -> Dict:
+    def run(self, stratify_mode: str = "proxy", sampling: str = "uniform", alloc_strategy: str = "neyman_pilot",
+            force_oracle: bool = False) -> Dict:
         """
         alloc_strategy: 
           - "neyman_pilot": 使用 Pilot 样本的方差估计 (原方法)
@@ -817,7 +776,31 @@ class ProxyStratifiedSampler:
             return {"T_hat": 0.0, "T_true": self.T_true, "Qerror": 0.0, "n_post": 0, "n_comment": 0} # +++ 返回 0 计数
         posts = self.posts.copy()
 
+        # ==========================================
+        # === [逻辑分支 1] 强制全量 Oracle (针对小数据集) ===
+        # ==========================================
+        if force_oracle:
+             # 不做分层，不做采样，直接计算总和
+             # 相当于对所有行都进行了 Oracle 检查
+             T_hat = (self.posts["a"] * self.posts["oracle"]).sum()
+             
+             # 计算 Qerror (如果 T_true 已知)
+             if self.T_true is not None and self.T_true != 0:
+                 Qerror = abs(T_hat - self.T_true) / self.T_true
+             else:
+                 Qerror = 0.0
+             
+             # 统计所有唯一节点 (全量开销)
+             n_post, n_comment = self._count_unique_nodes(self.posts)
+             
+             # 返回结果 (pi 设为 1.0 表示全采)
+             pi_stats = {"pi_min": 1.0, "pi_max": 1.0, "pi_mean": 1.0}
+             return {"T_hat": T_hat, "T_true": self.T_true, "Qerror": Qerror, 
+                     "n_post": n_post, "n_comment": n_comment, **pi_stats}
 
+        # ==========================================
+        # === [逻辑分支 2] 正常分层采样 ===
+        # ==========================================
 
         # 1. 预算划分
         N_total = int(math.floor(self.total_budget_frac * len(posts)))
@@ -968,7 +951,7 @@ class ProxyStratifiedSampler:
         return self.run(stratify_mode="cluster", sampling="importance_nrs", alloc_strategy="sqrt_wp")
 
     # 方法 11: POSSA 综合方法
-    def run_possa(self):
+    def run_possa(self, D_cnt: int = 100):
         """
         [综合方法] POSSA (Proxy Optimized Stratified Sampling Adaptive)
         策略切换逻辑：
@@ -982,12 +965,18 @@ class ProxyStratifiedSampler:
         - 分配: Sqrt_WP (Matched-IS)
         """
         # 这里的 self.total_budget_frac 是在外部循环中动态赋值的
+        current_N = len(self.posts)
+        if current_N < D_cnt:
+            # print(f"[Auto] Core size {current_N} < {D_cnt}, switching to Full Oracle.")
+            # 强制开启 force_oracle
+            return self.run(force_oracle=True)
         if self.total_budget_frac < 0.15:
-            # print(f"[POSSA] Budget={self.total_budget_frac:.2f} -> Mode: NRS (Without Replacement)")
+            print(f"[POSSA] Budget={self.total_budget_frac:.2f} -> Mode: NRS (Without Replacement)")
             return self.run_proxyE_alloc_sqrt_wp_nrs()
         else:
             # print(f"[POSSA] Budget={self.total_budget_frac:.2f} -> Mode: WR (With Replacement)")
             return self.run_proxyE_alloc_sqrt_wp()
+    
     def run_mab_sampling(self, K: int = 10, budget_frac: float = None, batch_size: int = 10, ucb_scale: float = 1.0):
         """
         基于多臂赌博机 (MAB) 的自适应分层采样。
@@ -2027,6 +2016,7 @@ def run_evaluation_for_query(
         "FOIS_nrs": sampler.run_baseline_proxy_a,
         "FOIS_rs": sampler.run_baseline_proxy_a_unbiased_test1,
         "POSS": sampler.run_proxyE_importance,
+        "POSSA": sampler.run_possa,
     }
 
     results = {}

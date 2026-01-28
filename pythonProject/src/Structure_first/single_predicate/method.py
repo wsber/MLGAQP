@@ -312,6 +312,7 @@ def evaluate_queries(
             "FOIS_nrs": sampler.run_baseline_proxy_a,
             "FOIS_rs": sampler.run_baseline_proxy_a_unbiased_test1,
             "POSS": sampler.run_proxyE_importance,
+            "POSSA": sampler.run_possa,
         }
 
         for mname, func in methods.items():
