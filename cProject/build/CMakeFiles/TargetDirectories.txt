@@ -1,0 +1,3 @@
+/home/wangshuo/projects/FaSTest-main/build/CMakeFiles/Fastest.dir
+/home/wangshuo/projects/FaSTest-main/build/CMakeFiles/edit_cache.dir
+/home/wangshuo/projects/FaSTest-main/build/CMakeFiles/rebuild_cache.dir

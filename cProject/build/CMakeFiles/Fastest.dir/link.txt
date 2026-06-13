@@ -1,0 +1,1 @@
+/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -std=c++20 -Ofast -g -Wl,--dependency-file=CMakeFiles/Fastest.dir/link.d "CMakeFiles/Fastest.dir/driver/subgraph-cardinality-estimation.cc.o" -o Fastest

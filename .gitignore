@@ -1,0 +1,13 @@
+# Python 缓存与虚拟环境
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# 忽略你之前提到的 Parler & Amazon 原始数据集、中间数据与大文件
+parler_data/
+amazon_data/
+datasets/
+*.csv
+*.json
