@@ -12,7 +12,7 @@ project_root = "/home/wangshuo/projects/Neo4j_Exp"
 if project_root not in sys.path:
     sys.path.append(project_root)
 
-from pythonProject.src.Structure_first.proxy_sample import ProxyStratifiedSampler
+from pythonProject.src.algorithms.proxy_sample import ProxyStratifiedSampler
 
 
 # 定义多谓词场景下 不同质量的 (Post Proxy, Comment Proxy) 对

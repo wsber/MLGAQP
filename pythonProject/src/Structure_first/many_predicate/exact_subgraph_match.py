@@ -14,8 +14,8 @@ if project_root not in sys.path:
     sys.path.append(project_root)
 from pythonProject.src.Structure_first.fastest_pipeline import FastestGraphConverter, FastestEstimateMerger
 from pythonProject.src.Structure_first.graph_sample import FastestRunner
-from pythonProject.src.Structure_first.precision_submatching import ExactSubgraphMatcher
-from pythonProject.src.Structure_first.proxy_sample import ProxyStratifiedSampler, compute_T_true
+from pythonProject.src.algorithms.precision_submatching import ExactSubgraphMatcher
+from pythonProject.src.algorithms.proxy_sample import ProxyStratifiedSampler, compute_T_true
 
 # 一级测试数据集
 # datasets_name = "parler_data"

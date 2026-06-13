@@ -10,7 +10,7 @@ project_root = "/home/wangshuo/projects/Neo4j_Exp"
 if project_root not in sys.path:
     sys.path.append(project_root)
 
-from pythonProject.src.Structure_first.proxy_sample import ProxyStratifiedSampler
+from pythonProject.src.algorithms.proxy_sample import ProxyStratifiedSampler
 from pythonProject.src.Structure_first.compute_truth import GroundTruthManager
 
 def _worker_process_single_file(
