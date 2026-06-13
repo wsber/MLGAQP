@@ -1,0 +1,2 @@
+dataset_name,method,agg_mode,num_queries,mean_are,avg_total_cost
+dataset_test,WO,avg,110,0.08471360766982331,3440.7454545454543
