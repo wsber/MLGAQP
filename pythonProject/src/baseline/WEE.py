@@ -10,7 +10,7 @@ project_root = "/home/wangshuo/projects/Neo4j_Exp"
 if project_root not in sys.path:
     sys.path.append(project_root)
 
-from pythonProject.src.algorithms.proxy_sample import ProxyStratifiedSampler
+from pythonProject.src.Structure_first.proxy_sample import ProxyStratifiedSampler
 from pythonProject.src.Structure_first.compute_truth import GroundTruthManager
 
 def _worker_process_single_file(
@@ -19,8 +19,9 @@ def _worker_process_single_file(
     all_T_true_results: dict,
     config: dict
 ):
-
-
+    """
+    [子进程工作函数] 处理单个文件，运行 FastestO 算法 (WO 基线) 并返回指标。
+    """
     if agg_file.startswith("aggregated_list_"):
         base = agg_file.replace("aggregated_list_", "")
     elif agg_file.startswith("aggregated_wide_"):
@@ -36,7 +37,8 @@ def _worker_process_single_file(
     filepath = os.path.join(aggregated_dir, agg_file)
 
     try:
-        
+        # WO 内部只计算 sum(estimateW * oracle), 由于 estimateW 在生成时
+        # 已经携带了 Upvotes（由Fastest输出），所以此处只需要对齐 T_true 即可正确计算 sum 的误差。
         sampler = ProxyStratifiedSampler(
             csv_path=filepath,
             is_multi_predicate=True,
@@ -50,7 +52,7 @@ def _worker_process_single_file(
         if sampler.posts.empty:
             return None
 
-        
+        # 运行基线 (Graph Only 意味着只经过 Fastest 图信息直接估算，对应你文章中的 WO)
         res = sampler.run_baseline_graph_only()
         
         return {
@@ -72,15 +74,15 @@ def evaluate_fastest_o_multi_predicate_dataset_fast(
     table1: str = "post",                 
     table2: str = "comment",              
     agg_mode: str = "count",   
-    sum_on: str = "post",       
-    sum_col: str = "upvotes",  
+    sum_on: str = "post",      
+    sum_col: str = "upvotes", 
     post_proxy_col: str = "ML1_proxy4b_probability",
     comment_proxy_col: str = "ML2_proxy1_probability",
     post_oracle_col: str = "ML1_oracle2_probability",
     comment_oracle_col: str = "ML2_oracle2_probability",
     max_workers: int = None
 ):
-  
+    
     print(f"\n{'='*10} Evaluation: FastestO (Graph Only - {agg_mode.upper()}) {'='*10}")
     
     # 1. 处理 Ground Truth 读取
@@ -99,7 +101,6 @@ def evaluate_fastest_o_multi_predicate_dataset_fast(
         safe_sum_col = str(sum_col).replace("/", "_").replace(":", "_")
         t_true_path = f"{base}_sum.json"
     else:
-        # count 尝试读有 count 后缀的，读不到退回默认
         t_true_path = f"{base}_count{ext}"
         if not os.path.exists(t_true_path):
             t_true_path = gt_manager.cache_path
@@ -112,7 +113,6 @@ def evaluate_fastest_o_multi_predicate_dataset_fast(
         print(f"[Error] 未能找到真值文件: {t_true_path}")
         return
 
-   
     base_path = f"/home/wangshuo/resource/datasets/{parent_dataset}/{dataset_name}"
     aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
     
@@ -127,7 +127,6 @@ def evaluate_fastest_o_multi_predicate_dataset_fast(
         "post_oracle": post_oracle_col, "comment_oracle": comment_oracle_col
     }
 
-    
     metrics = {"Qerror": [], "Oracle_Cost_Post": [], "Oracle_Cost_Comment": [], "Total_Cost": []}
     detailed_results_list = []
 
@@ -146,7 +145,7 @@ def evaluate_fastest_o_multi_predicate_dataset_fast(
                 metrics["Oracle_Cost_Comment"].append(result["n_comment"])
                 metrics["Total_Cost"].append(result["Total_Cost"])
 
-    
+
     if not metrics["Qerror"]: 
         print("[Warn] 无有效结果。")
         return
@@ -156,16 +155,15 @@ def evaluate_fastest_o_multi_predicate_dataset_fast(
     output_dir = os.path.join(base_path, "results", "efficiency")
     os.makedirs(output_dir, exist_ok=True)
     
-    
     suffix = "_sum" if agg_mode == "sum" else "_count"
     
     output_json = os.path.join(output_dir, f"WO{suffix}.json")
     try:
         with open(output_json, 'w') as f:
             json.dump(detailed_results_list, f, indent=4)
-        print(f"✅ 详细误差分析已保存至 (按误差降序): {output_json}")
+        print(f" 详细误差分析已保存至 (按误差降序): {output_json}")
     except Exception as e:
-        print(f"❌ 保存 JSON 失败: {e}")
+        print(f" 保存 JSON 失败: {e}")
 
     avg_qerror = np.mean(metrics["Qerror"])
     output_csv = os.path.join(output_dir, f"WO_summary_{suffix}.csv")
@@ -179,7 +177,7 @@ def evaluate_fastest_o_multi_predicate_dataset_fast(
     }])
     df_summary.to_csv(output_csv, mode='a', header=not os.path.exists(output_csv), index=False)
 
-    print(f"✅ 统计汇总已更新至: {output_csv}")
+    print(f"统计汇总已更新至: {output_csv}")
     print(f"Global Mean ARE ({agg_mode.upper()}): {avg_qerror:.6f}")
 
 if __name__ == "__main__":
@@ -197,7 +195,7 @@ if __name__ == "__main__":
         post_oracle_col="ML3_oracle2_probability",
         comment_oracle_col="ML2_oracle1_probability"
     )
-
+    
     # evaluate_fastest_o_multi_predicate_dataset_fast(
     #     dataset_name="dataset_test",  
     #     parent_dataset = "parler_data",  

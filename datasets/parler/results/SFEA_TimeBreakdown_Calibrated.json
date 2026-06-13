@@ -1,0 +1,39 @@
+{
+    "__TOTAL_SUM_SECONDS__": {
+        "SFEA": {
+            "exact_match_time": 6.302700000000001,
+            "oracle_call_time": 335819.718,
+            "total": 335826.0207
+        },
+        "Naive_10": {
+            "exact_match_time": 6.302700000000001,
+            "oracle_call_time": 7984.036278,
+            "total": 7990.338978
+        },
+        "FastestO_10": {
+            "graph_sampling_time": 1.96,
+            "oracle_call_time": 7984.036278,
+            "total": 7985.996278
+        },
+        "POSS": {
+            "0.01": {
+                "graph_sampling_time": 2.0,
+                "proxy_call_time": 7913.2902779999995,
+                "oracle_call_time": 7.02,
+                "total": 7922.310278
+            },
+            "0.05": {
+                "graph_sampling_time": 2.0,
+                "proxy_call_time": 7913.2902779999995,
+                "oracle_call_time": 35.334,
+                "total": 7950.624277999999
+            },
+            "0.1": {
+                "graph_sampling_time": 2.0,
+                "proxy_call_time": 7913.2902779999995,
+                "oracle_call_time": 70.746,
+                "total": 7986.036278
+            }
+        }
+    }
+}
