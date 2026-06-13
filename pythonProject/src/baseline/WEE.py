@@ -11,7 +11,7 @@ if project_root not in sys.path:
     sys.path.append(project_root)
 
 from pythonProject.src.Structure_first.proxy_sample import ProxyStratifiedSampler
-from pythonProject.src.Structure_first.compute_truth import GroundTruthManager
+from pythonProject.src.algorithms.compute_truth import GroundTruthManager
 
 def _worker_process_single_file(
     agg_file: str,

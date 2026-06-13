@@ -90,13 +90,13 @@ class GroundTruthManager:
             raise ValueError("agg_mode 只能是 'count' 或 'sum'")
 
         if os.path.exists(cache_path):
-            print(f"✅ 找到 T_true 缓存文件: {cache_path}")
+            print(f"   找到 T_true 缓存文件: {cache_path}")
             with open(cache_path, "r") as f:
                 all_T_true_results = json.load(f)
             print("已从缓存加载 T_true 数据。")
             return all_T_true_results
 
-        print(f"⚠️ 未找到 T_true 缓存文件，开始计算... (agg_mode={agg_mode})")
+        print(f"    未找到 T_true 缓存文件，开始计算... (agg_mode={agg_mode})")
         all_T_true_results = {}
         if os.path.exists(cache_path):
             try:
@@ -104,13 +104,13 @@ class GroundTruthManager:
                     loaded = json.load(f)
                 if isinstance(loaded, dict):
                     all_T_true_results = loaded
-                    print(f"✅ 检测到已有缓存，断点续跑: {cache_path} (已完成 {len(all_T_true_results)} 条)")
+                    print(f"   检测到已有缓存，断点续跑: {cache_path} (已完成 {len(all_T_true_results)} 条)")
                 else:
                     print(f"[警告] 缓存文件格式异常，将重新计算: {cache_path}")
             except Exception as e:
                 print(f"[警告] 读取缓存失败，将重新计算。原因: {e}")
         else:
-            print(f"⚠️ 未找到 T_true 缓存文件，开始计算... (agg_mode={agg_mode})")
+            print(f"    未找到 T_true 缓存文件，开始计算... (agg_mode={agg_mode})")
 
         try:
             with open(self.core_config_path, "r") as f:
@@ -162,7 +162,7 @@ class GroundTruthManager:
 
         print(f"\n--- T_true 计算完成，结果汇总 ---")
         print(json.dumps(all_T_true_results, indent=4, ensure_ascii=False))
-        print(f"✅ T_true 已增量缓存到: {cache_path}")
+        print(f"   T_true 已增量缓存到: {cache_path}")
 
         return all_T_true_results
 
@@ -267,49 +267,7 @@ class GroundTruthManager:
             else:
                 raise ValueError(f"sum_on 只能是 '{self.table1}' 或 '{self.table2}'")
         return {"idmap": idmap_df, "oracle_source": oracle_source, "value_source": value_source}
-        # comment_cols = comment_df.collect_schema().names()
-        # if self.comment_oracle_col in comment_cols:
-        #     comment_prob_expr = pl.col(self.comment_oracle_col)
-        # else:
-        #     print(f"[警告] comment.csv 缺少列 '{self.comment_oracle_col}'，该表的 oracle_prob 将全部填 0。")
-        #     comment_prob_expr = pl.lit(0.0)
 
-        # comment_df = comment_df.select(
-        #     pl.col("id:ID").alias("orig_id"),
-        #     comment_prob_expr.cast(pl.Float64).fill_null(0.0).alias("oracle_prob")
-        # ).with_columns(pl.lit("comment").alias("type"))
-
-        # oracle_source = pl.concat([post_df, comment_df])
-
-        # value_source = None
-        # agg_mode = str(agg_mode).lower()
-        # if agg_mode == "sum":
-        #     if sum_on is None or sum_col is None:
-        #         raise ValueError("agg_mode='sum' 需要 sum_on 和 sum_col")
-        #     sum_on = str(sum_on).lower()
-        #     if sum_on == "post":
-        #         if sum_col not in post_cols:
-        #             raise ValueError(f"post.csv 不存在列 '{sum_col}'")
-        #         value_source = (
-        #             post_raw.select(
-        #                 pl.col("id:ID").alias("orig_id"),
-        #                 pl.col(sum_col).cast(pl.Float64).fill_null(0.0).alias("sum_value")
-        #             ).with_columns(pl.lit("post").alias("type"))
-        #         )
-        #     elif sum_on == "comment":
-        #         if sum_col not in comment_cols:
-        #             raise ValueError(f"comment.csv 不存在列 '{sum_col}'")
-        #         value_source = (
-        #             comment_raw.select(
-        #                 pl.col("id:ID").alias("orig_id"),
-        #                 pl.col(sum_col).cast(pl.Float64).fill_null(0.0).alias("sum_value")
-        #             ).with_columns(pl.lit("comment").alias("type"))
-        #         )
-        #     else:
-        #         raise ValueError("sum_on 只能是 'post' 或 'comment'")
-        # print("已成功预加载 id_mapping, post, 和 comment 数据。")
-        # return {"idmap": idmap_df, "oracle_source": oracle_source, "value_source": value_source}
-    
     
     def _compute_multi_predicate_polars(self, gt_path: str, core_nodes_config: Dict, source_data: Dict,
                                     prob_threshold: float = 0.5,
@@ -389,7 +347,7 @@ class GroundTruthManager:
         if agg_mode == "count":
             result = valid_matches.select(pl.len()).collect()
             T_true = result[0, 0] if result is not None and not result.is_empty() else 0.0
-            print(f"✅ 计算完成: T_true(count) for '{query_basename}' = {T_true}")
+            print(f"   计算完成: T_true(count) for '{query_basename}' = {T_true}")
             return float(T_true)
 
         if agg_mode == "sum":
@@ -404,7 +362,7 @@ class GroundTruthManager:
             # )
             # result = joined.select( pl.col("sum_value").fill_null(0.0).sum()).collect()
             # T_true = result[0, 0] if result is not None and not result.is_empty() else 0.0
-            # print(f"✅ 计算完成: T_true(sum) for '{query_basename}' = {T_true}")
+            # print(f"   计算完成: T_true(sum) for '{query_basename}' = {T_true}")
             # return float(T_true)
             total_sum = 0.0
             for col in sum_match_cols:
@@ -424,7 +382,7 @@ class GroundTruthManager:
                     total_sum += float(result[0, 0])
 
             T_true = total_sum
-            print(f"✅ 计算完成: T_true(sum) for '{query_basename}' = {T_true}")
+            print(f"   计算完成: T_true(sum) for '{query_basename}' = {T_true}")
             return float(T_true)
 
         raise ValueError("agg_mode 只能是 'count' 或 'sum'")
@@ -447,7 +405,7 @@ class GroundTruthManager:
         post_df["st_truth"] = post_df["st_truth"].fillna(0)
         post_df["oracle"] = (post_df[prob_col] > prob_threshold).astype(int)
         T_true = (post_df["st_truth"] * post_df["oracle"]).sum()
-        print(f"✅ Pandas 计算完成: T_true = {T_true:.3f}")
+        print(f"   Pandas 计算完成: T_true = {T_true:.3f}")
         return T_true
 
     def compute_single_predicate_polars(self, gt_path: str, gt_match_col: str = "u1",
@@ -469,7 +427,7 @@ class GroundTruthManager:
             .with_columns((pl.col("st_truth") * pl.col("oracle")).alias("true_contrib"))
         result = final_lazy_df.select(pl.sum("true_contrib").alias("T_true")).collect()
         T_true_value = result["T_true"][0] if result is not None and len(result) > 0 else 0.0
-        print(f"✅ Polars 计算完成: T_true = {T_true_value:.3f}")
+        print(f"   Polars 计算完成: T_true = {T_true_value:.3f}")
         return T_true_value
 
     def save_all_filtered_matches(self, output_dir_name: str = "filtered_structure_result") -> None:
@@ -522,7 +480,7 @@ class GroundTruthManager:
         # tqdm.write(f"正在处理: {query_basename}") # 如果觉得日志太多，可以注释掉这行
         
         if query_basename not in core_nodes_config:
-            tqdm.write(f"⚠️ 配置中未找到 {query_basename}，跳过。")
+            tqdm.write(f"    配置中未找到 {query_basename}，跳过。")
             return
 
         query_config = core_nodes_config[query_basename]
@@ -530,7 +488,7 @@ class GroundTruthManager:
         core_node_cols = [f"u{vid}" for label, vids in query_config_int_labels.items() for vid in vids]
         
         if not core_node_cols:
-            tqdm.write(f"⚠️ {query_basename} 没有核心节点，跳过。")
+            tqdm.write(f"    {query_basename} 没有核心节点，跳过。")
             return
 
         try:

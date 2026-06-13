@@ -7,7 +7,7 @@ from tqdm import tqdm
 project_root = "/home/wangshuo/projects/Neo4j_Exp"
 if project_root not in sys.path:
     sys.path.append(project_root)
-from pythonProject.src.Structure_first.compute_truth import GroundTruthManager
+from pythonProject.src.algorithms.compute_truth import GroundTruthManager
 
 # ==========================================
 # 1. 用户配置区 (按需修改)
