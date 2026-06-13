@@ -14,6 +14,8 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import Dict, List
 from pythonProject.src.Structure_first.compute_truth import GroundTruthManager
 from scipy.stats import norm
+from tqdm import tqdm
+
 
 class ProxyStratifiedSampler:
 
@@ -144,20 +146,17 @@ class ProxyStratifiedSampler:
         return instances[final_cols]
 
     def _count_unique_nodes(self, sampled_df: pd.DataFrame) -> Tuple[int, int]:
-        """
-        统计采样结果中唯一的 Post ID 和 Comment ID 数量。
-        """
+      
         if sampled_df.empty: return 0, 0
 
-        # 只有多谓词模式（有 post_ids 列）才进行 ID 统计
+        
         if 'post_ids' not in sampled_df.columns:
-            # 单谓词模式简单处理：假设每一行是一个独立节点（或根据 id:ID 去重）
             return len(sampled_df), 0
 
         unique_posts = set()
         unique_comments = set()
 
-        # 遍历采样到的每一个实例，将其中包含的节点 ID 加入集合去重
+        
         for ids in sampled_df['post_ids']:
             if isinstance(ids, list): unique_posts.update(ids)
 
@@ -251,9 +250,7 @@ class ProxyStratifiedSampler:
         out["oracle"] = np.array(oracle_vals, dtype=int)
         return out, post_calls, comment_calls
 
-    # ----------------------------
-    # 数据预处理
-    # ----------------------------
+
     @staticmethod
     def prepare_posts(df: pd.DataFrame, proxy_model: str,oracle_model: str) -> pd.DataFrame:
         df = df.copy()
@@ -273,9 +270,7 @@ class ProxyStratifiedSampler:
         posts = posts[posts["a"] > 0].reset_index(drop=True)
         return posts
 
-    # ----------------------------
-    # 分层方法
-    # ----------------------------
+
     @staticmethod
     def stratify_by_proxy(posts: pd.DataFrame, K: int) -> pd.DataFrame:
         try:
@@ -297,41 +292,28 @@ class ProxyStratifiedSampler:
 
     @staticmethod
     def stratify_by_clustering_1d(posts: pd.DataFrame, K: int) -> pd.DataFrame:
-        """
-        基于 K-Means 的 1D 聚类分层。
-        特征：sqrt(proxy * a) —— 这是针对方差最小化的最佳变换。
-        """
-        # 1. 构造特征 (使用 sqrt(p*a) 以近似最佳分层边界)
-        # 加上 1e-12 防止 log(0) 或其他数值问题，虽然 sqrt 不怕 0
+
         feature = np.sqrt(posts["proxy"] * posts["a"]).values.reshape(-1, 1)
         
-        # 2. 处理 K=1 或 样本过少的情况
+        
         N = len(posts)
         if K <= 1 or N < K:
             posts["stratum"] = 0
             return posts
 
-        # 3. 执行 K-Means
-        # n_init='auto' 在 sklearn 新版中是默认值，为了兼容性可显式设置
+        
         kmeans = KMeans(n_clusters=K, random_state=42, n_init=10)
         labels = kmeans.fit_predict(feature)
         
-        # 4. 【关键步骤】标签重排序
-        # K-Means 的 label 0 不一定是最小的。我们需要按中心点大小排序。
+        
         centers = kmeans.cluster_centers_.flatten()
-        # argsort 返回的是：从小到大的中心点对应的原始 label 索引
+        
         sorted_indices = np.argsort(centers)
         
-        # 创建映射字典: 旧 label -> 新 label (0=最小, K-1=最大)
-        # 例如: centers=[100, 1, 50] -> sorted_indices=[1, 2, 0]
-        # map: {1:0, 2:1, 0:2}
+       
         label_map = {old_lbl: new_lbl for new_lbl, old_lbl in enumerate(sorted_indices)}
         
-        # 应用映射
-        # 使用 numpy 向量化操作加速映射
-        # 也就是：labels_new[i] = label_map[labels[i]]
-        # 既然 label_map 是 0..K-1 的置换，可以用数组索引代替字典查找
-        # 构建一个 lookup table
+    
         lookup = np.zeros(K, dtype=int)
         for old, new in label_map.items():
             lookup[old] = new
@@ -340,9 +322,7 @@ class ProxyStratifiedSampler:
         
         return posts
     
-    # ----------------------------
-    # Pilot 方法 ----> form
-    # ---------------------------
+
     @staticmethod
     def allocate_pilot_budget(stats: Dict[int, dict], N1_total: int, min_per_stratum: int = 1) -> Dict[int, int]:
         if N1_total <= 0:
@@ -364,9 +344,7 @@ class ProxyStratifiedSampler:
             alloc[k] = max(min_per_stratum, alloc[k])
         return alloc
 
-    # ----------------------------
-    # Pilot 采样与统计 (修改版)
-    # ----------------------------
+
     def pilot_stats(
             self,
             posts: pd.DataFrame,
@@ -375,11 +353,7 @@ class ProxyStratifiedSampler:
             oracle_cache: Dict = None,
             oracle_counter: Dict[str, int] = None
     ):
-        """
-        pilot_sampling_method:
-            "uniform" —— 原逻辑，层内均匀采样
-            "importance" —— 按 sqrt(proxy * a) 做近似重要性采样（无放回）
-        """
+
         stats, pilots = {}, {}
         if oracle_cache is None:
             oracle_cache = {}
@@ -395,13 +369,9 @@ class ProxyStratifiedSampler:
                 pilots[k] = pd.DataFrame(columns=posts.columns)
                 continue
 
-            # ========================================================
-            # 第一阶段采样方式选择：uniform 或 importance
-            # ========================================================
+       
             if pilot_sampling_method == "uniform":
-                # -----------------------
-                # 层内均匀采样（你原来的逻辑）
-                # -----------------------
+       
                 sample = grp.sample(
                     n1,
                     replace=False,
@@ -409,15 +379,13 @@ class ProxyStratifiedSampler:
                 ).copy()
 
             elif pilot_sampling_method == "importance":
-                # -----------------------------------------------
-                # 层内重要性采样（无放回），权重 ∝ sqrt(proxy * a)
-                # -----------------------------------------------
+                
                 print('[check importance sampling in pilot stage]')
                 eps = 1e-8
                 imp_weights = np.sqrt((grp["proxy"] * grp["a"]).clip(lower=0)) + eps
                 prob = imp_weights / imp_weights.sum()
 
-                # 近似无偏的无放回重要性采样（抽样比例小可视为无偏）
+               
                 sample_indices = np.random.choice(
                     grp.index,
                     size=n1,
@@ -433,9 +401,7 @@ class ProxyStratifiedSampler:
             oracle_counter["post"] += cp
             oracle_counter["comment"] += cc
 
-            # ========================================================
-            # 计算 pilot 阶段的估计量（与采样方式无关）
-            # ========================================================
+            
             sample["Y"] = sample["a"] * sample["oracle"]
 
             W_k_sample = sample["a"].sum()
@@ -459,14 +425,11 @@ class ProxyStratifiedSampler:
 
     @staticmethod
     def allocate_second_stage_heuristic(posts: pd.DataFrame, N2: int, strategy: str = "root_wp") -> Dict[int, int]:
-        """
-        根据全局的 proxy 和 a (weight) 直接计算分配权重，并带有【溢出重分配】机制。
-        确保预算绝对不浪费！
-        """
+        
         alloc_weights = {}
         stratum_sizes = {}
         
-        # 1. 计算每层的权重和库存上限
+        
         for k, grp in posts.groupby("stratum"):
             stratum_sizes[k] = len(grp)
             if grp.empty:
@@ -494,24 +457,24 @@ class ProxyStratifiedSampler:
             
             alloc_weights[k] = w_h
 
-        # 极端情况：总预算大于等于总数据量，全部分配
+        
         total_population = sum(stratum_sizes.values())
         if N2 >= total_population:
             return stratum_sizes.copy()
 
-        # 2. 水溢出分配算法 (Water-filling allocation)
+        
         final_alloc = {k: 0 for k in alloc_weights}
         remaining_budget = N2
         
-        # 活跃层：那些还没达到库存上限的层
+        
         active_strata = set(k for k in alloc_weights if stratum_sizes[k] > 0)
 
-        # 循环分配，直到预算花光或所有层都满了
+        
         while remaining_budget > 0 and active_strata:
             current_total_w = sum(alloc_weights[k] for k in active_strata)
             
             if current_total_w <= 0:
-                # 权重都为0了，但还有预算，直接在活跃层里均分
+               
                 chunk = remaining_budget // len(active_strata)
                 chunk = max(1, chunk)
                 for k in list(active_strata):
@@ -524,12 +487,12 @@ class ProxyStratifiedSampler:
                         break
                 continue
 
-            # 按比例计算理论应分名额 (浮点数)
+            
             tentative = {}
             for k in active_strata:
                 tentative[k] = remaining_budget * (alloc_weights[k] / current_total_w)
                 
-            # 第一轮：分配整数部分，且不能超过该层剩余库存
+            
             assigned_this_round = 0
             for k in list(active_strata):
                 add = int(math.floor(tentative[k]))
@@ -542,9 +505,9 @@ class ProxyStratifiedSampler:
                     if final_alloc[k] == stratum_sizes[k]:
                         active_strata.remove(k)
             
-            # 第二轮：如果大家整数部分都为0，靠小数部分残差来分发 1 个名额
+            
             if assigned_this_round == 0 and remaining_budget > 0 and active_strata:
-                # 按照小数部分的残余大小排序，优先给残余大的
+                
                 remainders = {k: tentative[k] - math.floor(tentative[k]) for k in active_strata}
                 sorted_k = sorted(remainders.keys(), key=lambda x: remainders[x], reverse=True)
                 
@@ -559,10 +522,7 @@ class ProxyStratifiedSampler:
         return final_alloc
 
 
-    # ----------------------------
-    # 第二阶段分配
-    # ----------------------------
-    # V1.0
+
     @staticmethod
     def allocate_second_stage(stats: Dict[int, dict], N2: int) -> Dict[int, int]:
         weights = {k: math.sqrt(max(1e-12, st["p_hat"]) * max(1e-12, st["sigma_hat"])) for k, st in stats.items()}
@@ -570,7 +530,7 @@ class ProxyStratifiedSampler:
         alloc = {k: max(1, int(N2 * weights[k] / total_w)) for k in stats}
         return alloc
 
-   # 重要性采样有/无放回抽样 + 预算去重优化
+
     def second_stage_and_estimate(
             self,
             posts: pd.DataFrame,
@@ -580,77 +540,67 @@ class ProxyStratifiedSampler:
             oracle_cache: Dict = None,
             oracle_counter: Dict[str, int] = None
     ) -> Dict:
-        """
-        Stage 2 采样。
-        修改：如果是 'importance' 采样，使用有放回 / 无放回 + 预算去重优化，以保证无偏性并减小方差。
-        """
+       
         combined = {}
         summaries = {}
         all_sampled_frames = []
-        # print('[WS check second stage sampling unbaised]')
+        
         if oracle_cache is None:
             oracle_cache = {}
         if oracle_counter is None:
             oracle_counter = {"post": 0, "comment": 0}
 
         for k, grp in posts.groupby("stratum"):
-            # 1. 准备 Pilot 数据
+           
             pilot = pilots.get(k, pd.DataFrame(columns=posts.columns))
             if not pilot.empty:
-                pilot = pilot.copy() # 避免 SettingWithCopyWarning
+                pilot = pilot.copy() 
                 pilot, cp, cc = self._materialize_oracle_for_sample(pilot, oracle_cache)
                 oracle_counter["post"] += cp
                 oracle_counter["comment"] += cc
                 N_h = len(grp)
                 n_pilot = len(pilot)
-                # Pilot 是层内均匀无放回采样
+               
                 pilot_pi = n_pilot / N_h if N_h > 0 else 0
                 pilot["pi"] = pilot_pi
             pilot_ids = set(pilot["id:ID"].tolist()) if not pilot.empty else set()
             
-            # 2. 准备剩余集合 (Remaining)用于 Stage 2
-            # 逻辑：Stage 2 补充采样，不应该与 Pilot 重复。
-            # 严格双阶段独立采样：Stage 2 应该在由 Remaining 组成的总集中独立采样。
+            
             remaining = grp[~grp["id:ID"].isin(pilot_ids)]
-            n2_budget = alloc.get(k, 0) # 这是分配给 Stage 2 的物理预算 (Unique Count)
+            n2_budget = alloc.get(k, 0) 
 
             add_sample = pd.DataFrame()
             T_hat_stage2 = 0.0
             
-            # 如果没有预算或没有数据，Stage 2 贡献为 0
+           
             if n2_budget > 0 and not remaining.empty:
                 if sampling == "uniform":
-                    # 均匀采样保持原样 (简单随机无放回是无偏的，只要用 N/n 加权)
+                   
                     actual_n2 = min(n2_budget, len(remaining))
                     add_sample = remaining.sample(actual_n2, replace=False)
-                    # HT 权重 = N_rem / n2
+                   
                     weight = len(remaining) / actual_n2
                     
-                    # 暂存 pi 以兼容旧逻辑 (均匀采样下 pi = 1/weight)
+                    
                     add_sample["pi"] = 1.0 / weight
                     if not add_sample.empty:
                         add_sample, cp, cc = self._materialize_oracle_for_sample(add_sample, oracle_cache)
                         oracle_counter["post"] += cp
                         oracle_counter["comment"] += cc
-                    # 计算 HT 估计值
+                   
                     add_sample["Y"] = add_sample["a"] * add_sample["oracle"]
                     T_hat_stage2 = add_sample["Y"].sum() * weight
                 elif sampling == "importance_nrs":
-                    # print('[check systematic sampling in second stage]')
-                    # 1. 准备基础权重
+                    
                     eps = 1e-10
                     w = np.sqrt(remaining["proxy"].values * remaining["a"].values + eps)
                     w = np.nan_to_num(w, nan=0.0, posinf=0.0, neginf=0.0)
                     
-                    # 2. 确定采样预算 n
+                    
                     n_target = min(n2_budget, len(remaining))
                     
                     if n_target > 0:
-                        # ========================================================
-                        # [核心修复]: 递归截断重分配算法 (Tillé's adjustment)
-                        # 确保所有样本的 pi <= 1.0，且 sum(pi) 严格等于 n_target
-                        # 从而完美利用所有物理预算！
-                        # ========================================================
+                       
                         pi_vals = np.zeros(len(remaining))
                         idx_pool = np.arange(len(remaining))
                         w_pool = w.copy()
@@ -659,26 +609,26 @@ class ProxyStratifiedSampler:
                         while True:
                             sum_w = w_pool.sum()
                             if sum_w <= 0:
-                                # 权重全0，剩余预算均匀分配
+                                
                                 if len(idx_pool) > 0:
                                     pi_vals[idx_pool] = rem_n / len(idx_pool)
                                 break
                             
-                            # 尝试分配当前概率
+                           
                             temp_pi = rem_n * (w_pool / sum_w)
-                            # 找出超出 1.0 的“必抽单元”
+                            
                             certain_mask = temp_pi >= (1.0 - 1e-9)
                             
                             if not np.any(certain_mask):
-                                # 没有单元超标，分配结束
+                                
                                 pi_vals[idx_pool] = temp_pi
                                 break
                                 
-                            # 强行截断为 1.0
+                            
                             certain_idx = idx_pool[certain_mask]
                             pi_vals[certain_idx] = 1.0
                             
-                            # 更新剩余预算和池子
+                           
                             rem_n -= np.sum(certain_mask)
                             idx_pool = idx_pool[~certain_mask]
                             w_pool = w_pool[~certain_mask]
@@ -686,45 +636,40 @@ class ProxyStratifiedSampler:
                             if rem_n <= 1e-9 or len(idx_pool) == 0:
                                 break
 
-                        # 此时 pi_vals 是严格满足 <=1.0 且 sum(pi) == n_target 的真实包含概率
-                        # ========================================================
-
-                        # === 系统采样 (Systematic Sampling) ===
+                        
                         rng = np.random.default_rng()
                         perm_indices = rng.permutation(len(remaining))
                         
-                        # 按打乱后的顺序排列真实概率
+                        
                         perm_pi = pi_vals[perm_indices]
                         
-                        # 构建累积分布 (数轴)
-                        cumsum = np.cumsum(perm_pi)
-                        total_length = cumsum[-1] # 这里严格等于 n_target
                         
-                        # 生成采样点 (Fixed Interval = 1.0)
+                        cumsum = np.cumsum(perm_pi)
+                        total_length = cumsum[-1] 
+                        
+                        
                         u = rng.uniform(0, 1)
                         sample_points = np.arange(u, total_length, 1.0)
                         
-                        # 确定被选中的区间索引
+                        
                         selected_positions = np.searchsorted(cumsum, sample_points)
                         selected_positions = np.clip(selected_positions, 0, len(remaining) - 1)
                         
-                        # 映射回原始索引
-                        # 因为现在所有 pi <= 1.0，理论上 selected_positions 不会有重复
-                        # 但为了防止浮点误差，保留 unique 安全
+                        
                         sampled_perm_indices = np.unique(selected_positions)
                         final_sample_idx = perm_indices[sampled_perm_indices]
                         
-                        # === 提取数据与无偏估计 ===
+                        
                         add_sample = remaining.iloc[final_sample_idx].copy()
                         if not add_sample.empty:
                             add_sample, cp, cc = self._materialize_oracle_for_sample(add_sample, oracle_cache)
                             oracle_counter["post"] += cp
                             oracle_counter["comment"] += cc
                             
-                        # 获取这些样本的包含概率 (作为分母)
+                        
                         pi_used = pi_vals[final_sample_idx]
                         
-                        # Horvitz-Thompson 估计: sum( y_i / pi_i )
+                        
                         y_vals = add_sample["a"].values * add_sample["oracle"].values
                         estimate_terms = y_vals / (pi_used + 1e-12)
                         T_hat_stage2 = np.sum(estimate_terms)
@@ -734,11 +679,7 @@ class ProxyStratifiedSampler:
                     else:
                         T_hat_stage2 = 0.0
                 
-                else:  # importance sampling
-                    # --- 【关键修改】有放回 + 预算优化 ---
-                    
-                    # 1. 计算分布
-                    # weights = sqrt(proxy * a) 推荐
+                else: 
                     w = np.sqrt(remaining["proxy"].values * remaining["a"].values + 1e-10)
                     sum_w = w.sum()
                     if sum_w == 0:
@@ -746,41 +687,37 @@ class ProxyStratifiedSampler:
                     else:
                         probs = w / sum_w
 
-                    # 2. 循环采样 (有放回)
+                    
                     rng = np.random.default_rng()
                     unique_indices = set()
                     sampled_indices = [] # 记录所有 trial
                     
-                    # 批量采样优化
-                    # 初始批量稍微大一点，假设有一半是新的
+                   
                     batch_size = max(50, int(n2_budget * 1.5))
                     
                     while len(unique_indices) < n2_budget:
-                        # 还需要多少个 unique
+                       
                         needed = n2_budget - len(unique_indices)
                         curr_batch = max(needed, 50)
                         
-                        # 有放回抽取
+                        
                         raw_idx = rng.choice(len(remaining), size=curr_batch, replace=True, p=probs)
                         
                         for idx in raw_idx:
-                            # 预算逻辑：只对新样本扣费
+                           
                             if idx not in unique_indices:
                                 if len(unique_indices) >= n2_budget:
                                     break # 预算满，该样本不能算入
                                 unique_indices.add(idx)
                             
-                            # 统计逻辑：所有试(Trial)都算 (Hansen-Hurwitz)
-                            # 只要预算没被截断，这个样本就是有效的统计点
+                           
                             sampled_indices.append(idx)
                         
-                        # 这次循环如果预算满了 break 出去的，最外层 while 也会检测到并退出
                         
-                        # 简单防死循环 (如剩余权重全为0或仅剩极少有效样本)
                         if len(sampled_indices) > n2_budget * 200 and len(unique_indices) < n2_budget:
                             break
 
-                    # 3. 构造样本 DataFrame (包含重复行)
+                   
                     add_sample = remaining.iloc[sampled_indices].copy()
                     if not add_sample.empty:
                         add_sample, cp, cc = self._materialize_oracle_for_sample(add_sample, oracle_cache)
@@ -788,40 +725,32 @@ class ProxyStratifiedSampler:
                         oracle_counter["comment"] += cc
                     sample_probs = probs[sampled_indices]
                     
-                    # 4. 计算 Hansen-Hurwitz 估计量 (仅针对 Remaining 部分！)
-                    # (1/n) * sum( y_i / p_i )
+                  
                     Y_vals = add_sample["a"].values * add_sample["oracle"].values
                     n_trials = len(sampled_indices)
                     
                     if n_trials > 0:
-                        # 这是对 "Remaining集合总值" 的估计
+                       
                         T_hat_stage2 = np.sum(Y_vals / sample_probs) / n_trials
                     else:
                         T_hat_stage2 = 0.0
                     
-                    # 为了兼容后续可能的 pi 访问 (虽然 HH 不需要 pi)
+                    
                     add_sample["pi"] = 1.0 
 
-            # ==========================================
-            # 合并估计结果 (Stratified Estimator)
-            # Total = Total_Pilot + Total_Stage2
-            # ==========================================
-            
-            # 1. Pilot 部分的贡献 (Census of Pilot samples)
-            # Pilot 是无放回采的，且我们后续不回采，所以它也是这一层总量的一部分
+           
             Y_pilot_sum = 0.0
             if not pilot.empty:
-                # 确保计算正确
+                
                 pilot["Y"] = pilot["a"] * pilot["oracle"]
                 Y_pilot_sum = pilot["Y"].sum()
                 
-            # 2. 层总估计
+            
             T_hat_k = Y_pilot_sum + T_hat_stage2
             
             summaries[k] = {"T_hat": T_hat_k}
             
-            # 3. 合并样本数据用于返回 (只用于分析，不用于重算 T_hat)
-            # 注意：add_sample 可能包含重复行，这对于后续分析 (unique nodes) 没问题，会自动去重
+            
             final = pd.concat([pilot, add_sample], ignore_index=True, sort=False)
             if "pi" in final.columns:
                 final["pi"] = final["pi"].fillna(0.0)
@@ -829,11 +758,11 @@ class ProxyStratifiedSampler:
             combined[k] = final
             all_sampled_frames.append(final)
 
-        # 汇总所有层
+       
         T_hat = sum(v["T_hat"] for v in summaries.values())
         full_sample = pd.concat(all_sampled_frames) if all_sampled_frames else pd.DataFrame()
         
-        # return {"T_hat": T_hat, "full_sample": full_sample}
+       
         return {
             "T_hat": T_hat,
             "full_sample": full_sample,
@@ -841,9 +770,7 @@ class ProxyStratifiedSampler:
             "oracle_calls_comment": int(oracle_counter["comment"])
         }
 
-    # ==========================================================
-    # === 🧩 公平消融实验基线：通用无放回采样引擎 (NRS) ===
-    # ==========================================================
+   
     
     def _run_generic_unstratified_nrs(self, weights: np.ndarray, budget_frac: float) -> Dict:
         """
@@ -937,9 +864,6 @@ class ProxyStratifiedSampler:
         }
 
 
-    # ----------------------------
-    # 核心执行函数
-    # ----------------------------
     def run(self, stratify_mode: str = "proxy", sampling: str = "uniform", alloc_strategy: str = "neyman_pilot",
             force_oracle: bool = False) -> Dict:
         """
@@ -1307,14 +1231,6 @@ class ProxyStratifiedSampler:
             else:
                 state["std"] = state["mean"]
                 
-    # ==========================================================
-    # === 🧩 四种基线方法（Uniform / sqrt(Proxy) / sqrt(Proxy×a) /a * sqrt(proxy)===
-    # ==========================================================
-
-   
-    # ==========================================================
-    # === 🧩 具体的消融基线方法 (UN, PO, WO) ===
-    # ==========================================================
 
     def run_baseline_uniform(self):
         """UN: 均匀采样 (等概率无放回)"""
@@ -1349,9 +1265,6 @@ class ProxyStratifiedSampler:
         # weights = posts["proxy"].values * posts["a"].values + eps
         weights = np.nan_to_num(weights, nan=0.0, posinf=0.0, neginf=0.0)
         probs = weights / (weights.sum() or 1e-12)
-        # --- 输出统计 ---
-        # print(f"[Proxy×A] weights: min={weights.min():.6f}, max={weights.max():.6f}, mean={weights.mean():.6f}")
-        # print(f"[Proxy×A] probs  : min={probs.min():.6f},  max={probs.max():.6f},  mean={probs.mean():.6f}")
 
         rng = np.random.default_rng(np.random.randint(1 << 30))
         sample_idx = rng.choice(N, size=n, replace=False, p=probs)
@@ -1462,9 +1375,6 @@ class ProxyStratifiedSampler:
         return {"T_hat": T_hat, "T_true": self.T_true, "Qerror": Qerror, "n_post": n_post, "n_comment": n_comment}
 
 
-    # ==========================================================
-    # === 🧩 主基线1（Fastest估计节点或核心集的频率 + Oralce） ===
-    # ==========================================================
 
     def run_baseline_graph_only(self):
         """
@@ -1659,9 +1569,7 @@ class ProxyStratifiedSampler:
             # 这里我们直接计算 "单次采样变量" 的值：Z_raw = y / p
             z_vals = y_vals / pi_vals
             
-            # --- 【核心优化】Winsorization (缩尾) ---
-            # 针对重要性采样常见的长尾分布，裁剪掉顶部 1% 如果样本够多
-            # 只有当样本量 > 20 时才做，否则数据太少不安全
+          
             if n_h > 20:
                 # 只对右侧长尾 (极大值) 感兴趣，左侧是 0 不用管
                 # limits=[0, 0.05] 表示保留左边所有，把右边最大的 5% 替换为第 95% 分位数
@@ -1670,12 +1578,7 @@ class ProxyStratifiedSampler:
             # 计算样本方差 S^2
             var_z = np.var(z_vals, ddof=1)
             
-            # 估计量的方差: Var(T_hat_h) ≈ S^2 / n_h
-            # 注意：这里的 var_z 是单次抽样的方差，必须要除以 n_h 才是均值的方差
-            # 前提是 T_hat_h 是均值估计量。如果 T_hat_h 是总和估计量 sum(z)，则 Var = n * S^2 ?
-            # 让我们回顾你的 run_proxyE_alloc_sqrt_wp 代码：
-            # T_hat_stage2 = np.mean(estimate_terms). 等同于 Mean.
-            # 所以 Var(T_hat) = Var(Z) / n_h. 
+           
             
             var_estimator_h = var_z / n_h
             total_variance_est += var_estimator_h
@@ -1783,19 +1686,6 @@ class ProxyStratifiedSampler:
         return results
     
     def run_baseline_proxy_a_checkpoints(self, budget_fracs, eps: float = 1e-10, seed: int = None):
-        """
-        [修正版] FOIS_nrs (无放回):
-        使用 【随机系统采样 (Randomized Systematic Sampling)】。
-        
-        特性：
-        1. 严格无放回 (UPSWOR)。
-        2. 严格无偏 (Strictly Unbiased)。
-        3. 包含概率 pi = min(1, n * p_i) 严格成立。
-        
-        注意：由于系统采样依赖于具体的 n 来构建累积概率轴，无法简单地通过切片前缀来模拟不同预算，
-        因此代码会对每个 budget_frac 重新运行一次采样过程。
-        """
-        # print('[Check_running_baseline_proxy_a_checkpoints]')
         if self.posts.empty:
             return []
 
@@ -2429,7 +2319,6 @@ def multi_predicate_evaluation(dataset_name: str, run_times: int = 20,
     print(f"✅ 详细评估报告已保存到: {final_report_path}")
     print(f"✅ 分次详细数据已保存至: {summarys_dir} (共 {run_times} 个 run_*.csv 文件)")
 
-from tqdm import tqdm  # 导入进度条库
 
 def evaluate_graph_only_baseline(dataset_name: str):
     """
@@ -2599,13 +2488,6 @@ def save_node_counts(records: List[Dict]):
         print(f"[错误] 写入节点统计失败: {e}")
 
 
-# ==========================================================
-# === 部分 3: 误差与oracle预算曲线评估测试 ===
-# ==========================================================
-# ==========================================================
-# === xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ===
-# ==========================================================
-
 
 
 def run_budget_curve_multi_predicate_fast(
@@ -2727,24 +2609,6 @@ def run_budget_curve_multi_predicate_fast(
                 if rec["budget_frac"] in temp_method_errors["FOIS_rs"]:
                     temp_method_errors["FOIS_rs"][rec["budget_frac"]].append(rec["Qerror"])
 
-            # # 处理 POSS
-            # for rec in res_poss:
-            #     records.append({
-            #         "query_basename": query_basename,
-            #         "run_id": run_id + 1,
-            #         "budget_frac": rec["budget_frac"],
-            #         "budget_n": rec["budget_n"],
-            #         "T_true": T_true,
-            #         "T_hat": rec["T_hat"],
-            #         "Qerror": rec["Qerror"],
-            #         "n_post": rec["n_post"],
-            #         "n_comment": rec["n_comment"],
-            #         "oracle_cost": rec["oracle_cost"],
-            #         "method": "POSS"
-            #     })
-            #     # 记录误差用于打印
-            #     if rec["budget_frac"] in temp_method_errors["POSS"]:
-            #         temp_method_errors["POSS"][rec["budget_frac"]].append(rec["Qerror"])
 
         # --- [新增模块 3] 当前查询的所有 Run 结束后，格式化打印每种方法的平均误差 ---
         print(f"Query: {query_basename:<35} | T_true: {int(T_true)}")
@@ -3115,12 +2979,6 @@ def run_adaptive_sampling_experiment(
 
     print(f"\n[Done] 所有实验完成。结果已保存至: {output_csv}")
 
-# ==========================================================
-# === 部分 4: 多线程优化执行 ===
-# ==========================================================
-# ==========================================================
-# === xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ===
-# ==========================================================
 
 def _process_budget_curve_worker(
     agg_file: str,
@@ -3306,7 +3164,6 @@ def run_budget_curve_multi_predicate_fast(
                 print(f"Job failed: {e}")
 
     print(f"\n[Done] 加速运行结束。结果已保存至: {out_path}")
-
 
 
 def _process_single_query_file(
