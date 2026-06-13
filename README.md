@@ -37,7 +37,7 @@ Conduct experimental validation for the `count` and `sum` aggregation modes.
      methods_map = {
          "PROXY": sampler.run_possa,
      }
-     # --target_ticks 0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9
+     --target_ticks 0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9
      ```
      Output saved to: `allocation_strategy_comparison_{agg_mode}.csv`
      
@@ -51,7 +51,7 @@ Conduct experimental validation for the `count` and `sum` aggregation modes.
          "MAB": sampler.run_mab_sampling,
          "PROXY": sampler.run_possa,
      }
-     # --target_ticks 0.1
+     --target_ticks 0.1
      ```
      Output saved to: `allocation_strategy_comparison_ablation_{agg_mode}.csv`
 
