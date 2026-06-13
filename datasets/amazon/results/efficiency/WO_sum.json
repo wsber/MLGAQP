@@ -1,0 +1,1631 @@
+[
+    {
+        "query_name": "query_8_85.graph",
+        "T_true": 63627.00000000001,
+        "T_hat": 54709.1192,
+        "abs_error_rate": 0.1401587502161033,
+        "n_post": 82,
+        "n_comment": 24,
+        "Total_Cost": 106
+    },
+    {
+        "query_name": "query_5_113.graph",
+        "T_true": 225.31,
+        "T_hat": 252.67229999999998,
+        "abs_error_rate": 0.1214429008921041,
+        "n_post": 363,
+        "n_comment": 8,
+        "Total_Cost": 371
+    },
+    {
+        "query_name": "query_6_73.graph",
+        "T_true": 6283.429999999999,
+        "T_hat": 6722.4018,
+        "abs_error_rate": 0.06986181114455008,
+        "n_post": 250,
+        "n_comment": 307,
+        "Total_Cost": 557
+    },
+    {
+        "query_name": "query_7_103.graph",
+        "T_true": 77.52,
+        "T_hat": 72.5047,
+        "abs_error_rate": 0.06469685242518056,
+        "n_post": 26,
+        "n_comment": 3,
+        "Total_Cost": 29
+    },
+    {
+        "query_name": "query_7_144.graph",
+        "T_true": 173712.74,
+        "T_hat": 162649.02719999998,
+        "abs_error_rate": 0.063689702896863,
+        "n_post": 312,
+        "n_comment": 671,
+        "Total_Cost": 983
+    },
+    {
+        "query_name": "query_8_119.graph",
+        "T_true": 2157631.0399999996,
+        "T_hat": 2028570.0474999996,
+        "abs_error_rate": 0.05981606220310955,
+        "n_post": 222,
+        "n_comment": 274,
+        "Total_Cost": 496
+    },
+    {
+        "query_name": "query_4_15.graph",
+        "T_true": 4537.54,
+        "T_hat": 4787.7872,
+        "abs_error_rate": 0.05515041189719535,
+        "n_post": 800,
+        "n_comment": 543,
+        "Total_Cost": 1343
+    },
+    {
+        "query_name": "query_6_127.graph",
+        "T_true": 803982.86,
+        "T_hat": 847291.7427000001,
+        "abs_error_rate": 0.053867917905613155,
+        "n_post": 698,
+        "n_comment": 798,
+        "Total_Cost": 1496
+    },
+    {
+        "query_name": "query_5_75.graph",
+        "T_true": 921.5500000000003,
+        "T_hat": 966.7640999999999,
+        "abs_error_rate": 0.04906310021159955,
+        "n_post": 259,
+        "n_comment": 80,
+        "Total_Cost": 339
+    },
+    {
+        "query_name": "query_7_33.graph",
+        "T_true": 51.34,
+        "T_hat": 53.7812,
+        "abs_error_rate": 0.047549668874172085,
+        "n_post": 28,
+        "n_comment": 6,
+        "Total_Cost": 34
+    },
+    {
+        "query_name": "query_7_44.graph",
+        "T_true": 140654.78,
+        "T_hat": 147247.2453,
+        "abs_error_rate": 0.046869827673115774,
+        "n_post": 357,
+        "n_comment": 59,
+        "Total_Cost": 416
+    },
+    {
+        "query_name": "query_5_89.graph",
+        "T_true": 205.01,
+        "T_hat": 195.554,
+        "abs_error_rate": 0.04612457928881513,
+        "n_post": 353,
+        "n_comment": 9,
+        "Total_Cost": 362
+    },
+    {
+        "query_name": "query_8_132.graph",
+        "T_true": 3202003.1,
+        "T_hat": 3059332.4385,
+        "abs_error_rate": 0.044556690622816676,
+        "n_post": 326,
+        "n_comment": 530,
+        "Total_Cost": 856
+    },
+    {
+        "query_name": "query_6_10.graph",
+        "T_true": 54792812.42,
+        "T_hat": 52431509.588700004,
+        "abs_error_rate": 0.043095120089840386,
+        "n_post": 599,
+        "n_comment": 528,
+        "Total_Cost": 1127
+    },
+    {
+        "query_name": "query_7_35.graph",
+        "T_true": 2212.9799999999977,
+        "T_hat": 2307.2749,
+        "abs_error_rate": 0.04260991965584969,
+        "n_post": 358,
+        "n_comment": 3,
+        "Total_Cost": 361
+    },
+    {
+        "query_name": "query_3_36.graph",
+        "T_true": 18684.51,
+        "T_hat": 17912.8146,
+        "abs_error_rate": 0.041301345338999894,
+        "n_post": 987,
+        "n_comment": 1077,
+        "Total_Cost": 2064
+    },
+    {
+        "query_name": "query_4_124.graph",
+        "T_true": 201105.59,
+        "T_hat": 209253.01030000002,
+        "abs_error_rate": 0.04051314684987139,
+        "n_post": 971,
+        "n_comment": 1026,
+        "Total_Cost": 1997
+    },
+    {
+        "query_name": "query_7_113.graph",
+        "T_true": 71746.22,
+        "T_hat": 68856.4709,
+        "abs_error_rate": 0.04027737071026182,
+        "n_post": 257,
+        "n_comment": 65,
+        "Total_Cost": 322
+    },
+    {
+        "query_name": "query_5_120.graph",
+        "T_true": 503.95000000000005,
+        "T_hat": 522.9476,
+        "abs_error_rate": 0.03769739061414807,
+        "n_post": 235,
+        "n_comment": 64,
+        "Total_Cost": 299
+    },
+    {
+        "query_name": "query_7_121.graph",
+        "T_true": 12217577.12,
+        "T_hat": 12648164.408299997,
+        "abs_error_rate": 0.035243263379539716,
+        "n_post": 508,
+        "n_comment": 540,
+        "Total_Cost": 1048
+    },
+    {
+        "query_name": "query_7_98.graph",
+        "T_true": 245884.84,
+        "T_hat": 254172.41429999997,
+        "abs_error_rate": 0.033705104796212644,
+        "n_post": 337,
+        "n_comment": 661,
+        "Total_Cost": 998
+    },
+    {
+        "query_name": "query_8_97.graph",
+        "T_true": 5014607.300000001,
+        "T_hat": 5181813.4673,
+        "abs_error_rate": 0.03334382082122341,
+        "n_post": 307,
+        "n_comment": 642,
+        "Total_Cost": 949
+    },
+    {
+        "query_name": "query_3_130.graph",
+        "T_true": 18684.51,
+        "T_hat": 18076.2537,
+        "abs_error_rate": 0.03255404075354384,
+        "n_post": 986,
+        "n_comment": 1076,
+        "Total_Cost": 2062
+    },
+    {
+        "query_name": "query_3_62.graph",
+        "T_true": 19458.59,
+        "T_hat": 18827.6786,
+        "abs_error_rate": 0.03242328452369883,
+        "n_post": 989,
+        "n_comment": 1094,
+        "Total_Cost": 2083
+    },
+    {
+        "query_name": "query_6_115.graph",
+        "T_true": 3247.340000000002,
+        "T_hat": 3350.8938000000003,
+        "abs_error_rate": 0.03188880745471625,
+        "n_post": 351,
+        "n_comment": 116,
+        "Total_Cost": 467
+    },
+    {
+        "query_name": "query_6_148.graph",
+        "T_true": 43909570.8,
+        "T_hat": 45282985.51009999,
+        "abs_error_rate": 0.03127825403613363,
+        "n_post": 593,
+        "n_comment": 600,
+        "Total_Cost": 1193
+    },
+    {
+        "query_name": "query_8_35.graph",
+        "T_true": 1682458.4100000001,
+        "T_hat": 1630522.0462000002,
+        "abs_error_rate": 0.030869329958652547,
+        "n_post": 320,
+        "n_comment": 370,
+        "Total_Cost": 690
+    },
+    {
+        "query_name": "query_4_61.graph",
+        "T_true": 161522.08,
+        "T_hat": 156678.7461,
+        "abs_error_rate": 0.029985584014272218,
+        "n_post": 910,
+        "n_comment": 998,
+        "Total_Cost": 1908
+    },
+    {
+        "query_name": "query_7_84.graph",
+        "T_true": 11862638.790000001,
+        "T_hat": 11511664.589300001,
+        "abs_error_rate": 0.02958652007476322,
+        "n_post": 555,
+        "n_comment": 604,
+        "Total_Cost": 1159
+    },
+    {
+        "query_name": "query_6_57.graph",
+        "T_true": 560.1599999999996,
+        "T_hat": 543.6985,
+        "abs_error_rate": 0.029387139388745483,
+        "n_post": 110,
+        "n_comment": 21,
+        "Total_Cost": 131
+    },
+    {
+        "query_name": "query_7_125.graph",
+        "T_true": 108469.7,
+        "T_hat": 111510.0778,
+        "abs_error_rate": 0.028029742868284895,
+        "n_post": 332,
+        "n_comment": 439,
+        "Total_Cost": 771
+    },
+    {
+        "query_name": "query_5_56.graph",
+        "T_true": 907.7400000000002,
+        "T_hat": 882.7601999999998,
+        "abs_error_rate": 0.027518672747703532,
+        "n_post": 341,
+        "n_comment": 112,
+        "Total_Cost": 453
+    },
+    {
+        "query_name": "query_6_130.graph",
+        "T_true": 12887.26,
+        "T_hat": 13227.607699999999,
+        "abs_error_rate": 0.026409624699121337,
+        "n_post": 344,
+        "n_comment": 637,
+        "Total_Cost": 981
+    },
+    {
+        "query_name": "query_7_36.graph",
+        "T_true": 117613.98999999999,
+        "T_hat": 114579.5129,
+        "abs_error_rate": 0.025800307429413707,
+        "n_post": 314,
+        "n_comment": 410,
+        "Total_Cost": 724
+    },
+    {
+        "query_name": "query_7_23.graph",
+        "T_true": 232398.19999999998,
+        "T_hat": 238277.7659,
+        "abs_error_rate": 0.02529953287073659,
+        "n_post": 344,
+        "n_comment": 708,
+        "Total_Cost": 1052
+    },
+    {
+        "query_name": "query_6_29.graph",
+        "T_true": 645999.8,
+        "T_hat": 662277.9995,
+        "abs_error_rate": 0.02519845903977058,
+        "n_post": 666,
+        "n_comment": 789,
+        "Total_Cost": 1455
+    },
+    {
+        "query_name": "query_4_120.graph",
+        "T_true": 196388.50000000003,
+        "T_hat": 191624.4982,
+        "abs_error_rate": 0.0242580487146652,
+        "n_post": 963,
+        "n_comment": 1021,
+        "Total_Cost": 1984
+    },
+    {
+        "query_name": "query_5_97.graph",
+        "T_true": 53409501.66,
+        "T_hat": 54690838.3303,
+        "abs_error_rate": 0.023990799960218294,
+        "n_post": 608,
+        "n_comment": 549,
+        "Total_Cost": 1157
+    },
+    {
+        "query_name": "query_4_96.graph",
+        "T_true": 4654.24,
+        "T_hat": 4543.996300000001,
+        "abs_error_rate": 0.023686724363161136,
+        "n_post": 784,
+        "n_comment": 297,
+        "Total_Cost": 1081
+    },
+    {
+        "query_name": "query_5_45.graph",
+        "T_true": 2918611.83,
+        "T_hat": 2987273.5624,
+        "abs_error_rate": 0.023525475945185934,
+        "n_post": 845,
+        "n_comment": 796,
+        "Total_Cost": 1641
+    },
+    {
+        "query_name": "query_6_42.graph",
+        "T_true": 8649.320000000002,
+        "T_hat": 8447.3902,
+        "abs_error_rate": 0.023346320866842903,
+        "n_post": 348,
+        "n_comment": 55,
+        "Total_Cost": 403
+    },
+    {
+        "query_name": "query_5_130.graph",
+        "T_true": 2852543.92,
+        "T_hat": 2785992.9104000004,
+        "abs_error_rate": 0.02333040663577216,
+        "n_post": 805,
+        "n_comment": 757,
+        "Total_Cost": 1562
+    },
+    {
+        "query_name": "query_4_51.graph",
+        "T_true": 208152.82,
+        "T_hat": 212930.37470000001,
+        "abs_error_rate": 0.02295214977149965,
+        "n_post": 961,
+        "n_comment": 1036,
+        "Total_Cost": 1997
+    },
+    {
+        "query_name": "query_8_53.graph",
+        "T_true": 2036161.0799999998,
+        "T_hat": 1989509.1428,
+        "abs_error_rate": 0.022911712466284748,
+        "n_post": 287,
+        "n_comment": 345,
+        "Total_Cost": 632
+    },
+    {
+        "query_name": "query_4_19.graph",
+        "T_true": 152598.52000000002,
+        "T_hat": 149120.10009999998,
+        "abs_error_rate": 0.022794584770547164,
+        "n_post": 925,
+        "n_comment": 1032,
+        "Total_Cost": 1957
+    },
+    {
+        "query_name": "query_6_14.graph",
+        "T_true": 48983415.2,
+        "T_hat": 47874277.070599996,
+        "abs_error_rate": 0.02264313594451061,
+        "n_post": 598,
+        "n_comment": 607,
+        "Total_Cost": 1205
+    },
+    {
+        "query_name": "query_5_131.graph",
+        "T_true": 42617.24,
+        "T_hat": 43564.147,
+        "abs_error_rate": 0.022218871987017445,
+        "n_post": 766,
+        "n_comment": 869,
+        "Total_Cost": 1635
+    },
+    {
+        "query_name": "query_6_88.graph",
+        "T_true": 45873406.88000001,
+        "T_hat": 44858251.557100005,
+        "abs_error_rate": 0.022129494884815158,
+        "n_post": 603,
+        "n_comment": 626,
+        "Total_Cost": 1229
+    },
+    {
+        "query_name": "query_4_136.graph",
+        "T_true": 192014.97,
+        "T_hat": 196200.16180000003,
+        "abs_error_rate": 0.021796174537849988,
+        "n_post": 965,
+        "n_comment": 970,
+        "Total_Cost": 1935
+    },
+    {
+        "query_name": "query_4_67.graph",
+        "T_true": 4277.439999999999,
+        "T_hat": 4184.260200000001,
+        "abs_error_rate": 0.021784010997231543,
+        "n_post": 768,
+        "n_comment": 495,
+        "Total_Cost": 1263
+    },
+    {
+        "query_name": "query_8_126.graph",
+        "T_true": 1313472.6,
+        "T_hat": 1284889.963,
+        "abs_error_rate": 0.021761121625224693,
+        "n_post": 236,
+        "n_comment": 351,
+        "Total_Cost": 587
+    },
+    {
+        "query_name": "query_3_96.graph",
+        "T_true": 19458.59,
+        "T_hat": 19866.1038,
+        "abs_error_rate": 0.02094261711665648,
+        "n_post": 988,
+        "n_comment": 1095,
+        "Total_Cost": 2083
+    },
+    {
+        "query_name": "query_7_140.graph",
+        "T_true": 153671.37999999998,
+        "T_hat": 150473.9278,
+        "abs_error_rate": 0.020807076763415356,
+        "n_post": 361,
+        "n_comment": 347,
+        "Total_Cost": 708
+    },
+    {
+        "query_name": "query_4_28.graph",
+        "T_true": 5480.3499999999985,
+        "T_hat": 5369.2889,
+        "abs_error_rate": 0.020265329769083913,
+        "n_post": 818,
+        "n_comment": 300,
+        "Total_Cost": 1118
+    },
+    {
+        "query_name": "query_6_64.graph",
+        "T_true": 55072599.66,
+        "T_hat": 53972514.8442,
+        "abs_error_rate": 0.019975174997940097,
+        "n_post": 609,
+        "n_comment": 513,
+        "Total_Cost": 1122
+    },
+    {
+        "query_name": "query_5_11.graph",
+        "T_true": 657.4000000000001,
+        "T_hat": 670.4799,
+        "abs_error_rate": 0.01989641010039542,
+        "n_post": 338,
+        "n_comment": 77,
+        "Total_Cost": 415
+    },
+    {
+        "query_name": "query_4_103.graph",
+        "T_true": 4394.049999999999,
+        "T_hat": 4307.1862,
+        "abs_error_rate": 0.019768505137629108,
+        "n_post": 793,
+        "n_comment": 287,
+        "Total_Cost": 1080
+    },
+    {
+        "query_name": "query_4_25.graph",
+        "T_true": 5182.200000000002,
+        "T_hat": 5283.311299999999,
+        "abs_error_rate": 0.019511269345065363,
+        "n_post": 813,
+        "n_comment": 289,
+        "Total_Cost": 1102
+    },
+    {
+        "query_name": "query_3_122.graph",
+        "T_true": 18684.51,
+        "T_hat": 18324.4628,
+        "abs_error_rate": 0.01926982297100632,
+        "n_post": 987,
+        "n_comment": 1076,
+        "Total_Cost": 2063
+    },
+    {
+        "query_name": "query_5_38.graph",
+        "T_true": 50996.149999999994,
+        "T_hat": 51971.12180000001,
+        "abs_error_rate": 0.019118537379782866,
+        "n_post": 778,
+        "n_comment": 832,
+        "Total_Cost": 1610
+    },
+    {
+        "query_name": "query_5_37.graph",
+        "T_true": 866.3299999999997,
+        "T_hat": 882.7184,
+        "abs_error_rate": 0.01891704085048455,
+        "n_post": 334,
+        "n_comment": 35,
+        "Total_Cost": 369
+    },
+    {
+        "query_name": "query_7_90.graph",
+        "T_true": 225373.8,
+        "T_hat": 229587.72639999999,
+        "abs_error_rate": 0.018697498999440027,
+        "n_post": 338,
+        "n_comment": 755,
+        "Total_Cost": 1093
+    },
+    {
+        "query_name": "query_5_55.graph",
+        "T_true": 45833.71,
+        "T_hat": 46682.0398,
+        "abs_error_rate": 0.018508861708991037,
+        "n_post": 758,
+        "n_comment": 487,
+        "Total_Cost": 1245
+    },
+    {
+        "query_name": "query_8_51.graph",
+        "T_true": 1776295.2999999998,
+        "T_hat": 1809093.2407,
+        "abs_error_rate": 0.018464238857131558,
+        "n_post": 295,
+        "n_comment": 86,
+        "Total_Cost": 381
+    },
+    {
+        "query_name": "query_6_51.graph",
+        "T_true": 11382.599999999999,
+        "T_hat": 11588.264299999999,
+        "abs_error_rate": 0.018068306010928997,
+        "n_post": 346,
+        "n_comment": 60,
+        "Total_Cost": 406
+    },
+    {
+        "query_name": "query_6_141.graph",
+        "T_true": 17227.550000000003,
+        "T_hat": 17532.9672,
+        "abs_error_rate": 0.017728417563727644,
+        "n_post": 387,
+        "n_comment": 774,
+        "Total_Cost": 1161
+    },
+    {
+        "query_name": "query_6_91.graph",
+        "T_true": 9738.119999999999,
+        "T_hat": 9566.723699999999,
+        "abs_error_rate": 0.017600553289546683,
+        "n_post": 338,
+        "n_comment": 497,
+        "Total_Cost": 835
+    },
+    {
+        "query_name": "query_6_8.graph",
+        "T_true": 58247134.37999998,
+        "T_hat": 57250670.437199995,
+        "abs_error_rate": 0.017107518737301798,
+        "n_post": 659,
+        "n_comment": 555,
+        "Total_Cost": 1214
+    },
+    {
+        "query_name": "query_7_83.graph",
+        "T_true": 11870933.52,
+        "T_hat": 12073771.523599999,
+        "abs_error_rate": 0.017086946301085804,
+        "n_post": 550,
+        "n_comment": 501,
+        "Total_Cost": 1051
+    },
+    {
+        "query_name": "query_7_87.graph",
+        "T_true": 14699917.760000002,
+        "T_hat": 14948823.8991,
+        "abs_error_rate": 0.016932485144733108,
+        "n_post": 520,
+        "n_comment": 153,
+        "Total_Cost": 673
+    },
+    {
+        "query_name": "query_3_120.graph",
+        "T_true": 19458.59,
+        "T_hat": 19131.888600000002,
+        "abs_error_rate": 0.016789572111853845,
+        "n_post": 989,
+        "n_comment": 1096,
+        "Total_Cost": 2085
+    },
+    {
+        "query_name": "query_4_18.graph",
+        "T_true": 195410.7,
+        "T_hat": 198619.10869999998,
+        "abs_error_rate": 0.016418797435350116,
+        "n_post": 964,
+        "n_comment": 1012,
+        "Total_Cost": 1976
+    },
+    {
+        "query_name": "query_7_32.graph",
+        "T_true": 6.32,
+        "T_hat": 6.2166,
+        "abs_error_rate": 0.01636075949367098,
+        "n_post": 24,
+        "n_comment": 1,
+        "Total_Cost": 25
+    },
+    {
+        "query_name": "query_7_118.graph",
+        "T_true": 14720624.279999997,
+        "T_hat": 14958277.9814,
+        "abs_error_rate": 0.016144267857096786,
+        "n_post": 541,
+        "n_comment": 558,
+        "Total_Cost": 1099
+    },
+    {
+        "query_name": "query_4_87.graph",
+        "T_true": 6058.63,
+        "T_hat": 6155.7528,
+        "abs_error_rate": 0.01603048874085397,
+        "n_post": 797,
+        "n_comment": 288,
+        "Total_Cost": 1085
+    },
+    {
+        "query_name": "query_5_86.graph",
+        "T_true": 2822930.24,
+        "T_hat": 2867742.1861,
+        "abs_error_rate": 0.015874266202199817,
+        "n_post": 845,
+        "n_comment": 791,
+        "Total_Cost": 1636
+    },
+    {
+        "query_name": "query_5_61.graph",
+        "T_true": 45793.950000000004,
+        "T_hat": 46520.451400000005,
+        "abs_error_rate": 0.01586457163009526,
+        "n_post": 784,
+        "n_comment": 284,
+        "Total_Cost": 1068
+    },
+    {
+        "query_name": "query_5_115.graph",
+        "T_true": 41524.99,
+        "T_hat": 40907.3211,
+        "abs_error_rate": 0.014874630915022424,
+        "n_post": 757,
+        "n_comment": 871,
+        "Total_Cost": 1628
+    },
+    {
+        "query_name": "query_4_27.graph",
+        "T_true": 3603.8,
+        "T_hat": 3550.696,
+        "abs_error_rate": 0.014735556912148362,
+        "n_post": 787,
+        "n_comment": 481,
+        "Total_Cost": 1268
+    },
+    {
+        "query_name": "query_4_83.graph",
+        "T_true": 5281.399999999999,
+        "T_hat": 5354.7658,
+        "abs_error_rate": 0.01389135456507771,
+        "n_post": 818,
+        "n_comment": 323,
+        "Total_Cost": 1141
+    },
+    {
+        "query_name": "query_5_1.graph",
+        "T_true": 56178.7,
+        "T_hat": 56938.789099999995,
+        "abs_error_rate": 0.01352984494123213,
+        "n_post": 786,
+        "n_comment": 297,
+        "Total_Cost": 1083
+    },
+    {
+        "query_name": "query_5_70.graph",
+        "T_true": 1210.9700000000003,
+        "T_hat": 1226.3046,
+        "abs_error_rate": 0.012663071752396574,
+        "n_post": 360,
+        "n_comment": 71,
+        "Total_Cost": 431
+    },
+    {
+        "query_name": "query_5_47.graph",
+        "T_true": 61315.369999999995,
+        "T_hat": 60540.8547,
+        "abs_error_rate": 0.012631666415777837,
+        "n_post": 794,
+        "n_comment": 305,
+        "Total_Cost": 1099
+    },
+    {
+        "query_name": "query_8_103.graph",
+        "T_true": 1396459.9400000002,
+        "T_hat": 1379200.9043999999,
+        "abs_error_rate": 0.012359134054357686,
+        "n_post": 315,
+        "n_comment": 375,
+        "Total_Cost": 690
+    },
+    {
+        "query_name": "query_5_101.graph",
+        "T_true": 1147.1999999999998,
+        "T_hat": 1133.2069999999999,
+        "abs_error_rate": 0.01219752440725239,
+        "n_post": 348,
+        "n_comment": 65,
+        "Total_Cost": 413
+    },
+    {
+        "query_name": "query_3_53.graph",
+        "T_true": 18684.51,
+        "T_hat": 18908.6576,
+        "abs_error_rate": 0.01199643983171088,
+        "n_post": 987,
+        "n_comment": 1076,
+        "Total_Cost": 2063
+    },
+    {
+        "query_name": "query_4_77.graph",
+        "T_true": 4204.01,
+        "T_hat": 4153.619,
+        "abs_error_rate": 0.011986412972376499,
+        "n_post": 787,
+        "n_comment": 488,
+        "Total_Cost": 1275
+    },
+    {
+        "query_name": "query_5_88.graph",
+        "T_true": 930.6700000000001,
+        "T_hat": 919.7631,
+        "abs_error_rate": 0.01171940644911737,
+        "n_post": 383,
+        "n_comment": 63,
+        "Total_Cost": 446
+    },
+    {
+        "query_name": "query_5_117.graph",
+        "T_true": 754.8300000000004,
+        "T_hat": 746.0082,
+        "abs_error_rate": 0.011687134851556496,
+        "n_post": 258,
+        "n_comment": 66,
+        "Total_Cost": 324
+    },
+    {
+        "query_name": "query_3_17.graph",
+        "T_true": 18296.02,
+        "T_hat": 18082.5229,
+        "abs_error_rate": 0.011669046054825065,
+        "n_post": 982,
+        "n_comment": 1085,
+        "Total_Cost": 2067
+    },
+    {
+        "query_name": "query_5_92.graph",
+        "T_true": 1202.5299999999997,
+        "T_hat": 1188.5308,
+        "abs_error_rate": 0.01164145593041317,
+        "n_post": 313,
+        "n_comment": 56,
+        "Total_Cost": 369
+    },
+    {
+        "query_name": "query_8_95.graph",
+        "T_true": 1418561.6600000001,
+        "T_hat": 1402357.0366000002,
+        "abs_error_rate": 0.011423277434411926,
+        "n_post": 297,
+        "n_comment": 349,
+        "Total_Cost": 646
+    },
+    {
+        "query_name": "query_8_133.graph",
+        "T_true": 4348276.720000001,
+        "T_hat": 4397941.7847,
+        "abs_error_rate": 0.01142178106364837,
+        "n_post": 334,
+        "n_comment": 588,
+        "Total_Cost": 922
+    },
+    {
+        "query_name": "query_3_41.graph",
+        "T_true": 20168.849999999995,
+        "T_hat": 20396.1364,
+        "abs_error_rate": 0.011269179948286816,
+        "n_post": 987,
+        "n_comment": 1104,
+        "Total_Cost": 2091
+    },
+    {
+        "query_name": "query_8_21.graph",
+        "T_true": 810659.76,
+        "T_hat": 819558.0041,
+        "abs_error_rate": 0.010976545943269727,
+        "n_post": 155,
+        "n_comment": 27,
+        "Total_Cost": 182
+    },
+    {
+        "query_name": "query_6_133.graph",
+        "T_true": 11331.499999999996,
+        "T_hat": 11453.932999999999,
+        "abs_error_rate": 0.010804659577284804,
+        "n_post": 378,
+        "n_comment": 70,
+        "Total_Cost": 448
+    },
+    {
+        "query_name": "query_4_0.graph",
+        "T_true": 4277.439999999999,
+        "T_hat": 4231.4312,
+        "abs_error_rate": 0.010756153213136528,
+        "n_post": 768,
+        "n_comment": 495,
+        "Total_Cost": 1263
+    },
+    {
+        "query_name": "query_6_109.graph",
+        "T_true": 10638.510000000002,
+        "T_hat": 10527.3371,
+        "abs_error_rate": 0.01045004422611826,
+        "n_post": 344,
+        "n_comment": 670,
+        "Total_Cost": 1014
+    },
+    {
+        "query_name": "query_6_136.graph",
+        "T_true": 554800.5599999999,
+        "T_hat": 549136.0157,
+        "abs_error_rate": 0.010210055123231943,
+        "n_post": 707,
+        "n_comment": 413,
+        "Total_Cost": 1120
+    },
+    {
+        "query_name": "query_4_119.graph",
+        "T_true": 5542.0999999999985,
+        "T_hat": 5485.793,
+        "abs_error_rate": 0.010159867198354215,
+        "n_post": 796,
+        "n_comment": 306,
+        "Total_Cost": 1102
+    },
+    {
+        "query_name": "query_5_59.graph",
+        "T_true": 2998339.3600000003,
+        "T_hat": 2968337.0867999997,
+        "abs_error_rate": 0.010006296685509486,
+        "n_post": 799,
+        "n_comment": 737,
+        "Total_Cost": 1536
+    },
+    {
+        "query_name": "query_5_93.graph",
+        "T_true": 53213.12,
+        "T_hat": 52683.1391,
+        "abs_error_rate": 0.009959590792646668,
+        "n_post": 811,
+        "n_comment": 320,
+        "Total_Cost": 1131
+    },
+    {
+        "query_name": "query_4_42.graph",
+        "T_true": 4437.269999999999,
+        "T_hat": 4395.3089,
+        "abs_error_rate": 0.009456512675586259,
+        "n_post": 790,
+        "n_comment": 282,
+        "Total_Cost": 1072
+    },
+    {
+        "query_name": "query_6_126.graph",
+        "T_true": 7037.969999999999,
+        "T_hat": 7103.4328000000005,
+        "abs_error_rate": 0.009301375254512474,
+        "n_post": 329,
+        "n_comment": 49,
+        "Total_Cost": 378
+    },
+    {
+        "query_name": "query_6_80.graph",
+        "T_true": 58654279.97999999,
+        "T_hat": 59198399.693,
+        "abs_error_rate": 0.009276726492688157,
+        "n_post": 639,
+        "n_comment": 553,
+        "Total_Cost": 1192
+    },
+    {
+        "query_name": "query_6_107.graph",
+        "T_true": 10049.67,
+        "T_hat": 9956.5141,
+        "abs_error_rate": 0.00926954815431748,
+        "n_post": 275,
+        "n_comment": 62,
+        "Total_Cost": 337
+    },
+    {
+        "query_name": "query_6_142.graph",
+        "T_true": 48983415.2,
+        "T_hat": 48538226.29739999,
+        "abs_error_rate": 0.009088563971750436,
+        "n_post": 595,
+        "n_comment": 615,
+        "Total_Cost": 1210
+    },
+    {
+        "query_name": "query_5_12.graph",
+        "T_true": 1202.53,
+        "T_hat": 1191.6051,
+        "abs_error_rate": 0.009084929274113727,
+        "n_post": 313,
+        "n_comment": 56,
+        "Total_Cost": 369
+    },
+    {
+        "query_name": "query_3_126.graph",
+        "T_true": 18684.51,
+        "T_hat": 18515.593500000003,
+        "abs_error_rate": 0.009040456506485625,
+        "n_post": 987,
+        "n_comment": 1074,
+        "Total_Cost": 2061
+    },
+    {
+        "query_name": "query_6_118.graph",
+        "T_true": 660923.73,
+        "T_hat": 654975.4294,
+        "abs_error_rate": 0.008999980375950428,
+        "n_post": 712,
+        "n_comment": 764,
+        "Total_Cost": 1476
+    },
+    {
+        "query_name": "query_6_134.graph",
+        "T_true": 60372718.32,
+        "T_hat": 59833198.0442,
+        "abs_error_rate": 0.008936491362544253,
+        "n_post": 567,
+        "n_comment": 481,
+        "Total_Cost": 1048
+    },
+    {
+        "query_name": "query_8_1.graph",
+        "T_true": 667.1900000000005,
+        "T_hat": 673.1358,
+        "abs_error_rate": 0.008911704312114245,
+        "n_post": 35,
+        "n_comment": 5,
+        "Total_Cost": 40
+    },
+    {
+        "query_name": "query_6_137.graph",
+        "T_true": 821074.1399999999,
+        "T_hat": 828249.2690999999,
+        "abs_error_rate": 0.00873871036786035,
+        "n_post": 732,
+        "n_comment": 748,
+        "Total_Cost": 1480
+    },
+    {
+        "query_name": "query_3_8.graph",
+        "T_true": 18296.02,
+        "T_hat": 18455.159900000002,
+        "abs_error_rate": 0.00869806110837231,
+        "n_post": 982,
+        "n_comment": 1086,
+        "Total_Cost": 2068
+    },
+    {
+        "query_name": "query_6_0.graph",
+        "T_true": 904255.2599999999,
+        "T_hat": 896473.2441,
+        "abs_error_rate": 0.008605994617050812,
+        "n_post": 731,
+        "n_comment": 731,
+        "Total_Cost": 1462
+    },
+    {
+        "query_name": "query_8_66.graph",
+        "T_true": 1588.089999999999,
+        "T_hat": 1574.4810999999997,
+        "abs_error_rate": 0.008569350603554758,
+        "n_post": 28,
+        "n_comment": 6,
+        "Total_Cost": 34
+    },
+    {
+        "query_name": "query_5_99.graph",
+        "T_true": 48019.9,
+        "T_hat": 48431.124899999995,
+        "abs_error_rate": 0.008563635076291157,
+        "n_post": 776,
+        "n_comment": 294,
+        "Total_Cost": 1070
+    },
+    {
+        "query_name": "query_3_133.graph",
+        "T_true": 19458.59,
+        "T_hat": 19301.8261,
+        "abs_error_rate": 0.008056282598071172,
+        "n_post": 989,
+        "n_comment": 1096,
+        "Total_Cost": 2085
+    },
+    {
+        "query_name": "query_5_5.graph",
+        "T_true": 776.8600000000001,
+        "T_hat": 783.0106,
+        "abs_error_rate": 0.007917256648559362,
+        "n_post": 308,
+        "n_comment": 54,
+        "Total_Cost": 362
+    },
+    {
+        "query_name": "query_5_8.graph",
+        "T_true": 1043.6800000000017,
+        "T_hat": 1051.307,
+        "abs_error_rate": 0.007307795492869796,
+        "n_post": 162,
+        "n_comment": 21,
+        "Total_Cost": 183
+    },
+    {
+        "query_name": "query_3_25.graph",
+        "T_true": 18684.51,
+        "T_hat": 18816.9079,
+        "abs_error_rate": 0.0070859712135881514,
+        "n_post": 987,
+        "n_comment": 1075,
+        "Total_Cost": 2062
+    },
+    {
+        "query_name": "query_4_140.graph",
+        "T_true": 4344.4,
+        "T_hat": 4313.713299999999,
+        "abs_error_rate": 0.007063507043550365,
+        "n_post": 792,
+        "n_comment": 263,
+        "Total_Cost": 1055
+    },
+    {
+        "query_name": "query_5_116.graph",
+        "T_true": 1180.7599999999998,
+        "T_hat": 1172.4560999999999,
+        "abs_error_rate": 0.007032673871065997,
+        "n_post": 268,
+        "n_comment": 46,
+        "Total_Cost": 314
+    },
+    {
+        "query_name": "query_6_81.graph",
+        "T_true": 51116628.81999999,
+        "T_hat": 50761379.6534,
+        "abs_error_rate": 0.006949776908233841,
+        "n_post": 628,
+        "n_comment": 554,
+        "Total_Cost": 1182
+    },
+    {
+        "query_name": "query_3_39.graph",
+        "T_true": 18684.51,
+        "T_hat": 18813.3874,
+        "abs_error_rate": 0.006897553106824917,
+        "n_post": 987,
+        "n_comment": 1077,
+        "Total_Cost": 2064
+    },
+    {
+        "query_name": "query_6_37.graph",
+        "T_true": 9416.91,
+        "T_hat": 9479.0377,
+        "abs_error_rate": 0.006597461375334469,
+        "n_post": 331,
+        "n_comment": 429,
+        "Total_Cost": 760
+    },
+    {
+        "query_name": "query_5_90.graph",
+        "T_true": 68893.98000000003,
+        "T_hat": 69317.8869,
+        "abs_error_rate": 0.006153032529111723,
+        "n_post": 765,
+        "n_comment": 314,
+        "Total_Cost": 1079
+    },
+    {
+        "query_name": "query_6_23.graph",
+        "T_true": 53517609.58,
+        "T_hat": 53194494.2352,
+        "abs_error_rate": 0.006037551888729098,
+        "n_post": 619,
+        "n_comment": 538,
+        "Total_Cost": 1157
+    },
+    {
+        "query_name": "query_4_102.graph",
+        "T_true": 4583.18,
+        "T_hat": 4555.530400000001,
+        "abs_error_rate": 0.00603284182598103,
+        "n_post": 796,
+        "n_comment": 276,
+        "Total_Cost": 1072
+    },
+    {
+        "query_name": "query_5_139.graph",
+        "T_true": 2392426.38,
+        "T_hat": 2378013.9947,
+        "abs_error_rate": 0.006024170867067489,
+        "n_post": 801,
+        "n_comment": 858,
+        "Total_Cost": 1659
+    },
+    {
+        "query_name": "query_8_29.graph",
+        "T_true": 3302857.7800000003,
+        "T_hat": 3322233.2633999996,
+        "abs_error_rate": 0.005866278444480684,
+        "n_post": 311,
+        "n_comment": 341,
+        "Total_Cost": 652
+    },
+    {
+        "query_name": "query_5_62.graph",
+        "T_true": 779.4000000000003,
+        "T_hat": 775.0160999999999,
+        "abs_error_rate": 0.005624711316397715,
+        "n_post": 271,
+        "n_comment": 37,
+        "Total_Cost": 308
+    },
+    {
+        "query_name": "query_7_55.graph",
+        "T_true": 184236.34999999998,
+        "T_hat": 183261.5002,
+        "abs_error_rate": 0.005291300006757447,
+        "n_post": 314,
+        "n_comment": 41,
+        "Total_Cost": 355
+    },
+    {
+        "query_name": "query_5_144.graph",
+        "T_true": 2692960.4,
+        "T_hat": 2679316.4969,
+        "abs_error_rate": 0.005066507142102708,
+        "n_post": 798,
+        "n_comment": 701,
+        "Total_Cost": 1499
+    },
+    {
+        "query_name": "query_3_137.graph",
+        "T_true": 18296.02,
+        "T_hat": 18203.8729,
+        "abs_error_rate": 0.005036456016117273,
+        "n_post": 982,
+        "n_comment": 1087,
+        "Total_Cost": 2069
+    },
+    {
+        "query_name": "query_6_61.graph",
+        "T_true": 11848.049999999997,
+        "T_hat": 11788.381,
+        "abs_error_rate": 0.00503618738948587,
+        "n_post": 344,
+        "n_comment": 563,
+        "Total_Cost": 907
+    },
+    {
+        "query_name": "query_6_110.graph",
+        "T_true": 10761.460000000001,
+        "T_hat": 10709.088,
+        "abs_error_rate": 0.0048666259039202115,
+        "n_post": 347,
+        "n_comment": 425,
+        "Total_Cost": 772
+    },
+    {
+        "query_name": "query_7_86.graph",
+        "T_true": 21.23,
+        "T_hat": 21.333,
+        "abs_error_rate": 0.00485162505887885,
+        "n_post": 18,
+        "n_comment": 1,
+        "Total_Cost": 19
+    },
+    {
+        "query_name": "query_6_40.graph",
+        "T_true": 13404.49,
+        "T_hat": 13469.490399999999,
+        "abs_error_rate": 0.00484915129184318,
+        "n_post": 384,
+        "n_comment": 780,
+        "Total_Cost": 1164
+    },
+    {
+        "query_name": "query_8_117.graph",
+        "T_true": 2117379.22,
+        "T_hat": 2107280.5861,
+        "abs_error_rate": 0.004769402573054555,
+        "n_post": 302,
+        "n_comment": 383,
+        "Total_Cost": 685
+    },
+    {
+        "query_name": "query_6_21.graph",
+        "T_true": 660832.1299999999,
+        "T_hat": 657827.0511,
+        "abs_error_rate": 0.004547416452041834,
+        "n_post": 722,
+        "n_comment": 258,
+        "Total_Cost": 980
+    },
+    {
+        "query_name": "query_6_101.graph",
+        "T_true": 959.2800000000021,
+        "T_hat": 954.9735,
+        "abs_error_rate": 0.00448930447836104,
+        "n_post": 99,
+        "n_comment": 14,
+        "Total_Cost": 113
+    },
+    {
+        "query_name": "query_4_115.graph",
+        "T_true": 197581.66,
+        "T_hat": 198446.16580000002,
+        "abs_error_rate": 0.004375435452865481,
+        "n_post": 954,
+        "n_comment": 1027,
+        "Total_Cost": 1981
+    },
+    {
+        "query_name": "query_7_146.graph",
+        "T_true": 155524.63,
+        "T_hat": 154878.90990000003,
+        "abs_error_rate": 0.004151883209752544,
+        "n_post": 335,
+        "n_comment": 50,
+        "Total_Cost": 385
+    },
+    {
+        "query_name": "query_6_132.graph",
+        "T_true": 6261.179999999999,
+        "T_hat": 6236.0255,
+        "abs_error_rate": 0.004017533436189288,
+        "n_post": 236,
+        "n_comment": 289,
+        "Total_Cost": 525
+    },
+    {
+        "query_name": "query_6_119.graph",
+        "T_true": 55901019.20999999,
+        "T_hat": 56123425.5962,
+        "abs_error_rate": 0.0039785747977957725,
+        "n_post": 638,
+        "n_comment": 547,
+        "Total_Cost": 1185
+    },
+    {
+        "query_name": "query_4_12.graph",
+        "T_true": 191887.27000000002,
+        "T_hat": 191172.7278,
+        "abs_error_rate": 0.003723760309894582,
+        "n_post": 958,
+        "n_comment": 1007,
+        "Total_Cost": 1965
+    },
+    {
+        "query_name": "query_3_88.graph",
+        "T_true": 20168.849999999995,
+        "T_hat": 20095.3237,
+        "abs_error_rate": 0.0036455375492402443,
+        "n_post": 987,
+        "n_comment": 1104,
+        "Total_Cost": 2091
+    },
+    {
+        "query_name": "query_6_84.graph",
+        "T_true": 8006.9299999999985,
+        "T_hat": 8036.0895,
+        "abs_error_rate": 0.0036417828056448075,
+        "n_post": 353,
+        "n_comment": 595,
+        "Total_Cost": 948
+    },
+    {
+        "query_name": "query_4_57.graph",
+        "T_true": 4866.56,
+        "T_hat": 4883.6359999999995,
+        "abs_error_rate": 0.0035088440294579974,
+        "n_post": 788,
+        "n_comment": 282,
+        "Total_Cost": 1070
+    },
+    {
+        "query_name": "query_5_2.graph",
+        "T_true": 792.7200000000001,
+        "T_hat": 790.0447,
+        "abs_error_rate": 0.003374836007669929,
+        "n_post": 329,
+        "n_comment": 58,
+        "Total_Cost": 387
+    },
+    {
+        "query_name": "query_6_140.graph",
+        "T_true": 6466.280000000001,
+        "T_hat": 6487.816500000001,
+        "abs_error_rate": 0.00333058574636424,
+        "n_post": 254,
+        "n_comment": 32,
+        "Total_Cost": 286
+    },
+    {
+        "query_name": "query_4_20.graph",
+        "T_true": 198247.94,
+        "T_hat": 198891.05730000001,
+        "abs_error_rate": 0.003244004956621555,
+        "n_post": 964,
+        "n_comment": 1014,
+        "Total_Cost": 1978
+    },
+    {
+        "query_name": "query_5_33.graph",
+        "T_true": 1291.2899999999997,
+        "T_hat": 1287.1324,
+        "abs_error_rate": 0.003219726010423511,
+        "n_post": 353,
+        "n_comment": 74,
+        "Total_Cost": 427
+    },
+    {
+        "query_name": "query_6_71.graph",
+        "T_true": 694089.2000000001,
+        "T_hat": 691926.0821,
+        "abs_error_rate": 0.0031164840196333124,
+        "n_post": 708,
+        "n_comment": 661,
+        "Total_Cost": 1369
+    },
+    {
+        "query_name": "query_6_106.graph",
+        "T_true": 707705.6,
+        "T_hat": 709882.3378,
+        "abs_error_rate": 0.0030757673812387564,
+        "n_post": 729,
+        "n_comment": 719,
+        "Total_Cost": 1448
+    },
+    {
+        "query_name": "query_5_35.graph",
+        "T_true": 2842172.7300000004,
+        "T_hat": 2850559.3382,
+        "abs_error_rate": 0.0029507735794789876,
+        "n_post": 831,
+        "n_comment": 772,
+        "Total_Cost": 1603
+    },
+    {
+        "query_name": "query_7_65.graph",
+        "T_true": 11691242.999999998,
+        "T_hat": 11724841.4063,
+        "abs_error_rate": 0.0028738095940699132,
+        "n_post": 534,
+        "n_comment": 331,
+        "Total_Cost": 865
+    },
+    {
+        "query_name": "query_5_95.graph",
+        "T_true": 1005.5700000000003,
+        "T_hat": 1002.7655,
+        "abs_error_rate": 0.002788965462374874,
+        "n_post": 347,
+        "n_comment": 66,
+        "Total_Cost": 413
+    },
+    {
+        "query_name": "query_5_105.graph",
+        "T_true": 2905204.68,
+        "T_hat": 2912428.2479000003,
+        "abs_error_rate": 0.002486423056429931,
+        "n_post": 808,
+        "n_comment": 740,
+        "Total_Cost": 1548
+    },
+    {
+        "query_name": "query_7_17.graph",
+        "T_true": 393805.38,
+        "T_hat": 392833.93,
+        "abs_error_rate": 0.0024668276497390963,
+        "n_post": 337,
+        "n_comment": 63,
+        "Total_Cost": 400
+    },
+    {
+        "query_name": "query_6_15.graph",
+        "T_true": 52947190.64,
+        "T_hat": 52826766.6865,
+        "abs_error_rate": 0.0022744163013065696,
+        "n_post": 608,
+        "n_comment": 553,
+        "Total_Cost": 1161
+    },
+    {
+        "query_name": "query_6_83.graph",
+        "T_true": 912692.27,
+        "T_hat": 914748.5353000001,
+        "abs_error_rate": 0.0022529667091407343,
+        "n_post": 740,
+        "n_comment": 717,
+        "Total_Cost": 1457
+    },
+    {
+        "query_name": "query_5_51.graph",
+        "T_true": 2976278.52,
+        "T_hat": 2969809.2845,
+        "abs_error_rate": 0.0021735988270344913,
+        "n_post": 816,
+        "n_comment": 754,
+        "Total_Cost": 1570
+    },
+    {
+        "query_name": "query_6_129.graph",
+        "T_true": 536846.56,
+        "T_hat": 538002.781,
+        "abs_error_rate": 0.002153727128287649,
+        "n_post": 703,
+        "n_comment": 808,
+        "Total_Cost": 1511
+    },
+    {
+        "query_name": "query_4_125.graph",
+        "T_true": 4491.78,
+        "T_hat": 4483.0142000000005,
+        "abs_error_rate": 0.0019515203326964405,
+        "n_post": 777,
+        "n_comment": 502,
+        "Total_Cost": 1279
+    },
+    {
+        "query_name": "query_4_147.graph",
+        "T_true": 197581.66,
+        "T_hat": 197943.18959999998,
+        "abs_error_rate": 0.0018297730669940713,
+        "n_post": 957,
+        "n_comment": 1001,
+        "Total_Cost": 1958
+    },
+    {
+        "query_name": "query_7_15.graph",
+        "T_true": 179927.19,
+        "T_hat": 179609.90600000002,
+        "abs_error_rate": 0.001763402185072668,
+        "n_post": 298,
+        "n_comment": 48,
+        "Total_Cost": 346
+    },
+    {
+        "query_name": "query_8_130.graph",
+        "T_true": 8618200.54,
+        "T_hat": 8603595.9935,
+        "abs_error_rate": 0.001694616693150104,
+        "n_post": 351,
+        "n_comment": 829,
+        "Total_Cost": 1180
+    },
+    {
+        "query_name": "query_4_79.graph",
+        "T_true": 4394.049999999999,
+        "T_hat": 4387.1254,
+        "abs_error_rate": 0.0015759037789736972,
+        "n_post": 793,
+        "n_comment": 287,
+        "Total_Cost": 1080
+    },
+    {
+        "query_name": "query_6_113.graph",
+        "T_true": 14077.74,
+        "T_hat": 14099.6411,
+        "abs_error_rate": 0.0015557255639045012,
+        "n_post": 337,
+        "n_comment": 454,
+        "Total_Cost": 791
+    },
+    {
+        "query_name": "query_7_149.graph",
+        "T_true": 71000.43000000001,
+        "T_hat": 70894.52249999999,
+        "abs_error_rate": 0.0014916458956659236,
+        "n_post": 351,
+        "n_comment": 437,
+        "Total_Cost": 788
+    },
+    {
+        "query_name": "query_4_29.graph",
+        "T_true": 184476.88,
+        "T_hat": 184237.8582,
+        "abs_error_rate": 0.0012956734740961404,
+        "n_post": 962,
+        "n_comment": 999,
+        "Total_Cost": 1961
+    },
+    {
+        "query_name": "query_7_66.graph",
+        "T_true": 9434808.6,
+        "T_hat": 9425600.862800002,
+        "abs_error_rate": 0.0009759325907255321,
+        "n_post": 546,
+        "n_comment": 549,
+        "Total_Cost": 1095
+    },
+    {
+        "query_name": "query_5_48.graph",
+        "T_true": 2830628.03,
+        "T_hat": 2827958.119,
+        "abs_error_rate": 0.000943222130107942,
+        "n_post": 851,
+        "n_comment": 804,
+        "Total_Cost": 1655
+    },
+    {
+        "query_name": "query_4_60.graph",
+        "T_true": 4999.6900000000005,
+        "T_hat": 5004.1119,
+        "abs_error_rate": 0.0008844348349596411,
+        "n_post": 813,
+        "n_comment": 266,
+        "Total_Cost": 1079
+    },
+    {
+        "query_name": "query_3_21.graph",
+        "T_true": 20168.849999999995,
+        "T_hat": 20156.415699999998,
+        "abs_error_rate": 0.0006165101133677512,
+        "n_post": 987,
+        "n_comment": 1104,
+        "Total_Cost": 2091
+    },
+    {
+        "query_name": "query_5_138.graph",
+        "T_true": 61633.84,
+        "T_hat": 61596.792199999996,
+        "abs_error_rate": 0.0006010951126848543,
+        "n_post": 793,
+        "n_comment": 311,
+        "Total_Cost": 1104
+    },
+    {
+        "query_name": "query_8_59.graph",
+        "T_true": 7214.4,
+        "T_hat": 7212.2945,
+        "abs_error_rate": 0.0002918468618318454,
+        "n_post": 18,
+        "n_comment": 1,
+        "Total_Cost": 19
+    },
+    {
+        "query_name": "query_8_54.graph",
+        "T_true": 2182732.0799999996,
+        "T_hat": 2183277.2245,
+        "abs_error_rate": 0.00024975328167642195,
+        "n_post": 301,
+        "n_comment": 38,
+        "Total_Cost": 339
+    },
+    {
+        "query_name": "query_7_53.graph",
+        "T_true": 0.0,
+        "T_hat": 0.0,
+        "abs_error_rate": 0.0,
+        "n_post": 7,
+        "n_comment": 0,
+        "Total_Cost": 7
+    }
+]

@@ -9,5 +9,5 @@ venv/
 # parler_data/
 # amazon_data/
 # datasets/
-*.csv
-*.json
+# *.csv
+# *.json
