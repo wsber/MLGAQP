@@ -14,7 +14,7 @@ if project_root not in sys.path:
     sys.path.append(project_root)
 from pythonProject.src.Structure_first.fastest_pipeline import FastestGraphConverter, FastestEstimateMerger
 from pythonProject.src.Structure_first.graph_sample import FastestRunner
-from pythonProject.src.algorithms.exact_subgraph_match import ExactSubgraphMatcher
+from pythonProject.src.Runner.exact_subgraph_match import ExactSubgraphMatcher
 from pythonProject.src.algorithms.proxy_sample import ProxyStratifiedSampler, compute_T_true
 
 # 一级测试数据集

@@ -20,7 +20,7 @@
 
 ---
 
-###  A. 数据集与查询负载 (Datasets & Workloads)
+###  0.1. 数据集与查询负载 (Datasets & Workloads)
 
 实验基于 3 个真实的属性图/多模态图数据集开展：
 
@@ -41,7 +41,7 @@
 
 ---
 
-###  B. ML 谓词架构与模型选型 (ML Predicates: Oracle vs. Proxy)
+###  0.2. ML 谓词架构与模型选型 (ML Predicates: Oracle vs. Proxy)
 
 每个原子 ML 谓词 $\mathcal{P}_i$ 均配置一个**高精度 Oracle 模型**（用于精确无偏验证）和一个**轻量级 Proxy 模型**（用于高效近似打分与引导分层重要性采样）：
 
@@ -56,7 +56,7 @@
 
 ---
 
-###  C. 硬件实验环境 (Hardware Setup)
+###  0.3. 硬件实验环境 (Hardware Setup)
 
 论文所有实验均在以下配置的高性能服务器上完成测试与评测：
 * **操作系统**：Ubuntu 22.04 LTS
@@ -65,6 +65,48 @@
 * **图形计算卡 (GPU)**：$4 \times$ NVIDIA GeForce RTX 3090 GPUs (24GB VRAM)
 
 > **⚠️ 注意**：每个 workload 包含数百个复杂的子图同构与大模型谓词评估，全量执行耗时数小时并需要每个 workload 预留至少 100GB 磁盘空间。**本仓库已为所有 workload 预先提供了计算完成的精确真值 (Ground Truth, GT)**，复现时无需重新运行昂贵的全量匹配与全量 Oracle 验证。
+
+### 0.4. 项目目录结构说明 (Repository Structure)
+
+本项目由底层的 **C++ 采样加速引擎 (`cProject`)** 与上层的 **Python 代理引导采样算法框架 (`pythonProject`)** 协同构成。整体目录结构如下：
+
+```text
+PROXY/
+├── cProject/                                   # [C++ 核心引擎] 负责候选空间构建、树采样与语义投影权重估计
+│   ├── build/                                  # 预编译二进制目录（包含编译就绪的 Fastest 可执行程序）
+│   ├── driver/                                 # C++ 入口文件 (subgraph-cardinality-estimation.cc)
+│   ├── lib/                                    # 图数据结构、CS 构建、均匀树采样等底层算法库
+│   └── CMakeLists.txt                          # C++ 项目 CMake 编译配置文件
+│
+├── datasets/                                   # [数据与结果存储] 存放三大工作负载的数据图、查询图与实验结果
+│   ├── parler/                                 # Parler 单谓词工作负载 (data_graph / query_graph / ground_truth / results)
+│   ├── parler-e/                               # Parler-E 多谓词扩展工作负载
+│   └── amazon/                                 # Amazon 多模态复杂异构图工作负载
+│
+├── Model/                                      # [ML 模型库] 存放 Oracle 真值模型与 Proxy 代理模型权重及配置
+│
+├── pythonProject/                              # [Python 实验框架] PROXY 算法实现、基准对比、流水线控制与绘图
+│   └── src/
+│       ├── algorithms/                         # PROXY 核心算法实现
+│       │   ├── exact_subgraph_match.py         # 精确子图同构匹配实现脚本
+│       │   ├── compute_truth.py                # 精确真值 (Ground Truth, GT) 计算与谓词聚合验证类
+│       │   └── proxy_sample.py                 # 代理引导的分层重要性采样 (POSSA) 核心算法与消融变体实现
+│       │
+│       ├── baseline/                           # 基准方法实现库
+│       │   ├── ...                             # 论文基础基线 (ENUM, FASTEST-ORACLE, WEE 等)
+│       │   └── ...                             # Rebuttal 新增对比方法 (如 Ψ + ABAE, Cascade-Filter 等)
+│       │
+│       ├── runner/                             # 执行调度器 (Runners)
+│       │   └── ...                             # 封装调用 C++ 引擎与 Python 采样模块的端到端运行脚本
+│       │
+│       └── RQS/                                # 实验可视化与图表绘制脚本 (绘制论文中 RQ1 ~ RQ4 的全部图表)
+│
+├── scripts/                                    # [自动化脚本] 一键复现 Shell 脚本 (run_all_experiments.sh 等)
+└── ...                                         # 历史遗留与调试辅助代码（正处于持续解耦与重构删改中）
+
+```
+
+---
 
 ## 1. 一键复现 (One-Click Reproduction)
 
@@ -78,94 +120,187 @@ bash scripts/run_all_experiments.sh
 
 ## 2. 分步执行流水线 (Step-by-Step Pipeline)
 
-如果您希望深入了解每个步骤的细节或仅复现特定模块，请按照以下 A~F 的步骤依次运行，以获取各项 Baseline 和本论文所提方法（$\text{PROXY}$）的输出结果。
+如果您希望分阶段检查流水线细节、复现论文中特定的研究问题（Research Questions, RQs），或单独运行某个对比基线，请按顺序执行步骤 **A 至 F**。
 
-### A. 计算精确真值 (Ground Truth / EXACT)
+### 2.1. 计算精确真值 (Ground Truth / EXACT)
 
-本步骤用于获取没有任何采样误差的精准查询结果。(建议跳过直接使用GT文件)
 
+通过穷举 + Oracle验证所有子图匹配嵌入（Embeddings），获取不含任何采样噪声的精确真值。(建议跳过直接使用GT文件)
 
 1. **精确子图匹配**：运行 `exact_subgraph_match.py`，该脚本将调用底层的 C++ 引擎执行精确子图匹配，并保存中间结果。
 2. **谓词验证与聚合**：运行 `EXACT.py`，使用查询对应的 Oracle 谓词验证上述匹配结果，并进行最终聚合计算（支持 `agg_mode={count, sum}`）。
+```bash
+python pythonProject/src/algorithms/EXACT.py --dataset dataset_test --agg_mode count
+python pythonProject/src/algorithms/EXACT.py --dataset dataset_test --agg_mode sum
+```
+* **输出文件：** `results/T_true_*_count.json` 与 `results/T_true_*_sum.json`
+---
 
-### B. $\text{PROXY}$ `count` / `sum` 实验
+### 2.2. $\text{PROXY}$ `count` / `sum` 实验
 
 针对聚合模式为 `count` 和 `sum` 的情况进行实验验证。
 
-1. **预处理与权重估计**：运行 `Projection_Sampling_and_Weight_Estimation_Runner.py`，得到论文中所定义的投影采样空间 $\hat{\Psi}$ 以及权重估计器 $\hat{w}(\psi)$。
-2. **核心性能与消融实验 (RQ1, RQ2 & RQ4)**：运行 `Proxy_Guided_Stratified_Importance_Sampling_Runner.py` 在 $\hat{\Psi}$ 上执行分层重要性采样：
-   
-   * **对于 RQ1 & RQ2 (核心性能对比)**：
-     仅启用 PROXY 方法，配置目标采样率梯度：
-     ```python
-     methods_map = {
-         "PROXY": sampler.run_possa,
-     }
-     # --target_ticks 0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9
-     ```
-     输出结果保存于：`allocation_strategy_comparison_{agg_mode}.csv`
-     
-   * **对于 RQ4 (组件消融研究)**：
-     在固定的采样率下运行各个消融变体：
-     ```python
-     methods_map = {
-         "PROJ": sampler.run_baseline_uniform,
-         "PO": sampler.run_baseline_proxy,
-         "WO": sampler.run_baseline_weight_only,
-         "MAB": sampler.run_mab_sampling,
-         "PROXY": sampler.run_possa,
-     }
-     # --target_ticks 0.1
-     ```
-     输出结果保存于：`allocation_strategy_comparison_ablation_{agg_mode}.csv`
+#### 2.2.1. 投影权重估计与实例聚合 (Projection Weight Estimation & Aggregation)
+将查询图分解为语义投影 $\hat{\Psi}$，通过 C++ 引擎估计各语义投影的权重 $\hat{w}(\psi)$：
 
-3. **鲁棒性与退化分析 (RQ3)**：运行 `Sensitivity_single_predicate_Runner.py` 与 `Sensitivity_multi_predicate_comparation.py`，分别检验在单谓词退化情况和多谓词复杂情况下的算法鲁棒性。
-   输出结果保存于：`proxy_quality_ablation_{agg_mode}.csv`
+下面是运行命令, 假定你将项目放到了目录 /home/hp/projects/PROXY 下
+```bash
+python Projection_Sampling_and_Weight_Estimation_Runner.py \
+  --base_dir /home/hp/projects/PROXY \
+  --dataset parler \
+  --sample_budget 60000 \
+  --agg_func count \
+  --table1 post \
+  --table2 comment
 
+python Projection_Sampling_and_Weight_Estimation_Runner.py \
+  --base_dir /home/wangshuo/projects/PROXY \
+  --dataset amazon_extend \
+  --sample_budget 60000 \
+  --agg_func sum \
+  --sum_table product \
+  --sum_col price \
+  --sum_label 12 \
+  --table1 product \
+  --table2 review
 
-### C. $\text{PROXY}$ `avg` 实验
+```
 
-基于论文中**定理 6** 提出的比率估计器，`avg` 的结果无需重新运行 C++ 引擎，而是通过离线合成已完成的 `count` 和 `sum` 实验数据来获得。
-
-1. **合并真值 (Ground Truth 合成)**：
-   根据公式 $\tau_{\text{avg}} = \tau_{\text{sum}} / \tau_{\text{count}}$ 计算 `avg` 真值。
-   * **输入**：`T_true_*_sum.json` 与 `T_true_*_count.json`
-   * **输出**：生成 `T_true_*_avg.json`
-
-2. **合成实验结果与误差计算**：
-   运行比率对齐脚本（遵循 $\hat{\tau}_{\text{avg}} = \hat{\tau}_{\text{sum}} / \hat{\tau}_{\text{count}}$ 逻辑）：
-   * **核心与消融策略 (RQ1, RQ2, RQ4)**：合并 `allocation_strategy_comparison_{count,sum}.csv` $\rightarrow$ 得到 `allocation_strategy_comparison_avg.csv`
-   * **基线 Fastest-Oracle**：合并 `FastestO_budget_curve_{count,sum}.csv` $\rightarrow$ 得到 `FastestO_budget_curve_avg.csv`
-   * **基线 Exact-structureO**：合并 `Exact_structureO_budget_curve_{count,sum}.csv` $\rightarrow$ 得到 `Exact_structureO_budget_curve_avg.csv`
-
-3. **自适应数据列提取**：
-   合成脚本内置自动适配机制，可根据数据集风格自动抓取所需采样统计列：
-   * **Parler 风格数据集**：自动提取 `n_post` 与 `n_comment`
-   * **Amazon 风格数据集**：自动提取 `n_product` 与 `n_review`
+* **中间输出：** `results/structure_estimate/*.csv`（按单个查询拆分后的原始实例文件）。
+* **最终输出：** `results/aggregated_results/aggregated_list_*.csv`（包含权重 $a$ 与各节点 ML 概率的核心实例紧凑投影空间）。
 
 
-### D. 时间对等协议：计算等效虚拟预算 $B_{\text{virtual}}$
+#### 2.2.2. 核心性能与组件消融实验 (RQ1, RQ2 & RQ4)
+在物化好的核心实例投影空间上执行分层重要性采样：
+* **针对 RQ1 与 RQ2（跨采样率的核心性能对比）：**
+  在渐进采样预算梯度 $\alpha \in [1\%, 90\%]$ 下评估 $\text{PROXY}$ (POSS) 方法：
+  ```bash
+  python pythonProject/src/Runner/Proxy_Guided_Stratified_Importance_Sampling_Runner.py \
+    --dataset dataset_test \
+    --mode performance \
+    --agg_mode sum \
+    --target_ticks 0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9
+  ```
+  * **输出文件：** `results/efficiency/allocation_strategy_comparison_{agg_mode}.csv`
 
-为了公平对比各类算法的效率，我们在统一的时间维度上折算预算。
+* **针对 RQ4（固定预算 $\alpha=10\%$ 下的组件消融研究）：**
+  运行各类消融变体（`UN`: 均匀采样, `PO`: 仅代理采样, `WO`: 仅权重采样, `MAB`: 多臂老虎机, `PROXY`: 完整 POSS）：
+  ```bash
+  python pythonProject/src/Runner/Proxy_Guided_Stratified_Importance_Sampling_Runner.py \
+    --dataset dataset_test \
+    --mode ablation \
+    --agg_mode sum \
+    --target_ticks 0.1
+  ```
+  * **输出文件：** `results/efficiency/allocation_strategy_comparison_ablation_{agg_mode}.csv`
 
-1. **提取调用次数**：读取 `allocation_strategy_comparison_{count,sum}.csv`，提取在指定采样率 $\alpha$ 下，Oracle 模型和 Proxy 模型的实际运行次数 $N_{oi}$ 和 $N_{pi}$。
-2. **折算虚拟预算**：结合当前数据集上 Oracle 模型与 Proxy 模型的平均推理延迟（$c_i$ 与 $c_p^i$），计算总的时间等效虚拟预算 $B_{\text{virtual}}$。
+#### 2.2.3. 敏感性与代理质量衰减分析 (RQ3)
+评估在单谓词代理质量下降以及复杂多谓词噪声场景下算法的鲁棒性：
+```bash
+python pythonProject/src/Runner/Sensitivity_single_predicate_Runner.py --dataset dataset_test
+python pythonProject/src/Runner/Sensitivity_multi_predicate_comparation.py --dataset dataset_test
+```
+* **输出文件：** `results/efficiency/proxy_quality_ablation_{agg_mode}.csv`
 
+---
 
-### E. 基于 $B_{\text{virtual}}$ 评估基准方法 (ENUM & FASTEST-ORACLE)
+### 2.3. `avg` 查询的离线比率合成 (Theorem 6)
+基于论文 **Theorem 6** 提出的比率估计量（$\hat{\tau}_{\text{avg}} = \hat{\tau}_{\text{sum}} / \hat{\tau}_{\text{count}}$），`avg` 结果无需重新运行图采样引擎，而是通过离线合成已完成的 `count` 和 `sum` 实验数据获得。
 
-在统一的虚拟预算下，评估其他基准方法估计 $\hat{\tau}$ 的绝对平均误差 (AAE) 等核心指标。
+1. **合成真值 JSON (Synthesizing Ground Truth)：**
+   根据公式 $\tau_{\text{avg}} = \tau_{\text{sum}} / \tau_{\text{count}}$ 计算精确平均值：
+   * **输入：** `results/T_true_*_sum.json` 与 `results/T_true_*_count.json`
+   * **输出：** 生成 `results/T_true_*_avg.json`
 
-1. **评估 ENUM 基线**：
-   运行 `ENUM.py`，根据等效预算计算 ENUM 方法在当前查询负载下的表现（支持 `agg_mode={count, sum}`）。
-   
-2. **评估 FASTEST-ORACLE 基线**：
-   运行 `FASTEST-ORACLE.py`，调用底层 C++ 引擎的相应算法，在相同的预算下估算目标值 $\hat{\tau}$（支持 `agg_mode={count, sum}`）。
-   * 输出结果将保存于 `results/efficiency` 文件夹中的 `FastestO_budget_curve_{agg_mode}.csv`。
-   * 该文件记录了每个查询 $Q$ 在指定数据集与采样率下，独立运行 $k$ 次（如 $k=5$ 或 $10$）的估计值 $\hat{\tau}$。
+2. **合成实验结果曲线与误差对齐：**
+   通过对公共键 `(query_basename, budget_frac, run_id)` 进行内联结（Inner Join），合并 `count` 与 `sum` 的评估 CSV 文件：
+   ```bash
+   python pythonProject/src/baseline/synthesize_avg_results.py --dataset dataset_test
+   ```
+   * 合并 `allocation_strategy_comparison_{count,sum}.csv` $\rightarrow$ 生成 `allocation_strategy_comparison_avg.csv`
+   * 合并 `FastestO_budget_curve_{count,sum}.csv` $\rightarrow$ 生成 `FastestO_budget_curve_avg.csv`
+   * 合并 `Exact_structureO_budget_curve_{count,sum}.csv` $\rightarrow$ 生成 `Exact_structureO_budget_curve_avg.csv`
 
+3. **自适应数据列提取机制：**
+   合成脚本会自动识别数据集类型，并提取相应的节点采样统计列：
+   * **Parler / Parler-E 数据集：** 自动提取 `n_post` 和 `n_comment`。
+   * **Amazon / Amazon-E 数据集：** 自动提取 `n_product` 和 `n_review`。
 
-### F. 计算理论性能上界 (WEE 渐近线)
+---
 
-1. 运行 `WEE.py`，为每个目标数据集计算其 WEE 理论渐近线指标。
+### 2.4. 基线方法评估 (在严格的 Oracle 预算对齐下)
+为确保在完全相同的物理 Oracle 成本限制（$B = \text{oracle\_cost}_{\text{POSS}}$）下进行公平比较，评估所有基线方法：
+
+1. **FaSTest-Oracle (`FaSTestO`)：**
+   调用 C++ 引擎执行带有短路 Oracle 校验的在线树采样：
+   ```bash
+   # 示例：在 Parler-E 上运行 FaSTestO (SUM 聚合)
+   /home/hp/projects/FaSTest-main/build/Fastest \
+     -d dataset_test --ROOT_LABEL 2 --SAMPLE_BUDGET 30000 \
+     --ESTIMATE_WITH_PREDICATE \
+     --POST_ORACLE_COL ML1_oracle2_probability \
+     --COMMENT_ORACLE_COL ML2_oracle2_probability \
+     --AGG_FUNC sum --SUM_TABLE post --SUM_COL upvotes --SUM_LABEL 2 \
+     --MULTI_PROXY_PROB ML1_proxy4b_probability \
+     --BUDGET_CURVE_IN results/efficiency/allocation_strategy_comparison_sum.csv \
+     --FASTESTO_BUDGET_CURVE --FASTESTO_RUNS 5 \
+     --FASTESTO_BUDGET_CURVE_OUT results/efficiency/FastestO_budget_curve_sum.csv
+   ```
+
+2. **Projection-ABae (`PRO-ABAE.py`)：**
+   将原版两阶段飞行采样（Pilot-Sampling）算法（VLDB 2021）迁移应用到核心实例投影空间：
+   ```bash
+   python pythonProject/src/baseline/PRO-ABAE.py \
+     --dataset_name dataset_test \
+     --ablation_csv results/efficiency/allocation_strategy_comparison_ablation_sum.csv \
+     --t1_proxy ML1_proxy4b_probability --t1_oracle ML1_oracle2_probability \
+     --t2_proxy ML2_proxy1_probability --t2_oracle ML2_oracle2_probability \
+     --workers 16 --runs 10 \
+     --out_csv Projection_ABae_results_sum.csv
+   ```
+
+3. **Proxy-Cascade-Filter (`PSF.py`)：**
+   模拟传统关系表 AQP 的硬剪枝机制（$<0.2$ 舍弃, $>0.3$ 接受），并在 $[0.2, 0.3]$ 灰色地带消耗预算调用 Oracle 验证：
+   ```bash
+   python pythonProject/src/baseline/PSF.py \
+     --dataset dataset_test \
+     --ablation_csv results/efficiency/allocation_strategy_comparison_ablation_sum.csv \
+     --table1 post --table1_proxy ML1_proxy4b_probability --table1_oracle ML1_oracle2_probability \
+     --table2 comment --table2_proxy ML2_proxy1_probability --table2_oracle ML2_oracle2_probability \
+     --t1_low 0.2 --t1_high 0.3 --t2_low 0.2 --t2_high 0.3 \
+     --num_workers 16 \
+     --out_csv PSF_results_sum.csv
+   ```
+
+4. **Exact-structureO / ENUM 基线：**
+   运行 `ENUM.py` 评估基于精确结构匹配并受 Oracle 预算限制的枚举基线。
+
+---
+
+### 2.5. 统计显著性检验与论文图表绘制
+生成所有符合 VLDB/IEEE 出版级标准的 PDF 矢量图，并计算统计假设检验：
+
+1. **误差收敛曲线 (RQ1)：**
+   绘制不同采样预算梯度下的误差收敛 PDF 折线图：
+   ```bash
+   python pythonProject/src/baseline/plot_convergence_curves.py --dataset dataset_test --agg_type sum
+   ```
+2. **偏差分析与箱线图 (RQ2)：**
+   绘制对称相对误差（SymRE）箱线图以展示无偏性分布：
+   ```bash
+   python pythonProject/src/baseline/plot_bias_boxplots.py --dataset dataset_test --budget 0.1
+   ```
+3. **统计显著性检验 (Statistical Significance Testing)：**
+   针对基线方法执行单尾配对 $t$ 检验（$p < 10^{-15}$）与 Wilcoxon 符号秩检验（$p < 10^{-18}$），并验证多轮重复采样的单查询稳定性（$\sigma < 2.0\%$）：
+   ```bash
+   python pythonProject/src/baseline/compare_poss_vs_fastesto.py
+   ```
+
+---
+
+### 2.6. 理论性能上界计算 (`WEE`)
+计算最坏情况执行效率（Worst-case Execution Efficiency, WEE）的理论渐近指标与上界：
+```bash
+python pythonProject/src/algorithms/WEE.py --dataset dataset_test
+```
 ```
