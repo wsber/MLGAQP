@@ -478,7 +478,7 @@ void read_core_nodes_config(const std::string& dataset_base_path) {
         std::string block = (*it)[2].str();
 
         std::string full_query_path =
-            "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/query_graph/" + query_filename;
+            dataset_base_path + "/query_graph/" + query_filename;
 
         std::vector<int> core_query_nodes;
         std::vector<int> predicate_labels;
@@ -522,7 +522,7 @@ void read_core_nodes_config(const std::string& dataset_base_path) {
     std::cout << "[Info] Loaded predicate-label configs for " << query_to_predicate_labels.size() << " queries." << std::endl;
 }
 
-void read_ans(const std::string& dataset) {
+void read_ans(const std::string& dataset_base_path) {
     std::string ans_file_name = query_path;
     cout << ans_file_name << endl;
     std::ifstream ans_in(ans_file_name);
@@ -531,7 +531,7 @@ void read_ans(const std::string& dataset) {
         ans_in >> name >> t >> c;
         if (name.empty() || c.empty()) continue;
         // name = "../dataset/"+dataset+"/query_graph/"+name;
-        name = "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/query_graph/"+name;
+        name = dataset_base_path + "/query_graph/"+name;
         true_cnt[name] = stod(c);
         query_names.push_back(name);
     }
@@ -584,8 +584,9 @@ void read_filter_option(const std::string& opt, const std::string &filter, Cardi
 }
 
 int32_t main(int argc, char *argv[]) {
+    std::string base_dir = "/home/wangshuo/resource/datasets";
     std::string dataset = "dataset_three";
-    std::string parent_dataset = "amazon_data";
+    std::string parent_dataset = "parler";
     std::string data_graph_name = "parler.graph"; // 默认数据图文件名
     std::string ans_file_name = "parler_ans.txt"; // 默认答案文件名
     CardinalityEstimation::CardEstOption opt;
@@ -617,8 +618,10 @@ int32_t main(int argc, char *argv[]) {
                     opt.ub_initial = atoi(argv[i + 1]);
                     break;
                 case '-':
-                    // 在解析命令行参数的循环里加入：
-                    if (std::string(argv[i]) == "--PARENT_DATASET" || std::string(argv[i]) == "-p") {
+                    if (std::string(argv[i]) == "--BASE_DIR" || std::string(argv[i]) == "-b") {
+                        base_dir = argv[++i];
+                        std::cout << "[CLI] Base Dir set to " << base_dir << std::endl;
+                    }else if (std::string(argv[i]) == "--PARENT_DATASET" || std::string(argv[i]) == "-p") {
                         parent_dataset = argv[++i];
                     } else if (std::string(argv[i]) == "--DATA_GRAPH" || std::string(argv[i]) == "-g") {
                         data_graph_name = argv[++i];
@@ -682,11 +685,16 @@ int32_t main(int argc, char *argv[]) {
         }
     }
     std::cout << "[info] SAMPLE_BUDGET:" <<opt.sample_budget<< std::endl;
-    std::string sv_out_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/results/in_estimateW_result.txt";
-    std::string results_dir = "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/results/";
+    std::string dataset_base_path = base_dir + "/" + dataset;
+    std::string results_dir = dataset_base_path + "/results/";
+    std::string sv_out_path = results_dir + "in_estimateW_result.txt";
     std::string sampled_node_count_path = results_dir + "efficiency/sampled_node_count.csv";
     std::string results_summary_path = results_dir + "results_summary_FaSTestO.csv";
-    std::string summary_run1_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/results/result_summarys/" + multi_proxy_prob + "/results_summary_run_1.csv";
+    std::string summary_run1_path = results_dir + "result_summarys/" + multi_proxy_prob + "/results_summary_run_1.csv";
+    std::string ins_csv_out_path = results_dir + "ins_estimateW_result.csv";
+    std::string data_path = dataset_base_path + "/data_graph/" + data_graph_name;
+
+
     std::vector<std::pair<std::string, double>> basic_estimates_for_json;
     CardinalityEstimation::AggFunc agg_func = CardinalityEstimation::AGG_COUNT;
     if (agg_func_str == "sum") agg_func = CardinalityEstimation::AGG_SUM;
@@ -704,7 +712,7 @@ int32_t main(int argc, char *argv[]) {
         std::cout << "[Info] budget_curve_path: " << budget_curve_path << std::endl;
     }
     if (query_path.empty()) {        // query_path = "../dataset/"+dataset+"/"+dataset+"_ans.txt";
-        query_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/ground_truth/parler_ans.txt";
+        query_path = dataset_base_path + "/ground_truth/" + ans_file_name;
     }
     
     if (fastesto_budget_curve_path.empty()) {
@@ -724,12 +732,11 @@ int32_t main(int argc, char *argv[]) {
 
     std::cout << "[info] args:" <<argv<< std::endl;
     std::cout << "[info] summary_run1_path:" <<summary_run1_path<< std::endl;
-    std::string data_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/data_graph/" + data_graph_name;
-    read_ans(dataset);
-    read_core_nodes_config(dataset);
+    
+    read_ans(dataset_base_path);
+    read_core_nodes_config(dataset_base_path);
 
     // --- 准备CSV文件的逻辑保持在main函数中，因为它只需执行一次 ---
-    std::string ins_csv_out_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/results/ins_estimateW_result.csv";
 
 
     size_t max_core_labels = 0;
@@ -775,9 +782,6 @@ int32_t main(int argc, char *argv[]) {
     }
     CardinalityEstimation::FaSTestCardinalityEstimation estimator(&D, opt);
     std::cout << "[info] Query Size:" << pattern_graphs.size()<< std::endl;
-    // std::string dataset_base_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset;
-
-    std::string dataset_base_path = "/home/wangshuo/resource/datasets/" + parent_dataset + "/" + dataset;
 
     if (agg_func == CardinalityEstimation::AGG_SUM) {
         if (sum_table.empty() || sum_col.empty() || sum_label < 0) {

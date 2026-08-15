@@ -131,7 +131,8 @@ def run_allocation_strategy_comparison(
     run_times: int = 5,
     max_workers: int = None,
     target_ticks: list = None,
-    agg_mode_init: str = "sum"
+    agg_mode_init: str = "sum",
+    dir = '/home/wangshuo/projects/PROXY/'
 ):
     """运行四种方法的对比实验"""
     if target_ticks is None:
@@ -140,7 +141,7 @@ def run_allocation_strategy_comparison(
         TARGET_TICKS = target_ticks
     
     # 【修改 1】动态支持不同父级数据目录
-    dir = '/home/wangshuo/projects/PROXY/'
+    
     base_path = dir + f"datasets/{parent_dataset}"
     aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
     
@@ -242,5 +243,6 @@ if __name__ == "__main__":
         run_times=args.run_times,
         max_workers=args.max_workers,
         target_ticks=ticks,
-        agg_mode_init="count"
+        agg_mode_init="count",
+        dir='/home/wangshuo/projects/PROXY/'
     )

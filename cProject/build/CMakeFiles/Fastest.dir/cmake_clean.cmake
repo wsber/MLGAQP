@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Fastest.dir/link.d"
   "CMakeFiles/Fastest.dir/driver/subgraph-cardinality-estimation.cc.o"
   "CMakeFiles/Fastest.dir/driver/subgraph-cardinality-estimation.cc.o.d"
   "Fastest"
