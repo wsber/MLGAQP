@@ -102,7 +102,7 @@ PROXY/
 │       │   └── ...                             # Comparative methods (e.g., PRO-ABAE, PSF cascade filter, etc.)
 │       │
 │       ├── runner/                             # Execution Runners
-│       │   └── ...                             # End-to-end execution scripts interfacing C++ and Python modules
+│       │   └── ...                             # Execution scripts interfacing C++ and Python modules
 │       │
 │       └── RQS/                                # Visualization and plotting scripts for paper figures (RQ1 ~ RQ4)
 │
@@ -114,11 +114,53 @@ PROXY/
 
 ## 1. One-Click Reproduction
 
-The simplest way to reproduce all results is to execute the main control script. Running the following shell script will automatically run the entire pipeline and generate all data required for plotting:
+You can reproduce the experimental results either by running the master all-in-one script across all datasets or by executing dedicated workload-specific one-click scripts.
+
+---
+
+### 1.1. Master Script (All Workloads & Aggregations)
+To automatically run the entire pipeline (including C++ weight materialization and stratified sampling) across all three workloads (`Parler`, `Parler-E`, `Amazon`) and generate all data required for plotting:
+<!-- 
+```bash
+# Ensure your conda environment is activated
+conda activate iogs
+
+# Grant execute permissions and run the master script
+chmod +x scripts/run_all_experiments.sh
+bash scripts/run_all_experiments.sh
+``` -->
+
+---
+
+### 1.2. Workload-Specific One-Click Scripts
+If you wish to evaluate or debug a specific dataset without running the entire multi-hour benchmark suite, dedicated one-click automation scripts are provided.
+
+#### Example: Parler (`COUNT` Mode)
+The script `run_parler_count.sh` automates the end-to-end workflow on the **Parler** workload in `COUNT` mode:
+1. **Step 1 (Offline Projection & Materialization):** Invokes the C++ engine to perform uniform tree sampling, estimate projection extension weights $\hat{w}(\psi)$, and materialize the compact core instance space.
+2. **Step 2 (Online POSSA Sampling):** Executes proxy-guided stratified importance sampling across budget gradients $\alpha \in [1\%, 90\%]$ with 5 independent runs per tick.
 
 ```bash
-bash scripts/run_all_experiments.sh  
+# 1. Activate conda environment
+conda activate iogs
+
+# 2. Grant execution permission
+chmod +x scripts/run_parler_e_count.sh
+
+# 3. Execute the one-click script
+./scripts/run_parler_e_count.sh
 ```
+
+* **Generated Output File:**
+  ```text
+  datasets/parler/results/efficiency/allocation_strategy_comparison_count.csv
+  ```
+
+> **💡 Note on Environment:** 
+> All one-click scripts automatically configure `PYTHONPATH` and export `LD_LIBRARY_PATH` pointing to `${CONDA_PREFIX}/lib` to guarantee runtime compatibility with `GLIBCXX_3.4.31/32`.
+
+---
+
 
 ---
 
