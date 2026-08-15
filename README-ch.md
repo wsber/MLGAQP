@@ -1,5 +1,5 @@
 
-# 实验复现指南 (Evaluation Reproduction)
+# 实验复现指南 (Evaluation Reproduction) - 加速更新中
 
 本仓库提供了复现论文所有实验结果的完整代码。您可以选择通过总脚本一键运行，或者按照完整的流水线分步执行。
 
