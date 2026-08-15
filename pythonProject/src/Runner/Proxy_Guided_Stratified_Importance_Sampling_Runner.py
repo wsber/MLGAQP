@@ -140,12 +140,12 @@ def run_allocation_strategy_comparison(
     else:
         TARGET_TICKS = target_ticks
     
-    # 【修改 1】动态支持不同父级数据目录
+
     
     base_path = dir + f"datasets/{parent_dataset}"
     aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
     
-    # 【修改 2】配置模型名（分别对应你给出的amazon的列）
+
     # config = {
     #     "POST_PROXY": "ML3_proxy2_probability",      # 对应 table1 / Product
     #     "COMMENT_PROXY": "ML2_proxy2_probability",   # 对应 table2 / Review
@@ -170,7 +170,7 @@ def run_allocation_strategy_comparison(
     print(f'********{t_true_path}')
     output_dir = os.path.join(base_path, "results", "efficiency")
     os.makedirs(output_dir, exist_ok=True)
-    output_csv = os.path.join(output_dir, f"allocation_strategy_comparison_{agg_mode}_ADV.csv")
+    output_csv = os.path.join(output_dir, f"allocation_strategy_comparison_{agg_mode}.csv")
     
     print(f"\n{'='*10} 开始分配策略对比实验 (POSSA) {'='*10}")
     
