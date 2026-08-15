@@ -13,6 +13,7 @@ import pandas as pd
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from tqdm import tqdm
 import argparse
+
 project_root = "/home/wangshuo/projects/PROXY"
 if project_root not in sys.path:
     sys.path.append(project_root)
@@ -125,7 +126,7 @@ def _parse_ticks(ticks_str: str):
     return ticks
 
 def run_allocation_strategy_comparison(
-    parent_dataset: str = "amazon_data",
+    parent_dataset: str = "amazon",
     dataset_name: str = "amazon_extend",
     run_times: int = 5,
     max_workers: int = None,
@@ -139,7 +140,8 @@ def run_allocation_strategy_comparison(
         TARGET_TICKS = target_ticks
     
     # 【修改 1】动态支持不同父级数据目录
-    base_path = f"/home/wangshuo/resource/datasets/{parent_dataset}/{dataset_name}"
+    dir = '/home/wangshuo/projects/PROXY/'
+    base_path = dir + f"datasets/{parent_dataset}"
     aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
     
     # 【修改 2】配置模型名（分别对应你给出的amazon的列）
@@ -150,14 +152,14 @@ def run_allocation_strategy_comparison(
     #     "COMMENT_ORACLE": "ML2_oracle1_probability"
     # }
     config = {
-        "POST_PROXY": "ML1_proxy_adv",      # 对应 table1 / post
-        # "POST_PROXY": "ML1_proxy4b_probability", 
+        # "POST_PROXY": "ML1_proxy_adv",      # 对应 table1 / post
+        "POST_PROXY": "ML1_proxy4b_probability", 
         "COMMENT_PROXY": "ML2_proxy1_probability",   # 对应 table2 / comment
         "POST_ORACLE": "ML1_oracle2_probability",
         "COMMENT_ORACLE": "ML2_oracle2_probability"
     }
     agg_mode = agg_mode_init  
-    # 【修改 3】动态拼出 JSON 的全名名称
+    
     safe_post = config["POST_ORACLE"].replace("/", "_")
     safe_comment = config["COMMENT_ORACLE"].replace("/", "_")
     
@@ -219,7 +221,7 @@ def run_allocation_strategy_comparison(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run POSS allocation strategy comparison")
-    parser.add_argument("--parent_dataset", type=str, default="parler_data")
+    parser.add_argument("--parent_dataset", type=str, default="parler")
     parser.add_argument("--dataset_name", type=str, default="dataset_three")
     parser.add_argument("--run_times", type=int, default=5)
     parser.add_argument("--max_workers", type=int, default=None)

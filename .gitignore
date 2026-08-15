@@ -4,10 +4,10 @@ __pycache__/
 .venv/
 venv/
 .ipynb_checkpoints/
-
+datasets/
 # 忽略你之前提到的 Parler & Amazon 原始数据集、中间数据与大文件
 # parler_data/
 # amazon_data/
 # datasets/
-# *.csv
-# *.json
+*.csv
+*.json

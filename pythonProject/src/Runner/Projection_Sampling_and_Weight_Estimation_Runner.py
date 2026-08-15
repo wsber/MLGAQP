@@ -17,24 +17,23 @@ if project_root not in sys.path:
     sys.path.append(project_root)
 from pythonProject.src.Structure_first.fastest_pipeline import FastestGraphConverter, FastestEstimateMerger
 from pythonProject.src.Structure_first.graph_sample import FastestRunner
-# from pythonProject.src.algorithms.precision_submatching import ExactSubgraphMatcher
-from pythonProject.src.algorithms.proxy_sample import ProxyStratifiedSampler, compute_T_true
 
 
-datasets_name = "parler_data"
+
+datasets_name = "parler"
 dataset_name = "dataset_three"
+base_dir='/home/wangshuo/projects/PROXY/'
+
 # dataset_name = "amazon"
 # 原始CSV数据路径
-CSV_BASE_DIR = f"/home/wangshuo/resource/datasets/{datasets_name}/{dataset_name}/csv_data"
+CSV_BASE_DIR = base_dir + f"datasets/{datasets_name}/csv_data"
 # 转换后GraphLib数据存放路径
-Graph_Lib_Dir = f"/home/wangshuo/resource/datasets/{datasets_name}/{dataset_name}/data_graph"
+Graph_Lib_Dir = base_dir + f"datasets/{datasets_name}/data_graph"
 
-runner = FastestRunner(build_dir="/home/wangshuo/projects/FaSTest-main/build")
-print(dataset_name)
-sample_budget = 60000
-extra_args = ["--AGG_FUNC","count","--SUM_TABLE","product","--SUM_COL","average_rating","--SUM_LABEL","12"]
-# extra_args = ["--AGG_FUNC","sum","--SUM_TABLE","post","--SUM_COL","upvotes","--SUM_LABEL","1"]
-# code, output = runner.run(dataset=dataset_name, root_label=-1, sample_budget=sample_budget, extra_args=extra_args)
+# runner = FastestRunner(build_dir="/home/wangshuo/projects/PROXY/cProject/build")
+# print(dataset_name)
+# sample_budget = 60000
+# extra_args = ["--AGG_FUNC","count","--SUM_TABLE","product","--SUM_COL","average_rating","--SUM_LABEL","12"]
 
 def split_results_by_query(input_file_path, output_dir):
     """
@@ -96,12 +95,12 @@ def split_results_by_query(input_file_path, output_dir):
         print(f"[严重错误] 处理过程中发生异常: {e}")
 
 
-base_path = f"/home/wangshuo/resource/datasets/{datasets_name}/{dataset_name}/results/"
+base_path = base_dir + f"datasets/{datasets_name}/results/"
 input_csv_path = os.path.join(base_path, "ins_estimateW_result.csv")
 output_directory = os.path.join(base_path, "structure_estimate/")
 
 # 调用主函数
-# split_results_by_query(input_csv_path, output_directory)
+split_results_by_query(input_csv_path, output_directory)
 
 
 def load_and_prepare_mappings(id_mapping_path: str) -> pd.DataFrame:
@@ -233,7 +232,8 @@ def main(parent_dataset: str, dataset_name: str, table1: str, table2: str):
     print(f"====== 开始处理数据集: {dataset_name} ({table1} & {table2}) ======")
     
     # [修改点4]：路径支持动态化配置，不再将 'parler_data' 写死
-    base_path = f"/home/wangshuo/resource/datasets/{parent_dataset}/{dataset_name}"
+    base_dir='/home/wangshuo/projects/PROXY/'
+    base_path = base_dir + f"datasets/{parent_dataset}"
     estimate_dir = os.path.join(base_path, "results", "structure_estimate")
     id_mapping_path = os.path.join(base_path, "data_graph", "id_mapping.csv")
     
@@ -275,7 +275,7 @@ if __name__ == '__main__':
     # 随时根据需要修改这里的内容
     cfg_parent_dataset = datasets_name      
     cfg_dataset_name   =  dataset_name   # 或 dataset_three等
-    cfg_table1         = "product"          # 或 post   product
-    cfg_table2         = "review"           # 或 comment  review
+    cfg_table1         = "post"          # 或 post   product
+    cfg_table2         = "comment"           # 或 comment  review
     
     main(cfg_parent_dataset, cfg_dataset_name, cfg_table1, cfg_table2)

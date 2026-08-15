@@ -54,18 +54,6 @@ namespace GraphLib
                 oracle_mgr->Load(dataset_path, data_->GetNumVertices());
             }
 
-            // [New] 初始化多源 Oracle (Post + Comment)
-            // void InitMultiOracle(const std::string &dataset_path,
-            //                      const std::string &post_col,
-            //                      const std::string &comment_col)
-            // {
-            //     if (oracle_mgr == nullptr)
-            //     {
-            //         oracle_mgr = new OracleManager();
-            //     }
-            //     // 调用 OracleManager 的 LoadMulti
-            //     oracle_mgr->LoadMulti(dataset_path, data_->GetNumVertices(), post_col, comment_col);
-            // }
 
             void InitMultiOracle(const std::string& dataset_path,
                                 const std::string& table1_name, const std::string& col1, 

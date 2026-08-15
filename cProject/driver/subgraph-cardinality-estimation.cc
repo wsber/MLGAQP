@@ -80,12 +80,7 @@ std::string sum_col;               // 列名，如 "score"
 int sum_label = -1;                // 语义B：指定 3/4/5 中一个，或 post 的 2
 std::mutex g_oracle_mutex;
 
-// 辅助函数：去除文件名后缀
-// std::string get_raw_name(const std::string& filename) {
-//     std::string basename = std::filesystem::path(filename).filename().string();
-//     size_t lastindex = basename.find_last_of(".");
-//     return (lastindex == std::string::npos) ? basename : basename.substr(0, lastindex);
-// }
+
 std::string get_filename_only(const std::string& filepath) {
     return std::filesystem::path(filepath).filename().string();
 }
@@ -415,8 +410,8 @@ void append_fastesto_budget_curve_row(const std::string& csv_path,
     csv_out.close();
 }
 
-void read_core_labels(const std::string& dataset) {
-    std::string config_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/data_graph/user_custom_labels.txt";
+void read_core_labels(const std::string& dataset_base_path) {
+    std::string config_path = dataset_base_path +  "/data_graph/user_custom_labels.txt";
     std::cout << "[Info] Reading core labels configuration from: " << config_path << std::endl;
 
     std::ifstream config_in(config_path);
@@ -440,7 +435,7 @@ void read_core_labels(const std::string& dataset) {
         }
 
         // 构造与 query_names 中一致的完整路径作为 map 的 key
-        std::string full_query_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/query_graph/" + query_filename;
+        std::string full_query_path = dataset_base_path + "/query_graph/" + query_filename;
 
         std::vector<int> labels;
         int label;
@@ -455,8 +450,8 @@ void read_core_labels(const std::string& dataset) {
     std::cout << "[Info] Loaded core label configurations for " << query_to_core_labels.size() << " queries." << std::endl;
 }
 
-void read_core_nodes_config(const std::string& dataset) {
-    std::string config_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/data_graph/core_nodes_config.json";
+void read_core_nodes_config(const std::string& dataset_base_path) {
+    std::string config_path = dataset_base_path + "/data_graph/core_nodes_config.json";
     std::cout << "[Info] Reading core nodes configuration from: " << config_path << std::endl;
 
     std::ifstream fin(config_path);
@@ -591,6 +586,8 @@ void read_filter_option(const std::string& opt, const std::string &filter, Cardi
 int32_t main(int argc, char *argv[]) {
     std::string dataset = "dataset_three";
     std::string parent_dataset = "amazon_data";
+    std::string data_graph_name = "parler.graph"; // 默认数据图文件名
+    std::string ans_file_name = "parler_ans.txt"; // 默认答案文件名
     CardinalityEstimation::CardEstOption opt;
     bool run_with_predicate = false;
     // ===  FastestO 预算曲线模式 ===
@@ -621,7 +618,13 @@ int32_t main(int argc, char *argv[]) {
                     break;
                 case '-':
                     // 在解析命令行参数的循环里加入：
-                    if (std::string(argv[i]) == "--ROOT_LABEL") {
+                    if (std::string(argv[i]) == "--PARENT_DATASET" || std::string(argv[i]) == "-p") {
+                        parent_dataset = argv[++i];
+                    } else if (std::string(argv[i]) == "--DATA_GRAPH" || std::string(argv[i]) == "-g") {
+                        data_graph_name = argv[++i];
+                    } else if (std::string(argv[i]) == "--ANS_FILE") {
+                        ans_file_name = argv[++i];
+                    } else if (std::string(argv[i]) == "--ROOT_LABEL") {
                         opt.root_label = atoi(argv[++i]);
                         std::cout << "[CLI] Root label set to " << opt.root_label << std::endl;
                     } else if (std::string(argv[i]) == "--ROOT_INDEX" ||
@@ -721,7 +724,7 @@ int32_t main(int argc, char *argv[]) {
 
     std::cout << "[info] args:" <<argv<< std::endl;
     std::cout << "[info] summary_run1_path:" <<summary_run1_path<< std::endl;
-    std::string data_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/data_graph/parler.graph";
+    std::string data_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset + "/data_graph/" + data_graph_name;
     read_ans(dataset);
     read_core_nodes_config(dataset);
 
@@ -772,7 +775,9 @@ int32_t main(int argc, char *argv[]) {
     }
     CardinalityEstimation::FaSTestCardinalityEstimation estimator(&D, opt);
     std::cout << "[info] Query Size:" << pattern_graphs.size()<< std::endl;
-    std::string dataset_base_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset;
+    // std::string dataset_base_path = "/home/wangshuo/resource/datasets/amazon_data/" + dataset;
+
+    std::string dataset_base_path = "/home/wangshuo/resource/datasets/" + parent_dataset + "/" + dataset;
 
     if (agg_func == CardinalityEstimation::AGG_SUM) {
         if (sum_table.empty() || sum_col.empty() || sum_label < 0) {
