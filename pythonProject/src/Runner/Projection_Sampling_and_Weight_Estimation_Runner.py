@@ -12,19 +12,18 @@ import numpy as np
 import json
 
 
-project_root = "/home/wangshuo/projects/Neo4j_Exp"
+project_root = "/home/wangshuo/projects/PROXY"
 if project_root not in sys.path:
     sys.path.append(project_root)
 from pythonProject.src.Structure_first.fastest_pipeline import FastestGraphConverter, FastestEstimateMerger
 from pythonProject.src.Structure_first.graph_sample import FastestRunner
-from pythonProject.src.algorithms.precision_submatching import ExactSubgraphMatcher
+# from pythonProject.src.algorithms.precision_submatching import ExactSubgraphMatcher
 from pythonProject.src.algorithms.proxy_sample import ProxyStratifiedSampler, compute_T_true
 
 
-datasets_name = "datasets"
-# datasets_name = "parler_data"
-# dataset_name = "dataset_three"
-dataset_name = "amazon"
+datasets_name = "parler_data"
+dataset_name = "dataset_three"
+# dataset_name = "amazon"
 # 原始CSV数据路径
 CSV_BASE_DIR = f"/home/wangshuo/resource/datasets/{datasets_name}/{dataset_name}/csv_data"
 # 转换后GraphLib数据存放路径

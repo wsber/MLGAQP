@@ -13,7 +13,7 @@ import pandas as pd
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from tqdm import tqdm
 import argparse
-project_root = "/home/wangshuo/projects/Neo4j_Exp"
+project_root = "/home/wangshuo/projects/PROXY"
 if project_root not in sys.path:
     sys.path.append(project_root)
 from pythonProject.src.algorithms.proxy_sample import ProxyStratifiedSampler
@@ -66,10 +66,10 @@ def _process_comparison_single_file(
 
     # === 定义对比方法 ===
     methods_map = {
-        "UN": sampler.run_baseline_uniform,
-        "PO": sampler.run_baseline_proxy,
-        "WO": sampler.run_baseline_weight_only,
-        "MAB": sampler.run_mab_sampling,
+        # "UN": sampler.run_baseline_uniform,
+        # "PO": sampler.run_baseline_proxy,
+        # "WO": sampler.run_baseline_weight_only,
+        # "MAB": sampler.run_mab_sampling,
         "8_POSSA": sampler.run_possa,  # 综合方法 POSSA
     }
     methods_requiring_pilot = {"1_Proxy_Imp_Pilot", "2_ProxyE_Imp_Pilot"}
@@ -150,7 +150,8 @@ def run_allocation_strategy_comparison(
     #     "COMMENT_ORACLE": "ML2_oracle1_probability"
     # }
     config = {
-        "POST_PROXY": "ML1_proxy4b_probability",      # 对应 table1 / post
+        "POST_PROXY": "ML1_proxy_adv",      # 对应 table1 / post
+        # "POST_PROXY": "ML1_proxy4b_probability", 
         "COMMENT_PROXY": "ML2_proxy1_probability",   # 对应 table2 / comment
         "POST_ORACLE": "ML1_oracle2_probability",
         "COMMENT_ORACLE": "ML2_oracle2_probability"
@@ -166,7 +167,7 @@ def run_allocation_strategy_comparison(
     print(f'********{t_true_path}')
     output_dir = os.path.join(base_path, "results", "efficiency")
     os.makedirs(output_dir, exist_ok=True)
-    output_csv = os.path.join(output_dir, f"allocation_strategy_comparison_ablation_{agg_mode}.csv")
+    output_csv = os.path.join(output_dir, f"allocation_strategy_comparison_{agg_mode}_ADV.csv")
     
     print(f"\n{'='*10} 开始分配策略对比实验 (POSSA) {'='*10}")
     
