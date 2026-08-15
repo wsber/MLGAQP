@@ -1,107 +1,338 @@
+# Evaluation & Reproduction Guide (Work in Progress)
 
-# Evaluation Reproduction Guide - Updating
+This repository provides the complete codebase, configurations, and scripts to reproduce all experimental results presented in the paper. Users can either reproduce the entire experimental suite via a **one-click automated script** or execute the pipeline **step-by-step across individual modules**.
 
-This repository provides the complete source code required to reproduce all the experimental results presented in the paper. You can choose to execute everything automatically via a single master script, or run the pipeline step-by-step.
+> **Cost Notice:** Performing real-time inference with heavy deep neural networks or large language models (Oracle models) incurs substantial computational and time costs. To facilitate rapid reproduction and validation, **we have pre-cached the Oracle and Proxy inference results for all queries under the `csv_data/` directory of each dataset for out-of-the-box evaluation.**
+
+---
+
+> ###  Technical Report & Theoretical Proofs
+> For detailed **Case Studies** and the **complete theoretical proofs for uniform tree sampling (Tree Sampling Proofs)**, please refer to the technical report: [**`TR.pdf`**](./TR0.1.pdf) located in the root directory.
+
+> ###  Codebase Notice & Recommended Workflow
+> 1. **Reproducibility & Verification Design:** The current codebase is in its academic open-source stage. To facilitate step-by-step verification of intermediate states, debugging of algorithmic logic, and end-to-end data provenance tracking, the code intentionally retains **granular intermediate result persistence and I/O validation routines**.
+> 2. **Recommended Execution Strategy:**
+>    * **Step 1 (Structural Projection & Weight Materialization):** Run `Projection_Sampling_and_Weight_Estimation_Runner.py`. This **only needs to be executed once** per workload and aggregation type (`COUNT` / `SUM`). It fixes the topological projection space $\hat{\Psi}$ and materializes the structural extension weights $\hat{w}(\psi)$ offline.
+>    * **Step 2 (Sampling Algorithms & Baseline Evaluation):** On top of the materialized $\hat{\Psi}$, you can repeatedly and efficiently run `Proxy_Guided_Stratified_Importance_Sampling_Runner.py` and various baseline scripts to quickly evaluate different sampling strategies, ablation variants, and multi-run random variances.
+> 3. **Continuous Refactoring Roadmap:** Our team will continuously modularize and decouple the codebase, streamline I/O workflows, and optimize execution performance. Stay tuned for future updates.
+
+---
+
+## 0. Experimental Foundation: Datasets & ML Predicate Architecture
+
+Before running experiments, please familiarize yourself with the underlying graph datasets, synthetic query workloads, and machine learning predicate architectures.
+
+---
+
+### 0.1. Datasets & Query Workloads
+
+Experiments are conducted on three real-world attributed/multimodal graph datasets:
+
+1. **`Parler`:** A text-attributed social network dataset comprising **3 distinct vertex labels/types**: users (`user`), posts (`post`), and comments (`comment`).
+2. **`Parler-E`:** Adapted from `Parler`. It escalates label sparsity by subdividing vertex types into disjoint sub-types, expanding the label set to **6 distinct vertex labels**. This drastically reduces query selectivity to evaluate performance in extreme low-selectivity scenarios.
+3. **`Amazon`:** A multimodal heterogeneous graph containing users (`user`), textual reviews (`review`), and product images (`product`). By randomly partitioning vertex types into disjoint sub-types, it features **11 distinct vertex labels** to evaluate structural complexity and multimodal feature integration.
+
+#### Query Generation & Aggregation Constraints
+Query graphs $Q$ are generated via **Random Walks** on the data graph, with aggregate attributes and ML predicates attached:
+* **Aggregation Constraints:** To ensure valid `SUM` and `AVG` aggregations over $Q$, each query must contain at least one numeric attribute:
+  * **`Parler` / `Parler-E`:** The `upvotes` attribute of a `post` vertex.
+  * **`Amazon`:** The `price` or `rating` attribute of a `product` vertex.
+* **Query Scale & Predicate Configurations:**
+  * **`Parler`:** Contains **245** single-predicate queries ($|V(Q)| \in [4, 8]$, $k=1$), with the predicate randomly assigned to 1 `post` or `comment` vertex.
+  * **`Parler-E`:** Contains **115** multi-predicate composite queries ($|V(Q)| \in [4, 8]$, $k \ge 2$), with predicates simultaneously assigned to at least 1 `post` vertex and at least 1 `comment` vertex.
+  * **`Amazon`:** Contains **750** multimodal composite multi-predicate queries ($|V(Q)| \in [3, 8]$, $k \ge 2$), with predicates assigned to at least 1 `product` image vertex and at least 1 `review` text vertex.
+
+---
+
+### 0.2. ML Predicates: Oracle vs. Proxy Models
+
+Each atomic ML predicate $\mathcal{P}_i$ is assigned an **accurate Oracle model** (for exact, unbiased validation) and a **lightweight Proxy model** (for efficient approximate scoring and guiding stratified importance sampling):
+
+| Dataset | Vertex Type | Predicate Semantics ($\mathcal{P}$) | Oracle Model (# Params) | Proxy Model (# Params) | Proxy $F_1$ | Proxy Speedup |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: |
+| **`Amazon`** | `product` | **Image Texture Classification**<br>*(wooden/plastic/metal/fabric/glass?)* | `siglip-so400m-patch14-384`<br>*(878M)* | `siglip-base`<br>*(84M)* | 0.7546 | **$26.8\times$** |
+| | `review` | **Sentiment Analysis**<br>*(positive/negative?)* | `roberta-large-sst2`<br>*(355M)* | `bert-mini-finetuned-sst2`<br>*(11M)* | 0.8890 | **$22.1\times$** |
+| **`Parler`** /<br>**`Parler-E`** | `post` | **Opinion Inference**<br>*(Support/Oppose Donald Trump?)* | `deberta-v2-xxlarge-mnli`<br>*(1.5B)* | `deberta-v3-base-mnli`<br>*(184M)* | 0.7720 | **$42.5\times$** |
+| | `comment` | **Sentiment Analysis**<br>*(positive/negative?)* | `roberta-large-sst2`<br>*(355M)* | `bert-mini-finetuned-sst2`<br>*(11M)* | 0.7876 | **$22.1\times$** |
+
+* **Proxy Quality Tiers ($M_{P1} \sim M_{P4}$):** To evaluate $\text{PROXY}$'s sensitivity to proxy accuracy (RQ3), we construct 4 proxy quality tiers per task by fine-tuning or adopting simpler architectures. Their relative $F_1$ scores decrease monotonically within $[0.65, 0.89]$, while inference speeds increase monotonically.
+
+---
+
+### 0.3. Hardware Setup
+
+All experiments were conducted on a high-performance server with the following specifications:
+* **Operating System:** Ubuntu 22.04 LTS
+* **Processor (CPU):** Dual Intel(R) Xeon(R) Gold 6130 CPUs @ 2.10GHz
+* **Memory (RAM):** 503 GB
+* **Graphics Cards (GPU):** $4 \times$ NVIDIA GeForce RTX 3090 GPUs (24GB VRAM each)
+
+> **⚠️ Notice:** Each workload contains hundreds of complex subgraph isomorphism and ML predicate evaluations. Running full exact matching takes hours and requires at least 100 GB of free disk space per workload. **We provide precomputed Ground Truth (GT) files for all workloads**, allowing you to bypass expensive full-graph matching and exhaustive Oracle evaluations.
+
+---
+
+### 0.4. Repository Structure
+
+The project is structured with a high-performance **C++ sampling engine (`cProject`)** at the lower level and a **Python proxy-guided sampling framework (`pythonProject`)** at the upper level:
+
+```text
+PROXY/
+├── cProject/                                   # [C++ Core Engine] CS construction, tree sampling, and semantic projection weight estimation
+│   ├── build/                                  # Precompiled binary directory (contains the compiled 'Fastest' executable)
+│   ├── driver/                                 # C++ entry point (subgraph-cardinality-estimation.cc)
+│   ├── lib/                                    # Graph data structures, CS builder, uniform tree sampler, etc.
+│   └── CMakeLists.txt                          # CMake configuration file
+│
+├── datasets/                                   # [Data & Results Storage] Data graphs, query graphs, and results for the three workloads
+│   ├── parler/                                 # Parler single-predicate workload (data_graph / query_graph / ground_truth / results)
+│   ├── parler-e/                               # Parler-E multi-predicate expanded workload
+│   └── amazon/                                 # Amazon multimodal heterogeneous graph workload
+│
+├── Model/                                      # [ML Model Repository] Oracle and Proxy model weights and configs
+│
+├── pythonProject/                              # [Python Experimental Framework] PROXY sampling algorithms, baseline evaluations, and plotting
+│   └── src/
+│       ├── algorithms/                         # Core PROXY algorithm implementations
+│       │   ├── exact_subgraph_match.py         # Exact subgraph isomorphism matching script
+│       │   ├── compute_truth.py                # Ground Truth (GT) computation and predicate verification class
+│       │   └── proxy_sample.py                 # Proxy-guided Stratified Sampling (POSSA) and ablation variants
+│       │
+│       ├── baseline/                           # Baseline algorithm library
+│       │   ├── ...                             # Core baselines (ENUM, FASTEST-ORACLE, WEE, etc.)
+│       │   └── ...                             # Comparative methods (e.g., PRO-ABAE, PSF cascade filter, etc.)
+│       │
+│       ├── runner/                             # Execution Runners
+│       │   └── ...                             # End-to-end execution scripts interfacing C++ and Python modules
+│       │
+│       └── RQS/                                # Visualization and plotting scripts for paper figures (RQ1 ~ RQ4)
+│
+├── scripts/                                    # [Automation Scripts] One-click reproduction shell scripts (run_all_experiments.sh, etc.)
+└── ...                                         # Auxiliary utility scripts and configuration files
+```
+
+---
 
 ## 1. One-Click Reproduction
 
-The simplest way to reproduce the results is to run the master script. Execute the following shell script to automatically run the entire pipeline and generate all data required for the experimental figures:
+The simplest way to reproduce all results is to execute the main control script. Running the following shell script will automatically run the entire pipeline and generate all data required for plotting:
 
 ```bash
-bash scripts/run_all_experiments.sh 
+bash scripts/run_all_experiments.sh  
 ```
 
 ---
 
 ## 2. Step-by-Step Pipeline
 
-If you wish to examine the details of each step or reproduce specific modules, please execute steps A through F in sequence to obtain the outputs for all baselines and our proposed method ($\text{PROXY}$).
+If you prefer to inspect individual pipeline stages, reproduce specific Research Questions (RQs), or execute standalone baselines, follow **Steps 2.1 through 2.6** sequentially.
 
-### A. Computing the Ground Truth (EXACT)
+### 2.1. Compute Ground Truth (EXACT)
 
-This step is used to obtain the exact query results without any sampling error.
+Obtain exact query answers free of sampling noise by performing exhaustive subgraph matching followed by Oracle verification *(it is recommended to skip this step and directly use the provided GT files)*.
 
-1. **Exact Subgraph Matching:** Run `exact_subgraph_match.py`. This script invokes the underlying C++ engine to perform exact subgraph matching and saves the intermediate results.
-2. **Predicate Verification and Aggregation:** Run `EXACT.py`. It uses the corresponding Oracle predicates of the queries to verify the matching results and performs the final aggregation calculation (supports `agg_mode={count, sum}`).
+1. **Exact Subgraph Matching:** Run `exact_subgraph_match.py` to invoke the C++ engine to perform exact subgraph matching and save intermediate embeddings.
+2. **Predicate Verification & Aggregation:** Run `EXACT.py` to evaluate Oracle predicates over matching embeddings and perform final aggregation (supports `agg_mode={count, sum}`).
 
-### B. $\text{PROXY}$ Experiments for `count` and `sum`
+```bash
+python pythonProject/src/algorithms/EXACT.py --dataset dataset_test --agg_mode count
+python pythonProject/src/algorithms/EXACT.py --dataset dataset_test --agg_mode sum
+```
+* **Output Files:** `results/T_true_*_count.json` and `results/T_true_*_sum.json`
 
-Conduct experimental validation for the `count` and `sum` aggregation modes.
+---
 
-1. **Preprocessing and Weight Estimation:** Run `Projection_Sampling_and_Weight_Estimation_Runner.py` to construct the projected sampling space $\hat{\Psi}$ and the weight estimator $\hat{w}(\psi)$ defined in the paper.
-2. **Core Performance and Ablation Studies (RQ1, RQ2 & RQ4):** Run `Proxy_Guided_Stratified_Importance_Sampling_Runner.py` to perform stratified importance sampling on $\hat{\Psi}$:
-   
-   * **For RQ1 & RQ2 (Core Performance Comparison):**
-     Enable only the PROXY method and configure the target sampling rate gradient:
-     ```python
-     methods_map = {
-         "PROXY": sampler.run_possa,
-     }
-     --target_ticks 0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9
-     ```
-     Output saved to: `allocation_strategy_comparison_{agg_mode}.csv`
-     
-   * **For RQ4 (Component Ablation Study):**
-     Run various ablation variants at a fixed sampling rate:
-     ```python
-     methods_map = {
-         "PROJ": sampler.run_baseline_uniform,
-         "PO": sampler.run_baseline_proxy,
-         "WO": sampler.run_baseline_weight_only,
-         "MAB": sampler.run_mab_sampling,
-         "PROXY": sampler.run_possa,
-     }
-     --target_ticks 0.1
-     ```
-     Output saved to: `allocation_strategy_comparison_ablation_{agg_mode}.csv`
+### 2.2. $\text{PROXY}$ `count` / `sum` Experiments
 
-3. **Robustness and Degradation Analysis (RQ3):** Run `Sensitivity_single_predicate_Runner.py` and `Sensitivity_multi_predicate_comparation.py` to evaluate the robustness of the algorithm under single-predicate degradation and complex multi-predicate scenarios.
-   Output saved to: `proxy_quality_ablation_{agg_mode}.csv`
+Execute experimental evaluations for `count` and `sum` aggregations.
 
+#### 2.2.1. Projection Weight Estimation & Aggregation
+Decompose each query graph into the semantic projection space $\hat{\Psi}$, estimate structural extension weights $\hat{w}(\psi)$ via the C++ engine, and associate corresponding ML proxy/oracle probabilities:
 
-### C. $\text{PROXY}$ Experiments for `avg`
+* **Parler Dataset (`COUNT` Aggregation Example):**
+```bash
+python pythonProject/src/runner/Projection_Sampling_and_Weight_Estimation_Runner.py \
+  --base_dir $(pwd) \
+  --dataset parler \
+  --sample_budget 60000 \
+  --agg_func count \
+  --table1 post \
+  --table2 comment
+```
 
-Based on the ratio estimator proposed in **Theorem 6**, the `avg` results do not require re-running the C++ engine. Instead, they are obtained by offline synthesis of the completed `count` and `sum` experimental data.
+* **Amazon Dataset (`SUM` Aggregation Example):**
+```bash
+python pythonProject/src/runner/Projection_Sampling_and_Weight_Estimation_Runner.py \
+  --base_dir $(pwd) \
+  --dataset amazon_extend \
+  --sample_budget 60000 \
+  --agg_func sum \
+  --sum_table product \
+  --sum_col price \
+  --sum_label 12 \
+  --table1 product \
+  --table2 review
+```
 
-1. **Synthesizing Ground Truth:**
-   Calculate the `avg` ground truth according to the formula $\tau_{\text{avg}} = \tau_{\text{sum}} / \tau_{\text{count}}$.
-   * **Input:** `T_true_*_sum.json` and `T_true_*_count.json`
-   * **Output:** Generates `T_true_*_avg.json`
+* **Intermediate Output:** `results/structure_estimate/*.csv` (raw instance files partitioned per query).
+* **Final Output:** `results/aggregated_results/aggregated_list_*.csv` (materialized compact projection space containing weights $a$ and node ML probabilities).
 
-2. **Synthesizing Experimental Results and Error Calculation:**
-   Run the ratio alignment script (following the logic $\hat{\tau}_{\text{avg}} = \hat{\tau}_{\text{sum}} / \hat{\tau}_{\text{count}}$):
-   * **Core & Ablation Strategies (RQ1, RQ2, RQ4):** Merge `allocation_strategy_comparison_{count,sum}.csv` $\rightarrow$ obtain `allocation_strategy_comparison_avg.csv`
-   * **Baseline Fastest-Oracle:** Merge `FastestO_budget_curve_{count,sum}.csv` $\rightarrow$ obtain `FastestO_budget_curve_avg.csv`
-   * **Baseline Exact-structureO:** Merge `Exact_structureO_budget_curve_{count,sum}.csv` $\rightarrow$ obtain `Exact_structureO_budget_curve_avg.csv`
+#### 2.2.2. Core Performance & Ablation Studies (RQ1, RQ2 & RQ4)
+Run Proxy-guided Stratified Importance Sampling (POSSA) and ablation variants over the materialized projection space (`aggregated_results/`):
 
-3. **Adaptive Data Column Extraction:**
-   The synthesis script features an automatic adaptation mechanism to extract the necessary sampling statistical columns based on dataset conventions:
-   * **Parler-style Datasets:** Automatically extracts `n_post` and `n_comment`
-   * **Amazon-style Datasets:** Automatically extracts `n_product` and `n_review`
+* **For RQ1 & RQ2 (Core Performance Across Sampling Rates):**
+  Evaluate $\text{PROXY}$ (POSSA) across a progressive budget gradient $\alpha \in [1\%, 90\%]$:
 
+  * *Parler Dataset (`parler` / `dataset_three`):*
+  ```bash
+  python pythonProject/src/runner/Proxy_Guided_Stratified_Importance_Sampling_Runner.py \
+    --parent_dataset parler \
+    --dataset_name dataset_three \
+    --target_ticks "0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9" \
+    --run_times 5 \
+    --max_workers 16
+  ```
 
-### D. Time-Equivalence Protocol: Calculating the Equivalent Virtual Budget $B_{\text{virtual}}$
+  * *Parler-E Dataset (`parler-e` / `dataset_test`):*
+  ```bash
+  python pythonProject/src/runner/Proxy_Guided_Stratified_Importance_Sampling_Runner.py \
+    --parent_dataset parler-e \
+    --dataset_name dataset_test \
+    --target_ticks "0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9" \
+    --run_times 5 \
+    --max_workers 16
+  ```
 
-To ensure a fair comparison of algorithm efficiency, we project the budget into a unified time dimension.
+  * *Amazon Dataset (`amazon` / `amazon_extend`):*
+  ```bash
+  python pythonProject/src/runner/Proxy_Guided_Stratified_Importance_Sampling_Runner.py \
+    --parent_dataset amazon \
+    --dataset_name amazon_extend \
+    --target_ticks "0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9" \
+    --run_times 5 \
+    --max_workers 16
+  ```
+  * **Output File:** `datasets/<parent_dataset>/results/efficiency/allocation_strategy_comparison_{agg_mode}.csv`
 
-1. **Extracting Execution Counts:** Read `allocation_strategy_comparison_{count,sum}.csv` to extract the actual execution counts $N_{oi}$ and $N_{pi}$ of the Oracle and Proxy models at a specified sampling rate $\alpha$.
-2. **Converting to Virtual Budget:** Combined with the average inference latencies ($c_i$ and $c_p^i$) of the Oracle and Proxy models on the current dataset, calculate the total time-equivalent virtual budget $B_{\text{virtual}}$.
+* **For RQ4 (Component Ablation under Fixed Budget $\alpha=10\%$):**
+  Evaluate component variants under a fixed sampling budget (`UN`: Uniform Sampling, `PO`: Proxy-Only, `WO`: Weight-Only, `MAB`: Multi-Armed Bandit, `POSSA`: Full Proposed Method):
+  ```bash
+  python pythonProject/src/runner/Proxy_Guided_Stratified_Importance_Sampling_Runner.py \
+    --parent_dataset parler-e \
+    --dataset_name dataset_test \
+    --target_ticks "0.1" \
+    --run_times 5 \
+    --max_workers 16
+  ```
+  * **Output File:** `datasets/<parent_dataset>/results/efficiency/allocation_strategy_comparison_ablation_{agg_mode}.csv`
 
+#### 2.2.3. Sensitivity & Proxy Quality Degradation Analysis (RQ3)
+Evaluate algorithm robustness against proxy quality degradation and complex multi-predicate noise:
+```bash
+python pythonProject/src/runner/Sensitivity_single_predicate_Runner.py --dataset dataset_test
+python pythonProject/src/runner/Sensitivity_multi_predicate_comparation.py --dataset dataset_test
+```
+* **Output File:** `results/efficiency/proxy_quality_ablation_{agg_mode}.csv`
 
-### E. Evaluating Baselines (ENUM & FASTEST-ORACLE) Based on $B_{\text{virtual}}$
+---
 
-Under the unified virtual budget, evaluate core metrics such as the Absolute Average Error (AAE) of the estimated $\hat{\tau}$ for other baseline methods.
+### 2.3. Offline Ratio Synthesis for `avg` Queries (Theorem 6)
+Based on the ratio estimator proposed in **Theorem 6** ($\hat{\tau}_{\text{avg}} = \hat{\tau}_{\text{sum}} / \hat{\tau}_{\text{count}}$), `avg` results do not require re-running the graph sampling engine; they are synthesized offline from completed `count` and `sum` evaluation data.
 
-1. **Evaluating ENUM Baseline:**
-   Run `ENUM.py` to calculate the performance of the ENUM method under the current query workload based on the equivalent budget (supports `agg_mode={count, sum}`).
-   
-2. **Evaluating FASTEST-ORACLE Baseline:**
-   Run `FASTEST-ORACLE.py` to call the corresponding algorithm in the underlying C++ engine to estimate the target value $\hat{\tau}$ under the same budget (supports `agg_mode={count, sum}`).
-   * The outputs will be saved to the `FastestO_budget_curve_{agg_mode}.csv` file in the `results/efficiency` folder.
-   * This file records the estimated value $\hat{\tau}$ for each query $Q$ after running independently for $k$ times (e.g., $k=5$ or $10$) under the specified dataset and sampling rate.
+1. **Synthesizing Ground Truth JSON:**
+   Calculate exact average values via $\tau_{\text{avg}} = \tau_{\text{sum}} / \tau_{\text{count}}$:
+   * **Inputs:** `results/T_true_*_sum.json` and `results/T_true_*_count.json`
+   * **Output:** Generates `results/T_true_*_avg.json`
 
+2. **Synthesizing Result Curves & Error Alignment:**
+   Merge `count` and `sum` CSV files via an inner join on `(query_basename, budget_frac, run_id)`:
+   ```bash
+   python pythonProject/src/baseline/synthesize_avg_results.py --dataset dataset_test
+   ```
+   * Merge `allocation_strategy_comparison_{count,sum}.csv` $\rightarrow$ `allocation_strategy_comparison_avg.csv`
+   * Merge `FastestO_budget_curve_{count,sum}.csv` $\rightarrow$ `FastestO_budget_curve_avg.csv`
+   * Merge `Exact_structureO_budget_curve_{count,sum}.csv` $\rightarrow$ `Exact_structureO_budget_curve_avg.csv`
 
-### F. Calculating Theoretical Performance Upper Bounds (WEE Asymptote)
+3. **Adaptive Column Extraction:**
+   The synthesis script automatically identifies the dataset schema and extracts corresponding node sampling statistics:
+   * **Parler / Parler-E:** Automatically extracts `n_post` and `n_comment`.
+   * **Amazon / Amazon-E:** Automatically extracts `n_product` and `n_review`.
 
-1. Run `WEE.py` to calculate the Worst-case Execution Efficiency (WEE) theoretical asymptotic metrics for each target dataset.
+---
+
+### 2.4. Baseline Evaluation (Under Strict Oracle Budget Alignment)
+To ensure a fair comparison under identical physical Oracle cost constraints ($B = \text{oracle\_cost}_{\text{POSS}}$), evaluate all baseline methods:
+
+1. **FaSTest-Oracle (`FaSTestO`):**
+   Invoke the C++ engine to perform online tree sampling with short-circuit Oracle verification:
+   ```bash
+   # Example: Run FaSTestO on Parler-E (SUM Aggregation)
+   ./cProject/build/Fastest \
+     -d dataset_test --ROOT_LABEL 2 --SAMPLE_BUDGET 30000 \
+     --ESTIMATE_WITH_PREDICATE \
+     --POST_ORACLE_COL ML1_oracle2_probability \
+     --COMMENT_ORACLE_COL ML2_oracle2_probability \
+     --AGG_FUNC sum --SUM_TABLE post --SUM_COL upvotes --SUM_LABEL 2 \
+     --MULTI_PROXY_PROB ML1_proxy4b_probability \
+     --BUDGET_CURVE_IN datasets/parler-e/results/efficiency/allocation_strategy_comparison_sum.csv \
+     --FASTESTO_BUDGET_CURVE --FASTESTO_RUNS 5 \
+     --FASTESTO_BUDGET_CURVE_OUT datasets/parler-e/results/efficiency/FastestO_budget_curve_sum.csv
+   ```
+
+2. **Projection-ABae (`PRO-ABAE.py`):**
+   Adapts the two-stage pilot-sampling algorithm (VLDB 2021) to the core instance projection space:
+   ```bash
+   python pythonProject/src/baseline/PRO-ABAE.py \
+     --parent_dataset parler-e \
+     --dataset_name dataset_test \
+     --ablation_csv datasets/parler-e/results/efficiency/allocation_strategy_comparison_ablation_sum.csv \
+     --t1_proxy ML1_proxy4b_probability --t1_oracle ML1_oracle2_probability \
+     --t2_proxy ML2_proxy1_probability --t2_oracle ML2_oracle2_probability \
+     --workers 16 --runs 10 \
+     --out_csv Projection_ABae_results_sum.csv
+   ```
+
+3. **Proxy-Cascade-Filter (`PSF.py`):**
+   Simulates traditional relational AQP hard filtering ($<0.2$ discard, $>0.3$ accept), invoking the Oracle only in the $[0.2, 0.3]$ gray zone until the budget is exhausted:
+   ```bash
+   python pythonProject/src/baseline/PSF.py \
+     --parent_dataset parler-e \
+     --dataset dataset_test \
+     --ablation_csv datasets/parler-e/results/efficiency/allocation_strategy_comparison_ablation_sum.csv \
+     --table1 post --t1_proxy ML1_proxy4b_probability --t1_oracle ML1_oracle2_probability \
+     --table2 comment --t2_proxy ML2_proxy1_probability --t2_oracle ML2_oracle2_probability \
+     --t1_low 0.2 --t1_high 0.3 --t2_low 0.2 --t2_high 0.3 \
+     --num_workers 16 \
+     --out_csv PSF_results_sum.csv
+   ```
+
+4. **Exact-structureO / ENUM Baseline:**
+   Run `ENUM.py` to evaluate the exact structural matching baseline subject to the same Oracle budget limits.
+
+---
+
+### 2.5. Statistical Significance Testing & Figure Plotting
+Generate publication-quality vector PDF figures and perform statistical hypothesis testing:
+
+1. **Error Convergence Curves (RQ1):**
+   Plot error convergence curves across sampling budget gradients:
+   ```bash
+   python pythonProject/src/RQS/plot_convergence_curves.py --dataset dataset_test --agg_type sum
+   ```
+2. **Bias Analysis & Boxplots (RQ2):**
+   Plot Symmetric Relative Error (SymRE) boxplots to demonstrate unbiased distribution:
+   ```bash
+   python pythonProject/src/RQS/plot_bias_boxplots.py --dataset dataset_test --budget 0.1
+   ```
+3. **Statistical Significance Testing:**
+   Execute one-tailed paired $t$-tests ($p < 10^{-15}$) and Wilcoxon signed-rank tests ($p < 10^{-18}$) against baseline methods, and verify per-query stability across repeated sampling runs ($\sigma < 2.0\%$):
+   ```bash
+   python pythonProject/src/baseline/compare_poss_vs_fastesto.py
+   ```
+
+---
+
+### 2.6. Theoretical Performance Upper Bound (`WEE`)
+Compute the asymptotic bounds and Worst-case Execution Efficiency (WEE) metrics:
+```bash
+python pythonProject/src/algorithms/WEE.py --dataset dataset_test
 ```
