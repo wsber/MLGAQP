@@ -4,9 +4,15 @@
 # 作用: 仅运行 Parler-E 数据集的 COUNT 聚合模式 (Step 1 权重估计 + Step 2 POSSA 采样)
 # ==============================================================================
 
+# 1. 基础路径与环境配置
+# ==============================================================================
+# 直接指定 iogs 虚拟环境中的 python 绝对路径！
+PYTHON_EXEC="/home/wangshuo/software/anaconda3/envs/proxy/bin/python"
+source /home/wangshuo/software/anaconda3/etc/profile.d/conda.sh
+conda activate proxy
+
 set -e  # 遇到任何错误立即终止脚本执行
 
-# 1. 基础路径与环境配置
 PROJECT_ROOT="/home/wangshuo/projects/PROXY"
 export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH}"
 
@@ -39,7 +45,8 @@ echo "==========================================================================
 # ------------------------------------------------------------------------------
 echo -e "\n[Step 1/2] 正在调用 C++ 引擎估计 COUNT 投影空间权重..."
 
-python "${RUNNER_STEP1}" \
+# 【修复】：使用 $PYTHON_EXEC 替代 python
+"$PYTHON_EXEC" "${RUNNER_STEP1}" \
     --base_dir "${PROJECT_ROOT}" \
     --dataset "${PARENT_DATASET}" \
     --sample_budget ${SAMPLE_BUDGET} \
@@ -54,7 +61,8 @@ echo -e "✅ [Step 1/2] COUNT 投影权重物化已完成！"
 # ------------------------------------------------------------------------------
 echo -e "\n[Step 2/2] 正在执行 COUNT 模式的分层重要性采样实验 (RQ1 & RQ2)..."
 
-python "${RUNNER_STEP2}" \
+# 【修复】：使用 $PYTHON_EXEC 替代 python
+"$PYTHON_EXEC" "${RUNNER_STEP2}" \
     -d ${DATASET_ID} \
     --agg_mode count \
     --target_ticks "${TARGET_TICKS}" \

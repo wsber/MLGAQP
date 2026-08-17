@@ -39,8 +39,8 @@
 推荐使用 Python 3.8+ 环境：
 ```bash
 # 1. 创建并激活 conda 虚拟环境
-conda create -n iogs python=3.8 -y
-conda activate iogs
+conda create -n proxy python=3.8 -y
+conda activate proxy
 
 # 2. 一键安装全部依赖包
 pip install -r requirements.txt
@@ -161,6 +161,16 @@ PROXY/
 
 ---
 
+**注意*:* 如果运行失败请先在控制台运行下面命令:
+```bash
+#  激活 conda 环境
+export LD_LIBRARY_PATH="{your envs lib path}/lib:${LD_LIBRARY_PATH}"
+
+例如: 
+export LD_LIBRARY_PATH="/home/wangshuo/software/anaconda3/envs/proxy/lib:${LD_LIBRARY_PATH}"
+
+```
+
 ### 1.1. 主脚本（所有工作负载与聚合）
 要自动运行完整流水线（包括 C++ 权重物化和分层采样），覆盖全部三个工作负载（`Parler`、`Parler-E`、`Amazon`）并生成绘图所需的全部数据：
 <!-- 
@@ -191,16 +201,16 @@ conda activate iogs
 chmod +x scripts/run_parler_e_count.sh
 
 # 3. 执行一键脚本
-./scripts/run_parler_e_count.sh
+./scripts/run_parler_count.sh
 ```
 
 * **生成的输出文件：**
   ```text
   datasets/parler/results/efficiency/allocation_strategy_comparison_count.csv
+  这个里面包含 N 次 PROXY 运行结果, 以及其他RQ4 消融实验的结果
   ```
 
-> **💡 环境说明：** 
-> 所有一键脚本都会自动配置 `PYTHONPATH`，并导出指向 `${CONDA_PREFIX}/lib` 的 `LD_LIBRARY_PATH`，以确保与 `GLIBCXX_3.4.31/32` 的运行时兼容性。
+
 
 
 ---
@@ -233,8 +243,10 @@ python pythonProject/src/algorithms/EXACT.py --dataset dataset_test --agg_mode s
 
 * **Parler 数据集 (`COUNT` 聚合示例)**：
 ```bash
-python pythonProject/src/runner/Projection_Sampling_and_Weight_Estimation_Runner.py \
-  --base_dir $(pwd) \
+cd pythonProject/src/runner/
+
+python Projection_Sampling_and_Weight_Estimation_Runner.py \
+  --base_dir {your prject base path} \
   --dataset parler \
   --sample_budget 60000 \
   --agg_func count \
@@ -244,7 +256,7 @@ python pythonProject/src/runner/Projection_Sampling_and_Weight_Estimation_Runner
 
 * **Amazon 数据集 (`SUM` 聚合示例)**：
 ```bash
-python pythonProject/src/runner/Projection_Sampling_and_Weight_Estimation_Runner.py \
+python Projection_Sampling_and_Weight_Estimation_Runner.py \
   --base_dir $(pwd) \
   --dataset amazon_extend \
   --sample_budget 60000 \

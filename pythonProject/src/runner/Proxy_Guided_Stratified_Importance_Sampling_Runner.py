@@ -25,6 +25,9 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from tqdm import tqdm
 import argparse
 
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
 project_root = "/home/wangshuo/projects/PROXY"
 if project_root not in sys.path:
     sys.path.append(project_root)
