@@ -8,16 +8,58 @@
 
 ---
 
-> ###  理论证明与技术报告 (Technical Report)
+
+> ###  (1) 快速查看与即时画图 (Instant Verification: 1-Minute Figure Reproduction)
+> **无需等待耗时的分层重要性采样与图匹配！** 我们已将论文全部实验评估的真实结果完整持久化在各数据集的 `datasets/{workload}results/efficiency/` 目录下。
+> 如果您希望**立即验证并复现论文中的全部实验图表（RQ1 ~ RQ4）与显著性检验指标**：
+> 1. 启动 Jupyter Notebook：
+>    ```bash
+>    jupyter notebook pythonProject/src/RQS/RQX.ipynb
+>    ```
+> 2. 点击 **`Run`**，即可直接读取预存数据，秒级渲染出论文中的全部高清矢量图表！
+
+---
+
+> ###  (2) 理论证明补充与技术报告 (Technical Report)
 > 关于论文中涉及的**案例分析 (Case Study)** 详情以及**均匀树采样的完整理论证明 (Tree Sampling Proofs)**，请查阅仓库根目录下的技术报告：[**`TR.pdf`**](./TR0.1.pdf)。
 
-> ###  代码设计说明与运行建议 (Codebase Notice & Workflow)
+> ###  (3) 代码设计说明与运行建议 (Codebase Notice & Workflow)
 > 1. **可复现性与排查设计**：当前代码处于学术开源阶段。为了便于校验各阶段的中间状态、排查算法逻辑并支撑完整的数据复现链条，代码中保留了**较为细致的中间结果落盘与 I/O 校验逻辑**。
 > 2. **推荐实验运行策略**：
 >    * **步骤一（结构投影与权重物化）**：运行 `Projection_Sampling_and_Weight_Estimation_Runner.py`，针对每个工作负载（Workload）及聚合类型（`COUNT` / `SUM`）**仅需执行一次**。该步骤会固定拓扑投影空间 $\hat{\Psi}$ 并离线物化所有投影的结构延伸权重 $\hat{w}(\psi)$。
 >    * **步骤二（采样算法与基准评估）**：在物化完成的 $\hat{\Psi}$ 基础上，可多次高效运行 `Proxy_Guided_Stratified_Importance_Sampling_Runner.py` 及各类基线脚本，快速评测不同采样策略、消融变体和多轮随机方差。
 > 3. **持续重构计划**：我们团队将持续对代码库进行模块化解耦、精简 I/O 流程并优化执行效率，敬请关注后续更新。
 
+
+## (4) 环境配置指南 (Environment Setup)
+
+在运行代码前，请按照以下步骤配置 Python 虚拟环境及编译底层 C++ 采样引擎。
+
+### 1. Python 依赖环境 (Conda)
+推荐使用 Python 3.8+ 环境：
+```bash
+# 1. 创建并激活 conda 虚拟环境
+conda create -n iogs python=3.8 -y
+conda activate iogs
+
+# 2. 一键安装全部依赖包
+pip install -r requirements.txt
+
+### 2. C++ 底层采样引擎编译
+底层图匹配与候选空间树采样引擎基于 C++20 开发，依赖 CMake、Boost 和 GSL：
+```bash
+# 1. 安装系统依赖 (Ubuntu/Debian)
+sudo apt update
+sudo apt install -y build-essential cmake libboost-all-dev libgsl-dev
+
+# 2. 编译生成 Fastest 二进制可执行文件 (已有编译好的程序,下面是重新编译一遍的过程)
+cd cProject
+mkdir -p build && cd build
+cmake ..
+make -j$(nproc)
+cd ../..
+```
+*编译完成后，二进制程序将位于 `cProject/build/Fastest`。*
 ---
 
 ## 0. 实验基础：数据集与 ML 谓词架构

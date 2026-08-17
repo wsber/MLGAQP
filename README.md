@@ -1,22 +1,70 @@
+以下是为您翻译的英文文档，已按照学术开源代码库的专业规范与习惯表达进行微调：
+
+***
+
 # Proxy-Guided Sampling for Approximate Graph Aggregation with Machine Learning Predicates
 
-# Evaluation & Reproduction Guide (Work in Progress)
+# Evaluation & Reproduction Guide (Updating...)
 
-This repository provides the complete codebase, configurations, and scripts to reproduce all experimental results presented in the paper. Users can either reproduce the entire experimental suite via a **one-click automated script** or execute the pipeline **step-by-step across individual modules**.
+This repository provides the complete code and configuration required to reproduce all experimental results reported in the paper. Users can choose to **fully automate the reproduction via a master script** or **execute the pipeline step-by-step by module**.
 
-> **Cost Notice:** Performing real-time inference with heavy deep neural networks or large language models (Oracle models) incurs substantial computational and time costs. To facilitate rapid reproduction and validation, **we have pre-cached the Oracle and Proxy inference results for all queries under the `csv_data/` directory of each dataset for out-of-the-box evaluation.**
+> **Overhead Notice:** Directly invoking Large Language Models or Deep Neural Networks (Oracle models) for real-time inference incurs substantial computational and time costs. To facilitate rapid reproduction and verification, **we have pre-cached all Oracle and Proxy verification results for all queries into the `csv_data/` directory of each dataset, enabling ready-to-use execution.**
 
 ---
 
-> ###  Technical Report & Theoretical Proofs
-> For detailed **Case Studies** and the **complete theoretical proofs for uniform tree sampling (Tree Sampling Proofs)**, please refer to the technical report: [**`TR.pdf`**](./TR0.1.pdf) located in the root directory.
+> ### (1) Instant Verification: 1-Minute Figure Reproduction
+> **No need to wait for time-consuming stratified importance sampling and graph matching!** We have fully persisted the ground-truth evaluation results of all paper experiments under the `datasets/{workload}/results/efficiency/` directory for each dataset.
+> If you wish to **immediately verify and reproduce all experimental figures (RQ1–RQ4) and statistical significance metrics from the paper**:
+> 1. Launch Jupyter Notebook:
+>    ```bash
+>    jupyter notebook pythonProject/src/RQS/RQX.ipynb
+>    ```
+> 2. Click **`Run`** to directly load the pre-cached data and instantly render all high-resolution vector figures presented in the paper!
 
-> ###  Codebase Notice & Recommended Workflow
-> 1. **Reproducibility & Verification Design:** The current codebase is in its academic open-source stage. To facilitate step-by-step verification of intermediate states, debugging of algorithmic logic, and end-to-end data provenance tracking, the code intentionally retains **granular intermediate result persistence and I/O validation routines**.
-> 2. **Recommended Execution Strategy:**
->    * **Step 1 (Structural Projection & Weight Materialization):** Run `Projection_Sampling_and_Weight_Estimation_Runner.py`. This **only needs to be executed once** per workload and aggregation type (`COUNT` / `SUM`). It fixes the topological projection space $\hat{\Psi}$ and materializes the structural extension weights $\hat{w}(\psi)$ offline.
->    * **Step 2 (Sampling Algorithms & Baseline Evaluation):** On top of the materialized $\hat{\Psi}$, you can repeatedly and efficiently run `Proxy_Guided_Stratified_Importance_Sampling_Runner.py` and various baseline scripts to quickly evaluate different sampling strategies, ablation variants, and multi-run random variances.
-> 3. **Continuous Refactoring Roadmap:** Our team will continuously modularize and decouple the codebase, streamline I/O workflows, and optimize execution performance. Stay tuned for future updates.
+---
+
+> ### (2) Technical Report & Supplementary Theoretical Proofs
+> For details regarding the **Case Study** and the **complete theoretical proofs for uniform tree sampling (Tree Sampling Proofs)** mentioned in the paper, please refer to the technical report in the repository root directory: [**`TR.pdf`**](./TR0.1.pdf).
+
+> ### (3) Codebase Design & Workflow Recommendations
+> 1. **Reproducibility & Debugging Design**: The codebase is currently in its academic open-source stage. To facilitate state verification at each stage, algorithm logic debugging, and support a complete data reproduction pipeline, the code retains **detailed intermediate result disk-persistence and I/O validation logic**.
+> 2. **Recommended Execution Strategy**:
+>    * **Step 1 (Structural Projection & Weight Materialization)**: Run `Projection_Sampling_and_Weight_Estimation_Runner.py`. This **only needs to be executed once** for each workload and aggregation type (`COUNT` / `SUM`). This step fixes the topological projection space $\hat{\Psi}$ and offline-materializes the structural extension weights $\hat{w}(\psi)$ for all projections.
+>    * **Step 2 (Sampling Algorithm & Baseline Evaluation)**: Upon completion of the materialized $\hat{\Psi}$, you can efficiently run `Proxy_Guided_Stratified_Importance_Sampling_Runner.py` and various baseline scripts multiple times to rapidly evaluate different sampling strategies, ablation variants, and multi-run stochastic variance.
+> 3. **Ongoing Refactoring Plan**: Our team will continuously modularize and decouple the codebase, streamline I/O workflows, and optimize execution efficiency. Stay tuned for future updates.
+
+---
+
+## (4) Environment Setup
+
+Before running the code, please follow the steps below to set up the Python virtual environment and compile the underlying C++ sampling engine.
+
+### 1. Python Environment (Conda)
+Python 3.8+ is recommended:
+```bash
+# 1. Create and activate conda virtual environment
+conda create -n iogs python=3.8 -y
+conda activate iogs
+
+# 2. Install all dependencies in one click
+pip install -r requirements.txt
+```
+
+### 2. C++ Sampling Engine Compilation
+The underlying graph matching and candidate space tree sampling engine is developed in C++20, depending on CMake, Boost, and GSL:
+```bash
+# 1. Install system dependencies (Ubuntu/Debian)
+sudo apt update
+sudo apt install -y build-essential cmake libboost-all-dev libgsl-dev
+
+# 2. Compile to generate the Fastest binary executable (Pre-compiled binaries are included; the steps below demonstrate recompilation)
+cd cProject
+mkdir -p build && cd build
+cmake ..
+make -j$(nproc)
+cd ../..
+```
+*Upon successful compilation, the binary executable will be located at `cProject/build/Fastest`.*
 
 ---
 
