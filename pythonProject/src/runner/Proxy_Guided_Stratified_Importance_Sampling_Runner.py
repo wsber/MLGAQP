@@ -48,7 +48,7 @@ DATASET_CONFIGS = {
     },
     1: {
         "desc": "Parler1 / Parler-E (多谓词扩展)",
-        "parent_dataset": "parler-e",
+        "parent_dataset": "parler-E",
         "dataset_name": "dataset_test",
         "model_config": {
             "POST_PROXY": "ML1_proxy4b_probability",

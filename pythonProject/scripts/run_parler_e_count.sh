@@ -19,12 +19,13 @@ if [ -n "$CONDA_PREFIX" ]; then
 fi
 
 # 2. 实验参数配置
-DATASET_NAME="dataset_test"    # Parler-E 数据集目录名
+DATASET_NAME="parler-E"    # Parler-E 数据集目录名
 DATASET_ID=1                   # Proxy_Guided_Runner 中 1 对应 Parler-E
 SAMPLE_BUDGET=60000            # C++ 结构采样预算
 RUN_TIMES=5                    # 每个采样率重复 5 轮
 MAX_WORKERS=16                 # 并发进程数
-TARGET_TICKS="0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9"
+# TARGET_TICKS="0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9"
+TARGET_TICKS="0.01,0.05,0.1"
 
 # 脚本路径
 RUNNER_STEP1="${PROJECT_ROOT}/pythonProject/src/runner/Projection_Sampling_and_Weight_Estimation_Runner.py"
