@@ -49,8 +49,7 @@ pip install -r requirements.txt
 底层图匹配与候选空间树采样引擎基于 C++20 开发，依赖 CMake、Boost 和 GSL：
 ```bash
 # 1. 安装系统依赖 (Ubuntu/Debian)
-sudo apt update
-sudo apt install -y build-essential cmake libboost-all-dev libgsl-dev
+conda install -c conda-forge cmake gxx_linux-64 boost gsl -y
 
 # 2. 编译生成 Fastest 二进制可执行文件 (已有编译好的程序,下面是重新编译一遍的过程)
 cd cProject

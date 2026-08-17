@@ -54,8 +54,7 @@ pip install -r requirements.txt
 The underlying graph matching and candidate space tree sampling engine is developed in C++20, depending on CMake, Boost, and GSL:
 ```bash
 # 1. Install system dependencies (Ubuntu/Debian)
-sudo apt update
-sudo apt install -y build-essential cmake libboost-all-dev libgsl-dev
+conda install -c conda-forge cmake gxx_linux-64 boost gsl -y
 
 # 2. Compile to generate the Fastest binary executable (Pre-compiled binaries are included; the steps below demonstrate recompilation)
 cd cProject
