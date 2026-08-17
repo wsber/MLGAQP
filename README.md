@@ -1,3 +1,5 @@
+# Proxy-Guided Sampling for Approximate Graph Aggregation with Machine Learning Predicates
+
 # Evaluation & Reproduction Guide (Work in Progress)
 
 This repository provides the complete codebase, configurations, and scripts to reproduce all experimental results presented in the paper. Users can either reproduce the entire experimental suite via a **one-click automated script** or execute the pipeline **step-by-step across individual modules**.
