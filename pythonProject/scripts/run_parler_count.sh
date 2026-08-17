@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # 脚本名称: run_parler_e_count.sh
-# 作用: 仅运行 Parler-E 数据集的 COUNT 聚合模式 (Step 1 权重估计 + Step 2 POSSA 采样)
+# 作用:  聚合模式 (Step 1 权重估计 + Step 2 POSSA 采样)
 # ==============================================================================
 
 # 1. 基础路径与环境配置
@@ -23,7 +23,7 @@ fi
 
 # 2. 实验参数配置
 PARENT_DATASET="parler"
-DATASET_ID=1                   # 0: parler, 1: parler-e, 2: amazon
+DATASET_ID=0                   # 0: parler, 1: parler-e, 2: amazon
 SAMPLE_BUDGET=60000            # C++ 树采样预算
 RUN_TIMES=5                    # 每个采样率的重复轮数
 MAX_WORKERS=16                 # 并行进程数
