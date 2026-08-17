@@ -195,9 +195,13 @@ conda activate iogs
 
 # 2. Grant execution permission
 chmod +x scripts/run_parler_e_count.sh
+chmod +x scripts/run_parler_count.sh
+chmod +x scripts/run_amazon.sh
 
 # 3. Execute the one-click script
+./scripts/run_parler_count.sh
 ./scripts/run_parler_e_count.sh
+./scripts/run_amazon_count.sh
 ```
 
 * **Generated Output File:**
