@@ -1,3 +1,5 @@
+# Proxy-Guided Sampling for Approximate Graph Aggregation with Machine Learning Predicates
+
 # 实验复现指南 (Evaluation & Reproduction Guide) -正在更新
 
 本仓库提供了复现论文全部实验结果的完整代码与配置。用户可以选择通过总脚本**一键全自动复现**，或按照流水线**分模块逐步执行**。
@@ -112,13 +114,53 @@ PROXY/
 
 ---
 
-## 1. 一键复现 (One-Click Reproduction)
+## 1. 一键复现
 
-最简单的复现方式是直接运行总控脚本。执行以下 Shell 脚本，即可自动跑完全部流程并生成实验绘图所需的所有数据：
+您可以通过运行跨所有数据集的主一体化脚本，或执行专用的工作负载特定一键脚本来复现实验结果。
+
+---
+
+### 1.1. 主脚本（所有工作负载与聚合）
+要自动运行完整流水线（包括 C++ 权重物化和分层采样），覆盖全部三个工作负载（`Parler`、`Parler-E`、`Amazon`）并生成绘图所需的全部数据：
+<!-- 
+```bash
+# 确保您的 conda 环境已激活
+conda activate iogs
+
+# 授予执行权限并运行主脚本
+chmod +x scripts/run_all_experiments.sh
+bash scripts/run_all_experiments.sh
+``` -->
+
+---
+
+### 1.2. 工作负载特定的一键脚本
+如果您希望评估或调试特定数据集，而无需运行整个数小时的基准测试套件，我们提供了专用的一键自动化脚本。
+
+#### 示例：Parler（`COUNT` 模式）
+脚本 `run_parler_count.sh` 在 **Parler** 工作负载的 `COUNT` 模式下自动化端到端工作流：
+1. **步骤 1（离线投影与物化）：** 调用 C++ 引擎执行均匀树采样、估计投影扩展权重 $\hat{w}(\psi)$，并物化紧凑核心实例空间。
+2. **步骤 2（在线 POSSA 采样）：** 在预算梯度 $\alpha \in [1\%, 90\%]$ 上执行代理引导的分层重要性采样，每个刻度进行 5 次独立运行。
 
 ```bash
-bash scripts/run_all_experiments.sh  
+# 1. 激活 conda 环境
+conda activate iogs
+
+# 2. 授予执行权限
+chmod +x scripts/run_parler_e_count.sh
+
+# 3. 执行一键脚本
+./scripts/run_parler_e_count.sh
 ```
+
+* **生成的输出文件：**
+  ```text
+  datasets/parler/results/efficiency/allocation_strategy_comparison_count.csv
+  ```
+
+> **💡 环境说明：** 
+> 所有一键脚本都会自动配置 `PYTHONPATH`，并导出指向 `${CONDA_PREFIX}/lib` 的 `LD_LIBRARY_PATH`，以确保与 `GLIBCXX_3.4.31/32` 的运行时兼容性。
+
 
 ---
 
