@@ -192,26 +192,27 @@ The script `run_parler_count.sh` automates the end-to-end workflow on the **Parl
 ```bash
 # 1. Activate conda environment
 conda activate iogs
-
+cd pythonProject/scripts
 # 2. Grant execution permission
-chmod +x scripts/run_parler_e_count.sh
-chmod +x scripts/run_parler_e_sum.sh
+chmod +x *.sh
 
-chmod +x scripts/run_parler_count.sh
-chmod +x scripts/run_parler_sum.sh
-
-chmod +x scripts/run_amazon_count.sh
-chmod +x scripts/run_amazon_sum.sh
 
 # 3. Execute the one-click script
-./scripts/run_parler_count.sh
-./scripts/run_parler_sum.sh
 
-./scripts/run_parler_e_count.sh
-./scripts/run_parler_e_sum.sh
+./run_all_proxy_experiments.sh
 
-./scripts/run_amazon_count.sh
-./scripts/run_amazon_sum.sh
+OR
+
+./run_parler_count.sh
+./run_parler_sum.sh
+
+./run_parler_e_count.sh
+./run_parler_e_sum.sh
+
+./run_amazon_count.sh
+./run_amazon_sum.sh
+
+./run_all_avg.sh
 ```
 
 **Generated Output File:**
