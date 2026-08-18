@@ -18,7 +18,7 @@ agg_mode = "count"  # 可选值为: "count" 或 "sum"
 # 三个数据集的完整执行参数配置字典
 # 为应对 dataset_test 在 count 和 sum 模式下参数差异较大的情况，本配置支持分模式重写
 WORKLOADS_CONFIG = {
-    "dataset_three": {
+    "parler": {
         "parent_dir": "parler_data",
         "root_label": 1,
         "sample_budget": 60000,

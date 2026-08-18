@@ -1,0 +1,324 @@
+[2026-08-18 15:38:51] [Task 1] 启动 Parler 单谓词 Proxy 质量消融...
+
+============================================================
+🚀 开始 RQ3 消融实验 | 数据集: parler | 模式: SINGLE
+   - 根目录: /home/wangshuo/projects/PROXY
+   - 输出文件: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/proxy_quality_ablation_count.csv
+============================================================
+Evaluating parler:   0%|          | 0/246 [00:00<?, ?it/s]Evaluating parler:   0%|          | 0/246 [00:07<?, ?it/s]
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+Traceback (most recent call last):
+  File "/home/wangshuo/projects/PROXY/pythonProject/src/runner/proxy_quality_runner.py", line 220, in <module>
+    run_proxy_quality_ablation(
+  File "/home/wangshuo/projects/PROXY/pythonProject/src/runner/proxy_quality_runner.py", line 196, in run_proxy_quality_ablation
+    for future in tqdm(as_completed(futures), total=len(futures), desc=f"Evaluating {dataset}"):
+  File "/home/wangshuo/software/anaconda3/envs/proxy/lib/python3.10/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+  File "/home/wangshuo/software/anaconda3/envs/proxy/lib/python3.10/concurrent/futures/_base.py", line 245, in as_completed
+    waiter.event.wait(wait_timeout)
+  File "/home/wangshuo/software/anaconda3/envs/proxy/lib/python3.10/threading.py", line 607, in wait
+    signaled = self._cond.wait(timeout)
+  File "/home/wangshuo/software/anaconda3/envs/proxy/lib/python3.10/threading.py", line 320, in wait
+    waiter.acquire()
+KeyboardInterrupt
+。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+[警告] 代理列 'worst_proxy_probability' 不存在，将使用空列表。
+Traceback (most recent call last):
+  File "/home/wangshuo/projects/PROXY/pythonProject/src/runner/proxy_quality_runner.py", line 220, in <module>
+    run_proxy_quality_ablation(
+  File "/home/wangshuo/projects/PROXY/pythonProject/src/runner/proxy_quality_runner.py", line 196, in run_proxy_quality_ablation
+    for future in tqdm(as_completed(futures), total=len(futures), desc=f"Evaluating {dataset}"):
+  File "/home/wangshuo/software/anaconda3/envs/proxy/lib/python3.10/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+  File "/home/wangshuo/software/anaconda3/envs/proxy/lib/python3.10/concurrent/futures/_base.py", line 245, in as_completed
+    waiter.event.wait(wait_timeout)
+  File "/home/wangshuo/software/anaconda3/envs/proxy/lib/python3.10/threading.py", line 607, in wait
+    signaled = self._cond.wait(timeout)
+  File "/home/wangshuo/software/anaconda3/envs/proxy/lib/python3.10/threading.py", line 320, in wait
+    waiter.acquire()
+KeyboardInterrupt

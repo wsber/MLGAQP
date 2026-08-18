@@ -9,4 +9,281 @@
 
 ========== 开始分配策略对比实验 (POSSA) [parler-E | SUM] ==========
 Workers: 16, 待处理查询文件数: 113, 输入目录: /home/wangshuo/projects/PROXY/datasets/parler-E/results/aggregated_results_sum
-Comparing (parler-E-sum):   0%|          | 0/113 [00:00<?, ?it/s]Comparing (parler-E-sum):   1%|          | 1/113 [00:42<1:18:45, 42.19s/it]Comparing (parler-E-sum):   2%|▏         | 2/113 [00:42<32:23, 17.51s/it]  Comparing (parler-E-sum):   3%|▎         | 3/113 [01:00<32:10, 17.55s/it]Comparing (parler-E-sum):   4%|▎         | 4/113 [01:02<21:06, 11.62s/it]Comparing (parler-E-sum):   4%|▍         | 5/113 [01:03<13:48,  7.67s/it]Comparing (parler-E-sum):   5%|▌         | 6/113 [01:08<12:12,  6.84s/it]Comparing (parler-E-sum):   6%|▌         | 7/113 [01:11<09:52,  5.59s/it]Comparing (parler-E-sum):   7%|▋         | 8/113 [01:17<09:55,  5.67s/it]
+Comparing (parler-E-sum):   0%|          | 0/113 [00:00<?, ?it/s]Comparing (parler-E-sum):   1%|          | 1/113 [00:42<1:18:45, 4[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+Traceback (most recent call last):
+  File "/home/wangshuo/projects/PROXY/pythonProject/src/runner/Proxy_Guided_Stratified_Importance_Sampling_Runner.py", line 326, in <module>
+    run_allocation_strategy_comparison(
+  File "/home/wangshuo/projects/PROXY/pythonProject/src/runner/Proxy_Guided_Stratified_Importance_Sampling_Runner.py", line 268, in run_allocation_strategy_comparison
+    for future in tqdm(as_completed(futures), total=len(futures), desc=f"Comparing ({parent_dataset}-{agg_mode})"):
+  File "/home/wangshuo/software/anaconda3/envs/proxy/lib/python3.10/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+  File "/home/wangshuo/software/anaconda3/envs/proxy/lib/python3.10/concurrent/futures/_base.py", line 245, in as_completed
+    waiter.event.wait(wait_timeout)
+  File "/home/wangshuo/software/anaconda3/envs/proxy/lib/python3.10/threading.py", line 607, in wait
+    signaled = self._cond.wait(timeout)
+  File "/home/wangshuo/software/anaconda3/envs/proxy/lib/python3.10/threading.py", line 320, in wait
+    waiter.acquire()
+KeyboardInterrupt
+ (parler-E-sum):  75%|███████▌  | 85/113 [06:39<01:26,  3.08s/it]Comparing (parler-E-sum):  76%|███████▌  | 86/113 [06:40<01:09,  2.58s/it]Comparing (parler-E-sum):  77%|███████▋  | 87/113 [06:45<01:24,  3.27s/it]Comparing (parler-E-sum):  78%|███████▊  | 88/113 [06:48<01:21,  3.26s/it]Comparing (parler-E-sum):  79%|███████▉  | 89/113 [06:52<01:23,  3.48s/it]Comparing (parler-E-sum):  80%|███████▉  | 90/113 [06:52<00:57,  2.50s/it]Comparing (parler-E-sum):  81%|████████  | 91/113 [07:00<01:25,  3.88s/it]Comparing (parler-E-sum):  81%|████████▏ | 92/113 [07:00<01:00,  2.90s/it]Comparing (parler-E-sum):  82%|████████▏ | 93/113 [07:04<01:01,  3.07s/it]Comparing (parler-E-sum):  83%|████████▎ | 94/113 [07:06<00:52,  2.76s/it]Comparing (parler-E-sum):  84%|████████▍ | 95/113 [07:06<00:35,  1.98s/it]Comparing (parler-E-sum):  85%|████████▍ | 96/113 [07:06<00:26,  1.55s/it]Comparing (parler-E-sum):  86%|████████▌ | 97/113 [07:08<00:24,  1.54s/it]Comparing (parler-E-sum):  87%|████████▋ | 98/113 [07:10<00:23,  1.59s/it]Comparing (parler-E-sum):  88%|████████▊ | 99/113 [07:10<00:17,  1.24s/it]Comparing (parler-E-sum):  88%|████████▊ | 100/113 [07:10<00:12,  1.07it/s]Comparing (parler-E-sum):  89%|████████▉ | 101/113 [07:14<00:22,  1.90s/it]Comparing (parler-E-sum):  90%|█████████ | 102/113 [07:17<00:22,  2.01s/it]Comparing (parler-E-sum):  91%|█████████ | 103/113 [07:30<00:53,  5.39s/it]Comparing (parler-E-sum):  92%|█████████▏| 104/113 [07:34<00:45,  5.01s/it]Comparing (parler-E-sum):  93%|█████████▎| 105/113 [07:41<00:43,  5.49s/it]Comparing (parler-E-sum):  94%|█████████▍| 106/113 [07:42<00:28,  4.13s/it]Comparing (parler-E-sum):  95%|█████████▍| 107/113 [07:51<00:34,  5.78s/it]Comparing (parler-E-sum):  96%|█████████▌| 108/113 [07:55<00:25,  5.09s/it]Comparing (parler-E-sum):  96%|█████████▋| 109/113 [07:59<00:19,  4.88s/it]Comparing (parler-E-sum):  97%|█████████▋| 110/113 [08:04<00:14,  4.84s/it]Comparing (parler-E-sum):  98%|█████████▊| 111/113 [08:49<00:33, 16.77s/it]Comparing (parler-E-sum):  99%|█████████▉| 112/113 [09:08<00:17, 17.73s/it]Comparing (parler-E-sum): 100%|██████████| 113/113 [09:31<00:00, 19.21s/it]Comparing (parler-E-sum): 100%|██████████| 113/113 [09:31<00:00,  5.06s/it]
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+
+[Done] 实验结束，结果已保存至: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/allocation_strategy_comparison_sum.csv
+[2026-08-18 15:18:23] [Task 2] ✅ Parler-E SUM 执行完毕！

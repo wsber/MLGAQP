@@ -1,0 +1,591 @@
+
+========== 启动采样评估 [amazon | COUNT] ==========
+[*] 执行的方法集合: ['UN', 'PO', 'WO', 'MAB', '8_POSSA']
+[*] 输出文件路径: /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/allocation_strategy_comparison_ablation_count.csv
+Sampling (amazon-count):   0%|          | 0/764 [00:00<?, ?it/s]Sampling (amazon-count):   0%|          | 1/764 [00:10<2:11:46, 10.36s/it]Sampling (amazon-count):   0%|          | 2/764 [00:10<58:10,  4.58s/it]  Sampling (amazon-count):   0%|          | 3/764 [00:11<32:12,  2.54s/it]Sampling (amazon-count):   1%|          | 4/764 [00:11<21:11,  1.67s/it]Sampling (amazon-count):   1%|          | 5/764 [00:11<16:14,  1.28s/it]Sampling (amazon-count):   1%|          | 6/764 [00:12<13:42,  1.09s/it]Sampling (amazon-count):   1%|          | 7/764 [00:13<12:18,  1.03it/s]Sampling (amazon-count):   1%|          | 9/764 [00:14<08:17,  1.52it/s]Sampling (amazon-count):   1%|▏         | 11/764 [00:14<05:26,  2.30it/s]Sampling (amazon-count):   2%|▏         | 12/764 [00:14<04:46,  2.62it/s]Sampling (amazon-count):   2%|▏         | 13/764 [00:14<04:00,  3.12it/s]Sampling (amazon-count):   2%|▏         | 14/764 [00:14<03:39,  3.41it/s]Sampling (amazon-count):   2%|▏         | 15/764 [00:15<04:29,  2.78it/s]Sampling (amazon-count):   2%|▏         | 16/764 [00:17<11:20,  1.10it/s]Sampling (amazon-count):   2%|▏         | 17/764 [00:18<11:46,  1.06it/s]Sampling (amazon-count):   2%|▏         | 18/764 [00:21<19:42,  1.59s/it]Sampling (amazon-count):   2%|▏         | 19/764 [00:22<14:45,  1.19s/it]Sampling (amazon-count):   3%|▎         | 20/764 [00:22<12:37,  1.02s/it]Sampling (amazon-count):   3%|▎         | 21/764 [00:23<13:07,  1.06s/it]Sampling (amazon-count):   3%|▎         | 22/764 [00:24<13:18,  1.08s/it]Sampling (amazon-count):   3%|▎         | 23/764 [00:25<09:42,  1.27it/s]Sampling (amazon-count):   3%|▎         | 25/764 [00:26<09:04,  1.36it/s]Sampling (amazon-count):   3%|▎         | 26/764 [00:27<08:41,  1.42it/s]Sampling (amazon-count):   4%|▎         | 27/764 [00:27<08:39,  1.42it/s]Sampling (amazon-count):   4%|▎         | 28/764 [00:29<11:35,  1.06it/s]Sampling (amazon-count):   4%|▍         | 29/764 [00:29<09:24,  1.30it/s]Sampling (amazon-count):   4%|▍         | 31/764 [00:30<06:22,  1.92it/s]Sampling (amazon-count):   4%|▍         | 32/764 [00:30<06:22,  1.92it/s]Sampling (amazon-count):   4%|▍         | 33/764 [00:31<06:38,  1.84it/s]Sampling (amazon-count):   4%|▍         | 34/764 [00:31<06:10,  1.97it/s]Sampling (amazon-count):   5%|▍         | 35/764 [00:31<05:06,  2.37it/s]Sampling (amazon-count):   5%|▍         | 36/764 [00:32<07:27,  1.63it/s]Sampling (amazon-count):   5%|▍         | 37/764 [00:34<09:58,  1.22it/s]Sampling (amazon-count):   5%|▍         | 38/764 [00:37<17:44,  1.47s/it]Sampling (amazon-count):   5%|▌         | 39/764 [00:37<14:07,  1.17s/it]Sampling (amazon-count):   5%|▌         | 41/764 [00:38<09:55,  1.21it/s]Sampling (amazon-count):   5%|▌         | 42/764 [00:39<11:22,  1.06it/s]Sampling (amazon-count):   6%|▌         | 43/764 [00:40<09:38,  1.25it/s]Sampling (amazon-count):   6%|▌         | 44/764 [00:41<09:27,  1.27it/s]Sampling (amazon-count):   6%|▌         | 45/764 [00:41<08:30,  1.41it/s]Sampling (amazon-count):   6%|▌         | 46/764 [00:42<09:15,  1.29it/s]Sampling (amazon-count):   6%|▌         | 47/764 [00:42<07:49,  1.53it/s]Sampling (amazon-count):   6%|▋         | 48/764 [00:43<06:06,  1.95it/s]Sampling (amazon-count):   6%|▋         | 49/764 [00:43<04:54,  2.43it/s]Sampling (amazon-count):   7%|▋         | 50/764 [00:43<05:16,  2.26it/s]Sampling (amazon-count):   7%|▋         | 51/764 [00:44<06:15,  1.90it/s]Sampling (amazon-count):   7%|▋         | 52/764 [00:45<09:50,  1.21it/s]Sampling (amazon-count):   7%|▋         | 53/764 [00:46<09:23,  1.26it/s]Sampling (amazon-count):   7%|▋         | 54/764 [00:49<17:45,  1.50s/it]Sampling (amazon-count):   7%|▋         | 55/764 [00:49<12:57,  1.10s/it]Sampling (amazon-count):   7%|▋         | 56/764 [00:50<11:14,  1.05it/s]Sampling (amazon-count):   7%|▋         | 57/764 [00:51<11:13,  1.05it/s]Sampling (amazon-count):   8%|▊         | 58/764 [00:52<12:13,  1.04s/it]Sampling (amazon-count):   8%|▊         | 59/764 [00:53<12:38,  1.08s/it]Sampling (amazon-count):   8%|▊         | 60/764 [00:54<12:15,  1.04s/it]Sampling (amazon-count):   8%|▊         | 61/764 [00:55<11:59,  1.02s/it]Sampling (amazon-count):   8%|▊         | 62/764 [00:56<09:30,  1.23it/s]Sampling (amazon-count):   8%|▊         | 64/764 [00:57<08:16,  1.41it/s]Sampling (amazon-count):   9%|▊         | 65/764 [00:57<07:45,  1.50it/s]Sampling (amazon-count):   9%|▊         | 66/764 [00:58<07:52,  1.48it/s]Sampling (amazon-count):   9%|▉         | 67/764 [01:00<10:08,  1.15it/s]Sampling (amazon-count):   9%|▉         | 68/764 [01:00<08:46,  1.32it/s]Sampling (amazon-count):   9%|▉         | 69/764 [01:01<08:58,  1.29it/s]Sampling (amazon-count):   9%|▉         | 70/764 [01:01<08:08,  1.42it/s]Sampling (amazon-count):   9%|▉         | 71/764 [01:03<10:44,  1.07it/s]Sampling (amazon-count):   9%|▉         | 72/764 [01:03<08:35,  1.34it/s]Sampling (amazon-count):  10%|▉         | 73/764 [01:04<08:09,  1.41it/s]Sampling (amazon-count):  10%|▉         | 74/764 [01:04<06:09,  1.87it/s]Sampling (amazon-count):  10%|▉         | 75/764 [01:05<06:58,  1.64it/s]Sampling (amazon-count):  10%|█         | 77/764 [01:05<04:26,  2.58it/s]Sampling (amazon-count):  10%|█         | 78/764 [01:06<05:27,  2.09it/s]Sampling (amazon-count):  10%|█         | 79/764 [01:06<04:49,  2.36it/s]Sampling (amazon-count):  10%|█         | 80/764 [01:06<04:48,  2.37it/s]Sampling (amazon-count):  11%|█         | 81/764 [01:08<08:51,  1.28it/s]Sampling (amazon-count):  11%|█         | 82/764 [01:08<06:48,  1.67it/s]Sampling (amazon-count):  11%|█         | 83/764 [01:10<09:31,  1.19it/s]Sampling (amazon-count):  11%|█         | 84/764 [01:10<07:34,  1.49it/s]Sampling (amazon-count):  11%|█         | 85/764 [01:11<07:46,  1.46it/s]Sampling (amazon-count):  11%|█▏        | 86/764 [01:12<10:53,  1.04it/s]Sampling (amazon-count):  11%|█▏        | 87/764 [01:12<08:29,  1.33it/s]Sampling (amazon-count):  12%|█▏        | 88/764 [01:13<07:08,  1.58it/s]Sampling (amazon-count):  12%|█▏        | 90/764 [01:14<06:15,  1.80it/s]Sampling (amazon-count):  12%|█▏        | 91/764 [01:14<05:12,  2.15it/s]Sampling (amazon-count):  12%|█▏        | 92/764 [01:14<04:31,  2.48it/s]Sampling (amazon-count):  12%|█▏        | 93/764 [01:15<06:44,  1.66it/s]Sampling (amazon-count):  12%|█▏        | 94/764 [01:16<05:34,  2.00it/s]Sampling (amazon-count):  12%|█▏        | 95/764 [01:16<05:24,  2.06it/s]Sampling (amazon-count):  13%|█▎        | 98/764 [01:17<04:31,  2.45it/s]Sampling (amazon-count):  13%|█▎        | 100/764 [01:18<04:58,  2.23it/s]Sampling (amazon-count):  13%|█▎        | 101/764 [01:18<04:28,  2.47it/s]Sampling (amazon-count):  13%|█▎        | 102/764 [01:19<04:57,  2.22it/s]Sampling (amazon-count):  13%|█▎        | 103/764 [01:21<09:28,  1.16it/s]Sampling (amazon-count):  14%|█▎        | 104/764 [01:22<09:23,  1.17it/s]Sampling (amazon-count):  14%|█▎        | 105/764 [01:22<08:29,  1.29it/s]Sampling (amazon-count):  14%|█▍        | 106/764 [01:23<06:27,  1.70it/s]Sampling (amazon-count):  14%|█▍        | 107/764 [01:23<05:20,  2.05it/s]Sampling (amazon-count):  14%|█▍        | 108/764 [01:24<08:47,  1.24it/s]Sampling (amazon-count):  14%|█▍        | 109/764 [01:25<06:36,  1.65it/s]Sampling (amazon-count):  14%|█▍        | 110/764 [01:25<05:22,  2.03it/s]Sampling (amazon-count):  15%|█▍        | 111/764 [01:25<04:27,  2.44it/s]Sampling (amazon-count):  15%|█▍        | 112/764 [01:25<04:16,  2.54it/s]Sampling (amazon-count):  15%|█▍        | 113/764 [01:26<06:00,  1.81it/s]Sampling (amazon-count):  15%|█▍        | 114/764 [01:26<04:45,  2.28it/s]Sampling (amazon-count):  15%|█▌        | 115/764 [01:27<04:04,  2.65it/s]Sampling (amazon-count):  15%|█▌        | 116/764 [01:27<04:10,  2.59it/s]Sampling (amazon-count):  15%|█▌        | 117/764 [01:28<06:01,  1.79it/s]Sampling (amazon-count):  15%|█▌        | 118/764 [01:28<04:34,  2.35it/s]Sampling (amazon-count):  16%|█▌        | 119/764 [01:29<06:10,  1.74it/s]Sampling (amazon-count):  16%|█▌        | 120/764 [01:29<05:35,  1.92it/s]Sampling (amazon-count):  16%|█▌        | 121/764 [01:30<06:55,  1.55it/s]Sampling (amazon-count):  16%|█▌        | 122/764 [01:31<05:36,  1.91it/s]Sampling (amazon-count):  16%|█▌        | 123/764 [01:31<04:29,  2.38it/s]Sampling (amazon-count):  16%|█▌        | 124/764 [01:32<05:33,  1.92it/s]Sampling (amazon-count):  16%|█▋        | 125/764 [01:32<05:01,  2.12it/s]Sampling (amazon-count):  16%|█▋        | 126/764 [01:32<03:59,  2.67it/s]Sampling (amazon-count):  17%|█▋        | 128/764 [01:33<04:20,  2.44it/s]Sampling (amazon-count):  17%|█▋        | 129/764 [01:34<05:17,  2.00it/s]Sampling (amazon-count):  17%|█▋        | 131/764 [01:35<06:35,  1.60it/s]Sampling (amazon-count):  17%|█▋        | 132/764 [01:36<07:22,  1.43it/s]Sampling (amazon-count):  17%|█▋        | 133/764 [01:37<08:13,  1.28it/s]Sampling (amazon-count):  18%|█▊        | 134/764 [01:38<06:59,  1.50it/s]Sampling (amazon-count):  18%|█▊        | 135/764 [01:38<06:10,  1.70it/s]Sampling (amazon-count):  18%|█▊        | 137/764 [01:38<03:54,  2.67it/s]Sampling (amazon-count):  18%|█▊        | 138/764 [01:39<04:03,  2.57it/s]Sampling (amazon-count):  18%|█▊        | 140/764 [01:39<02:49,  3.69it/s]Sampling (amazon-count):  18%|█▊        | 141/764 [01:39<03:13,  3.21it/s]Sampling (amazon-count):  19%|█▊        | 142/764 [01:40<03:13,  3.21it/s]Sampling (amazon-count):  19%|█▊        | 143/764 [01:40<03:09,  3.27it/s]Sampling (amazon-count):  19%|█▉        | 144/764 [01:40<03:29,  2.96it/s]Sampling (amazon-count):  19%|█▉        | 145/764 [01:41<03:34,  2.88it/s]Sampling (amazon-count):  19%|█▉        | 146/764 [01:41<03:27,  2.97it/s]Sampling (amazon-count):  20%|█▉        | 149/764 [01:41<01:57,  5.25it/s]Sampling (amazon-count):  20%|█▉        | 150/764 [01:42<02:50,  3.59it/s]Sampling (amazon-count):  20%|█▉        | 151/764 [01:42<02:26,  4.19it/s]Sampling (amazon-count):  20%|██        | 153/764 [01:42<01:51,  5.47it/s]Sampling (amazon-count):  20%|██        | 154/764 [01:42<02:04,  4.90it/s]Sampling (amazon-count):  20%|██        | 155/764 [01:43<01:50,  5.51it/s]Sampling (amazon-count):  21%|██        | 158/764 [01:43<01:22,  7.38it/s]Sampling (amazon-count):  21%|██        | 161/764 [01:43<00:56, 10.67it/s]Sampling (amazon-count):  21%|██▏       | 163/764 [01:44<01:50,  5.46it/s]Sampling (amazon-count):  22%|██▏       | 165/764 [01:44<02:01,  4.93it/s]Sampling (amazon-count):  22%|██▏       | 166/764 [01:45<02:16,  4.38it/s]Sampling (amazon-count):  22%|██▏       | 167/764 [01:45<02:33,  3.89it/s]Sampling (amazon-count):  22%|██▏       | 168/764 [01:45<02:31,  3.95it/s]Sampling (amazon-count):  22%|██▏       | 170/764 [01:46<02:57,  3.34it/s]Sampling (amazon-count):  22%|██▏       | 171/764 [01:46<02:43,  3.63it/s]Sampling (amazon-count):  23%|██▎       | 172/764 [01:47<03:25,  2.88it/s]Sampling (amazon-count):  23%|██▎       | 173/764 [01:47<03:40,  2.68it/s]Sampling (amazon-count):  23%|██▎       | 174/764 [01:48<04:24,  2.23it/s]Sampling (amazon-count):  23%|██▎       | 176/764 [01:48<03:27,  2.84it/s]Sampling (amazon-count):  23%|██▎       | 177/764 [01:48<03:04,  3.19it/s]Sampling (amazon-count):  23%|██▎       | 178/764 [01:49<02:35,  3.78it/s]Sampling (amazon-count):  23%|██▎       | 179/764 [01:49<02:47,  3.49it/s]Sampling (amazon-count):  24%|██▎       | 180/764 [01:49<02:31,  3.86it/s]Sampling (amazon-count):  24%|██▎       | 181/764 [01:49<02:42,  3.58it/s]Sampling (amazon-count):  24%|██▍       | 182/764 [01:50<02:36,  3.71it/s]Sampling (amazon-count):  24%|██▍       | 184/764 [01:51<03:57,  2.44it/s]Sampling (amazon-count):  24%|██▍       | 186/764 [01:51<02:49,  3.40it/s]Sampling (amazon-count):  25%|██▍       | 188/764 [01:51<02:02,  4.70it/s]Sampling (amazon-count):  25%|██▍       | 189/764 [01:51<02:00,  4.76it/s]Sampling (amazon-count):  25%|██▍       | 190/764 [01:52<02:14,  4.28it/s]Sampling (amazon-count):  25%|██▌       | 191/764 [01:52<02:26,  3.92it/s]Sampling (amazon-count):  25%|██▌       | 193/764 [01:53<03:01,  3.14it/s]Sampling (amazon-count):  26%|██▌       | 195/764 [01:53<02:25,  3.91it/s]Sampling (amazon-count):  26%|██▌       | 196/764 [01:54<03:00,  3.14it/s]Sampling (amazon-count):  26%|██▌       | 197/764 [01:54<03:53,  2.43it/s]Sampling (amazon-count):  26%|██▌       | 198/764 [01:55<03:27,  2.73it/s]Sampling (amazon-count):  26%|██▌       | 199/764 [01:55<03:20,  2.82it/s]Sampling (amazon-count):  26%|██▌       | 200/764 [01:56<05:37,  1.67it/s]Sampling (amazon-count):  26%|██▋       | 202/764 [01:57<03:43,  2.51it/s]Sampling (amazon-count):  27%|██▋       | 203/764 [01:57<03:24,  2.75it/s]Sampling (amazon-count):  27%|██▋       | 204/764 [01:57<02:48,  3.33it/s]Sampling (amazon-count):  27%|██▋       | 205/764 [01:57<02:52,  3.23it/s]Sampling (amazon-count):  27%|██▋       | 206/764 [01:58<04:07,  2.25it/s]Sampling (amazon-count):  27%|██▋       | 207/764 [01:58<03:17,  2.82it/s]Sampling (amazon-count):  27%|██▋       | 208/764 [01:58<02:40,  3.47it/s]Sampling (amazon-count):  27%|██▋       | 210/764 [01:59<01:54,  4.84it/s]Sampling (amazon-count):  28%|██▊       | 211/764 [01:59<02:41,  3.41it/s]Sampling (amazon-count):  28%|██▊       | 213/764 [02:00<02:52,  3.19it/s]Sampling (amazon-count):  28%|██▊       | 214/764 [02:00<02:37,  3.49it/s]Sampling (amazon-count):  28%|██▊       | 215/764 [02:00<02:46,  3.31it/s]Sampling (amazon-count):  28%|██▊       | 216/764 [02:01<04:12,  2.17it/s]Sampling (amazon-count):  29%|██▊       | 218/764 [02:01<02:46,  3.29it/s]Sampling (amazon-count):  29%|██▊       | 219/764 [02:02<04:14,  2.14it/s]Sampling (amazon-count):  29%|██▉       | 220/764 [02:03<03:38,  2.49it/s]Sampling (amazon-count):  29%|██▉       | 221/764 [02:03<02:55,  3.10it/s]Sampling (amazon-count):  29%|██▉       | 222/764 [02:03<02:43,  3.32it/s]Sampling (amazon-count):  29%|██▉       | 223/764 [02:03<03:04,  2.94it/s]Sampling (amazon-count):  29%|██▉       | 224/764 [02:04<03:21,  2.68it/s]Sampling (amazon-count):  29%|██▉       | 225/764 [02:04<03:15,  2.76it/s]Sampling (amazon-count):  30%|██▉       | 226/764 [02:05<03:21,  2.68it/s]Sampling (amazon-count):  30%|██▉       | 227/764 [02:05<04:35,  1.95it/s]Sampling (amazon-count):  30%|██▉       | 228/764 [02:06<03:41,  2.42it/s]Sampling (amazon-count):  30%|██▉       | 229/764 [02:07<05:27,  1.63it/s]Sampling (amazon-count):  30%|███       | 230/764 [02:07<04:21,  2.04it/s]Sampling (amazon-count):  30%|███       | 231/764 [02:07<03:30,  2.54it/s]Sampling (amazon-count):  30%|███       | 233/764 [02:08<04:06,  2.15it/s]Sampling (amazon-count):  31%|███       | 234/764 [02:08<03:34,  2.48it/s]Sampling (amazon-count):  31%|███       | 235/764 [02:09<03:02,  2.89it/s]Sampling (amazon-count):  31%|███       | 237/764 [02:09<02:08,  4.10it/s]Sampling (amazon-count):  31%|███       | 238/764 [02:10<03:21,  2.61it/s]Sampling (amazon-count):  31%|███▏      | 239/764 [02:10<03:22,  2.59it/s]Sampling (amazon-count):  31%|███▏      | 240/764 [02:10<02:43,  3.21it/s]Sampling (amazon-count):  32%|███▏      | 242/764 [02:11<03:31,  2.47it/s]Sampling (amazon-count):  32%|███▏      | 243/764 [02:11<03:01,  2.87it/s]Sampling (amazon-count):  32%|███▏      | 244/764 [02:12<03:47,  2.29it/s]Sampling (amazon-count):  32%|███▏      | 245/764 [02:13<04:19,  2.00it/s]Sampling (amazon-count):  32%|███▏      | 247/764 [02:14<04:28,  1.92it/s]Sampling (amazon-count):  33%|███▎      | 249/764 [02:14<03:27,  2.48it/s]Sampling (amazon-count):  33%|███▎      | 250/764 [02:15<03:23,  2.53it/s]Sampling (amazon-count):  33%|███▎      | 251/764 [02:15<04:11,  2.04it/s]Sampling (amazon-count):  33%|███▎      | 252/764 [02:16<03:32,  2.41it/s]Sampling (amazon-count):  33%|███▎      | 253/764 [02:16<02:50,  2.99it/s]Sampling (amazon-count):  33%|███▎      | 254/764 [02:16<02:58,  2.86it/s]Sampling (amazon-count):  33%|███▎      | 255/764 [02:17<04:12,  2.02it/s]Sampling (amazon-count):  34%|███▎      | 256/764 [02:17<03:36,  2.35it/s]Sampling (amazon-count):  34%|███▍      | 258/764 [02:18<02:37,  3.21it/s]Sampling (amazon-count):  34%|███▍      | 259/764 [02:18<02:58,  2.82it/s]Sampling (amazon-count):  34%|███▍      | 260/764 [02:18<02:51,  2.94it/s]Sampling (amazon-count):  34%|███▍      | 261/764 [02:18<02:22,  3.54it/s]Sampling (amazon-count):  34%|███▍      | 262/764 [02:19<02:19,  3.59it/s]Sampling (amazon-count):  34%|███▍      | 263/764 [02:19<02:25,  3.44it/s]Sampling (amazon-count):  35%|███▍      | 265/764 [02:20<02:15,  3.68it/s]Sampling (amazon-count):  35%|███▍      | 266/764 [02:20<02:03,  4.04it/s]Sampling (amazon-count):  35%|███▍      | 267/764 [02:20<02:01,  4.08it/s]Sampling (amazon-count):  35%|███▌      | 268/764 [02:20<02:11,  3.76it/s]Sampling (amazon-count):  35%|███▌      | 270/764 [02:20<01:36,  5.10it/s]Sampling (amazon-count):  36%|███▌      | 272/764 [02:21<02:32,  3.22it/s]Sampling (amazon-count):  36%|███▌      | 273/764 [02:22<02:14,  3.64it/s]Sampling (amazon-count):  36%|███▌      | 274/764 [02:22<02:36,  3.13it/s]Sampling (amazon-count):  36%|███▌      | 276/764 [02:23<02:28,  3.28it/s]Sampling (amazon-count):  36%|███▋      | 277/764 [02:23<02:33,  3.16it/s]Sampling (amazon-count):  36%|███▋      | 278/764 [02:23<02:48,  2.88it/s]Sampling (amazon-count):  37%|███▋      | 279/764 [02:24<02:59,  2.70it/s]Sampling (amazon-count):  37%|███▋      | 280/764 [02:25<03:54,  2.06it/s]Sampling (amazon-count):  37%|███▋      | 281/764 [02:25<03:26,  2.34it/s]Sampling (amazon-count):  37%|███▋      | 282/764 [02:25<03:33,  2.25it/s]Sampling (amazon-count):  37%|███▋      | 283/764 [02:26<04:25,  1.82it/s]Sampling (amazon-count):  37%|███▋      | 284/764 [02:26<03:25,  2.34it/s]Sampling (amazon-count):  37%|███▋      | 285/764 [02:27<03:38,  2.19it/s]Sampling (amazon-count):  37%|███▋      | 286/764 [02:27<03:40,  2.17it/s]Sampling (amazon-count):  38%|███▊      | 287/764 [02:28<03:10,  2.50it/s]Sampling (amazon-count):  38%|███▊      | 288/764 [02:28<02:44,  2.89it/s]Sampling (amazon-count):  38%|███▊      | 289/764 [02:28<02:30,  3.16it/s]Sampling (amazon-count):  38%|███▊      | 290/764 [02:28<02:01,  3.91it/s]Sampling (amazon-count):  38%|███▊      | 291/764 [02:29<02:13,  3.55it/s]Sampling (amazon-count):  38%|███▊      | 292/764 [02:29<02:20,  3.36it/s]Sampling (amazon-count):  38%|███▊      | 293/764 [02:29<02:28,  3.17it/s]Sampling (amazon-count):  39%|███▊      | 295/764 [02:30<02:08,  3.64it/s]Sampling (amazon-count):  39%|███▊      | 296/764 [02:30<02:32,  3.08it/s]Sampling (amazon-count):  39%|███▉      | 297/764 [02:30<02:19,  3.34it/s]Sampling (amazon-count):  39%|███▉      | 298/764 [02:31<02:06,  3.68it/s]Sampling (amazon-count):  39%|███▉      | 301/764 [02:31<01:29,  5.16it/s]Sampling (amazon-count):  40%|███▉      | 304/764 [02:31<01:01,  7.50it/s]Sampling (amazon-count):  40%|███▉      | 305/764 [02:32<01:17,  5.90it/s]Sampling (amazon-count):  40%|████      | 307/764 [02:32<01:00,  7.55it/s]Sampling (amazon-count):  40%|████      | 309/764 [02:32<01:03,  7.21it/s]Sampling (amazon-count):  41%|████      | 310/764 [02:32<01:05,  6.97it/s]Sampling (amazon-count):  41%|████      | 311/764 [02:32<01:12,  6.25it/s]Sampling (amazon-count):  41%|████      | 312/764 [02:32<01:07,  6.73it/s]Sampling (amazon-count):  41%|████      | 313/764 [02:33<01:28,  5.12it/s]Sampling (amazon-count):  41%|████      | 314/764 [02:33<02:27,  3.05it/s]Sampling (amazon-count):  41%|████      | 315/764 [02:34<02:22,  3.16it/s]Sampling (amazon-count):  42%|████▏     | 319/764 [02:34<01:20,  5.50it/s]Sampling (amazon-count):  42%|████▏     | 322/764 [02:35<01:14,  5.93it/s]Sampling (amazon-count):  42%|████▏     | 323/764 [02:35<01:55,  3.82it/s]Sampling (amazon-count):  42%|████▏     | 324/764 [02:36<01:56,  3.78it/s]Sampling (amazon-count):  43%|████▎     | 325/764 [02:36<01:42,  4.29it/s]Sampling (amazon-count):  43%|████▎     | 326/764 [02:36<01:53,  3.86it/s]Sampling (amazon-count):  43%|████▎     | 327/764 [02:36<01:44,  4.19it/s]Sampling (amazon-count):  43%|████▎     | 328/764 [02:37<01:49,  3.97it/s]Sampling (amazon-count):  43%|████▎     | 329/764 [02:38<03:35,  2.02it/s]Sampling (amazon-count):  43%|████▎     | 330/764 [02:38<03:46,  1.92it/s]Sampling (amazon-count):  43%|████▎     | 331/764 [02:38<03:09,  2.28it/s]Sampling (amazon-count):  44%|████▎     | 333/764 [02:39<02:13,  3.24it/s]Sampling (amazon-count):  44%|████▎     | 334/764 [02:39<02:33,  2.80it/s]Sampling (amazon-count):  44%|████▍     | 335/764 [02:40<02:48,  2.55it/s]Sampling (amazon-count):  44%|████▍     | 336/764 [02:40<03:09,  2.26it/s]Sampling (amazon-count):  44%|████▍     | 337/764 [02:41<03:27,  2.05it/s]Sampling (amazon-count):  44%|████▍     | 338/764 [02:41<03:03,  2.32it/s]Sampling (amazon-count):  44%|████▍     | 339/764 [02:42<03:08,  2.25it/s]Sampling (amazon-count):  45%|████▍     | 341/764 [02:44<04:45,  1.48it/s]Sampling (amazon-count):  45%|████▍     | 342/764 [02:45<05:23,  1.31it/s]Sampling (amazon-count):  45%|████▍     | 343/764 [02:45<04:43,  1.49it/s]Sampling (amazon-count):  45%|████▌     | 345/764 [02:45<03:09,  2.21it/s]Sampling (amazon-count):  46%|████▌     | 348/764 [02:46<02:04,  3.35it/s]Sampling (amazon-count):  46%|████▌     | 349/764 [02:46<01:50,  3.75it/s]Sampling (amazon-count):  46%|████▌     | 350/764 [02:46<02:09,  3.20it/s]Sampling (amazon-count):  46%|████▌     | 351/764 [02:47<02:01,  3.41it/s]Sampling (amazon-count):  46%|████▌     | 353/764 [02:47<01:31,  4.49it/s]Sampling (amazon-count):  46%|████▋     | 354/764 [02:47<01:54,  3.59it/s]Sampling (amazon-count):  46%|████▋     | 355/764 [02:48<02:34,  2.65it/s]Sampling (amazon-count):  47%|████▋     | 356/764 [02:48<02:30,  2.71it/s]Sampling (amazon-count):  47%|████▋     | 357/764 [02:49<02:35,  2.62it/s]Sampling (amazon-count):  47%|████▋     | 358/764 [02:49<02:16,  2.98it/s]Sampling (amazon-count):  47%|████▋     | 359/764 [02:50<03:12,  2.11it/s]Sampling (amazon-count):  47%|████▋     | 360/764 [02:50<02:39,  2.53it/s]Sampling (amazon-count):  47%|████▋     | 361/764 [02:50<02:16,  2.95it/s]Sampling (amazon-count):  47%|████▋     | 362/764 [02:50<01:48,  3.71it/s]Sampling (amazon-count):  48%|████▊     | 363/764 [02:51<02:08,  3.11it/s]Sampling (amazon-count):  48%|████▊     | 364/764 [02:51<01:54,  3.51it/s]Sampling (amazon-count):  48%|████▊     | 365/764 [02:51<01:44,  3.82it/s]Sampling (amazon-count):  48%|████▊     | 366/764 [02:51<01:26,  4.61it/s]Sampling (amazon-count):  48%|████▊     | 367/764 [02:52<01:40,  3.94it/s]Sampling (amazon-count):  48%|████▊     | 369/764 [02:54<05:07,  1.29it/s]Sampling (amazon-count):  48%|████▊     | 370/764 [02:55<04:22,  1.50it/s]Sampling (amazon-count):  49%|████▊     | 371/764 [02:55<04:12,  1.56it/s]Sampling (amazon-count):  49%|████▊     | 372/764 [02:56<03:21,  1.94it/s]Sampling (amazon-count):  49%|████▉     | 374/764 [02:56<03:08,  2.07it/s]Sampling (amazon-count):  49%|████▉     | 376/764 [02:57<03:09,  2.05it/s]Sampling (amazon-count):  49%|████▉     | 377/764 [02:58<02:57,  2.18it/s]Sampling (amazon-count):  49%|████▉     | 378/764 [02:58<03:12,  2.01it/s]Sampling (amazon-count):  50%|████▉     | 379/764 [02:59<02:44,  2.34it/s]Sampling (amazon-count):  50%|████▉     | 380/764 [02:59<02:16,  2.82it/s]Sampling (amazon-count):  50%|█████     | 382/764 [02:59<01:26,  4.43it/s]Sampling (amazon-count):  50%|█████     | 383/764 [02:59<01:17,  4.94it/s]Sampling (amazon-count):  50%|█████     | 384/764 [02:59<01:10,  5.41it/s]Sampling (amazon-count):  51%|█████     | 386/764 [02:59<00:50,  7.41it/s]Sampling (amazon-count):  51%|█████     | 388/764 [02:59<00:39,  9.49it/s]Sampling (amazon-count):  51%|█████     | 390/764 [03:00<01:12,  5.19it/s]Sampling (amazon-count):  51%|█████     | 391/764 [03:01<02:05,  2.98it/s]Sampling (amazon-count):  51%|█████▏    | 393/764 [03:01<01:46,  3.47it/s]Sampling (amazon-count):  52%|█████▏    | 394/764 [03:02<02:30,  2.45it/s]Sampling (amazon-count):  52%|█████▏    | 395/764 [03:02<02:15,  2.72it/s]Sampling (amazon-count):  52%|█████▏    | 396/764 [03:03<01:58,  3.10it/s]Sampling (amazon-count):  52%|█████▏    | 397/764 [03:03<01:40,  3.66it/s]Sampling (amazon-count):  52%|█████▏    | 399/764 [03:03<01:28,  4.15it/s]Sampling (amazon-count):  52%|█████▏    | 400/764 [03:03<01:20,  4.52it/s]Sampling (amazon-count):  52%|█████▏    | 401/764 [03:04<01:23,  4.35it/s]Sampling (amazon-count):  53%|█████▎    | 403/764 [03:04<00:56,  6.34it/s]Sampling (amazon-count):  53%|█████▎    | 404/764 [03:04<01:09,  5.19it/s]Sampling (amazon-count):  53%|█████▎    | 405/764 [03:04<01:05,  5.51it/s]Sampling (amazon-count):  53%|█████▎    | 407/764 [03:04<01:01,  5.80it/s]Sampling (amazon-count):  54%|█████▎    | 409/764 [03:05<01:09,  5.09it/s]Sampling (amazon-count):  54%|█████▍    | 412/764 [03:05<00:44,  7.84it/s]Sampling (amazon-count):  54%|█████▍    | 414/764 [03:05<00:46,  7.55it/s]Sampling (amazon-count):  54%|█████▍    | 416/764 [03:06<00:39,  8.91it/s]Sampling (amazon-count):  55%|█████▍    | 418/764 [03:06<00:37,  9.19it/s]Sampling (amazon-count):  55%|█████▍    | 420/764 [03:06<00:39,  8.80it/s]Sampling (amazon-count):  55%|█████▌    | 422/764 [03:07<01:21,  4.18it/s]Sampling (amazon-count):  55%|█████▌    | 424/764 [03:07<01:11,  4.76it/s]Sampling (amazon-count):  56%|█████▌    | 425/764 [03:07<01:09,  4.91it/s]Sampling (amazon-count):  56%|█████▌    | 427/764 [03:08<00:58,  5.76it/s]Sampling (amazon-count):  56%|█████▌    | 429/764 [03:08<01:00,  5.56it/s]Sampling (amazon-count):  56%|█████▋    | 430/764 [03:09<01:16,  4.38it/s]Sampling (amazon-count):  57%|█████▋    | 432/764 [03:09<00:57,  5.78it/s]Sampling (amazon-count):  57%|█████▋    | 433/764 [03:09<00:59,  5.56it/s]Sampling (amazon-count):  57%|█████▋    | 435/764 [03:09<00:46,  7.01it/s]Sampling (amazon-count):  57%|█████▋    | 436/764 [03:09<00:53,  6.14it/s]Sampling (amazon-count):  57%|█████▋    | 439/764 [03:09<00:37,  8.59it/s]Sampling (amazon-count):  58%|█████▊    | 440/764 [03:10<00:43,  7.37it/s]Sampling (amazon-count):  58%|█████▊    | 441/764 [03:10<01:04,  5.00it/s]Sampling (amazon-count):  58%|█████▊    | 443/764 [03:10<00:54,  5.86it/s]Sampling (amazon-count):  58%|█████▊    | 445/764 [03:11<00:45,  7.00it/s]Sampling (amazon-count):  58%|█████▊    | 446/764 [03:11<00:54,  5.88it/s]Sampling (amazon-count):  59%|█████▊    | 447/764 [03:11<00:50,  6.31it/s]Sampling (amazon-count):  59%|█████▊    | 448/764 [03:11<01:08,  4.65it/s]Sampling (amazon-count):  59%|█████▉    | 449/764 [03:12<01:18,  4.04it/s]Sampling (amazon-count):  59%|█████▉    | 451/764 [03:12<01:00,  5.19it/s]Sampling (amazon-count):  59%|█████▉    | 453/764 [03:12<00:47,  6.56it/s]Sampling (amazon-count):  59%|█████▉    | 454/764 [03:12<00:52,  5.86it/s]Sampling (amazon-count):  60%|█████▉    | 455/764 [03:13<01:00,  5.09it/s]Sampling (amazon-count):  60%|█████▉    | 456/764 [03:13<00:55,  5.56it/s]Sampling (amazon-count):  60%|█████▉    | 457/764 [03:13<01:17,  3.96it/s]Sampling (amazon-count):  60%|█████▉    | 458/764 [03:13<01:05,  4.71it/s]Sampling (amazon-count):  60%|██████    | 459/764 [03:14<01:12,  4.19it/s]Sampling (amazon-count):  60%|██████    | 460/764 [03:14<01:11,  4.26it/s]Sampling (amazon-count):  60%|██████    | 461/764 [03:14<01:03,  4.76it/s]Sampling (amazon-count):  60%|██████    | 462/764 [03:14<01:08,  4.43it/s]Sampling (amazon-count):  61%|██████    | 463/764 [03:15<01:11,  4.19it/s]Sampling (amazon-count):  61%|██████    | 464/764 [03:15<02:15,  2.22it/s]Sampling (amazon-count):  61%|██████    | 465/764 [03:17<03:37,  1.38it/s]Sampling (amazon-count):  61%|██████▏   | 468/764 [03:17<01:44,  2.83it/s]Sampling (amazon-count):  62%|██████▏   | 470/764 [03:17<01:19,  3.72it/s]Sampling (amazon-count):  62%|██████▏   | 472/764 [03:18<01:17,  3.78it/s]Sampling (amazon-count):  62%|██████▏   | 473/764 [03:18<01:12,  4.02it/s]Sampling (amazon-count):  62%|██████▏   | 474/764 [03:18<01:17,  3.73it/s]Sampling (amazon-count):  62%|██████▏   | 475/764 [03:18<01:06,  4.34it/s]Sampling (amazon-count):  62%|██████▏   | 477/764 [03:19<00:58,  4.92it/s]Sampling (amazon-count):  63%|██████▎   | 478/764 [03:21<02:40,  1.78it/s]Sampling (amazon-count):  63%|██████▎   | 479/764 [03:22<03:18,  1.44it/s]Sampling (amazon-count):  63%|██████▎   | 480/764 [03:22<02:56,  1.61it/s]Sampling (amazon-count):  63%|██████▎   | 481/764 [03:23<02:53,  1.63it/s]Sampling (amazon-count):  63%|██████▎   | 483/764 [03:23<02:08,  2.19it/s]Sampling (amazon-count):  63%|██████▎   | 484/764 [03:24<02:08,  2.19it/s]Sampling (amazon-count):  63%|██████▎   | 485/764 [03:25<03:41,  1.26it/s]Sampling (amazon-count):  64%|██████▎   | 486/764 [03:26<03:10,  1.46it/s]Sampling (amazon-count):  64%|██████▎   | 487/764 [03:27<03:42,  1.25it/s]Sampling (amazon-count):  64%|██████▍   | 488/764 [03:27<03:16,  1.40it/s]Sampling (amazon-count):  64%|██████▍   | 489/764 [03:28<03:15,  1.40it/s]Sampling (amazon-count):  64%|██████▍   | 490/764 [03:28<02:44,  1.67it/s]Sampling (amazon-count):  64%|██████▍   | 491/764 [03:29<03:11,  1.43it/s]Sampling (amazon-count):  64%|██████▍   | 492/764 [03:31<04:08,  1.09it/s]Sampling (amazon-count):  65%|██████▍   | 493/764 [03:31<03:27,  1.30it/s]Sampling (amazon-count):  65%|██████▍   | 494/764 [03:32<03:59,  1.13it/s]Sampling (amazon-count):  65%|██████▍   | 495/764 [03:33<03:23,  1.32it/s]Sampling (amazon-count):  65%|██████▍   | 496/764 [03:34<03:30,  1.27it/s]Sampling (amazon-count):  65%|██████▌   | 497/764 [03:35<04:11,  1.06it/s]Sampling (amazon-count):  65%|██████▌   | 498/764 [03:35<03:16,  1.35it/s]Sampling (amazon-count):  65%|██████▌   | 499/764 [03:36<02:48,  1.57it/s]Sampling (amazon-count):  65%|██████▌   | 500/764 [03:36<02:27,  1.79it/s]Sampling (amazon-count):  66%|██████▌   | 501/764 [03:38<03:55,  1.12it/s]Sampling (amazon-count):  66%|██████▌   | 502/764 [03:38<03:41,  1.18it/s]Sampling (amazon-count):  66%|██████▌   | 503/764 [03:39<02:55,  1.49it/s]Sampling (amazon-count):  66%|██████▌   | 504/764 [03:39<02:36,  1.66it/s]Sampling (amazon-count):  66%|██████▌   | 505/764 [03:39<02:07,  2.03it/s]Sampling (amazon-count):  66%|██████▌   | 506/764 [03:40<02:02,  2.10it/s]Sampling (amazon-count):  66%|██████▋   | 508/764 [03:42<03:03,  1.40it/s]Sampling (amazon-count):  67%|██████▋   | 509/764 [03:42<02:42,  1.57it/s]Sampling (amazon-count):  67%|██████▋   | 510/764 [03:43<02:23,  1.77it/s]Sampling (amazon-count):  67%|██████▋   | 511/764 [03:43<01:56,  2.17it/s]Sampling (amazon-count):  67%|██████▋   | 512/764 [03:43<01:38,  2.55it/s]Sampling (amazon-count):  67%|██████▋   | 513/764 [03:43<01:21,  3.09it/s]Sampling (amazon-count):  67%|██████▋   | 514/764 [03:44<01:26,  2.88it/s]Sampling (amazon-count):  67%|██████▋   | 515/764 [03:45<02:43,  1.52it/s]Sampling (amazon-count):  68%|██████▊   | 516/764 [03:45<02:29,  1.66it/s]Sampling (amazon-count):  68%|██████▊   | 517/764 [03:46<02:32,  1.62it/s]Sampling (amazon-count):  68%|██████▊   | 518/764 [03:46<02:19,  1.76it/s]Sampling (amazon-count):  68%|██████▊   | 519/764 [03:47<02:06,  1.94it/s]Sampling (amazon-count):  68%|██████▊   | 520/764 [03:47<02:05,  1.95it/s]Sampling (amazon-count):  68%|██████▊   | 522/764 [03:48<01:31,  2.65it/s]Sampling (amazon-count):  69%|██████▊   | 524/764 [03:48<01:10,  3.40it/s]Sampling (amazon-count):  69%|██████▊   | 525/764 [03:48<01:12,  3.31it/s]Sampling (amazon-count):  69%|██████▉   | 526/764 [03:49<01:14,  3.18it/s]Sampling (amazon-count):  69%|██████▉   | 527/764 [03:49<01:29,  2.64it/s]Sampling (amazon-count):  69%|██████▉   | 528/764 [03:50<01:24,  2.80it/s]Sampling (amazon-count):  69%|██████▉   | 529/764 [03:50<01:15,  3.10it/s]Sampling (amazon-count):  69%|██████▉   | 530/764 [03:50<01:21,  2.87it/s]Sampling (amazon-count):  70%|██████▉   | 531/764 [03:51<01:21,  2.86it/s]Sampling (amazon-count):  70%|██████▉   | 533/764 [03:51<00:54,  4.23it/s]Sampling (amazon-count):  70%|██████▉   | 534/764 [03:51<00:57,  4.01it/s]Sampling (amazon-count):  70%|███████   | 535/764 [03:52<01:47,  2.13it/s]Sampling (amazon-count):  70%|███████   | 536/764 [03:53<01:40,  2.27it/s]Sampling (amazon-count):  70%|███████   | 537/764 [03:53<01:18,  2.89it/s]Sampling (amazon-count):  70%|███████   | 538/764 [03:53<01:03,  3.56it/s]Sampling (amazon-count):  71%|███████   | 539/764 [03:53<00:51,  4.33it/s]Sampling (amazon-count):  71%|███████   | 541/764 [03:53<00:36,  6.05it/s]Sampling (amazon-count):  71%|███████   | 543/764 [03:53<00:33,  6.58it/s]Sampling (amazon-count):  71%|███████   | 544/764 [03:54<00:35,  6.17it/s]Sampling (amazon-count):  71%|███████▏  | 545/764 [03:54<00:35,  6.16it/s]Sampling (amazon-count):  72%|███████▏  | 547/764 [03:54<00:43,  5.03it/s]Sampling (amazon-count):  72%|███████▏  | 548/764 [03:55<01:06,  3.23it/s]Sampling (amazon-count):  72%|███████▏  | 549/764 [03:56<01:31,  2.35it/s]Sampling (amazon-count):  72%|███████▏  | 550/764 [03:56<01:27,  2.44it/s]Sampling (amazon-count):  72%|███████▏  | 551/764 [03:56<01:14,  2.88it/s]Sampling (amazon-count):  72%|███████▏  | 552/764 [03:56<01:03,  3.32it/s]Sampling (amazon-count):  72%|███████▏  | 553/764 [03:57<01:07,  3.15it/s]Sampling (amazon-count):  73%|███████▎  | 554/764 [03:57<01:00,  3.48it/s]Sampling (amazon-count):  73%|███████▎  | 557/764 [03:57<00:38,  5.40it/s]Sampling (amazon-count):  73%|███████▎  | 559/764 [03:58<00:34,  5.91it/s]Sampling (amazon-count):  73%|███████▎  | 560/764 [03:58<00:33,  6.04it/s]Sampling (amazon-count):  73%|███████▎  | 561/764 [03:58<00:43,  4.70it/s]Sampling (amazon-count):  74%|███████▎  | 562/764 [04:00<01:47,  1.89it/s]Sampling (amazon-count):  74%|███████▎  | 563/764 [04:00<01:58,  1.69it/s]Sampling (amazon-count):  74%|███████▍  | 565/764 [04:01<01:13,  2.70it/s]Sampling (amazon-count):  74%|███████▍  | 566/764 [04:01<01:11,  2.76it/s]Sampling (amazon-count):  74%|███████▍  | 569/764 [04:01<00:47,  4.08it/s]Sampling (amazon-count):  75%|███████▍  | 570/764 [04:01<00:43,  4.51it/s]Sampling (amazon-count):  75%|███████▍  | 571/764 [04:02<00:50,  3.80it/s]Sampling (amazon-count):  75%|███████▍  | 572/764 [04:02<01:00,  3.19it/s]Sampling (amazon-count):  75%|███████▌  | 573/764 [04:02<00:50,  3.80it/s]Sampling (amazon-count):  75%|███████▌  | 574/764 [04:03<00:48,  3.92it/s]Sampling (amazon-count):  75%|███████▌  | 575/764 [04:03<01:09,  2.72it/s]Sampling (amazon-count):  75%|███████▌  | 576/764 [04:04<01:11,  2.64it/s]Sampling (amazon-count):  76%|███████▌  | 577/764 [04:04<01:07,  2.76it/s]Sampling (amazon-count):  76%|███████▌  | 579/764 [04:05<01:07,  2.75it/s]Sampling (amazon-count):  76%|███████▌  | 580/764 [04:05<00:59,  3.09it/s]Sampling (amazon-count):  76%|███████▌  | 581/764 [04:05<00:49,  3.68it/s]Sampling (amazon-count):  76%|███████▌  | 582/764 [04:05<00:44,  4.06it/s]Sampling (amazon-count):  76%|███████▋  | 583/764 [04:06<00:45,  3.98it/s]Sampling (amazon-count):  76%|███████▋  | 584/764 [04:06<00:42,  4.26it/s]Sampling (amazon-count):  77%|███████▋  | 585/764 [04:06<00:41,  4.30it/s]Sampling (amazon-count):  77%|███████▋  | 586/764 [04:06<00:37,  4.70it/s]Sampling (amazon-count):  77%|███████▋  | 587/764 [04:06<00:38,  4.66it/s]Sampling (amazon-count):  77%|███████▋  | 588/764 [04:07<00:34,  5.04it/s]Sampling (amazon-count):  77%|███████▋  | 589/764 [04:07<00:30,  5.75it/s]Sampling (amazon-count):  77%|███████▋  | 590/764 [04:08<01:04,  2.69it/s]Sampling (amazon-count):  77%|███████▋  | 591/764 [04:08<00:52,  3.33it/s]Sampling (amazon-count):  77%|███████▋  | 592/764 [04:08<00:43,  3.97it/s]Sampling (amazon-count):  78%|███████▊  | 593/764 [04:08<00:38,  4.46it/s]Sampling (amazon-count):  78%|███████▊  | 594/764 [04:08<00:33,  5.10it/s]Sampling (amazon-count):  78%|███████▊  | 595/764 [04:08<00:43,  3.88it/s]Sampling (amazon-count):  78%|███████▊  | 596/764 [04:09<00:40,  4.14it/s]Sampling (amazon-count):  78%|███████▊  | 597/764 [04:09<00:41,  4.07it/s]Sampling (amazon-count):  78%|███████▊  | 599/764 [04:09<00:31,  5.25it/s]Sampling (amazon-count):  79%|███████▊  | 600/764 [04:10<00:40,  4.05it/s]Sampling (amazon-count):  79%|███████▉  | 602/764 [04:10<00:28,  5.71it/s]Sampling (amazon-count):  79%|███████▉  | 603/764 [04:10<00:37,  4.30it/s]Sampling (amazon-count):  79%|███████▉  | 604/764 [04:11<01:06,  2.41it/s]Sampling (amazon-count):  79%|███████▉  | 605/764 [04:12<01:38,  1.62it/s]Sampling (amazon-count):  79%|███████▉  | 606/764 [04:13<01:46,  1.48it/s]Sampling (amazon-count):  79%|███████▉  | 607/764 [04:13<01:28,  1.78it/s]Sampling (amazon-count):  80%|███████▉  | 608/764 [04:14<01:10,  2.20it/s]Sampling (amazon-count):  80%|███████▉  | 609/764 [04:14<01:03,  2.43it/s]Sampling (amazon-count):  80%|███████▉  | 611/764 [04:15<00:55,  2.78it/s]Sampling (amazon-count):  80%|████████  | 612/764 [04:15<00:48,  3.11it/s]Sampling (amazon-count):  80%|████████  | 613/764 [04:15<00:57,  2.63it/s]Sampling (amazon-count):  80%|████████  | 614/764 [04:16<00:57,  2.61it/s]Sampling (amazon-count):  80%|████████  | 615/764 [04:16<00:45,  3.24it/s]Sampling (amazon-count):  81%|████████  | 616/764 [04:16<00:41,  3.57it/s]Sampling (amazon-count):  81%|████████  | 618/764 [04:17<01:01,  2.39it/s]Sampling (amazon-count):  81%|████████  | 619/764 [04:18<01:05,  2.21it/s]Sampling (amazon-count):  81%|████████  | 620/764 [04:18<01:05,  2.19it/s]Sampling (amazon-count):  81%|████████▏ | 621/764 [04:19<00:59,  2.39it/s]Sampling (amazon-count):  81%|████████▏ | 622/764 [04:19<01:13,  1.93it/s]Sampling (amazon-count):  82%|████████▏ | 623/764 [04:19<01:00,  2.33it/s]Sampling (amazon-count):  82%|████████▏ | 625/764 [04:20<00:39,  3.56it/s]Sampling (amazon-count):  82%|████████▏ | 627/764 [04:20<00:26,  5.15it/s]Sampling (amazon-count):  82%|████████▏ | 629/764 [04:20<00:19,  6.93it/s]Sampling (amazon-count):  83%|████████▎ | 631/764 [04:20<00:19,  6.88it/s]Sampling (amazon-count):  83%|████████▎ | 633/764 [04:21<00:35,  3.69it/s]Sampling (amazon-count):  83%|████████▎ | 634/764 [04:21<00:32,  4.06it/s]Sampling (amazon-count):  83%|████████▎ | 636/764 [04:22<00:25,  5.06it/s]Sampling (amazon-count):  83%|████████▎ | 637/764 [04:22<00:28,  4.51it/s]Sampling (amazon-count):  84%|████████▎ | 638/764 [04:22<00:25,  5.02it/s]Sampling (amazon-count):  84%|████████▍ | 640/764 [04:22<00:17,  6.92it/s]Sampling (amazon-count):  84%|████████▍ | 642/764 [04:22<00:15,  8.01it/s]Sampling (amazon-count):  84%|████████▍ | 644/764 [04:23<00:18,  6.45it/s]Sampling (amazon-count):  85%|████████▍ | 647/764 [04:23<00:20,  5.61it/s]Sampling (amazon-count):  85%|████████▍ | 649/764 [04:24<00:20,  5.64it/s]Sampling (amazon-count):  85%|████████▌ | 652/764 [04:24<00:14,  7.81it/s]Sampling (amazon-count):  86%|████████▌ | 654/764 [04:24<00:12,  9.06it/s]Sampling (amazon-count):  86%|████████▌ | 656/764 [04:25<00:17,  6.28it/s]Sampling (amazon-count):  86%|████████▋ | 659/764 [04:25<00:12,  8.33it/s]Sampling (amazon-count):  87%|████████▋ | 661/764 [04:25<00:12,  8.46it/s]Sampling (amazon-count):  87%|████████▋ | 664/764 [04:25<00:12,  8.25it/s]Sampling (amazon-count):  87%|████████▋ | 666/764 [04:25<00:10,  9.60it/s]Sampling (amazon-count):  87%|████████▋ | 668/764 [04:26<00:13,  7.35it/s]Sampling (amazon-count):  88%|████████▊ | 670/764 [04:26<00:10,  8.72it/s]Sampling (amazon-count):  88%|████████▊ | 672/764 [04:26<00:09,  9.82it/s]Sampling (amazon-count):  88%|████████▊ | 674/764 [04:26<00:09,  9.08it/s]Sampling (amazon-count):  88%|████████▊ | 676/764 [04:27<00:09,  8.93it/s]Sampling (amazon-count):  89%|████████▊ | 678/764 [04:27<00:13,  6.21it/s]Sampling (amazon-count):  89%|████████▉ | 679/764 [04:27<00:13,  6.45it/s]Sampling (amazon-count):  89%|████████▉ | 680/764 [04:28<00:12,  6.70it/s]Sampling (amazon-count):  89%|████████▉ | 681/764 [04:28<00:14,  5.73it/s]Sampling (amazon-count):  89%|████████▉ | 682/764 [04:28<00:16,  5.10it/s]Sampling (amazon-count):  89%|████████▉ | 683/764 [04:28<00:14,  5.75it/s]Sampling (amazon-count):  90%|████████▉ | 684/764 [04:28<00:12,  6.48it/s]Sampling (amazon-count):  90%|████████▉ | 686/764 [04:29<00:12,  6.01it/s]Sampling (amazon-count):  90%|████████▉ | 687/764 [04:29<00:19,  4.03it/s]Sampling (amazon-count):  90%|█████████ | 691/764 [04:29<00:09,  8.08it/s]Sampling (amazon-count):  91%|█████████ | 693/764 [04:30<00:09,  7.79it/s]Sampling (amazon-count):  91%|█████████ | 695/764 [04:31<00:20,  3.38it/s]Sampling (amazon-count):  91%|█████████ | 697/764 [04:31<00:18,  3.55it/s]Sampling (amazon-count):  92%|█████████▏| 700/764 [04:32<00:12,  5.02it/s]Sampling (amazon-count):  92%|█████████▏| 701/764 [04:32<00:12,  5.23it/s]Sampling (amazon-count):  92%|█████████▏| 703/764 [04:32<00:09,  6.72it/s]Sampling (amazon-count):  92%|█████████▏| 705/764 [04:33<00:15,  3.89it/s]Sampling (amazon-count):  92%|█████████▏| 706/764 [04:33<00:15,  3.84it/s]Sampling (amazon-count):  93%|█████████▎| 707/764 [04:33<00:13,  4.33it/s]Sampling (amazon-count):  93%|█████████▎| 708/764 [04:35<00:27,  2.06it/s]Sampling (amazon-count):  93%|█████████▎| 709/764 [04:36<00:35,  1.53it/s]Sampling (amazon-count):  93%|█████████▎| 710/764 [04:36<00:30,  1.80it/s]Sampling (amazon-count):  93%|█████████▎| 711/764 [04:36<00:27,  1.96it/s]Sampling (amazon-count):  93%|█████████▎| 712/764 [04:37<00:21,  2.39it/s]Sampling (amazon-count):  93%|█████████▎| 714/764 [04:37<00:15,  3.30it/s]Sampling (amazon-count):  94%|█████████▎| 716/764 [04:37<00:10,  4.73it/s]Sampling (amazon-count):  94%|█████████▍| 718/764 [04:37<00:07,  5.75it/s]Sampling (amazon-count):  94%|█████████▍| 719/764 [04:37<00:07,  6.20it/s]Sampling (amazon-count):  94%|█████████▍| 720/764 [04:38<00:07,  5.61it/s]Sampling (amazon-count):  95%|█████████▍| 722/764 [04:39<00:18,  2.23it/s]Sampling (amazon-count):  95%|█████████▍| 724/764 [04:40<00:13,  3.08it/s]Sampling (amazon-count):  95%|█████████▍| 725/764 [04:40<00:11,  3.50it/s]Sampling (amazon-count):  95%|█████████▌| 726/764 [04:40<00:11,  3.28it/s]Sampling (amazon-count):  95%|█████████▌| 727/764 [04:40<00:11,  3.17it/s]Sampling (amazon-count):  95%|█████████▌| 728/764 [04:41<00:14,  2.57it/s]Sampling (amazon-count):  95%|█████████▌| 729/764 [04:41<00:12,  2.76it/s]Sampling (amazon-count):  96%|█████████▌| 731/764 [04:42<00:08,  4.12it/s]Sampling (amazon-count):  96%|█████████▌| 732/764 [04:42<00:07,  4.31it/s]Sampling (amazon-count):  96%|█████████▌| 733/764 [04:42<00:06,  5.03it/s]Sampling (amazon-count):  96%|█████████▌| 734/764 [04:42<00:07,  3.98it/s]Sampling (amazon-count):  96%|█████████▌| 735/764 [04:43<00:07,  3.70it/s]Sampling (amazon-count):  96%|█████████▋| 736/764 [04:43<00:11,  2.43it/s]Sampling (amazon-count):  97%|█████████▋| 738/764 [04:43<00:06,  3.95it/s]Sampling (amazon-count):  97%|█████████▋| 739/764 [04:44<00:06,  4.05it/s]Sampling (amazon-count):  97%|█████████▋| 740/764 [04:44<00:05,  4.43it/s]Sampling (amazon-count):  97%|█████████▋| 742/764 [04:44<00:03,  5.57it/s]Sampling (amazon-count):  97%|█████████▋| 743/764 [04:45<00:05,  4.03it/s]Sampling (amazon-count):  97%|█████████▋| 744/764 [04:45<00:05,  3.90it/s]Sampling (amazon-count):  98%|█████████▊| 745/764 [04:45<00:06,  3.04it/s]Sampling (amazon-count):  98%|█████████▊| 747/764 [04:46<00:04,  4.08it/s]Sampling (amazon-count):  98%|█████████▊| 750/764 [04:46<00:02,  6.26it/s]Sampling (amazon-count):  98%|█████████▊| 751/764 [04:46<00:02,  5.10it/s]Sampling (amazon-count):  98%|█████████▊| 752/764 [04:46<00:02,  5.11it/s]Sampling (amazon-count):  99%|█████████▊| 753/764 [04:47<00:04,  2.74it/s]Sampling (amazon-count):  99%|█████████▊| 754/764 [04:48<00:04,  2.40it/s]Sampling (amazon-count):  99%|█████████▉| 756/764 [04:48<00:02,  2.92it/s]Sampling (amazon-count):  99%|█████████▉| 757/764 [04:49<00:02,  3.23it/s]Sampling (amazon-count):  99%|█████████▉| 758/764 [04:49<00:01,  3.66it/s]Sampling (amazon-count):  99%|█████████▉| 759/764 [04:51<00:04,  1.10it/s]Sampling (amazon-count):  99%|█████████▉| 760/764 [04:52<00:02,  1.36it/s]Sampling (amazon-count): 100%|█████████▉| 761/764 [04:52<00:01,  1.55it/s]Sampling (amazon-count): 100%|█████████▉| 762/764 [04:54<00:02,  1.05s/it]Sampling (amazon-count): 100%|█████████▉| 763/764 [04:55<00:00,  1.12it/s]Sampling (amazon-count): 100%|██████████| 764/764 [05:08<00:00,  4.62s/it]Sampling (amazon-count): 100%|██████████| 764/764 [05:08<00:00,  2.47it/s]
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=21, Reduced K from 5 to 2
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=19, Reduced K from 5 to 1
+[Auto-Tune] Budget=19, Reduced K from 5 to 1
+[Auto-Tune] Budget=19, Reduced K from 5 to 1
+[Auto-Tune] Budget=19, Reduced K from 5 to 1
+[Auto-Tune] Budget=19, Reduced K from 5 to 1
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=31, Reduced K from 5 to 3
+[Auto-Tune] Budget=31, Reduced K from 5 to 3
+[Auto-Tune] Budget=31, Reduced K from 5 to 3
+[Auto-Tune] Budget=31, Reduced K from 5 to 3
+[Auto-Tune] Budget=31, Reduced K from 5 to 3
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=37, Reduced K from 5 to 3
+[Auto-Tune] Budget=37, Reduced K from 5 to 3
+[Auto-Tune] Budget=37, Reduced K from 5 to 3
+[Auto-Tune] Budget=37, Reduced K from 5 to 3
+[Auto-Tune] Budget=37, Reduced K from 5 to 3
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=17, Reduced K from 5 to 1
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Done] 评估完成，已保存至: /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/allocation_strategy_comparison_ablation_count.csv

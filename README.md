@@ -214,7 +214,24 @@ OR
 ./run_amazon_sum.sh
 
 ./run_all_avg.sh
+
+# RQ-Specific Reproduction Scripts (RQ1 – RQ4)
+
+# Generates all `{PROXY}` results for RQ1. Visualize in `pythonProject/src/RQs_plots/RQ1&RQ2.ipynb` or `pythonProject/src/RQs_plots/Rebuttal_exp_result.ipynb`.
+./run_RQ1.sh 
+
+# Generates all `{PROXY}` results for RQ2. Visualize in `pythonProject/src/RQs_plots/RQ1&RQ2.ipynb`.
+
+./run_RQ2.sh 
+
+# Generates all results for RQ3. Visualize in `pythonProject/src/RQs_plots/RQ3:Sensitivity.ipynb`.
+./run_RQ3.sh
+
+# Generates all results for RQ4. Visualize in `pythonProject/src/RQs_plots/RQ4:Ablation.ipynb`.
+./run_RQ4.sh
+
 ```
+
 
 **Generated Output File:**
   ```text

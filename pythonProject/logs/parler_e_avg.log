@@ -1,0 +1,17 @@
+
+[Processing CSV] 开始计算 allocation_strategy_comparison 的 AVG 结果...
+  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/allocation_strategy_comparison_avg.csv (行数: 7345)
+
+[Processing CSV] 开始计算 allocation_strategy_comparison_ablation 的 AVG 结果...
+  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/allocation_strategy_comparison_ablation_avg.csv (行数: 2825)
+
+[Processing CSV] 开始计算 FastestO_budget_curve 的 AVG 结果...
+  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/FastestO_budget_curve_avg.csv (行数: 2938)
+
+[Processing CSV] 开始计算 Exact_structureO_budget_curve 的 AVG 结果...
+  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/Exact_structureO_budget_curve_avg.csv (行数: 7910)
+[Warning] sum CSV 不存在: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/Projection_ABae_results_sum.csv，跳过此项。
+[Warning] sum CSV 不存在: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/PSF_results_sum.csv，跳过此项。
+
+[Processing JSON] 开始生成 Ground Truth JSON...
+  -> [DONE] 生成 JSON: /home/wangshuo/projects/PROXY/datasets/parler-E/results/T_true_ML1_oracle2_probability_ML2_oracle2_probability_avg.json (键总数: 113)

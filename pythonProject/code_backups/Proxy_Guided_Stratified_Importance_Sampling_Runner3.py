@@ -1,9 +1,18 @@
+# interpretation: 面这段代码就是多次调用C++ 程序 进行 对数据集, 聚合函数(agg,count) 进行论文中的投影采样和权重估计, 为后续分层重要性采样算法提供 输入数据 (即每个 Query Q 的 \hat\{Psi} 和 \hat{w}(\psi))。
+# author: shuo wang
+# input: dataset_id (0: parler, 1: parler-e/parler1, 2: amazon)
+# output: the \hat\{Psi} and \hat{w}(\psi) of each Query Q in workload.
+
 """
-# 1. 运行 Parler (0) 默认只跑 8_POSSA (RQ1~RQ3)
+# 1. 运行 Parler (0)
 python Proxy_Guided_Stratified_Importance_Sampling_Runner.py -d 0 --agg_mode count --target_ticks "0.01,0.05,0.1"
 
-# 2. 运行 RQ4 消融实验 (跑全部 5 种方法)
-python Proxy_Guided_Stratified_Importance_Sampling_Runner.py -d 0 --agg_mode count --target_ticks "0.1" --methods all --out_csv_name allocation_strategy_comparison_ablation_count.csv
+# 2. 运行 Parler1 / Parler-E (1)
+python Proxy_Guided_Stratified_Importance_Sampling_Runner.py -d 1 --agg_mode count --target_ticks "0.1"
+
+# 3. 运行 Amazon (2)
+python Proxy_Guided_Stratified_Importance_Sampling_Runner.py -d 2 --agg_mode count --target_ticks "0.1"
+
 """
 
 import os
@@ -17,14 +26,11 @@ from tqdm import tqdm
 import argparse
 
 import warnings
-warnings.simplefilter(action='ignore', category='FutureWarning')
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
-# 自动定位项目根目录
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, "../../.."))
-
-if DEFAULT_PROJECT_ROOT not in sys.path:
-    sys.path.append(DEFAULT_PROJECT_ROOT)
+project_root = "/home/wangshuo/projects/PROXY"
+if project_root not in sys.path:
+    sys.path.append(project_root)
 from pythonProject.src.algorithms.proxy_sample import ProxyStratifiedSampler
 
 # ======================= 数据集与模型配置映射 =======================
@@ -56,13 +62,15 @@ DATASET_CONFIGS = {
         "parent_dataset": "amazon",
         "dataset_name": "amazon_extend",
         "model_config": {
-            "POST_PROXY": "ML3_proxy2_probability",      
-            "COMMENT_PROXY": "ML2_proxy2_probability",   
+            "POST_PROXY": "ML3_proxy2_probability",      # 对应 table1 / Product
+            "COMMENT_PROXY": "ML2_proxy2_probability",   # 对应 table2 / Review
             "POST_ORACLE": "ML3_oracle2_probability",
             "COMMENT_ORACLE": "ML2_oracle1_probability"
         }
     }
 }
+# =================================================================
+
 
 def _process_comparison_single_file(
     agg_file: str,
@@ -71,10 +79,10 @@ def _process_comparison_single_file(
     all_t_true: dict,
     target_ticks: list,
     run_times: int,
-    config: dict,
-    selected_methods: list  # 【修改点 1】：动态接收需要执行的方法列表
+    config: dict
 ):
     """子进程工作函数"""
+    # 1. 准备基础信息
     if agg_file.startswith("aggregated_list_"):
         base = agg_file.replace("aggregated_list_", "")
     elif agg_file.startswith("aggregated_wide_"):
@@ -89,6 +97,7 @@ def _process_comparison_single_file(
 
     filepath = os.path.join(aggregated_dir, agg_file)
     
+    # 2. 初始化 Sampler
     try:
         sampler = ProxyStratifiedSampler(
             csv_path=filepath,
@@ -109,33 +118,33 @@ def _process_comparison_single_file(
     total_instances = len(sampler.posts)
     file_records = []
 
-    # 所有可用方法池
-    ALL_AVAILABLE_METHODS = {
+    # === 定义对比方法 ===
+    methods_map = {
         "UN": sampler.run_baseline_uniform,
         "PO": sampler.run_baseline_proxy,
         "WO": sampler.run_baseline_weight_only,
         "MAB": sampler.run_mab_sampling,
-        "8_POSSA": sampler.run_possa,
+        "8_POSSA": sampler.run_possa,  # 综合方法 POSSA
     }
-
-    # 【修改点 2】：根据参数动态构建 methods_map
-    methods_map = {m: ALL_AVAILABLE_METHODS[m] for m in selected_methods if m in ALL_AVAILABLE_METHODS}
     methods_requiring_pilot = {"1_Proxy_Imp_Pilot", "2_ProxyE_Imp_Pilot"}
     
+    # 3. 循环采样率
     for tick in target_ticks:
-        budget_n = max(1, int(math.floor(tick * total_instances)))
+        budget_n = int(math.floor(tick * total_instances))
         sampler.total_budget_frac = tick
 
+        # 4. 循环方法
         for method_name, run_func in methods_map.items():
             if method_name in methods_requiring_pilot:
                 sampler.c_stage = 0.2
             else:
                 sampler.c_stage = 0.0
-            sampler.K = min(5, budget_n)  
-
+            sampler.K = min(5, budget_n)  # 动态调整层数
+            # 5. 重复运行
             for r in range(run_times):
                 try:
                     res = run_func()
+                    
                     oracle_cost = res.get("n_post", 0) + res.get("n_comment", 0)
                     
                     record = {
@@ -159,12 +168,15 @@ def _process_comparison_single_file(
 
 
 def _parse_ticks(ticks_str: str):
+    """将 '0.01,0.05,0.075' -> [0.01, 0.05, 0.075]"""
     if ticks_str is None or str(ticks_str).strip() == "":
         return None
     try:
         ticks = [float(x.strip()) for x in ticks_str.split(",") if x.strip() != ""]
     except ValueError:
         raise ValueError(f"Invalid ticks string: {ticks_str}")
+    if not ticks:
+        raise ValueError("ticks is empty")
     return ticks
 
 
@@ -176,22 +188,25 @@ def run_allocation_strategy_comparison(
     max_workers: int = None,
     target_ticks: list = None,
     agg_mode_init: str = "count",
-    base_dir: str = DEFAULT_PROJECT_ROOT,
-    selected_methods: list = ["8_POSSA"],  # 默认仅 8_POSSA
-    out_csv_name: str = None               # 自定义输出名
+    base_dir: str = '/home/wangshuo/projects/PROXY/'
 ):
+    """运行对比实验 (已实现 count/sum 隔离与极速 I/O 写入)"""
     if target_ticks is None:
         TARGET_TICKS = [0.01, 0.05, 0.075, 0.1, 0.125, 0.15, 0.2]
     else:
         TARGET_TICKS = target_ticks
 
     base_path = os.path.join(base_dir, "datasets", parent_dataset)
-    agg_mode = agg_mode_init.lower()
+    agg_mode = agg_mode_init.lower()  # 统一小写
     
+    # =========================================================================
+    # 【核心修复 1】根据 agg_mode 动态读取对应的隔离目录，并增加向下兼容保护
+    # =========================================================================
     aggregated_dir = os.path.join(base_path, "results", f"aggregated_results_{agg_mode}")
     if not os.path.exists(aggregated_dir):
         fallback_agg_dir = os.path.join(base_path, "results", "aggregated_results")
         if os.path.exists(fallback_agg_dir):
+            print(f"[提示] 未检测到隔离目录 {aggregated_dir}，自动回退到默认目录: {fallback_agg_dir}")
             aggregated_dir = fallback_agg_dir
         else:
             print(f"[错误] 未找到聚合结果目录: {aggregated_dir}")
@@ -200,24 +215,20 @@ def run_allocation_strategy_comparison(
     safe_post = config["POST_ORACLE"].replace("/", "_")
     safe_comment = config["COMMENT_ORACLE"].replace("/", "_")
     
+    # 查找 T_true 路径
     t_true_path = os.path.join(base_path, "results", f"T_true_{safe_post}_{safe_comment}_{agg_mode}.json")
+    print(f'[*] T_true 路径: {t_true_path}')
     output_dir = os.path.join(base_path, "results", "efficiency")
     os.makedirs(output_dir, exist_ok=True)
+    output_csv = os.path.join(output_dir, f"allocation_strategy_comparison_{agg_mode}.csv")
     
-    # 动态确定输出文件名
-    if out_csv_name:
-        output_csv = os.path.join(output_dir, out_csv_name)
-    else:
-        output_csv = os.path.join(output_dir, f"allocation_strategy_comparison_{agg_mode}.csv")
-    
-    print(f"\n{'='*10} 启动采样评估 [{parent_dataset} | {agg_mode.upper()}] {'='*10}")
-    print(f"[*] 执行的方法集合: {selected_methods}")
-    print(f"[*] 输出文件路径: {output_csv}")
+    print(f"\n{'='*10} 开始分配策略对比实验 (POSSA) [{parent_dataset} | {agg_mode.upper()}] {'='*10}")
     
     if not os.path.exists(t_true_path):
+        # 尝试去掉 _count/_sum 的后备路径
         fallback_path = os.path.join(base_path, "results", f"T_true_{safe_post}_{safe_comment}.json")
         if not os.path.exists(fallback_path):
-            print(f"[严重错误] 未能找到 T_true 文件: {t_true_path}")
+            print(f"[严重错误] 未能找到 T_true 文件。尝试了以下路径:\n  - {t_true_path}\n  - {fallback_path}")
             return
         t_true_path = fallback_path
         
@@ -229,76 +240,89 @@ def run_allocation_strategy_comparison(
         print(f"[警告] 目录 {aggregated_dir} 下未找到任何 CSV 文件。")
         return
 
+    # 初始化表头
     headers = ["query_basename", "run_id", "budget_frac", "budget_n", "T_true", "T_hat", "Qerror", "n_post", "n_comment", "oracle_cost", "method"]
     pd.DataFrame(columns=headers).to_csv(output_csv, index=False)
 
     if max_workers is None:
         max_workers = max(1, os.cpu_count() - 2)
 
+    print(f"Workers: {max_workers}, 待处理查询文件数: {len(agg_files)}, 输入目录: {aggregated_dir}")
+    
+    # =========================================================================
+    # 【核心优化 2】并发执行与批量落盘缓冲（减少磁盘 I/O）
+    # =========================================================================
     all_results_buffer = []
     
     with ProcessPoolExecutor(max_workers=max_workers) as executor:
-        futures = [
-            executor.submit(
-                _process_comparison_single_file,
-                agg_file, base_path, aggregated_dir, all_t_true, 
-                TARGET_TICKS, run_times, config, selected_methods
-            ) for agg_file in agg_files
-        ]
+        futures = []
+        for agg_file in agg_files:
+            futures.append(
+                executor.submit(
+                    _process_comparison_single_file,
+                    agg_file, base_path, aggregated_dir, all_t_true, 
+                    TARGET_TICKS, run_times, config
+                )
+            )
         
-        for future in tqdm(as_completed(futures), total=len(futures), desc=f"Sampling ({parent_dataset}-{agg_mode})"):
+        for future in tqdm(as_completed(futures), total=len(futures), desc=f"Comparing ({parent_dataset}-{agg_mode})"):
             try:
                 result_records = future.result()
                 if result_records:
                     all_results_buffer.extend(result_records)
+                    # 积攒到一定数量批量落盘，降低频繁操作文件的开销
                     if len(all_results_buffer) >= 500:
                         pd.DataFrame(all_results_buffer).to_csv(output_csv, mode='a', header=False, index=False)
                         all_results_buffer.clear()
             except Exception as e:
                 print(f"Error: {e}")
 
+        # 将缓冲区剩余数据写完
         if all_results_buffer:
             pd.DataFrame(all_results_buffer).to_csv(output_csv, mode='a', header=False, index=False)
             all_results_buffer.clear()
 
-    print(f"[Done] 评估完成，已保存至: {output_csv}")
+    print(f"\n[Done] 实验结束，结果已保存至: {output_csv}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run POSS allocation strategy comparison")
     
-    parser.add_argument("--dataset_id", "-d", type=int, choices=[0, 1, 2], default=0)
-    parser.add_argument("--agg_mode", type=str, default="count", choices=["count", "sum"])
-    parser.add_argument("--run_times", type=int, default=5)
-    parser.add_argument("--max_workers", type=int, default=None)
-    parser.add_argument("--target_ticks", type=str, default="0.1")
-    parser.add_argument("--base_dir", type=str, default=DEFAULT_PROJECT_ROOT)
-    
-    # 【新增参数】：控制跑哪些方法，默认只跑 8_POSSA（完全不影响 RQ1~RQ3）
+    # 新增核心参数：通过 0, 1, 2 切换数据集
     parser.add_argument(
-        "--methods",
-        type=str,
-        default="8_POSSA",
-        help="方法列表，如 '8_POSSA', 'all', 或 'UN,PO,WO,MAB,8_POSSA'"
+        "--dataset_id", "-d",
+        type=int,
+        choices=[0, 1, 2],
+        default=0,
+        help="0: parler, 1: parler1 (parler-e), 2: amazon"
     )
-    # 【新增参数】：自定义输出文件名
     parser.add_argument(
-        "--out_csv_name",
+        "--agg_mode",
         type=str,
-        default=None,
-        help="自定义输出 CSV 文件名"
+        default="count",
+        choices=["count", "sum"],
+        help="Aggregation mode: count or sum"
     )
+    parser.add_argument("--run_times", type=int, default=5, help="Number of repetitions per tick")
+    parser.add_argument("--max_workers", type=int, default=None, help="Process pool worker count")
+    parser.add_argument(
+        "--target_ticks",
+        type=str,
+        default="0.1",
+        # default="0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9",
+        help="Comma-separated ticks, e.g. 0.01,0.05,0.1"
+    )
+    parser.add_argument("--base_dir", type=str, default="/home/wangshuo/projects/PROXY/", help="Project root base directory")
 
     args = parser.parse_args()
     ticks = _parse_ticks(args.target_ticks)
 
-    # 解析需要运行的方法
-    if args.methods.lower() == "all":
-        methods_to_run = ["UN", "PO", "WO", "MAB", "8_POSSA"]
-    else:
-        methods_to_run = [m.strip() for m in args.methods.split(",") if m.strip()]
-
+    # 1. 根据传入的 dataset_id 获取对应的预设配置
     selected_cfg = DATASET_CONFIGS[args.dataset_id]
+    print(f"\n>>> 选定数据集 [{args.dataset_id}]: {selected_cfg['desc']}")
+    print(f">>> 父数据集目录: {selected_cfg['parent_dataset']}, 子数据集名: {selected_cfg['dataset_name']}")
+    print(f">>> 模型配置: {selected_cfg['model_config']}")
 
+    # 2. 执行对比实验
     run_allocation_strategy_comparison(
         parent_dataset=selected_cfg["parent_dataset"],
         dataset_name=selected_cfg["dataset_name"],
@@ -307,7 +331,5 @@ if __name__ == "__main__":
         max_workers=args.max_workers,
         target_ticks=ticks,
         agg_mode_init=args.agg_mode,
-        base_dir=args.base_dir,
-        selected_methods=methods_to_run,
-        out_csv_name=args.out_csv_name
+        base_dir=args.base_dir
     )
