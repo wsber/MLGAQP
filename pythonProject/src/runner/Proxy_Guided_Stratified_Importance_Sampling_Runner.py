@@ -11,7 +11,7 @@ python Proxy_Guided_Stratified_Importance_Sampling_Runner.py -d 0 --agg_mode cou
 python Proxy_Guided_Stratified_Importance_Sampling_Runner.py -d 1 --agg_mode count --target_ticks "0.1"
 
 # 3. 运行 Amazon (2)
-python Proxy_Guided_Stratified_Importance_Sampling_Runner.py -d 2 --agg_mode sum --target_ticks "0.01,0.05,0.1,0.2"
+python Proxy_Guided_Stratified_Importance_Sampling_Runner.py -d 2 --agg_mode count --target_ticks "0.1"
 
 """
 
