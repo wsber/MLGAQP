@@ -691,7 +691,8 @@ int32_t main(int argc, char *argv[]) {
     std::string sampled_node_count_path = results_dir + "efficiency/sampled_node_count.csv";
     std::string results_summary_path = results_dir + "results_summary_FaSTestO.csv";
     std::string summary_run1_path = results_dir + "result_summarys/" + multi_proxy_prob + "/results_summary_run_1.csv";
-    std::string ins_csv_out_path = results_dir + "ins_estimateW_result.csv";
+    std::string func_suffix = (agg_func_str == "sum") ? "_sum" : "_count";
+    std::string ins_csv_out_path = results_dir + "ins_estimateW_result" + func_suffix + ".csv";
     std::string data_path = dataset_base_path + "/data_graph/" + data_graph_name;
 
 
