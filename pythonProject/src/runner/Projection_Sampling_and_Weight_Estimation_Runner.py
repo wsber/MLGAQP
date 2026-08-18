@@ -218,14 +218,14 @@ def run_pipeline(
             print(f"[错误] C++ 端执行失败 (Code {code})"); return
             
         # 【核心修复 2】C++ 跑完后，立刻把那个固定的名字改成带 count/sum 后缀的名字
-        if os.path.exists(raw_ins_csv_path):
-            if os.path.exists(safe_ins_csv_path):
-                os.remove(safe_ins_csv_path) # 删掉旧的
-            os.rename(raw_ins_csv_path, safe_ins_csv_path)
+        # if os.path.exists(raw_ins_csv_path):
+        #     if os.path.exists(safe_ins_csv_path):
+        #         os.remove(safe_ins_csv_path) # 删掉旧的
+        #     os.rename(raw_ins_csv_path, safe_ins_csv_path)
 
     # 如果没开 run_cpp，但目录里有之前遗留的 raw 文件，做个兼容处理
-    if not run_cpp and not os.path.exists(safe_ins_csv_path) and os.path.exists(raw_ins_csv_path):
-        os.rename(raw_ins_csv_path, safe_ins_csv_path)
+    # if not run_cpp and not os.path.exists(safe_ins_csv_path) and os.path.exists(raw_ins_csv_path):
+        # os.rename(raw_ins_csv_path, safe_ins_csv_path)
 
     # [Step 1] 拆分结果文件 (这里传入的是带后缀的 safe 文件)
     split_results_by_query(safe_ins_csv_path, estimate_dir)
