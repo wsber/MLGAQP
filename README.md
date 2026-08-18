@@ -204,13 +204,10 @@ chmod +x scripts/run_amazon.sh
 ./scripts/run_amazon_count.sh
 ```
 
-* **Generated Output File:**
+**Generated Output File:**
   ```text
   datasets/parler/results/efficiency/allocation_strategy_comparison_count.csv
   ```
-
-> **💡 Note on Environment:** 
-> All one-click scripts automatically configure `PYTHONPATH` and export `LD_LIBRARY_PATH` pointing to `${CONDA_PREFIX}/lib` to guarantee runtime compatibility with `GLIBCXX_3.4.31/32`.
 
 ---
 
