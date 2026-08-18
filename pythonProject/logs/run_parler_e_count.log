@@ -140,3 +140,1072 @@ Global Estimated Value: 239225.06
 Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_2.graph for core instances with query nodes: 1 2 
 [Info] Auto-selected query root index 1 with (transferred) label 2
 [Check] Sample budget = 60000
+[Check] Sum of instance estimates = 230405.00, Global estimate = 230405.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_2.graph to CSV in long format.
+Global Estimated Value: 230405.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_2.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_20.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 236280.67, Global estimate = 236280.67, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_20.graph to CSV in long format.
+Global Estimated Value: 236280.67
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_20.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_21.graph for core instances with query nodes: 0 2 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 233642.00, Global estimate = 233642.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_21.graph to CSV in long format.
+Global Estimated Value: 233642.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_21.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_22.graph for core instances with query nodes: 0 1 2 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 230298.23, Global estimate = 230298.23, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_22.graph to CSV in long format.
+Global Estimated Value: 230298.23
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_22.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_23.graph for core instances with query nodes: 0 1 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 227174.00, Global estimate = 227174.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_23.graph to CSV in long format.
+Global Estimated Value: 227174.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_23.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_24.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 243509.00, Global estimate = 243509.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_24.graph to CSV in long format.
+Global Estimated Value: 243509.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_24.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_25.graph for core instances with query nodes: 0 2 3 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 403042.37, Global estimate = 403042.37, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_25.graph to CSV in long format.
+Global Estimated Value: 403042.37
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_25.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_26.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 223780.00, Global estimate = 223780.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_26.graph to CSV in long format.
+Global Estimated Value: 223780.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_26.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_27.graph for core instances with query nodes: 0 2 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 229547.00, Global estimate = 229547.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_27.graph to CSV in long format.
+Global Estimated Value: 229547.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_27.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_28.graph for core instances with query nodes: 0 1 2 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 222880.35, Global estimate = 222880.35, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_28.graph to CSV in long format.
+Global Estimated Value: 222880.35
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_28.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_29.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 230405.00, Global estimate = 230405.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_29.graph to CSV in long format.
+Global Estimated Value: 230405.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_29.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_3.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 221160.00, Global estimate = 221160.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_3.graph to CSV in long format.
+Global Estimated Value: 221160.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_3.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_30.graph for core instances with query nodes: 1 3 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 233642.00, Global estimate = 233642.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_30.graph to CSV in long format.
+Global Estimated Value: 233642.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_30.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_31.graph for core instances with query nodes: 0 2 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 236584.00, Global estimate = 236584.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_31.graph to CSV in long format.
+Global Estimated Value: 236584.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_31.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_32.graph for core instances with query nodes: 0 1 3 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 11546.00, Global estimate = 11546.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_32.graph to CSV in long format.
+Global Estimated Value: 11546.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_32.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_33.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 232452.00, Global estimate = 232452.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_33.graph to CSV in long format.
+Global Estimated Value: 232452.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_33.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_34.graph for core instances with query nodes: 0 2 3 
+[Info] Auto-selected query root index 1 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 158740.82, Global estimate = 158740.82, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_34.graph to CSV in long format.
+Global Estimated Value: 158740.82
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_34.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_35.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 227174.00, Global estimate = 227174.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_35.graph to CSV in long format.
+Global Estimated Value: 227174.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_35.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_36.graph for core instances with query nodes: 0 2 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 236201.55, Global estimate = 236201.55, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_36.graph to CSV in long format.
+Global Estimated Value: 236201.55
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_36.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_37.graph for core instances with query nodes: 0 2 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 246321.00, Global estimate = 246321.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_37.graph to CSV in long format.
+Global Estimated Value: 246321.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_37.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_38.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 230405.00, Global estimate = 230405.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_38.graph to CSV in long format.
+Global Estimated Value: 230405.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_38.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_39.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 227174.00, Global estimate = 227174.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_39.graph to CSV in long format.
+Global Estimated Value: 227174.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_39.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_4.graph for core instances with query nodes: 0 1 3 
+[Info] Auto-selected query root index 2 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2288.00, Global estimate = 2288.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_4.graph to CSV in long format.
+Global Estimated Value: 2288.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_4.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_40.graph for core instances with query nodes: 1 3 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2158.00, Global estimate = 2158.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_40.graph to CSV in long format.
+Global Estimated Value: 2158.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_40.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_41.graph for core instances with query nodes: 0 2 3 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 383582.71, Global estimate = 383582.71, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_41.graph to CSV in long format.
+Global Estimated Value: 383582.71
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_41.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_42.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 223780.00, Global estimate = 223780.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_42.graph to CSV in long format.
+Global Estimated Value: 223780.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_42.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_43.graph for core instances with query nodes: 0 1 2 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 232698.50, Global estimate = 232698.50, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_43.graph to CSV in long format.
+Global Estimated Value: 232698.50
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_43.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_44.graph for core instances with query nodes: 0 3 
+[Info] Auto-selected query root index 1 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 153669.00, Global estimate = 153669.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_44.graph to CSV in long format.
+Global Estimated Value: 153669.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_44.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_45.graph for core instances with query nodes: 1 3 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 246321.00, Global estimate = 246321.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_45.graph to CSV in long format.
+Global Estimated Value: 246321.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_45.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_46.graph for core instances with query nodes: 0 2 3 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 394589.09, Global estimate = 394589.09, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_46.graph to CSV in long format.
+Global Estimated Value: 394589.09
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_46.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_47.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 225087.00, Global estimate = 225087.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_47.graph to CSV in long format.
+Global Estimated Value: 225087.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_47.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_48.graph for core instances with query nodes: 0 1 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 153514.00, Global estimate = 153514.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_48.graph to CSV in long format.
+Global Estimated Value: 153514.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_48.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_49.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 237278.00, Global estimate = 237278.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_49.graph to CSV in long format.
+Global Estimated Value: 237278.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_49.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_5.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 229547.00, Global estimate = 229547.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_5.graph to CSV in long format.
+Global Estimated Value: 229547.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_5.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_6.graph for core instances with query nodes: 0 1 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 229547.00, Global estimate = 229547.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_6.graph to CSV in long format.
+Global Estimated Value: 229547.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_6.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_7.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 397653.00, Global estimate = 397653.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_7.graph to CSV in long format.
+Global Estimated Value: 397653.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_7.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_8.graph for core instances with query nodes: 0 2 3 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 475747.34, Global estimate = 475747.34, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_8.graph to CSV in long format.
+Global Estimated Value: 475747.34
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_8.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_9.graph for core instances with query nodes: 0 1 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 49228.00, Global estimate = 49228.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_4_9.graph to CSV in long format.
+Global Estimated Value: 49228.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_4_9.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_1.graph for core instances with query nodes: 1 4 5 
+[Info] Auto-selected query root index 3 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 848847.05, Global estimate = 848847.05, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_1.graph to CSV in long format.
+Global Estimated Value: 848847.05
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_1.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_10.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 10276.82, Global estimate = 10276.82, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_10.graph to CSV in long format.
+Global Estimated Value: 10276.82
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_10.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_11.graph for core instances with query nodes: 3 5 
+[Info] Auto-selected query root index 3 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 5772870.64, Global estimate = 5772870.64, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_11.graph to CSV in long format.
+Global Estimated Value: 5772870.64
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_11.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_15.graph for core instances with query nodes: 3 4 
+[Info] Auto-selected query root index 1 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 425687.00, Global estimate = 425687.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_15.graph to CSV in long format.
+Global Estimated Value: 425687.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_15.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_16.graph for core instances with query nodes: 1 5 
+[Info] Auto-selected query root index 5 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 106765.00, Global estimate = 106765.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_16.graph to CSV in long format.
+Global Estimated Value: 106765.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_16.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_17.graph for core instances with query nodes: 2 3 4 5 
+[Info] Auto-selected query root index 0 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 34164.62, Global estimate = 34164.62, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_17.graph to CSV in long format.
+Global Estimated Value: 34164.62
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_17.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_18.graph for core instances with query nodes: 0 5 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 183577.55, Global estimate = 183577.55, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_18.graph to CSV in long format.
+Global Estimated Value: 183577.55
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_18.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_20.graph for core instances with query nodes: 3 5 
+[Info] Auto-selected query root index 3 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 410420.85, Global estimate = 410420.85, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_20.graph to CSV in long format.
+Global Estimated Value: 410420.85
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_20.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_21.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 4 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 852860.11, Global estimate = 852860.11, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_21.graph to CSV in long format.
+Global Estimated Value: 852860.11
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_21.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_22.graph for core instances with query nodes: 3 4 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 761020.81, Global estimate = 761020.81, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_22.graph to CSV in long format.
+Global Estimated Value: 761020.81
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_22.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_25.graph for core instances with query nodes: 1 2 4 
+[Info] Auto-selected query root index 3 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 149025.56, Global estimate = 149025.56, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_25.graph to CSV in long format.
+Global Estimated Value: 149025.56
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_25.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_27.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 83505.85, Global estimate = 83505.85, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_27.graph to CSV in long format.
+Global Estimated Value: 83505.85
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_27.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_28.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 9410.00, Global estimate = 9410.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_28.graph to CSV in long format.
+Global Estimated Value: 9410.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_28.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_29.graph for core instances with query nodes: 2 4 
+[Info] Auto-selected query root index 4 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 1670527.89, Global estimate = 1670527.89, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_29.graph to CSV in long format.
+Global Estimated Value: 1670527.89
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_29.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_31.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 3 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 11092.75, Global estimate = 11092.75, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_31.graph to CSV in long format.
+Global Estimated Value: 11092.75
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_31.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_32.graph for core instances with query nodes: 1 2 3 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 71866.52, Global estimate = 71866.52, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_32.graph to CSV in long format.
+Global Estimated Value: 71866.52
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_32.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_33.graph for core instances with query nodes: 1 2 5 
+[Info] Auto-selected query root index 4 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 820030.89, Global estimate = 820030.89, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_33.graph to CSV in long format.
+Global Estimated Value: 820030.89
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_33.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_35.graph for core instances with query nodes: 1 2 4 5 
+[Info] Auto-selected query root index 3 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 30364.69, Global estimate = 30364.69, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_35.graph to CSV in long format.
+Global Estimated Value: 30364.69
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_35.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_36.graph for core instances with query nodes: 0 1 3 4 
+[Info] Auto-selected query root index 2 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 1548940.31, Global estimate = 1548940.31, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_36.graph to CSV in long format.
+Global Estimated Value: 1548940.31
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_36.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_37.graph for core instances with query nodes: 0 5 
+[Info] Auto-selected query root index 2 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 9330.00, Global estimate = 9330.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_37.graph to CSV in long format.
+Global Estimated Value: 9330.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_37.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_38.graph for core instances with query nodes: 0 2 3 4 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 165547.87, Global estimate = 165547.87, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_38.graph to CSV in long format.
+Global Estimated Value: 165547.87
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_38.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_39.graph for core instances with query nodes: 1 5 
+[Info] Auto-selected query root index 3 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 41085.36, Global estimate = 41085.36, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_39.graph to CSV in long format.
+Global Estimated Value: 41085.36
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_39.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_4.graph for core instances with query nodes: 2 3 5 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 16881574.01, Global estimate = 16881574.01, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_4.graph to CSV in long format.
+Global Estimated Value: 16881574.01
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_4.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_40.graph for core instances with query nodes: 2 3 4 
+[Info] Auto-selected query root index 1 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 465608.00, Global estimate = 465608.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_40.graph to CSV in long format.
+Global Estimated Value: 465608.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_40.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_42.graph for core instances with query nodes: 3 4 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 800409.89, Global estimate = 800409.89, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_42.graph to CSV in long format.
+Global Estimated Value: 800409.89
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_42.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_43.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 15350451.65, Global estimate = 15350451.65, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_43.graph to CSV in long format.
+Global Estimated Value: 15350451.65
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_43.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_44.graph for core instances with query nodes: 0 1 5 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 34685893.62, Global estimate = 34685893.62, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_44.graph to CSV in long format.
+Global Estimated Value: 34685893.62
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_44.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_45.graph for core instances with query nodes: 3 4 
+[Info] Auto-selected query root index 1 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 382030.35, Global estimate = 382030.35, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_45.graph to CSV in long format.
+Global Estimated Value: 382030.35
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_45.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_46.graph for core instances with query nodes: 1 2 3 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 9701.47, Global estimate = 9701.47, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_46.graph to CSV in long format.
+Global Estimated Value: 9701.47
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_46.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_48.graph for core instances with query nodes: 4 5 
+[Info] Auto-selected query root index 3 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 6991.75, Global estimate = 6991.75, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_48.graph to CSV in long format.
+Global Estimated Value: 6991.75
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_48.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_6.graph for core instances with query nodes: 0 3 
+[Info] Auto-selected query root index 3 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 444146.72, Global estimate = 444146.72, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_6.graph to CSV in long format.
+Global Estimated Value: 444146.72
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_6.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_7.graph for core instances with query nodes: 2 5 
+[Info] Auto-selected query root index 4 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 825980.00, Global estimate = 825980.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_7.graph to CSV in long format.
+Global Estimated Value: 825980.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_7.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_8.graph for core instances with query nodes: 3 4 
+[Info] Auto-selected query root index 5 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 835945.00, Global estimate = 835945.00, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_8.graph to CSV in long format.
+Global Estimated Value: 835945.00
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_8.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_9.graph for core instances with query nodes: 0 2 
+[Info] Auto-selected query root index 0 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 6137132.05, Global estimate = 6137132.05, Ratio = 1.00
+[Info] Appended instance results for query_cycle_6_9.graph to CSV in long format.
+Global Estimated Value: 6137132.05
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_6_9.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_0.graph for core instances with query nodes: 2 5 7 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 41041.48, Global estimate = 41041.48, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_0.graph to CSV in long format.
+Global Estimated Value: 41041.48
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_0.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_10.graph for core instances with query nodes: 4 7 
+[Info] Auto-selected query root index 5 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 29195.80, Global estimate = 29195.80, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_10.graph to CSV in long format.
+Global Estimated Value: 29195.80
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_10.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_12.graph for core instances with query nodes: 0 4 7 
+[Info] Auto-selected query root index 2 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 1636208.80, Global estimate = 1636208.80, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_12.graph to CSV in long format.
+Global Estimated Value: 1636208.80
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_12.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_18.graph for core instances with query nodes: 2 6 
+[Info] Auto-selected query root index 0 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 41318.07, Global estimate = 41318.07, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_18.graph to CSV in long format.
+Global Estimated Value: 41318.07
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_18.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_19.graph for core instances with query nodes: 0 2 3 5 6 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 46554892.51, Global estimate = 46554892.51, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_19.graph to CSV in long format.
+Global Estimated Value: 46554892.51
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_19.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_20.graph for core instances with query nodes: 1 4 7 
+[Info] Auto-selected query root index 7 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 12999779.55, Global estimate = 12999779.55, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_20.graph to CSV in long format.
+Global Estimated Value: 12999779.55
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_20.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_23.graph for core instances with query nodes: 0 2 6 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 27501.02, Global estimate = 27501.02, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_23.graph to CSV in long format.
+Global Estimated Value: 27501.02
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_23.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_24.graph for core instances with query nodes: 2 3 6 
+[Info] Auto-selected query root index 4 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 59774034.84, Global estimate = 59774034.84, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_24.graph to CSV in long format.
+Global Estimated Value: 59774034.84
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_24.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_26.graph for core instances with query nodes: 0 2 3 5 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 22558.60, Global estimate = 22558.60, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_26.graph to CSV in long format.
+Global Estimated Value: 22558.60
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_26.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_28.graph for core instances with query nodes: 1 2 3 5 6 7 
+[Info] Auto-selected query root index 3 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 17270469.82, Global estimate = 17270469.82, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_28.graph to CSV in long format.
+Global Estimated Value: 17270469.82
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_28.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_29.graph for core instances with query nodes: 1 4 5 7 
+[Info] Auto-selected query root index 7 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2506080.75, Global estimate = 2506080.75, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_29.graph to CSV in long format.
+Global Estimated Value: 2506080.75
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_29.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_3.graph for core instances with query nodes: 1 3 6 
+[Info] Auto-selected query root index 4 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 40241.13, Global estimate = 40241.13, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_3.graph to CSV in long format.
+Global Estimated Value: 40241.13
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_3.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_31.graph for core instances with query nodes: 0 5 7 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 556212.11, Global estimate = 556212.11, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_31.graph to CSV in long format.
+Global Estimated Value: 556212.11
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_31.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_33.graph for core instances with query nodes: 0 2 4 5 6 
+[Info] Auto-selected query root index 5 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2738657.04, Global estimate = 2738657.04, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_33.graph to CSV in long format.
+Global Estimated Value: 2738657.04
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_33.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_35.graph for core instances with query nodes: 3 4 5 7 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 523130.69, Global estimate = 523130.69, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_35.graph to CSV in long format.
+Global Estimated Value: 523130.69
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_35.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_36.graph for core instances with query nodes: 1 6 
+[Info] Auto-selected query root index 2 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 106855.22, Global estimate = 106855.22, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_36.graph to CSV in long format.
+Global Estimated Value: 106855.22
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_36.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_37.graph for core instances with query nodes: 2 3 6 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 3053692.98, Global estimate = 3053692.98, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_37.graph to CSV in long format.
+Global Estimated Value: 3053692.98
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_37.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_39.graph for core instances with query nodes: 0 2 6 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 305976.58, Global estimate = 305976.58, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_39.graph to CSV in long format.
+Global Estimated Value: 305976.58
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_39.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_40.graph for core instances with query nodes: 3 6 7 
+[Info] Auto-selected query root index 4 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 85106782.01, Global estimate = 85106782.01, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_40.graph to CSV in long format.
+Global Estimated Value: 85106782.01
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_40.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_41.graph for core instances with query nodes: 0 1 3 5 
+[Info] Auto-selected query root index 0 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 1327327.98, Global estimate = 1327327.98, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_41.graph to CSV in long format.
+Global Estimated Value: 1327327.98
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_41.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_42.graph for core instances with query nodes: 1 3 4 7 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 23964.14, Global estimate = 23964.14, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_42.graph to CSV in long format.
+Global Estimated Value: 23964.14
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_42.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_44.graph for core instances with query nodes: 1 3 4 
+[Info] Auto-selected query root index 5 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 7284.58, Global estimate = 7284.58, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_44.graph to CSV in long format.
+Global Estimated Value: 7284.58
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_44.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_46.graph for core instances with query nodes: 0 1 3 4 5 7 
+[Info] Auto-selected query root index 2 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 8706201.50, Global estimate = 8706201.50, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_46.graph to CSV in long format.
+Global Estimated Value: 8706201.50
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_46.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_47.graph for core instances with query nodes: 0 4 6 
+[Info] Auto-selected query root index 4 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 5089.32, Global estimate = 5089.32, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_47.graph to CSV in long format.
+Global Estimated Value: 5089.32
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_47.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_48.graph for core instances with query nodes: 0 2 3 4 5 
+[Info] Auto-selected query root index 5 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 57546902.37, Global estimate = 57546902.37, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_48.graph to CSV in long format.
+Global Estimated Value: 57546902.37
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_48.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_49.graph for core instances with query nodes: 1 2 4 5 6 
+[Info] Auto-selected query root index 3 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 17420.21, Global estimate = 17420.21, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_49.graph to CSV in long format.
+Global Estimated Value: 17420.21
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_49.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_5.graph for core instances with query nodes: 3 6 7 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 77072269.70, Global estimate = 77072269.70, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_5.graph to CSV in long format.
+Global Estimated Value: 77072269.70
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_5.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_6.graph for core instances with query nodes: 0 2 3 5 6 
+[Info] Auto-selected query root index 1 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 548317.02, Global estimate = 548317.02, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_6.graph to CSV in long format.
+Global Estimated Value: 548317.02
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_6.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_8.graph for core instances with query nodes: 1 4 5 
+[Info] Auto-selected query root index 3 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 89312992.38, Global estimate = 89312992.38, Ratio = 1.00
+[Info] Appended instance results for query_cycle_8_8.graph to CSV in long format.
+Global Estimated Value: 89312992.38
+/home/wangshuo/projects/PROXY/datasets/parler-E/query_graph/query_cycle_8_8.graph Finished!
+
+[Info] Saved basic estimates to JSON: /home/wangshuo/projects/PROXY/datasets/parler-E/results/basic_estimates_count.json
+
+✅ Fastest 运行结束，退出码: 0
+
+[*] 正在拆分多查询结果文件: /home/wangshuo/projects/PROXY/datasets/parler-E/results/ins_estimateW_result_count.csv
+[+] 成功读取 5630963 行实例数据。
+[✓] 拆分完成，共生成 113 个文件。
+
+[*] 正在预计算全局数据映射 (极大提升并发速度)...
+[+] 预计算完成: post 表预置 24082 行, comment 表预置 130388 行。
+
+[Step 3] 启动多进程并发生成聚合列表 (Worker=16)...
+Aggregating:   0%|                                                          | 0/113 [00:00<?, ?it/s]Aggregating:   1%|▍                                                 | 1/113 [00:01<02:07,  1.14s/it]Aggregating:   2%|▉                                                 | 2/113 [00:02<02:41,  1.46s/it]Aggregating:   3%|█▎                                                | 3/113 [00:03<01:45,  1.05it/s]Aggregating:   4%|█▊                                                | 4/113 [00:03<01:14,  1.46it/s]Aggregating:   4%|██▏                                               | 5/113 [00:04<01:39,  1.09it/s]Aggregating:   5%|██▋                                               | 6/113 [00:06<01:58,  1.11s/it]Aggregating:   6%|███                                               | 7/113 [00:06<01:26,  1.22it/s]Aggregating:   7%|███▌                                              | 8/113 [00:08<01:52,  1.07s/it]Aggregating:   8%|███▉                                              | 9/113 [00:09<01:46,  1.03s/it]Aggregating:   9%|████▎                                            | 10/113 [00:09<01:17,  1.34it/s]Aggregating:  11%|█████▏                                           | 12/113 [00:09<00:45,  2.23it/s]Aggregating:  12%|█████▋                                           | 13/113 [00:10<00:53,  1.89it/s]Aggregating:  12%|██████                                           | 14/113 [00:11<01:12,  1.37it/s]Aggregating:  13%|██████▌                                          | 15/113 [00:14<02:09,  1.32s/it]Aggregating:  14%|██████▉                                          | 16/113 [00:14<01:46,  1.09s/it]Aggregating:  16%|███████▊                                         | 18/113 [00:15<01:14,  1.28it/s]Aggregating:  17%|████████▏                                        | 19/113 [00:17<01:42,  1.09s/it]Aggregating:  18%|████████▋                                        | 20/113 [00:18<01:32,  1.00it/s]Aggregating:  19%|█████████                                        | 21/113 [00:18<01:17,  1.19it/s]Aggregating:  19%|█████████▌                                       | 22/113 [00:19<01:12,  1.25it/s]Aggregating:  20%|█████████▉                                       | 23/113 [00:19<01:02,  1.45it/s]Aggregating:  21%|██████████▍                                      | 24/113 [00:20<00:52,  1.70it/s]Aggregating:  22%|██████████▊                                      | 25/113 [00:20<00:43,  2.03it/s]Aggregating:  23%|███████████▎                                     | 26/113 [00:20<00:39,  2.20it/s]Aggregating:  24%|███████████▋                                     | 27/113 [00:21<00:32,  2.61it/s]Aggregating:  25%|████████████▏                                    | 28/113 [00:21<00:25,  3.30it/s]Aggregating:  26%|████████████▌                                    | 29/113 [00:21<00:27,  3.00it/s]Aggregating:  27%|█████████████                                    | 30/113 [00:21<00:24,  3.45it/s]Aggregating:  28%|█████████████▉                                   | 32/113 [00:22<00:25,  3.22it/s]Aggregating:  29%|██████████████▎                                  | 33/113 [00:23<00:34,  2.35it/s]Aggregating:  30%|██████████████▋                                  | 34/113 [00:24<00:51,  1.54it/s]Aggregating:  32%|███████████████▌                                 | 36/113 [00:25<00:49,  1.56it/s]Aggregating:  33%|████████████████                                 | 37/113 [00:26<00:43,  1.76it/s]Aggregating:  34%|████████████████▍                                | 38/113 [00:26<00:47,  1.57it/s]Aggregating:  35%|█████████████████▎                               | 40/113 [00:27<00:36,  2.01it/s]Aggregating:  36%|█████████████████▊                               | 41/113 [00:27<00:30,  2.35it/s]Aggregating:  37%|██████████████████▏                              | 42/113 [00:28<00:32,  2.21it/s]Aggregating:  38%|██████████████████▋                              | 43/113 [00:29<00:51,  1.37it/s]Aggregating:  39%|███████████████████                              | 44/113 [00:31<01:00,  1.15it/s]Aggregating:  40%|███████████████████▌                             | 45/113 [00:31<00:46,  1.45it/s]Aggregating:  41%|███████████████████▉                             | 46/113 [00:31<00:37,  1.79it/s]Aggregating:  42%|████████████████████▍                            | 47/113 [00:31<00:32,  2.03it/s]Aggregating:  42%|████████████████████▊                            | 48/113 [00:32<00:27,  2.40it/s]Aggregating:  44%|█████████████████████▋                           | 50/113 [00:32<00:16,  3.89it/s]Aggregating:  45%|██████████████████████                           | 51/113 [00:32<00:23,  2.62it/s]Aggregating:  46%|██████████████████████▌                          | 52/113 [00:34<00:33,  1.80it/s]Aggregating:  48%|███████████████████████▍                         | 54/113 [00:34<00:27,  2.15it/s]Aggregating:  49%|███████████████████████▊                         | 55/113 [00:35<00:36,  1.59it/s]Aggregating:  50%|████████████████████████▎                        | 56/113 [00:36<00:29,  1.93it/s]Aggregating:  50%|████████████████████████▋                        | 57/113 [00:38<00:50,  1.11it/s]Aggregating:  52%|█████████████████████████▌                       | 59/113 [00:38<00:32,  1.68it/s]Aggregating:  53%|██████████████████████████                       | 60/113 [00:38<00:28,  1.87it/s]Aggregating:  54%|██████████████████████████▍                      | 61/113 [00:38<00:22,  2.29it/s]Aggregating:  55%|██████████████████████████▉                      | 62/113 [00:39<00:23,  2.13it/s]Aggregating:  56%|███████████████████████████▎                     | 63/113 [00:40<00:25,  1.92it/s]Aggregating:  57%|███████████████████████████▊                     | 64/113 [00:40<00:28,  1.73it/s]Aggregating:  58%|████████████████████████████▏                    | 65/113 [00:42<00:37,  1.27it/s]Aggregating:  59%|█████████████████████████████                    | 67/113 [00:43<00:38,  1.19it/s]Aggregating:  60%|█████████████████████████████▍                   | 68/113 [00:44<00:33,  1.33it/s]Aggregating:  61%|█████████████████████████████▉                   | 69/113 [00:45<00:32,  1.34it/s]Aggregating:  62%|██████████████████████████████▎                  | 70/113 [00:45<00:32,  1.32it/s]Aggregating:  64%|███████████████████████████████▏                 | 72/113 [00:47<00:27,  1.48it/s]Aggregating:  65%|████████████████████████████████                 | 74/113 [00:47<00:16,  2.30it/s]Aggregating:  66%|████████████████████████████████▌                | 75/113 [00:47<00:15,  2.45it/s]Aggregating:  68%|█████████████████████████████████▍               | 77/113 [00:48<00:16,  2.19it/s]Aggregating:  70%|██████████████████████████████████▎              | 79/113 [00:49<00:16,  2.08it/s]Aggregating:  71%|██████████████████████████████████▋              | 80/113 [00:50<00:16,  1.96it/s]Aggregating:  72%|███████████████████████████████████              | 81/113 [00:51<00:18,  1.74it/s]Aggregating:  73%|███████████████████████████████████▌             | 82/113 [00:51<00:16,  1.89it/s]Aggregating:  74%|████████████████████████████████████▍            | 84/113 [00:52<00:13,  2.19it/s]Aggregating:  76%|█████████████████████████████████████▎           | 86/113 [00:52<00:11,  2.42it/s]Aggregating:  77%|█████████████████████████████████████▋           | 87/113 [00:53<00:11,  2.30it/s]Aggregating:  78%|██████████████████████████████████████▏          | 88/113 [00:53<00:10,  2.33it/s]Aggregating:  79%|██████████████████████████████████████▌          | 89/113 [00:55<00:15,  1.55it/s]Aggregating:  81%|███████████████████████████████████████▍         | 91/113 [00:55<00:10,  2.01it/s]Aggregating:  81%|███████████████████████████████████████▉         | 92/113 [00:56<00:10,  2.02it/s]Aggregating:  82%|████████████████████████████████████████▎        | 93/113 [00:56<00:08,  2.36it/s]Aggregating:  83%|████████████████████████████████████████▊        | 94/113 [00:56<00:08,  2.32it/s]Aggregating:  84%|█████████████████████████████████████████▏       | 95/113 [00:56<00:06,  2.90it/s]Aggregating:  85%|█████████████████████████████████████████▋       | 96/113 [00:57<00:06,  2.60it/s]Aggregating:  86%|██████████████████████████████████████████       | 97/113 [00:57<00:05,  2.78it/s]Aggregating:  87%|██████████████████████████████████████████▍      | 98/113 [00:57<00:05,  2.81it/s]Aggregating:  88%|██████████████████████████████████████████▉      | 99/113 [00:58<00:04,  2.91it/s]Aggregating:  88%|██████████████████████████████████████████▍     | 100/113 [00:59<00:05,  2.22it/s]Aggregating:  89%|██████████████████████████████████████████▉     | 101/113 [01:00<00:08,  1.44it/s]Aggregating:  90%|███████████████████████████████████████████▎    | 102/113 [01:00<00:06,  1.78it/s]Aggregating:  91%|███████████████████████████████████████████▊    | 103/113 [01:00<00:04,  2.06it/s]Aggregating:  92%|████████████████████████████████████████████▏   | 104/113 [01:01<00:04,  1.94it/s]Aggregating:  93%|████████████████████████████████████████████▌   | 105/113 [01:02<00:04,  1.75it/s]Aggregating:  94%|█████████████████████████████████████████████   | 106/113 [01:03<00:06,  1.12it/s]Aggregating:  95%|█████████████████████████████████████████████▍  | 107/113 [01:05<00:06,  1.15s/it]Aggregating:  96%|█████████████████████████████████████████████▉  | 108/113 [01:05<00:04,  1.12it/s]Aggregating:  96%|██████████████████████████████████████████████▎ | 109/113 [01:06<00:03,  1.04it/s]Aggregating:  97%|██████████████████████████████████████████████▋ | 110/113 [01:11<00:06,  2.09s/it]Aggregating:  98%|███████████████████████████████████████████████▏| 111/113 [01:16<00:06,  3.06s/it]Aggregating:  99%|███████████████████████████████████████████████▌| 112/113 [01:17<00:02,  2.42s/it]Aggregating: 100%|████████████████████████████████████████████████| 113/113 [01:21<00:00,  2.78s/it]Aggregating: 100%|████████████████████████████████████████████████| 113/113 [01:21<00:00,  1.39it/s]
+
+======================================================================
+🎉 处理完毕！成功聚合 113/113 个查询。输出至: /home/wangshuo/projects/PROXY/datasets/parler-E/results/aggregated_results_count
+======================================================================
+
+[Step 2/2] 正在执行 COUNT 模式的分层重要性采样实验 (POSSA)...
+
+>>> 选定数据集 [1]: Parler1 / Parler-E (多谓词扩展)
+>>> 父数据集目录: parler-E, 子数据集名: dataset_test
+>>> 模型配置: {'POST_PROXY': 'ML1_proxy4b_probability', 'COMMENT_PROXY': 'ML2_proxy1_probability', 'POST_ORACLE': 'ML1_oracle2_probability', 'COMMENT_ORACLE': 'ML2_oracle2_probability'}
+[*] T_true 路径: /home/wangshuo/projects/PROXY/datasets/parler-E/results/T_true_ML1_oracle2_probability_ML2_oracle2_probability_count.json
+
+========== 开始分配策略对比实验 (POSSA) [parler-E | COUNT] ==========
+Workers: 16, 待处理查询文件数: 113, 输入目录: /home/wangshuo/projects/PROXY/datasets/parler-E/results/aggregated_results_count
+Comparing (parler-E-count):   0%|          | 0/113 [00:00<?, ?it/s]Comparing (parler-E-count):   1%|          | 1/113 [00:04<07:29,  4.01s/it]Comparing (parler-E-count):   2%|▏         | 2/113 [00:04<03:10,  1.72s/it]Comparing (parler-E-count):   3%|▎         | 3/113 [00:04<02:04,  1.13s/it]Comparing (parler-E-count):   4%|▎         | 4/113 [00:04<01:27,  1.25it/s]Comparing (parler-E-count):   6%|▌         | 7/113 [00:04<00:33,  3.13it/s]Comparing (parler-E-count):   8%|▊         | 9/113 [00:07<01:02,  1.67it/s]Comparing (parler-E-count):   9%|▉         | 10/113 [00:09<01:34,  1.09it/s]Comparing (parler-E-count):  10%|▉         | 11/113 [00:09<01:27,  1.16it/s]Comparing (parler-E-count):  11%|█         | 12/113 [00:10<01:08,  1.47it/s]Comparing (parler-E-count):  12%|█▏        | 14/113 [00:11<01:05,  1.51it/s]Comparing (parler-E-count):  13%|█▎        | 15/113 [00:11<01:02,  1.57it/s]Comparing (parler-E-count):  14%|█▍        | 16/113 [00:12<01:01,  1.58it/s]Comparing (parler-E-count):  15%|█▌        | 17/113 [00:13<01:01,  1.57it/s]Comparing (parler-E-count):  16%|█▌        | 18/113 [00:14<01:10,  1.36it/s]Comparing (parler-E-count):  17%|█▋        | 19/113 [00:16<01:50,  1.17s/it]Comparing (parler-E-count):  18%|█▊        | 20/113 [00:16<01:23,  1.12it/s]Comparing (parler-E-count):  19%|█▊        | 21/113 [00:16<01:05,  1.40it/s]Comparing (parler-E-count):  19%|█▉        | 22/113 [00:17<00:52,  1.73it/s]Comparing (parler-E-count):  20%|██        | 23/113 [00:17<00:41,  2.17it/s]Comparing (parler-E-count):  21%|██        | 24/113 [00:17<00:35,  2.53it/s]Comparing (parler-E-count):  23%|██▎       | 26/113 [00:17<00:23,  3.73it/s]Comparing (parler-E-count):  24%|██▍       | 27/113 [00:18<00:40,  2.14it/s]Comparing (parler-E-count):  25%|██▍       | 28/113 [00:19<00:49,  1.73it/s]Comparing (parler-E-count):  26%|██▌       | 29/113 [00:20<00:43,  1.94it/s]Comparing (parler-E-count):  27%|██▋       | 30/113 [00:21<00:55,  1.50it/s]Comparing (parler-E-count):  27%|██▋       | 31/113 [00:21<00:50,  1.61it/s]Comparing (parler-E-count):  28%|██▊       | 32/113 [00:21<00:42,  1.91it/s]Comparing (parler-E-count):  29%|██▉       | 33/113 [00:22<00:34,  2.35it/s]Comparing (parler-E-count):  30%|███       | 34/113 [00:22<00:31,  2.51it/s]Comparing (parler-E-count):  31%|███       | 35/113 [00:24<01:08,  1.14it/s]Comparing (parler-E-count):  33%|███▎      | 37/113 [00:24<00:41,  1.84it/s]Comparing (parler-E-count):  35%|███▍      | 39/113 [00:25<00:28,  2.60it/s]Comparing (parler-E-count):  35%|███▌      | 40/113 [00:25<00:25,  2.90it/s]Comparing (parler-E-count):  36%|███▋      | 41/113 [00:25<00:29,  2.42it/s]Comparing (parler-E-count):  37%|███▋      | 42/113 [00:26<00:28,  2.53it/s]Comparing (parler-E-count):  38%|███▊      | 43/113 [00:26<00:25,  2.72it/s]Comparing (parler-E-count):  39%|███▉      | 44/113 [00:26<00:23,  2.88it/s]Comparing (parler-E-count):  40%|███▉      | 45/113 [00:27<00:21,  3.14it/s]Comparing (parler-E-count):  42%|████▏     | 47/113 [00:27<00:15,  4.39it/s]Comparing (parler-E-count):  43%|████▎     | 49/113 [00:28<00:19,  3.30it/s]Comparing (parler-E-count):  45%|████▌     | 51/113 [00:28<00:18,  3.39it/s]Comparing (parler-E-count):  47%|████▋     | 53/113 [00:28<00:12,  4.71it/s]Comparing (parler-E-count):  48%|████▊     | 54/113 [00:29<00:13,  4.42it/s]Comparing (parler-E-count):  49%|████▊     | 55/113 [00:29<00:18,  3.19it/s]Comparing (parler-E-count):  50%|████▉     | 56/113 [00:29<00:17,  3.34it/s]Comparing (parler-E-count):  50%|█████     | 57/113 [00:30<00:24,  2.28it/s]Comparing (parler-E-count):  51%|█████▏    | 58/113 [00:32<00:45,  1.22it/s]Comparing (parler-E-count):  53%|█████▎    | 60/113 [00:33<00:32,  1.64it/s]Comparing (parler-E-count):  54%|█████▍    | 61/113 [00:34<00:33,  1.57it/s]Comparing (parler-E-count):  55%|█████▍    | 62/113 [00:34<00:33,  1.54it/s]Comparing (parler-E-count):  56%|█████▌    | 63/113 [00:34<00:26,  1.89it/s]Comparing (parler-E-count):  57%|█████▋    | 64/113 [00:35<00:21,  2.32it/s]Comparing (parler-E-count):  58%|█████▊    | 66/113 [00:35<00:13,  3.37it/s]Comparing (parler-E-count):  59%|█████▉    | 67/113 [00:36<00:22,  2.04it/s]Comparing (parler-E-count):  60%|██████    | 68/113 [00:36<00:19,  2.28it/s]Comparing (parler-E-count):  61%|██████    | 69/113 [00:38<00:29,  1.50it/s]Comparing (parler-E-count):  62%|██████▏   | 70/113 [00:38<00:23,  1.83it/s]Comparing (parler-E-count):  63%|██████▎   | 71/113 [00:39<00:24,  1.69it/s]Comparing (parler-E-count):  65%|██████▍   | 73/113 [00:39<00:14,  2.80it/s]Comparing (parler-E-count):  67%|██████▋   | 76/113 [00:39<00:09,  3.73it/s]Comparing (parler-E-count):  69%|██████▉   | 78/113 [00:39<00:07,  4.56it/s]Comparing (parler-E-count):  70%|██████▉   | 79/113 [00:40<00:07,  4.61it/s]Comparing (parler-E-count):  71%|███████   | 80/113 [00:40<00:10,  3.17it/s]Comparing (parler-E-count):  73%|███████▎  | 82/113 [00:41<00:08,  3.80it/s]Comparing (parler-E-count):  73%|███████▎  | 83/113 [00:41<00:08,  3.35it/s]Comparing (parler-E-count):  74%|███████▍  | 84/113 [00:42<00:11,  2.42it/s]Comparing (parler-E-count):  75%|███████▌  | 85/113 [00:43<00:13,  2.06it/s]Comparing (parler-E-count):  76%|███████▌  | 86/113 [00:43<00:11,  2.35it/s]Comparing (parler-E-count):  77%|███████▋  | 87/113 [00:43<00:10,  2.45it/s]Comparing (parler-E-count):  78%|███████▊  | 88/113 [00:44<00:11,  2.15it/s]Comparing (parler-E-count):  79%|███████▉  | 89/113 [00:45<00:16,  1.44it/s]Comparing (parler-E-count):  80%|███████▉  | 90/113 [00:45<00:13,  1.66it/s]Comparing (parler-E-count):  81%|████████▏ | 92/113 [00:46<00:10,  1.95it/s]Comparing (parler-E-count):  83%|████████▎ | 94/113 [00:47<00:07,  2.45it/s]Comparing (parler-E-count):  84%|████████▍ | 95/113 [00:47<00:07,  2.56it/s]Comparing (parler-E-count):  87%|████████▋ | 98/113 [00:47<00:03,  4.51it/s]Comparing (parler-E-count):  88%|████████▊ | 99/113 [00:47<00:03,  4.60it/s]Comparing (parler-E-count):  88%|████████▊ | 100/113 [00:48<00:03,  4.27it/s]Comparing (parler-E-count):  89%|████████▉ | 101/113 [00:48<00:03,  3.67it/s]Comparing (parler-E-count):  90%|█████████ | 102/113 [00:49<00:03,  2.79it/s]Comparing (parler-E-count):  91%|█████████ | 103/113 [00:51<00:07,  1.25it/s]Comparing (parler-E-count):  92%|█████████▏| 104/113 [00:51<00:05,  1.54it/s]Comparing (parler-E-count):  93%|█████████▎| 105/113 [00:51<00:04,  1.73it/s]Comparing (parler-E-count):  94%|█████████▍| 106/113 [00:52<00:04,  1.69it/s]Comparing (parler-E-count):  95%|█████████▍| 107/113 [00:55<00:07,  1.20s/it]Comparing (parler-E-count):  96%|█████████▌| 108/113 [00:56<00:05,  1.17s/it]Comparing (parler-E-count):  97%|█████████▋| 110/113 [00:59<00:03,  1.27s/it]Comparing (parler-E-count):  98%|█████████▊| 111/113 [01:07<00:06,  3.05s/it]Comparing (parler-E-count):  99%|█████████▉| 112/113 [01:10<00:03,  3.03s/it]Comparing (parler-E-count): 100%|██████████| 113/113 [01:17<00:00,  4.07s/it]Comparing (parler-E-count): 100%|██████████| 113/113 [01:17<00:00,  1.46it/s]
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=12, Reduced K from 5 to 1
+[Auto-Tune] Budget=12, Reduced K from 5 to 1
+[Auto-Tune] Budget=12, Reduced K from 5 to 1
+[Auto-Tune] Budget=12, Reduced K from 5 to 1
+[Auto-Tune] Budget=12, Reduced K from 5 to 1
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+
+[Done] 实验结束，结果已保存至: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/allocation_strategy_comparison_count.csv
+
+==============================================================================
+🎉 Parler-E [COUNT 模式] 全部执行完毕！
+==============================================================================

@@ -841,3 +841,1002 @@ Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/q
 [Check] Sum of instance estimates = 840701.62, Global estimate = 840701.62, Ratio = 1.00
 [Info] Appended instance results for query_5_99.graph to CSV in long format.
 Global Estimated Value: 840701.62
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_5_99.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_0.graph for core instances with query nodes: 4 5 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 12978453.20, Global estimate = 12978453.20, Ratio = 1.00
+[Info] Appended instance results for query_6_0.graph to CSV in long format.
+Global Estimated Value: 12978453.20
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_0.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_10.graph for core instances with query nodes: 0 5 
+[Info] Auto-selected query root index 5 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 1041170361.17, Global estimate = 1041170361.17, Ratio = 1.00
+[Info] Appended instance results for query_6_10.graph to CSV in long format.
+Global Estimated Value: 1041170361.17
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_10.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_101.graph for core instances with query nodes: 0 5 
+[Info] Auto-selected query root index 0 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 30035.73, Global estimate = 30035.73, Ratio = 1.00
+[Info] Appended instance results for query_6_101.graph to CSV in long format.
+Global Estimated Value: 30035.73
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_101.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_106.graph for core instances with query nodes: 4 5 
+[Info] Auto-selected query root index 5 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 14148232.74, Global estimate = 14148232.74, Ratio = 1.00
+[Info] Appended instance results for query_6_106.graph to CSV in long format.
+Global Estimated Value: 14148232.74
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_106.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_107.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 3 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 251965.90, Global estimate = 251965.90, Ratio = 1.00
+[Info] Appended instance results for query_6_107.graph to CSV in long format.
+Global Estimated Value: 251965.90
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_107.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_109.graph for core instances with query nodes: 1 4 5 
+[Info] Auto-selected query root index 1 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 160555.45, Global estimate = 160555.45, Ratio = 1.00
+[Info] Appended instance results for query_6_109.graph to CSV in long format.
+Global Estimated Value: 160555.45
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_109.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_110.graph for core instances with query nodes: 4 5 
+[Info] Auto-selected query root index 3 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 143568.67, Global estimate = 143568.67, Ratio = 1.00
+[Info] Appended instance results for query_6_110.graph to CSV in long format.
+Global Estimated Value: 143568.67
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_110.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_113.graph for core instances with query nodes: 0 1 
+[Info] Auto-selected query root index 5 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 140691.86, Global estimate = 140691.86, Ratio = 1.00
+[Info] Appended instance results for query_6_113.graph to CSV in long format.
+Global Estimated Value: 140691.86
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_113.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_115.graph for core instances with query nodes: 0 1 2 5 
+[Info] Auto-selected query root index 1 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 264383.27, Global estimate = 264383.27, Ratio = 1.00
+[Info] Appended instance results for query_6_115.graph to CSV in long format.
+Global Estimated Value: 264383.27
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_115.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_118.graph for core instances with query nodes: 0 1 5 
+[Info] Auto-selected query root index 0 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 13267039.27, Global estimate = 13267039.27, Ratio = 1.00
+[Info] Appended instance results for query_6_118.graph to CSV in long format.
+Global Estimated Value: 13267039.27
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_118.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_119.graph for core instances with query nodes: 0 3 
+[Info] Auto-selected query root index 3 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 996183988.75, Global estimate = 996183988.75, Ratio = 1.00
+[Info] Appended instance results for query_6_119.graph to CSV in long format.
+Global Estimated Value: 996183988.75
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_119.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_126.graph for core instances with query nodes: 0 4 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 130768.37, Global estimate = 130768.37, Ratio = 1.00
+[Info] Appended instance results for query_6_126.graph to CSV in long format.
+Global Estimated Value: 130768.37
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_126.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_127.graph for core instances with query nodes: 3 4 5 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 14021163.15, Global estimate = 14021163.15, Ratio = 1.00
+[Info] Appended instance results for query_6_127.graph to CSV in long format.
+Global Estimated Value: 14021163.15
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_127.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_129.graph for core instances with query nodes: 3 4 5 
+[Info] Auto-selected query root index 3 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 14407732.22, Global estimate = 14407732.22, Ratio = 1.00
+[Info] Appended instance results for query_6_129.graph to CSV in long format.
+Global Estimated Value: 14407732.22
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_129.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_130.graph for core instances with query nodes: 3 5 
+[Info] Auto-selected query root index 5 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 148297.89, Global estimate = 148297.89, Ratio = 1.00
+[Info] Appended instance results for query_6_130.graph to CSV in long format.
+Global Estimated Value: 148297.89
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_130.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_132.graph for core instances with query nodes: 2 4 5 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 445680.25, Global estimate = 445680.25, Ratio = 1.00
+[Info] Appended instance results for query_6_132.graph to CSV in long format.
+Global Estimated Value: 445680.25
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_132.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_133.graph for core instances with query nodes: 0 4 
+[Info] Auto-selected query root index 5 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 169234.33, Global estimate = 169234.33, Ratio = 1.00
+[Info] Appended instance results for query_6_133.graph to CSV in long format.
+Global Estimated Value: 169234.33
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_133.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_134.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 1002466273.95, Global estimate = 1002466273.95, Ratio = 1.00
+[Info] Appended instance results for query_6_134.graph to CSV in long format.
+Global Estimated Value: 1002466273.95
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_134.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_136.graph for core instances with query nodes: 1 4 5 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 13578728.15, Global estimate = 13578728.15, Ratio = 1.00
+[Info] Appended instance results for query_6_136.graph to CSV in long format.
+Global Estimated Value: 13578728.15
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_136.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_137.graph for core instances with query nodes: 3 4 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 13741712.56, Global estimate = 13741712.56, Ratio = 1.00
+[Info] Appended instance results for query_6_137.graph to CSV in long format.
+Global Estimated Value: 13741712.56
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_137.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_14.graph for core instances with query nodes: 0 3 5 
+[Info] Auto-selected query root index 3 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 1044800522.62, Global estimate = 1044800522.62, Ratio = 1.00
+[Info] Appended instance results for query_6_14.graph to CSV in long format.
+Global Estimated Value: 1044800522.62
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_14.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_140.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 353737.03, Global estimate = 353737.03, Ratio = 1.00
+[Info] Appended instance results for query_6_140.graph to CSV in long format.
+Global Estimated Value: 353737.03
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_140.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_141.graph for core instances with query nodes: 0 2 
+[Info] Auto-selected query root index 1 with (transferred) label 3
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 172593.25, Global estimate = 172593.25, Ratio = 1.00
+[Info] Appended instance results for query_6_141.graph to CSV in long format.
+Global Estimated Value: 172593.25
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_141.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_142.graph for core instances with query nodes: 2 4 5 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 1053132661.86, Global estimate = 1053132661.86, Ratio = 1.00
+[Info] Appended instance results for query_6_142.graph to CSV in long format.
+Global Estimated Value: 1053132661.86
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_142.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_148.graph for core instances with query nodes: 0 4 5 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 941485948.73, Global estimate = 941485948.73, Ratio = 1.00
+[Info] Appended instance results for query_6_148.graph to CSV in long format.
+Global Estimated Value: 941485948.73
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_148.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_15.graph for core instances with query nodes: 0 2 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 961088534.02, Global estimate = 961088534.01, Ratio = 1.00
+[Info] Appended instance results for query_6_15.graph to CSV in long format.
+Global Estimated Value: 961088534.01
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_15.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_21.graph for core instances with query nodes: 3 4 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 13263418.60, Global estimate = 13263418.60, Ratio = 1.00
+[Info] Appended instance results for query_6_21.graph to CSV in long format.
+Global Estimated Value: 13263418.60
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_21.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_23.graph for core instances with query nodes: 2 4 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 1004240658.67, Global estimate = 1004240658.67, Ratio = 1.00
+[Info] Appended instance results for query_6_23.graph to CSV in long format.
+Global Estimated Value: 1004240658.67
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_23.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_29.graph for core instances with query nodes: 0 1 4 5 
+[Info] Auto-selected query root index 1 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 13452324.46, Global estimate = 13452324.46, Ratio = 1.00
+[Info] Appended instance results for query_6_29.graph to CSV in long format.
+Global Estimated Value: 13452324.46
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_29.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_37.graph for core instances with query nodes: 0 4 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 136966.63, Global estimate = 136966.63, Ratio = 1.00
+[Info] Appended instance results for query_6_37.graph to CSV in long format.
+Global Estimated Value: 136966.63
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_37.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_40.graph for core instances with query nodes: 0 1 
+[Info] Auto-selected query root index 5 with (transferred) label 3
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 185549.45, Global estimate = 185549.45, Ratio = 1.00
+[Info] Appended instance results for query_6_40.graph to CSV in long format.
+Global Estimated Value: 185549.45
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_40.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_42.graph for core instances with query nodes: 2 3 
+[Info] Auto-selected query root index 3 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 160755.20, Global estimate = 160755.20, Ratio = 1.00
+[Info] Appended instance results for query_6_42.graph to CSV in long format.
+Global Estimated Value: 160755.20
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_42.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_51.graph for core instances with query nodes: 1 4 
+[Info] Auto-selected query root index 2 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 137417.89, Global estimate = 137417.89, Ratio = 1.00
+[Info] Appended instance results for query_6_51.graph to CSV in long format.
+Global Estimated Value: 137417.89
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_51.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_57.graph for core instances with query nodes: 0 4 
+[Info] Auto-selected query root index 0 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 37938.81, Global estimate = 37938.81, Ratio = 1.00
+[Info] Appended instance results for query_6_57.graph to CSV in long format.
+Global Estimated Value: 37938.81
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_57.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_61.graph for core instances with query nodes: 4 5 
+[Info] Auto-selected query root index 3 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 128135.66, Global estimate = 128135.66, Ratio = 1.00
+[Info] Appended instance results for query_6_61.graph to CSV in long format.
+Global Estimated Value: 128135.66
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_61.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_64.graph for core instances with query nodes: 3 4 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 1033022837.16, Global estimate = 1033022837.16, Ratio = 1.00
+[Info] Appended instance results for query_6_64.graph to CSV in long format.
+Global Estimated Value: 1033022837.16
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_64.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_71.graph for core instances with query nodes: 0 2 
+[Info] Auto-selected query root index 0 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 14861157.59, Global estimate = 14861157.59, Ratio = 1.00
+[Info] Appended instance results for query_6_71.graph to CSV in long format.
+Global Estimated Value: 14861157.59
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_71.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_73.graph for core instances with query nodes: 2 3 4 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 266708.20, Global estimate = 266708.20, Ratio = 1.00
+[Info] Appended instance results for query_6_73.graph to CSV in long format.
+Global Estimated Value: 266708.20
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_73.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_8.graph for core instances with query nodes: 0 5 
+[Info] Auto-selected query root index 0 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 963194357.55, Global estimate = 963194357.55, Ratio = 1.00
+[Info] Appended instance results for query_6_8.graph to CSV in long format.
+Global Estimated Value: 963194357.55
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_8.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_80.graph for core instances with query nodes: 0 5 
+[Info] Auto-selected query root index 5 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 989038625.95, Global estimate = 989038625.95, Ratio = 1.00
+[Info] Appended instance results for query_6_80.graph to CSV in long format.
+Global Estimated Value: 989038625.95
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_80.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_81.graph for core instances with query nodes: 0 1 
+[Info] Auto-selected query root index 0 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 1010956562.15, Global estimate = 1010956562.15, Ratio = 1.00
+[Info] Appended instance results for query_6_81.graph to CSV in long format.
+Global Estimated Value: 1010956562.15
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_81.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_83.graph for core instances with query nodes: 2 4 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 12642911.97, Global estimate = 12642911.97, Ratio = 1.00
+[Info] Appended instance results for query_6_83.graph to CSV in long format.
+Global Estimated Value: 12642911.97
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_83.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_84.graph for core instances with query nodes: 1 2 3 5 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 158389.94, Global estimate = 158389.94, Ratio = 1.00
+[Info] Appended instance results for query_6_84.graph to CSV in long format.
+Global Estimated Value: 158389.94
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_84.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_88.graph for core instances with query nodes: 1 2 3 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 959268961.71, Global estimate = 959268961.71, Ratio = 1.00
+[Info] Appended instance results for query_6_88.graph to CSV in long format.
+Global Estimated Value: 959268961.71
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_88.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_91.graph for core instances with query nodes: 3 5 
+[Info] Auto-selected query root index 4 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 140277.11, Global estimate = 140277.11, Ratio = 1.00
+[Info] Appended instance results for query_6_91.graph to CSV in long format.
+Global Estimated Value: 140277.11
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_6_91.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_103.graph for core instances with query nodes: 2 6 
+[Info] Auto-selected query root index 6 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 10256.89, Global estimate = 10256.89, Ratio = 1.00
+[Info] Appended instance results for query_7_103.graph to CSV in long format.
+Global Estimated Value: 10256.89
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_103.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_113.graph for core instances with query nodes: 0 3 4 
+[Info] Auto-selected query root index 0 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 5330414.00, Global estimate = 5330414.00, Ratio = 1.00
+[Info] Appended instance results for query_7_113.graph to CSV in long format.
+Global Estimated Value: 5330414.00
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_113.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_118.graph for core instances with query nodes: 0 1 6 
+[Info] Auto-selected query root index 0 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 288192019.54, Global estimate = 288192019.54, Ratio = 1.00
+[Info] Appended instance results for query_7_118.graph to CSV in long format.
+Global Estimated Value: 288192019.54
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_118.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_121.graph for core instances with query nodes: 0 3 4 6 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 360550598.38, Global estimate = 360550598.38, Ratio = 1.00
+[Info] Appended instance results for query_7_121.graph to CSV in long format.
+Global Estimated Value: 360550598.38
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_121.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_125.graph for core instances with query nodes: 2 5 6 
+[Info] Auto-selected query root index 1 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 3073316.35, Global estimate = 3073316.35, Ratio = 1.00
+[Info] Appended instance results for query_7_125.graph to CSV in long format.
+Global Estimated Value: 3073316.35
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_125.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_140.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 4 with (transferred) label 4
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2725429.51, Global estimate = 2725429.51, Ratio = 1.00
+[Info] Appended instance results for query_7_140.graph to CSV in long format.
+Global Estimated Value: 2725429.51
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_140.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_144.graph for core instances with query nodes: 0 3 4 5 
+[Info] Auto-selected query root index 6 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2208709.20, Global estimate = 2208709.20, Ratio = 1.00
+[Info] Appended instance results for query_7_144.graph to CSV in long format.
+Global Estimated Value: 2208709.20
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_144.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_146.graph for core instances with query nodes: 1 4 
+[Info] Auto-selected query root index 5 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2768647.89, Global estimate = 2768647.89, Ratio = 1.00
+[Info] Appended instance results for query_7_146.graph to CSV in long format.
+Global Estimated Value: 2768647.89
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_146.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_149.graph for core instances with query nodes: 2 5 6 
+[Info] Auto-selected query root index 5 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2915781.77, Global estimate = 2915781.77, Ratio = 1.00
+[Info] Appended instance results for query_7_149.graph to CSV in long format.
+Global Estimated Value: 2915781.77
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_149.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_15.graph for core instances with query nodes: 4 6 
+[Info] Auto-selected query root index 3 with (transferred) label 0
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2132015.94, Global estimate = 2132015.94, Ratio = 1.00
+[Info] Appended instance results for query_7_15.graph to CSV in long format.
+Global Estimated Value: 2132015.94
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_15.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_17.graph for core instances with query nodes: 0 4 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2652777.25, Global estimate = 2652777.25, Ratio = 1.00
+[Info] Appended instance results for query_7_17.graph to CSV in long format.
+Global Estimated Value: 2652777.25
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_17.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_23.graph for core instances with query nodes: 4 6 
+[Info] Auto-selected query root index 0 with (transferred) label 3
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2993646.86, Global estimate = 2993646.86, Ratio = 1.00
+[Info] Appended instance results for query_7_23.graph to CSV in long format.
+Global Estimated Value: 2993646.86
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_23.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_32.graph for core instances with query nodes: 1 3 
+[Info] Auto-selected query root index 4 with (transferred) label 6
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 810.28, Global estimate = 810.28, Ratio = 1.00
+[Info] Appended instance results for query_7_32.graph to CSV in long format.
+Global Estimated Value: 810.28
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_32.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_33.graph for core instances with query nodes: 0 1 5 
+[Info] Auto-selected query root index 2 with (transferred) label 6
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 21711.51, Global estimate = 21711.51, Ratio = 1.00
+[Info] Appended instance results for query_7_33.graph to CSV in long format.
+Global Estimated Value: 21711.51
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_33.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_35.graph for core instances with query nodes: 2 3 5 
+[Info] Auto-selected query root index 5 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 5066700.94, Global estimate = 5066700.94, Ratio = 1.00
+[Info] Appended instance results for query_7_35.graph to CSV in long format.
+Global Estimated Value: 5066700.94
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_35.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_36.graph for core instances with query nodes: 4 6 
+[Info] Auto-selected query root index 6 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2946659.69, Global estimate = 2946659.69, Ratio = 1.00
+[Info] Appended instance results for query_7_36.graph to CSV in long format.
+Global Estimated Value: 2946659.69
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_36.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_44.graph for core instances with query nodes: 2 6 
+[Info] Auto-selected query root index 6 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2885673.05, Global estimate = 2885673.05, Ratio = 1.00
+[Info] Appended instance results for query_7_44.graph to CSV in long format.
+Global Estimated Value: 2885673.05
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_44.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_53.graph for core instances with query nodes: 0 2 6 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 8064.25, Global estimate = 8064.25, Ratio = 1.00
+[Info] Appended instance results for query_7_53.graph to CSV in long format.
+Global Estimated Value: 8064.25
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_53.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_55.graph for core instances with query nodes: 3 5 
+[Info] Auto-selected query root index 1 with (transferred) label 3
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2602487.62, Global estimate = 2602487.62, Ratio = 1.00
+[Info] Appended instance results for query_7_55.graph to CSV in long format.
+Global Estimated Value: 2602487.62
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_55.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_65.graph for core instances with query nodes: 2 3 5 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 305649761.82, Global estimate = 305649761.82, Ratio = 1.00
+[Info] Appended instance results for query_7_65.graph to CSV in long format.
+Global Estimated Value: 305649761.82
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_65.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_66.graph for core instances with query nodes: 0 2 3 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 288102753.30, Global estimate = 288102753.30, Ratio = 1.00
+[Info] Appended instance results for query_7_66.graph to CSV in long format.
+Global Estimated Value: 288102753.30
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_66.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_83.graph for core instances with query nodes: 4 6 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 289720555.38, Global estimate = 289720555.38, Ratio = 1.00
+[Info] Appended instance results for query_7_83.graph to CSV in long format.
+Global Estimated Value: 289720555.38
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_83.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_84.graph for core instances with query nodes: 0 2 5 
+[Info] Auto-selected query root index 0 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 288287137.79, Global estimate = 288287137.79, Ratio = 1.00
+[Info] Appended instance results for query_7_84.graph to CSV in long format.
+Global Estimated Value: 288287137.79
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_84.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_86.graph for core instances with query nodes: 0 6 
+[Info] Auto-selected query root index 4 with (transferred) label 6
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 608.39, Global estimate = 608.39, Ratio = 1.00
+[Info] Appended instance results for query_7_86.graph to CSV in long format.
+Global Estimated Value: 608.39
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_86.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_87.graph for core instances with query nodes: 3 6 
+[Info] Auto-selected query root index 6 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 318473912.62, Global estimate = 318473912.62, Ratio = 1.00
+[Info] Appended instance results for query_7_87.graph to CSV in long format.
+Global Estimated Value: 318473912.62
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_87.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_90.graph for core instances with query nodes: 0 1 5 6 
+[Info] Auto-selected query root index 5 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 2686495.01, Global estimate = 2686495.01, Ratio = 1.00
+[Info] Appended instance results for query_7_90.graph to CSV in long format.
+Global Estimated Value: 2686495.01
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_90.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_98.graph for core instances with query nodes: 0 6 
+[Info] Auto-selected query root index 0 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 3576387.21, Global estimate = 3576387.21, Ratio = 1.00
+[Info] Appended instance results for query_7_98.graph to CSV in long format.
+Global Estimated Value: 3576387.21
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_7_98.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_1.graph for core instances with query nodes: 3 5 
+[Info] Auto-selected query root index 1 with (transferred) label 6
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 9923.52, Global estimate = 9923.52, Ratio = 1.00
+[Info] Appended instance results for query_8_1.graph to CSV in long format.
+Global Estimated Value: 9923.52
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_1.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_103.graph for core instances with query nodes: 0 2 4 7 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 55879615.65, Global estimate = 55879615.65, Ratio = 1.00
+[Info] Appended instance results for query_8_103.graph to CSV in long format.
+Global Estimated Value: 55879615.65
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_103.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_117.graph for core instances with query nodes: 0 6 7 
+[Info] Auto-selected query root index 1 with (transferred) label 4
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 54362536.75, Global estimate = 54362536.75, Ratio = 1.00
+[Info] Appended instance results for query_8_117.graph to CSV in long format.
+Global Estimated Value: 54362536.75
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_117.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_119.graph for core instances with query nodes: 0 4 5 6 
+[Info] Auto-selected query root index 0 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 122601519.86, Global estimate = 122601519.86, Ratio = 1.00
+[Info] Appended instance results for query_8_119.graph to CSV in long format.
+Global Estimated Value: 122601519.86
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_119.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_126.graph for core instances with query nodes: 1 2 3 4 
+[Info] Auto-selected query root index 3 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 92808027.49, Global estimate = 92808027.49, Ratio = 1.00
+[Info] Appended instance results for query_8_126.graph to CSV in long format.
+Global Estimated Value: 92808027.49
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_126.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_130.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 4 with (transferred) label 4
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 88957471.31, Global estimate = 88957471.31, Ratio = 1.00
+[Info] Appended instance results for query_8_130.graph to CSV in long format.
+Global Estimated Value: 88957471.31
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_130.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_132.graph for core instances with query nodes: 1 3 4 
+[Info] Auto-selected query root index 2 with (transferred) label 4
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 71966305.82, Global estimate = 71966305.82, Ratio = 1.00
+[Info] Appended instance results for query_8_132.graph to CSV in long format.
+Global Estimated Value: 71966305.82
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_132.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_133.graph for core instances with query nodes: 3 4 5 
+[Info] Auto-selected query root index 7 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 50664758.43, Global estimate = 50664758.43, Ratio = 1.00
+[Info] Appended instance results for query_8_133.graph to CSV in long format.
+Global Estimated Value: 50664758.43
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_133.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_21.graph for core instances with query nodes: 2 3 5 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 115411618.28, Global estimate = 115411618.28, Ratio = 1.00
+[Info] Appended instance results for query_8_21.graph to CSV in long format.
+Global Estimated Value: 115411618.28
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_21.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_29.graph for core instances with query nodes: 3 4 
+[Info] Auto-selected query root index 4 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 75812295.29, Global estimate = 75812295.29, Ratio = 1.00
+[Info] Appended instance results for query_8_29.graph to CSV in long format.
+Global Estimated Value: 75812295.29
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_29.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_35.graph for core instances with query nodes: 1 2 5 
+[Info] Auto-selected query root index 4 with (transferred) label 4
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 51675316.54, Global estimate = 51675316.54, Ratio = 1.00
+[Info] Appended instance results for query_8_35.graph to CSV in long format.
+Global Estimated Value: 51675316.54
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_35.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_51.graph for core instances with query nodes: 0 2 7 
+[Info] Auto-selected query root index 7 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 68493607.52, Global estimate = 68493607.52, Ratio = 1.00
+[Info] Appended instance results for query_8_51.graph to CSV in long format.
+Global Estimated Value: 68493607.52
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_51.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_53.graph for core instances with query nodes: 0 5 
+[Info] Auto-selected query root index 5 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 59834749.08, Global estimate = 59834749.08, Ratio = 1.00
+[Info] Appended instance results for query_8_53.graph to CSV in long format.
+Global Estimated Value: 59834749.08
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_53.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_54.graph for core instances with query nodes: 0 3 
+[Info] Auto-selected query root index 7 with (transferred) label 2
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 59739884.98, Global estimate = 59739884.98, Ratio = 1.00
+[Info] Appended instance results for query_8_54.graph to CSV in long format.
+Global Estimated Value: 59739884.98
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_54.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_59.graph for core instances with query nodes: 0 5 
+[Info] Auto-selected query root index 2 with (transferred) label 6
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 1875828.23, Global estimate = 1875828.23, Ratio = 1.00
+[Info] Appended instance results for query_8_59.graph to CSV in long format.
+Global Estimated Value: 1875828.23
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_59.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_66.graph for core instances with query nodes: 0 1 
+[Info] Auto-selected query root index 2 with (transferred) label 6
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 16407.01, Global estimate = 16407.01, Ratio = 1.00
+[Info] Appended instance results for query_8_66.graph to CSV in long format.
+Global Estimated Value: 16407.01
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_66.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_85.graph for core instances with query nodes: 2 3 5 
+[Info] Auto-selected query root index 1 with (transferred) label 6
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 7328553.26, Global estimate = 7328553.26, Ratio = 1.00
+[Info] Appended instance results for query_8_85.graph to CSV in long format.
+Global Estimated Value: 7328553.26
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_85.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_95.graph for core instances with query nodes: 0 1 3 5 7 
+[Info] Auto-selected query root index 5 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 47223737.09, Global estimate = 47223737.09, Ratio = 1.00
+[Info] Appended instance results for query_8_95.graph to CSV in long format.
+Global Estimated Value: 47223737.09
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_95.graph Finished!
+
+
+Start Processing /home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_97.graph for core instances with query nodes: 1 2 
+[Info] Auto-selected query root index 2 with (transferred) label 1
+[Check] Sample budget = 60000
+[Check] Sum of instance estimates = 64499400.43, Global estimate = 64499400.43, Ratio = 1.00
+[Info] Appended instance results for query_8_97.graph to CSV in long format.
+Global Estimated Value: 64499400.43
+/home/wangshuo/projects/PROXY/datasets/amazon/query_graph_sum/query_8_97.graph Finished!
+
+[Info] Saved basic estimates to JSON: /home/wangshuo/projects/PROXY/datasets/amazon/results/basic_estimates_sum.json
+
+✅ Fastest 运行结束，退出码: 0
+
+[*] 正在拆分多查询结果文件: /home/wangshuo/projects/PROXY/datasets/amazon/results/ins_estimateW_result_sum.csv
+[+] 成功读取 3622090 行实例数据。
+[✓] 拆分完成，共生成 181 个文件。
+
+[*] 正在预计算全局数据映射 (极大提升并发速度)...
+[+] 预计算完成: product 表预置 5000 行, review 表预置 214501 行。
+
+[Step 3] 启动多进程并发生成聚合列表 (Worker=16)...
+Aggregating:   0%|                                                          | 0/181 [00:00<?, ?it/s]Aggregating:   1%|▎                                                 | 1/181 [00:00<00:48,  3.70it/s]Aggregating:   1%|▌                                                 | 2/181 [00:00<00:31,  5.69it/s]Aggregating:   3%|█▍                                                | 5/181 [00:01<00:37,  4.67it/s]Aggregating:   4%|██▏                                               | 8/181 [00:01<00:23,  7.38it/s]Aggregating:   6%|██▋                                              | 10/181 [00:01<00:22,  7.77it/s]Aggregating:   6%|██▉                                              | 11/181 [00:01<00:27,  6.12it/s]Aggregating:   7%|███▏                                             | 12/181 [00:02<00:32,  5.28it/s]Aggregating:   8%|███▊                                             | 14/181 [00:02<00:26,  6.24it/s]Aggregating:   8%|████                                             | 15/181 [00:02<00:26,  6.32it/s]Aggregating:   9%|████▎                                            | 16/181 [00:02<00:25,  6.47it/s]Aggregating:  10%|█████▏                                           | 19/181 [00:02<00:15, 10.49it/s]Aggregating:  12%|█████▉                                           | 22/181 [00:02<00:11, 14.11it/s]Aggregating:  13%|██████▍                                          | 24/181 [00:03<00:14, 10.99it/s]Aggregating:  14%|███████                                          | 26/181 [00:03<00:16,  9.44it/s]Aggregating:  17%|████████                                         | 30/181 [00:03<00:12, 12.54it/s]Aggregating:  18%|████████▋                                        | 32/181 [00:03<00:11, 13.26it/s]Aggregating:  19%|█████████▏                                       | 34/181 [00:03<00:12, 11.71it/s]Aggregating:  20%|█████████▋                                       | 36/181 [00:04<00:11, 12.68it/s]Aggregating:  21%|██████████▎                                      | 38/181 [00:04<00:17,  8.28it/s]Aggregating:  22%|██████████▊                                      | 40/181 [00:04<00:21,  6.64it/s]Aggregating:  23%|███████████                                      | 41/181 [00:05<00:19,  7.02it/s]Aggregating:  23%|███████████▎                                     | 42/181 [00:05<00:24,  5.57it/s]Aggregating:  24%|███████████▉                                     | 44/181 [00:05<00:22,  6.09it/s]Aggregating:  25%|████████████▏                                    | 45/181 [00:05<00:22,  6.13it/s]Aggregating:  25%|████████████▍                                    | 46/181 [00:05<00:20,  6.67it/s]Aggregating:  27%|████████████▉                                    | 48/181 [00:06<00:17,  7.60it/s]Aggregating:  28%|█████████████▌                                   | 50/181 [00:06<00:16,  7.86it/s]Aggregating:  29%|██████████████                                   | 52/181 [00:06<00:23,  5.44it/s]Aggregating:  30%|██████████████▌                                  | 54/181 [00:07<00:26,  4.86it/s]Aggregating:  30%|██████████████▉                                  | 55/181 [00:07<00:23,  5.34it/s]Aggregating:  31%|███████████████▏                                 | 56/181 [00:07<00:21,  5.90it/s]Aggregating:  31%|███████████████▍                                 | 57/181 [00:07<00:19,  6.46it/s]Aggregating:  32%|███████████████▋                                 | 58/181 [00:08<00:23,  5.18it/s]Aggregating:  33%|████████████████▏                                | 60/181 [00:08<00:29,  4.06it/s]Aggregating:  34%|████████████████▌                                | 61/181 [00:08<00:28,  4.25it/s]Aggregating:  35%|█████████████████                                | 63/181 [00:09<00:21,  5.46it/s]Aggregating:  35%|█████████████████▎                               | 64/181 [00:09<00:20,  5.67it/s]Aggregating:  36%|█████████████████▊                               | 66/181 [00:09<00:25,  4.46it/s]Aggregating:  37%|██████████████████▏                              | 67/181 [00:10<00:27,  4.18it/s]Aggregating:  38%|██████████████████▋                              | 69/181 [00:10<00:23,  4.72it/s]Aggregating:  39%|██████████████████▉                              | 70/181 [00:10<00:24,  4.45it/s]Aggregating:  39%|███████████████████▏                             | 71/181 [00:10<00:23,  4.71it/s]Aggregating:  40%|███████████████████▍                             | 72/181 [00:11<00:22,  4.83it/s]Aggregating:  40%|███████████████████▊                             | 73/181 [00:11<00:20,  5.37it/s]Aggregating:  41%|████████████████████                             | 74/181 [00:11<00:19,  5.52it/s]Aggregating:  43%|████████████████████▊                            | 77/181 [00:11<00:12,  8.45it/s]Aggregating:  44%|█████████████████████▍                           | 79/181 [00:12<00:17,  5.75it/s]Aggregating:  44%|█████████████████████▋                           | 80/181 [00:12<00:16,  6.14it/s]Aggregating:  45%|██████████████████████▏                          | 82/181 [00:12<00:16,  6.05it/s]Aggregating:  46%|██████████████████████▍                          | 83/181 [00:12<00:16,  5.88it/s]Aggregating:  46%|██████████████████████▋                          | 84/181 [00:13<00:16,  5.98it/s]Aggregating:  48%|███████████████████████▌                         | 87/181 [00:13<00:14,  6.27it/s]Aggregating:  49%|████████████████████████                         | 89/181 [00:13<00:14,  6.43it/s]Aggregating:  50%|████████████████████████▎                        | 90/181 [00:13<00:14,  6.32it/s]Aggregating:  51%|████████████████████████▉                        | 92/181 [00:14<00:16,  5.51it/s]Aggregating:  52%|█████████████████████████▍                       | 94/181 [00:14<00:13,  6.30it/s]Aggregating:  53%|█████████████████████████▉                       | 96/181 [00:14<00:10,  7.83it/s]Aggregating:  54%|██████████████████████████▎                      | 97/181 [00:14<00:11,  7.56it/s]Aggregating:  54%|██████████████████████████▌                      | 98/181 [00:14<00:10,  7.91it/s]Aggregating:  55%|██████████████████████████▊                      | 99/181 [00:15<00:11,  6.92it/s]Aggregating:  55%|██████████████████████████▌                     | 100/181 [00:16<00:28,  2.86it/s]Aggregating:  56%|███████████████████████████                     | 102/181 [00:16<00:19,  4.06it/s]Aggregating:  57%|███████████████████████████▎                    | 103/181 [00:17<00:27,  2.85it/s]Aggregating:  58%|███████████████████████████▊                    | 105/181 [00:17<00:18,  4.20it/s]Aggregating:  59%|████████████████████████████▍                   | 107/181 [00:17<00:13,  5.50it/s]Aggregating:  60%|████████████████████████████▋                   | 108/181 [00:17<00:12,  5.86it/s]Aggregating:  61%|█████████████████████████████▍                  | 111/181 [00:17<00:07,  9.11it/s]Aggregating:  62%|█████████████████████████████▉                  | 113/181 [00:18<00:11,  6.00it/s]Aggregating:  64%|██████████████████████████████▍                 | 115/181 [00:18<00:09,  6.96it/s]Aggregating:  65%|███████████████████████████████                 | 117/181 [00:18<00:08,  7.44it/s]Aggregating:  66%|███████████████████████████████▌                | 119/181 [00:18<00:08,  7.05it/s]Aggregating:  67%|████████████████████████████████▎               | 122/181 [00:19<00:06,  8.73it/s]Aggregating:  69%|████████████████████████████████▉               | 124/181 [00:19<00:05, 10.03it/s]Aggregating:  70%|█████████████████████████████████▍              | 126/181 [00:19<00:05, 10.01it/s]Aggregating:  71%|██████████████████████████████████▏             | 129/181 [00:19<00:05, 10.14it/s]Aggregating:  72%|██████████████████████████████████▋             | 131/181 [00:20<00:08,  6.18it/s]Aggregating:  73%|███████████████████████████████████▎            | 133/181 [00:20<00:07,  6.26it/s]Aggregating:  74%|███████████████████████████████████▌            | 134/181 [00:21<00:08,  5.28it/s]Aggregating:  75%|███████████████████████████████████▊            | 135/181 [00:21<00:08,  5.61it/s]Aggregating:  76%|████████████████████████████████████▎           | 137/181 [00:21<00:06,  6.86it/s]Aggregating:  77%|█████████████████████████████████████▏          | 140/181 [00:21<00:04, 10.10it/s]Aggregating:  78%|█████████████████████████████████████▋          | 142/181 [00:21<00:04,  9.38it/s]Aggregating:  80%|██████████████████████████████████████▏         | 144/181 [00:21<00:03,  9.51it/s]Aggregating:  81%|██████████████████████████████████████▉         | 147/181 [00:22<00:05,  5.95it/s]Aggregating:  82%|███████████████████████████████████████▏        | 148/181 [00:23<00:06,  5.25it/s]Aggregating:  82%|███████████████████████████████████████▌        | 149/181 [00:23<00:07,  4.53it/s]Aggregating:  83%|███████████████████████████████████████▊        | 150/181 [00:23<00:07,  4.13it/s]Aggregating:  83%|████████████████████████████████████████        | 151/181 [00:23<00:07,  4.19it/s]Aggregating:  84%|████████████████████████████████████████▎       | 152/181 [00:24<00:06,  4.68it/s]Aggregating:  85%|████████████████████████████████████████▌       | 153/181 [00:24<00:07,  4.00it/s]Aggregating:  85%|████████████████████████████████████████▊       | 154/181 [00:24<00:07,  3.84it/s]Aggregating:  86%|█████████████████████████████████████████▎      | 156/181 [00:24<00:04,  5.12it/s]Aggregating:  87%|█████████████████████████████████████████▉      | 158/181 [00:25<00:04,  5.74it/s]Aggregating:  88%|██████████████████████████████████████████▏     | 159/181 [00:25<00:04,  5.18it/s]Aggregating:  89%|██████████████████████████████████████████▋     | 161/181 [00:25<00:03,  5.68it/s]Aggregating:  91%|███████████████████████████████████████████▍    | 164/181 [00:25<00:02,  8.34it/s]Aggregating:  91%|███████████████████████████████████████████▊    | 165/181 [00:26<00:02,  7.46it/s]Aggregating:  92%|████████████████████████████████████████████    | 166/181 [00:26<00:03,  4.04it/s]Aggregating:  93%|████████████████████████████████████████████▌   | 168/181 [00:27<00:02,  4.83it/s]Aggregating:  93%|████████████████████████████████████████████▊   | 169/181 [00:28<00:04,  2.65it/s]Aggregating:  95%|█████████████████████████████████████████████▌  | 172/181 [00:28<00:01,  4.59it/s]Aggregating:  96%|██████████████████████████████████████████████▏ | 174/181 [00:30<00:03,  2.22it/s]Aggregating:  97%|██████████████████████████████████████████████▍ | 175/181 [00:31<00:03,  1.81it/s]Aggregating:  97%|██████████████████████████████████████████████▋ | 176/181 [00:31<00:02,  2.16it/s]Aggregating:  98%|███████████████████████████████████████████████▏| 178/181 [00:32<00:01,  1.73it/s]Aggregating:  99%|███████████████████████████████████████████████▍| 179/181 [00:33<00:00,  2.02it/s]Aggregating:  99%|███████████████████████████████████████████████▋| 180/181 [00:35<00:00,  1.00it/s]Aggregating: 100%|████████████████████████████████████████████████| 181/181 [00:37<00:00,  1.09s/it]Aggregating: 100%|████████████████████████████████████████████████| 181/181 [00:37<00:00,  4.87it/s]
+
+======================================================================
+🎉 处理完毕！成功聚合 181/181 个查询。输出至: /home/wangshuo/projects/PROXY/datasets/amazon/results/aggregated_results_sum
+======================================================================
+✅ [Step 1/2] SUM 投影权重物化已完成 (保存在 aggregated_results_sum/)！
+
+[Step 2/2] 正在执行 SUM 模式的分层重要性采样实验 (POSSA)...
+
+>>> 选定数据集 [2]: Amazon (多模态图)
+>>> 父数据集目录: amazon, 子数据集名: amazon_extend
+>>> 模型配置: {'POST_PROXY': 'ML3_proxy2_probability', 'COMMENT_PROXY': 'ML2_proxy2_probability', 'POST_ORACLE': 'ML3_oracle2_probability', 'COMMENT_ORACLE': 'ML2_oracle1_probability'}
+[*] T_true 路径: /home/wangshuo/projects/PROXY/datasets/amazon/results/T_true_ML3_oracle2_probability_ML2_oracle1_probability_sum.json
+
+========== 开始分配策略对比实验 (POSSA) [amazon | SUM] ==========
+Workers: 16, 待处理查询文件数: 181, 输入目录: /home/wangshuo/projects/PROXY/datasets/amazon/results/aggregated_results_sum
+Comparing (amazon-sum):   0%|          | 0/181 [00:00<?, ?it/s]Comparing (amazon-sum):   1%|          | 1/181 [00:03<09:25,  3.14s/it]Comparing (amazon-sum):   5%|▍         | 9/181 [00:03<00:45,  3.79it/s]Comparing (amazon-sum):   9%|▉         | 17/181 [00:04<00:29,  5.52it/s]Comparing (amazon-sum):  12%|█▏        | 21/181 [00:04<00:21,  7.30it/s]Comparing (amazon-sum):  14%|█▍        | 25/181 [00:05<00:26,  5.87it/s]Comparing (amazon-sum):  15%|█▌        | 28/181 [00:06<00:28,  5.28it/s]Comparing (amazon-sum):  18%|█▊        | 32/181 [00:06<00:20,  7.20it/s]Comparing (amazon-sum):  21%|██        | 38/181 [00:06<00:15,  9.17it/s]Comparing (amazon-sum):  23%|██▎       | 42/181 [00:06<00:14,  9.60it/s]Comparing (amazon-sum):  25%|██▍       | 45/181 [00:07<00:13, 10.22it/s]Comparing (amazon-sum):  28%|██▊       | 51/181 [00:07<00:08, 15.07it/s]Comparing (amazon-sum):  30%|██▉       | 54/181 [00:07<00:08, 15.45it/s]Comparing (amazon-sum):  31%|███▏      | 57/181 [00:07<00:07, 16.05it/s]Comparing (amazon-sum):  33%|███▎      | 60/181 [00:08<00:14,  8.19it/s]Comparing (amazon-sum):  34%|███▍      | 62/181 [00:08<00:12,  9.20it/s]Comparing (amazon-sum):  35%|███▌      | 64/181 [00:09<00:15,  7.46it/s]Comparing (amazon-sum):  36%|███▋      | 66/181 [00:09<00:16,  7.18it/s]Comparing (amazon-sum):  38%|███▊      | 68/181 [00:09<00:13,  8.37it/s]Comparing (amazon-sum):  39%|███▊      | 70/181 [00:09<00:11,  9.86it/s]Comparing (amazon-sum):  40%|███▉      | 72/181 [00:09<00:11,  9.65it/s]Comparing (amazon-sum):  42%|████▏     | 76/181 [00:09<00:07, 14.33it/s]Comparing (amazon-sum):  44%|████▎     | 79/181 [00:10<00:07, 14.06it/s]Comparing (amazon-sum):  45%|████▍     | 81/181 [00:10<00:08, 11.34it/s]Comparing (amazon-sum):  46%|████▌     | 83/181 [00:10<00:11,  8.65it/s]Comparing (amazon-sum):  47%|████▋     | 85/181 [00:10<00:09,  9.79it/s]Comparing (amazon-sum):  48%|████▊     | 87/181 [00:11<00:18,  5.21it/s]Comparing (amazon-sum):  49%|████▉     | 89/181 [00:11<00:15,  6.12it/s]Comparing (amazon-sum):  50%|█████     | 91/181 [00:12<00:12,  7.06it/s]Comparing (amazon-sum):  51%|█████▏    | 93/181 [00:12<00:11,  7.45it/s]Comparing (amazon-sum):  52%|█████▏    | 94/181 [00:12<00:11,  7.33it/s]Comparing (amazon-sum):  52%|█████▏    | 95/181 [00:12<00:14,  5.77it/s]Comparing (amazon-sum):  54%|█████▎    | 97/181 [00:13<00:13,  6.18it/s]Comparing (amazon-sum):  54%|█████▍    | 98/181 [00:13<00:15,  5.39it/s]Comparing (amazon-sum):  55%|█████▌    | 100/181 [00:14<00:18,  4.28it/s]Comparing (amazon-sum):  56%|█████▌    | 101/181 [00:14<00:18,  4.34it/s]Comparing (amazon-sum):  56%|█████▋    | 102/181 [00:14<00:21,  3.62it/s]Comparing (amazon-sum):  57%|█████▋    | 103/181 [00:14<00:18,  4.26it/s]Comparing (amazon-sum):  57%|█████▋    | 104/181 [00:15<00:18,  4.18it/s]Comparing (amazon-sum):  58%|█████▊    | 105/181 [00:15<00:19,  3.94it/s]Comparing (amazon-sum):  59%|█████▊    | 106/181 [00:15<00:17,  4.37it/s]Comparing (amazon-sum):  59%|█████▉    | 107/181 [00:15<00:19,  3.73it/s]Comparing (amazon-sum):  60%|██████    | 109/181 [00:16<00:14,  4.96it/s]Comparing (amazon-sum):  61%|██████▏   | 111/181 [00:16<00:11,  6.36it/s]Comparing (amazon-sum):  62%|██████▏   | 112/181 [00:16<00:12,  5.31it/s]Comparing (amazon-sum):  63%|██████▎   | 114/181 [00:16<00:09,  7.00it/s]Comparing (amazon-sum):  64%|██████▎   | 115/181 [00:17<00:25,  2.63it/s]Comparing (amazon-sum):  64%|██████▍   | 116/181 [00:18<00:21,  2.96it/s]Comparing (amazon-sum):  65%|██████▌   | 118/181 [00:18<00:17,  3.62it/s]Comparing (amazon-sum):  66%|██████▋   | 120/181 [00:18<00:12,  4.90it/s]Comparing (amazon-sum):  67%|██████▋   | 122/181 [00:19<00:11,  5.30it/s]Comparing (amazon-sum):  68%|██████▊   | 123/181 [00:19<00:10,  5.76it/s]Comparing (amazon-sum):  69%|██████▊   | 124/181 [00:19<00:11,  5.00it/s]Comparing (amazon-sum):  69%|██████▉   | 125/181 [00:19<00:11,  4.98it/s]Comparing (amazon-sum):  70%|██████▉   | 126/181 [00:19<00:10,  5.50it/s]Comparing (amazon-sum):  70%|███████   | 127/181 [00:20<00:11,  4.84it/s]Comparing (amazon-sum):  71%|███████   | 128/181 [00:20<00:12,  4.09it/s]Comparing (amazon-sum):  72%|███████▏  | 131/181 [00:20<00:09,  5.41it/s]Comparing (amazon-sum):  75%|███████▍  | 135/181 [00:20<00:04,  9.33it/s]Comparing (amazon-sum):  76%|███████▌  | 137/181 [00:21<00:05,  8.65it/s]Comparing (amazon-sum):  77%|███████▋  | 140/181 [00:21<00:04,  8.84it/s]Comparing (amazon-sum):  78%|███████▊  | 142/181 [00:22<00:06,  5.95it/s]Comparing (amazon-sum):  79%|███████▉  | 143/181 [00:22<00:06,  6.25it/s]Comparing (amazon-sum):  81%|████████  | 146/181 [00:22<00:06,  5.40it/s]Comparing (amazon-sum):  81%|████████  | 147/181 [00:23<00:05,  5.81it/s]Comparing (amazon-sum):  83%|████████▎ | 150/181 [00:23<00:05,  6.03it/s]Comparing (amazon-sum):  83%|████████▎ | 151/181 [00:24<00:07,  3.81it/s]Comparing (amazon-sum):  85%|████████▍ | 153/181 [00:24<00:06,  4.18it/s]Comparing (amazon-sum):  85%|████████▌ | 154/181 [00:24<00:06,  4.00it/s]Comparing (amazon-sum):  86%|████████▌ | 155/181 [00:25<00:07,  3.35it/s]Comparing (amazon-sum):  86%|████████▌ | 156/181 [00:25<00:07,  3.39it/s]Comparing (amazon-sum):  87%|████████▋ | 157/181 [00:25<00:06,  3.57it/s]Comparing (amazon-sum):  87%|████████▋ | 158/181 [00:26<00:07,  2.92it/s]Comparing (amazon-sum):  88%|████████▊ | 159/181 [00:26<00:07,  2.90it/s]Comparing (amazon-sum):  88%|████████▊ | 160/181 [00:27<00:06,  3.38it/s]Comparing (amazon-sum):  89%|████████▉ | 161/181 [00:27<00:05,  4.00it/s]Comparing (amazon-sum):  92%|█████████▏| 166/181 [00:27<00:01,  9.22it/s]Comparing (amazon-sum):  93%|█████████▎| 168/181 [00:28<00:02,  5.75it/s]Comparing (amazon-sum):  93%|█████████▎| 169/181 [00:28<00:02,  5.67it/s]Comparing (amazon-sum):  94%|█████████▍| 171/181 [00:28<00:02,  4.37it/s]Comparing (amazon-sum):  95%|█████████▌| 172/181 [00:29<00:02,  4.38it/s]Comparing (amazon-sum):  96%|█████████▌| 173/181 [00:30<00:03,  2.17it/s]Comparing (amazon-sum):  96%|█████████▌| 174/181 [00:32<00:05,  1.23it/s]Comparing (amazon-sum):  97%|█████████▋| 175/181 [00:33<00:05,  1.08it/s]Comparing (amazon-sum):  97%|█████████▋| 176/181 [00:34<00:04,  1.22it/s]Comparing (amazon-sum):  98%|█████████▊| 177/181 [00:35<00:03,  1.19it/s]Comparing (amazon-sum):  98%|█████████▊| 178/181 [00:36<00:02,  1.06it/s]Comparing (amazon-sum):  99%|█████████▉| 179/181 [00:37<00:02,  1.05s/it]Comparing (amazon-sum):  99%|█████████▉| 180/181 [00:39<00:01,  1.17s/it]Comparing (amazon-sum): 100%|██████████| 181/181 [00:42<00:00,  1.93s/it]Comparing (amazon-sum): 100%|██████████| 181/181 [00:42<00:00,  4.22it/s]
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=35, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=38, Reduced K from 5 to 3
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=20, Reduced K from 5 to 2
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=24, Reduced K from 5 to 2
+[Auto-Tune] Budget=24, Reduced K from 5 to 2
+[Auto-Tune] Budget=24, Reduced K from 5 to 2
+[Auto-Tune] Budget=24, Reduced K from 5 to 2
+[Auto-Tune] Budget=24, Reduced K from 5 to 2
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=43, Reduced K from 5 to 4
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=48, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=46, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+[Auto-Tune] Budget=40, Reduced K from 5 to 4
+
+[Done] 实验结束，结果已保存至: /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/allocation_strategy_comparison_sum.csv
+✅ [Step 2/2] SUM 分层采样评估已全部完成！
+
+==============================================================================
+🎉 Amazon [SUM 模式] 全部执行完毕！
+实验结果已保存至:
+👉 /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/allocation_strategy_comparison_sum.csv
+==============================================================================

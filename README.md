@@ -200,6 +200,7 @@ chmod +x *.sh
 # 3. Execute the one-click script
 
 ./run_all_proxy_experiments.sh
+(Run all sh files in parallel)
 
 OR
 
