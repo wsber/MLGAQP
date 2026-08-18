@@ -684,15 +684,19 @@ int32_t main(int argc, char *argv[]) {
             }
         }
     }
+    std::transform(agg_func_str.begin(), agg_func_str.end(), agg_func_str.begin(), ::tolower);
+    std::string func_suffix = (agg_func_str == "sum") ? "_sum" : "_count";
+
     std::cout << "[info] SAMPLE_BUDGET:" <<opt.sample_budget<< std::endl;
     std::string dataset_base_path = base_dir + "/" + dataset;
     std::string results_dir = dataset_base_path + "/results/";
-    std::string sv_out_path = results_dir + "in_estimateW_result.txt";
-    std::string sampled_node_count_path = results_dir + "efficiency/sampled_node_count.csv";
-    std::string results_summary_path = results_dir + "results_summary_FaSTestO.csv";
-    std::string summary_run1_path = results_dir + "result_summarys/" + multi_proxy_prob + "/results_summary_run_1.csv";
-    std::string func_suffix = (agg_func_str == "sum") ? "_sum" : "_count";
+
+    std::string sv_out_path = results_dir + "in_estimateW_result" + func_suffix + ".txt";
+    std::string sampled_node_count_path = efficiency_dir + "sampled_node_count" + func_suffix + ".csv";
+    std::string results_summary_path = results_dir + "results_summary_FaSTestO" + func_suffix + ".csv";
+
     std::string ins_csv_out_path = results_dir + "ins_estimateW_result" + func_suffix + ".csv";
+    std::string summary_run1_path = results_dir + "result_summarys/" + multi_proxy_prob + "/results_summary_run_1.csv";
     std::string data_path = dataset_base_path + "/data_graph/" + data_graph_name;
 
 
@@ -717,7 +721,7 @@ int32_t main(int argc, char *argv[]) {
     }
     
     if (fastesto_budget_curve_path.empty()) {
-        fastesto_budget_curve_path = results_dir + "efficiency/FastestO_budget_curve.csv";
+        fastesto_budget_curve_path = efficiency_dir + "FastestO_budget_curve" + func_suffix + ".csv";
     }
 
     // 若开启 FastestO budget curve，则清空旧文件
@@ -995,19 +999,17 @@ int32_t main(int argc, char *argv[]) {
         }
     }
     // [New] 将收集到的基础估计结果写入 JSON 文件
+    // [修改] 将收集到的基础估计结果写入带后缀的 JSON 文件
     if (!basic_estimates_for_json.empty()) {
-        std::string json_path = results_dir + "basic_estimates.json";
+        std::string json_path = results_dir + "basic_estimates" + func_suffix + ".json";
         std::ofstream json_out(json_path);
         if (json_out.is_open()) {
             json_out << "{\n";
             for (size_t i = 0; i < basic_estimates_for_json.size(); ++i) {
-                // 只保留文件名作为 key，去掉路径
                 std::string key = get_filename_only(basic_estimates_for_json[i].first);
                 double val = basic_estimates_for_json[i].second;
                 
                 json_out << "  \"" << key << "\": " << val;
-                
-                // 如果不是最后一个元素，添加逗号
                 if (i < basic_estimates_for_json.size() - 1) {
                     json_out << ",";
                 }
