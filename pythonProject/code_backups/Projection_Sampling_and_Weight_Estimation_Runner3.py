@@ -185,25 +185,20 @@ def run_pipeline(
 ):
     print("=" * 70)
     print(f"🚀 开始执行核心实例抽取与聚合流水线 (极致提速版)")
+    print(f"   • 项目根目录 : {base_dir}")
     print(f"   • 数据集名称 : {dataset}")
-    print(f"   • 聚合模式   : {agg_func.upper()}  <--- [当前模式]")
+    print(f"   • 并发核心数 : {workers}")
     print("=" * 70)
 
     dataset_path = os.path.join(base_dir, "datasets", dataset)
     results_dir = os.path.join(dataset_path, "results")
-    
-    # 【核心修复 1】按 agg_func 隔离所有的目录，避免相互覆盖
-    estimate_dir = os.path.join(results_dir, f"structure_estimate_{agg_func}")
-    aggregated_dir = os.path.join(results_dir, f"aggregated_results_{agg_func}")
+    estimate_dir = os.path.join(results_dir, "structure_estimate")
+    aggregated_dir = os.path.join(results_dir, "aggregated_results")
     
     id_mapping_path = os.path.join(dataset_path, "data_graph", "id_mapping.csv")
     t1_csv_path = os.path.join(dataset_path, "csv_data", f"{table1}.csv")
     t2_csv_path = os.path.join(dataset_path, "csv_data", f"{table2}.csv")
-    
-    # C++ 默认的固定输出文件
     raw_ins_csv_path = os.path.join(results_dir, "ins_estimateW_result.csv")
-    # 我们期望的隔离文件
-    safe_ins_csv_path = os.path.join(results_dir, f"ins_estimateW_result_{agg_func}.csv")
 
     # [Step 0] 触发 C++ 执行
     if run_cpp:
@@ -216,24 +211,14 @@ def run_pipeline(
         code, output = runner.run(dataset=dataset, root_label=-1, sample_budget=sample_budget, extra_args=extra_args)
         if code != 0:
             print(f"[错误] C++ 端执行失败 (Code {code})"); return
-            
-        # 【核心修复 2】C++ 跑完后，立刻把那个固定的名字改成带 count/sum 后缀的名字
-        if os.path.exists(raw_ins_csv_path):
-            if os.path.exists(safe_ins_csv_path):
-                os.remove(safe_ins_csv_path) # 删掉旧的
-            os.rename(raw_ins_csv_path, safe_ins_csv_path)
 
-    # 如果没开 run_cpp，但目录里有之前遗留的 raw 文件，做个兼容处理
-    if not run_cpp and not os.path.exists(safe_ins_csv_path) and os.path.exists(raw_ins_csv_path):
-        os.rename(raw_ins_csv_path, safe_ins_csv_path)
+    # [Step 1] 拆分结果文件
+    split_results_by_query(raw_ins_csv_path, estimate_dir)
 
-    # [Step 1] 拆分结果文件 (这里传入的是带后缀的 safe 文件)
-    split_results_by_query(safe_ins_csv_path, estimate_dir)
-
-    # [Step 2] 预计算全局 Join 缓存
+    # [Step 2] 预计算全局 Join 缓存 (消除进程内重复计算)
     load_and_prepare_globals(id_mapping_path, t1_csv_path, t2_csv_path, table1, table2)
 
-    # [Step 3] 多进程并发聚合 (输出到隔离的 aggregated_dir)
+    # [Step 3] 多进程并发聚合
     print(f"\n[Step 3] 启动多进程并发生成聚合列表 (Worker={workers})...")
     os.makedirs(aggregated_dir, exist_ok=True)
     

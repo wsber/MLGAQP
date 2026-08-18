@@ -190,28 +190,16 @@ def run_allocation_strategy_comparison(
     agg_mode_init: str = "count",
     base_dir: str = '/home/wangshuo/projects/PROXY/'
 ):
-    """运行对比实验 (已实现 count/sum 隔离与极速 I/O 写入)"""
+    """运行四种方法的对比实验"""
     if target_ticks is None:
         TARGET_TICKS = [0.01, 0.05, 0.075, 0.1, 0.125, 0.15, 0.2]
     else:
         TARGET_TICKS = target_ticks
 
     base_path = os.path.join(base_dir, "datasets", parent_dataset)
-    agg_mode = agg_mode_init.lower()  # 统一小写
+    aggregated_dir = os.path.join(base_path, "results", "aggregated_results")
+    agg_mode = agg_mode_init  
     
-    # =========================================================================
-    # 【核心修复 1】根据 agg_mode 动态读取对应的隔离目录，并增加向下兼容保护
-    # =========================================================================
-    aggregated_dir = os.path.join(base_path, "results", f"aggregated_results_{agg_mode}")
-    if not os.path.exists(aggregated_dir):
-        fallback_agg_dir = os.path.join(base_path, "results", "aggregated_results")
-        if os.path.exists(fallback_agg_dir):
-            print(f"[提示] 未检测到隔离目录 {aggregated_dir}，自动回退到默认目录: {fallback_agg_dir}")
-            aggregated_dir = fallback_agg_dir
-        else:
-            print(f"[错误] 未找到聚合结果目录: {aggregated_dir}")
-            return
-
     safe_post = config["POST_ORACLE"].replace("/", "_")
     safe_comment = config["COMMENT_ORACLE"].replace("/", "_")
     
@@ -222,7 +210,7 @@ def run_allocation_strategy_comparison(
     os.makedirs(output_dir, exist_ok=True)
     output_csv = os.path.join(output_dir, f"allocation_strategy_comparison_{agg_mode}.csv")
     
-    print(f"\n{'='*10} 开始分配策略对比实验 (POSSA) [{parent_dataset} | {agg_mode.upper()}] {'='*10}")
+    print(f"\n{'='*10} 开始分配策略对比实验 (POSSA) [{parent_dataset}] {'='*10}")
     
     if not os.path.exists(t_true_path):
         # 尝试去掉 _count/_sum 的后备路径
@@ -235,24 +223,18 @@ def run_allocation_strategy_comparison(
     with open(t_true_path, 'r') as f:
         all_t_true = json.load(f)
 
-    agg_files = sorted([f for f in os.listdir(aggregated_dir) if f.endswith(".csv")])
-    if not agg_files:
-        print(f"[警告] 目录 {aggregated_dir} 下未找到任何 CSV 文件。")
+    if not os.path.exists(aggregated_dir):
+        print(f"[错误] Aggregated dir not found: {aggregated_dir}")
         return
+    agg_files = sorted([f for f in os.listdir(aggregated_dir) if f.endswith(".csv")])
 
-    # 初始化表头
     headers = ["query_basename", "run_id", "budget_frac", "budget_n", "T_true", "T_hat", "Qerror", "n_post", "n_comment", "oracle_cost", "method"]
     pd.DataFrame(columns=headers).to_csv(output_csv, index=False)
 
     if max_workers is None:
         max_workers = max(1, os.cpu_count() - 2)
 
-    print(f"Workers: {max_workers}, 待处理查询文件数: {len(agg_files)}, 输入目录: {aggregated_dir}")
-    
-    # =========================================================================
-    # 【核心优化 2】并发执行与批量落盘缓冲（减少磁盘 I/O）
-    # =========================================================================
-    all_results_buffer = []
+    print(f"Workers: {max_workers}, 待处理查询文件数: {len(agg_files)}")
     
     with ProcessPoolExecutor(max_workers=max_workers) as executor:
         futures = []
@@ -265,24 +247,17 @@ def run_allocation_strategy_comparison(
                 )
             )
         
-        for future in tqdm(as_completed(futures), total=len(futures), desc=f"Comparing ({parent_dataset}-{agg_mode})"):
+        for future in tqdm(as_completed(futures), total=len(futures), desc=f"Comparing ({parent_dataset})"):
             try:
                 result_records = future.result()
                 if result_records:
-                    all_results_buffer.extend(result_records)
-                    # 积攒到一定数量批量落盘，降低频繁操作文件的开销
-                    if len(all_results_buffer) >= 500:
-                        pd.DataFrame(all_results_buffer).to_csv(output_csv, mode='a', header=False, index=False)
-                        all_results_buffer.clear()
+                    df_chunk = pd.DataFrame(result_records)
+                    df_chunk.to_csv(output_csv, mode='a', header=False, index=False)
             except Exception as e:
                 print(f"Error: {e}")
 
-        # 将缓冲区剩余数据写完
-        if all_results_buffer:
-            pd.DataFrame(all_results_buffer).to_csv(output_csv, mode='a', header=False, index=False)
-            all_results_buffer.clear()
+    print(f"\n[Done] 结果已保存至: {output_csv}")
 
-    print(f"\n[Done] 实验结束，结果已保存至: {output_csv}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run POSS allocation strategy comparison")

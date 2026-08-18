@@ -6,7 +6,7 @@
 
 # 1. 基础路径与环境配置
 # ==============================================================================
-# 直接指定 iogs 虚拟环境中的 python 绝对路径！
+# 直接指定 iogs 虚拟环境中的 python 绝对路径 和 annaconda3环境防止出错！
 PYTHON_EXEC="/home/wangshuo/software/anaconda3/envs/proxy/bin/python"
 source /home/wangshuo/software/anaconda3/etc/profile.d/conda.sh
 conda activate proxy
