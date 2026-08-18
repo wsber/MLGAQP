@@ -217,10 +217,10 @@ OR
 
 # RQ-Specific Reproduction Scripts (RQ1 – RQ4)
 
-# Generates all `{PROXY}` results for RQ1. Visualize in `pythonProject/src/RQs_plots/RQ1&RQ2.ipynb` or `pythonProject/src/RQs_plots/Rebuttal_exp_result.ipynb`.
+# Generates  `PROXY` results for RQ1. Visualize in `pythonProject/src/RQs_plots/RQ1&RQ2.ipynb` or `pythonProject/src/RQs_plots/Rebuttal_exp_result.ipynb`.
 ./run_RQ1.sh 
 
-# Generates all `{PROXY}` results for RQ2. Visualize in `pythonProject/src/RQs_plots/RQ1&RQ2.ipynb`.
+# Generates  `PROXY` results for RQ2. Visualize in `pythonProject/src/RQs_plots/RQ1&RQ2.ipynb`.
 
 ./run_RQ2.sh 
 
