@@ -80,11 +80,6 @@ std::string sum_col;               // 列名，如 "score"
 int sum_label = -1;                // 语义B：指定 3/4/5 中一个，或 post 的 2
 std::mutex g_oracle_mutex;
 
-std::string query_dir_name = "query_graph";
-std::string core_config_name = "core_nodes_config.json";
-std::string custom_labels_name = "user_custom_labels.txt";
-std::string ans_file_name = "parler_ans.txt";
-
 
 std::string get_filename_only(const std::string& filepath) {
     return std::filesystem::path(filepath).filename().string();
@@ -416,7 +411,7 @@ void append_fastesto_budget_curve_row(const std::string& csv_path,
 }
 
 void read_core_labels(const std::string& dataset_base_path) {
-    std::string config_path = dataset_base_path +  "/data_graph/" + custom_labels_name;
+    std::string config_path = dataset_base_path +  "/data_graph/user_custom_labels.txt";
     std::cout << "[Info] Reading core labels configuration from: " << config_path << std::endl;
 
     std::ifstream config_in(config_path);
@@ -440,7 +435,7 @@ void read_core_labels(const std::string& dataset_base_path) {
         }
 
         // 构造与 query_names 中一致的完整路径作为 map 的 key
-        std::string full_query_path = dataset_base_path + "/" + query_dir_name + "/" + query_filename;
+        std::string full_query_path = dataset_base_path + "/query_graph/" + query_filename;
 
         std::vector<int> labels;
         int label;
@@ -456,7 +451,7 @@ void read_core_labels(const std::string& dataset_base_path) {
 }
 
 void read_core_nodes_config(const std::string& dataset_base_path) {
-    std::string config_path = dataset_base_path + "/data_graph/" + core_config_name;
+    std::string config_path = dataset_base_path + "/data_graph/core_nodes_config.json";
     std::cout << "[Info] Reading core nodes configuration from: " << config_path << std::endl;
 
     std::ifstream fin(config_path);
@@ -482,9 +477,8 @@ void read_core_nodes_config(const std::string& dataset_base_path) {
         std::string query_filename = (*it)[1].str();
         std::string block = (*it)[2].str();
 
-        // std::string full_query_path =
-            // dataset_base_path + "/query_graph/" + query_filename;
-        std::string full_query_path = dataset_base_path + "/" + query_dir_name + "/" + query_filename;
+        std::string full_query_path =
+            dataset_base_path + "/query_graph/" + query_filename;
 
         std::vector<int> core_query_nodes;
         std::vector<int> predicate_labels;
@@ -528,39 +522,20 @@ void read_core_nodes_config(const std::string& dataset_base_path) {
     std::cout << "[Info] Loaded predicate-label configs for " << query_to_predicate_labels.size() << " queries." << std::endl;
 }
 
-// void read_ans(const std::string& dataset_base_path) {
-//     std::string ans_file_name = query_path;
-//     cout << ans_file_name << endl;
-//     std::ifstream ans_in(ans_file_name);
-//     while (!ans_in.eof()) {
-//         std::string name, t, c;
-//         ans_in >> name >> t >> c;
-//         if (name.empty() || c.empty()) continue;
-//         // name = "../dataset/"+dataset+"/query_graph/"+name;
-//         name = dataset_base_path + "/query_graph/"+name;
-//         true_cnt[name] = stod(c);
-//         query_names.push_back(name);
-//     }
-// }
-
 void read_ans(const std::string& dataset_base_path) {
-    // 如果 query_path 是空的，使用动态的 ans_file_name
-    if (query_path.empty()) {
-        query_path = dataset_base_path + "/ground_truth/" + ans_file_name;
-    }
-    std::ifstream ans_in(query_path);
+    std::string ans_file_name = query_path;
+    cout << ans_file_name << endl;
+    std::ifstream ans_in(ans_file_name);
     while (!ans_in.eof()) {
         std::string name, t, c;
         ans_in >> name >> t >> c;
         if (name.empty() || c.empty()) continue;
-        
-        // 替换目录名
-        name = dataset_base_path + "/" + query_dir_name + "/" + name;
+        // name = "../dataset/"+dataset+"/query_graph/"+name;
+        name = dataset_base_path + "/query_graph/"+name;
         true_cnt[name] = stod(c);
         query_names.push_back(name);
     }
 }
-
 void write_instance_results_to_csv(
     const std::string& csv_path,
     const std::string& query_name,
@@ -723,19 +698,6 @@ int32_t main(int argc, char *argv[]) {
     std::vector<std::pair<std::string, double>> basic_estimates_for_json;
     CardinalityEstimation::AggFunc agg_func = CardinalityEstimation::AGG_COUNT;
     if (agg_func_str == "sum") agg_func = CardinalityEstimation::AGG_SUM;
-    if (parent_dataset == "amazon_data" || dataset.find("amazon") != std::string::npos) {
-        query_dir_name = "query_graph_" + agg_func_str;                     // e.g., query_graph_sum
-        core_config_name = "core_nodes_config_" + agg_func_str + ".json";   // e.g., core_nodes_config_sum.json
-        custom_labels_name = "user_custom_labels_" + agg_func_str + ".txt"; // e.g., user_custom_labels_sum.txt
-        
-        // 自动替换答案文件名后缀 (如: amazon_ans.txt -> amazon_ans_sum.txt)
-        if (ans_file_name.find("_" + agg_func_str) == std::string::npos) {
-            size_t dot_pos = ans_file_name.find_last_of(".");
-            if (dot_pos != std::string::npos) {
-                ans_file_name = ans_file_name.substr(0, dot_pos) + "_" + agg_func_str + ans_file_name.substr(dot_pos);
-            }
-        }
-    }
     
     // --- Step 0. 清空旧文件内容 ---
     std::ofstream clear_file(sv_out_path, std::ios::out | std::ios::trunc);
