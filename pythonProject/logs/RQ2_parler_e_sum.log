@@ -1,0 +1,12 @@
+[2026-08-18 15:08:47] [Task 2] 启动 Parler-E SUM 评估...
+[2026-08-18 15:08:47] [Task 2] ⚡ 检测到已存在物化目录: /home/wangshuo/projects/PROXY/datasets/parler-E/results/aggregated_results_sum，跳过 Step 1 权重物化！
+[2026-08-18 15:08:47] [Task 2] [Step 2/2] 开始执行 SUM 模式分层重要性采样...
+
+>>> 选定数据集 [1]: Parler1 / Parler-E (多谓词扩展)
+>>> 父数据集目录: parler-E, 子数据集名: dataset_test
+>>> 模型配置: {'POST_PROXY': 'ML1_proxy4b_probability', 'COMMENT_PROXY': 'ML2_proxy1_probability', 'POST_ORACLE': 'ML1_oracle2_probability', 'COMMENT_ORACLE': 'ML2_oracle2_probability'}
+[*] T_true 路径: /home/wangshuo/projects/PROXY/datasets/parler-E/results/T_true_ML1_oracle2_probability_ML2_oracle2_probability_sum.json
+
+========== 开始分配策略对比实验 (POSSA) [parler-E | SUM] ==========
+Workers: 16, 待处理查询文件数: 113, 输入目录: /home/wangshuo/projects/PROXY/datasets/parler-E/results/aggregated_results_sum
+Comparing (parler-E-sum):   0%|          | 0/113 [00:00<?, ?it/s]Comparing (parler-E-sum):   1%|          | 1/113 [00:42<1:18:45, 42.19s/it]Comparing (parler-E-sum):   2%|▏         | 2/113 [00:42<32:23, 17.51s/it]  Comparing (parler-E-sum):   3%|▎         | 3/113 [01:00<32:10, 17.55s/it]Comparing (parler-E-sum):   4%|▎         | 4/113 [01:02<21:06, 11.62s/it]Comparing (parler-E-sum):   4%|▍         | 5/113 [01:03<13:48,  7.67s/it]Comparing (parler-E-sum):   5%|▌         | 6/113 [01:08<12:12,  6.84s/it]Comparing (parler-E-sum):   6%|▌         | 7/113 [01:11<09:52,  5.59s/it]Comparing (parler-E-sum):   7%|▋         | 8/113 [01:17<09:55,  5.67s/it]

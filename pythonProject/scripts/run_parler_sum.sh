@@ -26,7 +26,8 @@ DATASET_ID=0                   # 0: parler, 1: parler-e, 2: amazon
 SAMPLE_BUDGET=60000            # C++ 树采样预算
 RUN_TIMES=5                    # 每个采样率的重复轮数
 MAX_WORKERS=16                 # 并行进程数
-TARGET_TICKS="0.01,0.05,0.1"
+# TARGET_TICKS="0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8"
+TARGET_TICKS="0.1"
 
 # === SUM 聚合专属配置 ===
 SUM_TABLE="post"               # 聚合目标表
