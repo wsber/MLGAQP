@@ -215,6 +215,9 @@ OR
 
 ./run_all_avg.sh
 
+#  baseline : Fastest-Oracle
+./run_Fastest-Oracle.sh
+
 # RQ-Specific Reproduction Scripts (RQ1 – RQ4)
 
 # Generates  `PROXY` results for RQ1. Visualize in `pythonProject/src/RQs_plots/RQ1&RQ2.ipynb` or `pythonProject/src/RQs_plots/Rebuttal_exp_result.ipynb`.
