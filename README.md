@@ -170,15 +170,18 @@ PROXY/
 
 
 
-
-
 > ⚠️ **IMPORTANT NOTE FOR REPRODUCIBILITY:**
 >
 > All pre-computed exact cardinalities and ground truth mappings (`results/T_true_*. json`) are **already packaged in this repository by default**, allowing you to immediately run all downstream sampling and approximation benchmarks (RQ1–RQ4).
 >
 > **However, if you wish to generate the ground truth from scratch or reproduce the exact enumeration baseline (ENUM / EXACT):**
-> Exact subgraph matching is NP-hard and involves massive memory and CPU overhead (can take several hours per workload).  We provide an **interactive, single-workload generator** `run_ground_truth_matching.sh` to safely execute exact matching one dataset at a time:
+> Getting all exact subgraph matching is #-hard and involves massive memory and CPU overhead (can take several hours per workload).  We provide an **interactive, single-workload generator** `run_all_proxy_experiments.sh` to safely execute exact matching one dataset at a time:
 
+```bash
+cd pythonProject/scripts
+chmod +x *.sh
+./run_all_proxy_experiments.sh
+```
 ## 1. One-Click Reproduction
 
 You can reproduce the experimental results either by running the master all-in-one script across all datasets or by executing dedicated workload-specific one-click scripts.
