@@ -2,7 +2,7 @@
 
 # Proxy-Guided Sampling for Approximate Graph Aggregation with Machine Learning Predicates
 
-# Evaluation & Reproduction Guide (Continuously Updated...)
+# Evaluation & Reproduction Guide ( V-0.7.1 Continuously Updated...)
 
 This repository provides the complete code and configuration required to reproduce all experimental results reported in the paper. Users can choose to **fully automate the reproduction via a master script** or **execute the pipeline step-by-step by module**.
 
@@ -158,7 +158,7 @@ PROXY/
 │   ├── run_RQ2.sh                              # [updated] RQ2: PROXY Accuracy convergence across budget ticks (COUNT, SUM, AVG) 
 │   ├── run_RQ3.sh                              # [updated] RQ3: Proxy quality sensitivity and robustness ablation          
 │   ├── run_RQ4.sh                              # [updated] RQ4: Allocation strategy ablation (UN, PO, WO, MAB, POSS)       
-│   ├── run_fastesto_all.sh                     # [updated] RQ1: Baseline: Parallel FaSTest-Oracle budget curve runner           
+│   ├── run_fastesto_all.sh                     # [updated] RQ1&RQ2: Baseline: Parallel FaSTest-Oracle budget curve runner           
 │   ├── run_parler_{count,sum}.sh               # [updated] Modular one-click scripts for Parler (Single Predicate)         
 │   ├── run_parler_e_{count,sum}.sh             # [updated] Modular one-click scripts for Parler-E (Multi-Predicate)        
 │   └── run_amazon_{count,sum}.sh               # [updated] Modular one-click scripts for Amazon (multi-modality Graph)     
