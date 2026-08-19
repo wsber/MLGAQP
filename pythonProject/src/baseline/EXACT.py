@@ -1,141 +1,182 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import os
-import json
-import glob
 import sys
+import json
+import argparse
+from pathlib import Path
 from tqdm import tqdm
 
-project_root = "/home/wangshuo/projects/Neo4j_Exp"
-if project_root not in sys.path:
-    sys.path.append(project_root)
+# ==============================================================================
+# 【核心机制】：零硬编码！全自动动态推算项目根目录
+# 无论谁把代码 clone 到什么路径，这里都会自动解析到 .../PROXY
+# ==============================================================================
+CURRENT_FILE_PATH = Path(__file__).resolve()
+# 向上回退 3 级到达项目根目录 (EXACT.py -> baseline -> src -> pythonProject -> PROXY)
+DEFAULT_PROJECT_ROOT = str(CURRENT_FILE_PATH.parents[3])
+
+if DEFAULT_PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, DEFAULT_PROJECT_ROOT)
+
 from pythonProject.src.algorithms.compute_truth import GroundTruthManager
 
-# ==========================================
-# 1. 用户配置区 (按需修改)
-# ==========================================
-agg_mode = "sum"  # [新增切换开关]: "count" 或 "sum"
+# ==============================================================================
+# 数据集内置预设配置
+# ==============================================================================
+DATASET_PRESETS = {
+    "amazon": {
+        "table1": "product", "table2": "review",
+        "post_oracle_col": "ML3_oracle2_probability",
+        "comment_oracle_col": "ML2_oracle1_probability",
+        "sum_on": "product", "sum_col": "price", "sum_labels": [12]
+    },
+    "parler": {
+        "table1": "post", "table2": "comment",
+        "post_oracle_col": "ML1_oracle2_probability",
+        "comment_oracle_col": "ML2_oracle2_probability",
+        "sum_on": "post", "sum_col": "upvotes", "sum_labels": [1]
+    },
+    "parler-E": {
+        "table1": "post", "table2": "comment",
+        "post_oracle_col": "ML1_oracle2_probability",
+        "comment_oracle_col": "ML2_oracle2_probability",
+        "sum_on": "post", "sum_col": "upvotes", "sum_labels": [2]
+    }
+}
 
-parent_dataset = "amazon_data"
-dataset_name = "amazon_extend"
-table1 = "product"   # 映射第一张表 (原post)
-table2 = "review"    # 映射第二张表 (原comment)
+def compute_dataset_ground_truth(base_dir: str, dataset: str, agg_mode: str):
+    cfg = DATASET_PRESETS.get(dataset)
+    if not cfg:
+        raise ValueError(f"未受支持的数据集: {dataset}，可选: {list(DATASET_PRESETS.keys())}")
 
-post_oracle_col = "ML3_oracle2_probability"
-comment_oracle_col = "ML2_oracle1_probability"
+    # 动态拼接数据集路径 (如: /any_user_path/PROXY/datasets/parler)
+    dataset_base = os.path.join(base_dir, "datasets", dataset)
+    print("=" * 70)
+    print(f"🚀 开始计算 Ground Truth ({agg_mode.upper()}) | 数据集: {dataset}")
+    print(f"   • 项目根目录: {base_dir}")
+    print(f"   • 数据集路径: {dataset_base}")
+    print(f"   • 谓词 Oracle: {cfg['post_oracle_col']} & {cfg['comment_oracle_col']}")
+    if agg_mode == "sum":
+        print(f"   • 求和目标: 表={cfg['sum_on']}, 列={cfg['sum_col']}, 作用Label={cfg['sum_labels']}")
+    print("=" * 70)
 
-# [SUM 模式参数]: 仅当 agg_mode == "sum" 时生效
-sum_on = table1      # 对 product 求和
-sum_col = "price"  # 你要 SUM 的列
+    gt = GroundTruthManager(
+        dataset_name=dataset,
+        post_oracle_col=cfg["post_oracle_col"],
+        comment_oracle_col=cfg["comment_oracle_col"],
+        parent_dataset=dataset,
+        table1=cfg["table1"],
+        table2=cfg["table2"]
+    )
 
-target_labels = [12]
+    # 动态设置 GroundTruthManager 内部路径，防止相对路径在不同工作目录下迷失
+    gt.base_path = dataset_base
+    gt.csv_dir = os.path.join(dataset_base, "csv_data")
+    gt.t1_csv_path = os.path.join(dataset_base, "csv_data", f"{cfg['table1']}.csv")
+    gt.t2_csv_path = os.path.join(dataset_base, "csv_data", f"{cfg['table2']}.csv")
+    if hasattr(gt, 'table1_csv_path'): gt.table1_csv_path = gt.t1_csv_path
+    if hasattr(gt, 'table2_csv_path'): gt.table2_csv_path = gt.t2_csv_path
+    gt.gt_dir = os.path.join(dataset_base, "ground_truth", "structure_result")
+    gt.results_dir = os.path.join(dataset_base, "results")
 
-# 【修改1】：将 parler.ans 修改为 parler_ans.txt
-ans_file_path = f"/home/wangshuo/resource/datasets/{parent_dataset}/{dataset_name}/ground_truth/parler_ans.txt" 
+    # 1. 动态定位 core_nodes_config 文件
+    core_candidates = [
+        os.path.join(dataset_base, "data_graph", f"core_nodes_config_{agg_mode}.json"),
+        os.path.join(dataset_base, "data_graph", "core_nodes_config.json")
+    ]
+    core_path = next((p for p in core_candidates if os.path.exists(p)), None)
+    if not core_path:
+        raise FileNotFoundError(f"未找到 core_nodes_config 文件于: {dataset_base}/data_graph/")
+    
+    with open(core_path, "r", encoding="utf-8") as f:
+        core = json.load(f)
 
-# ==========================================
-# 2. 初始化与数据加载
-# ==========================================
-gt = GroundTruthManager(
-    dataset_name=dataset_name,
-    post_oracle_col=post_oracle_col,
-    comment_oracle_col=comment_oracle_col,
-    parent_dataset=parent_dataset,
-    table1=table1,   
-    table2=table2    
-)
+    # 2. 预加载源数据
+    if agg_mode == "sum":
+        source_data = gt._load_and_prepare_sources(agg_mode="sum", sum_on=cfg["sum_on"], sum_col=cfg["sum_col"])
+    else:
+        source_data = gt._load_and_prepare_sources(agg_mode="count")
 
-# 读取 core_nodes_config.json
-core_path = os.path.join(gt.base_path, "data_graph", "core_nodes_config.json")
-with open(core_path, "r") as f:
-    core = json.load(f)
+    # 3. 读取目标查询列表
+    ans_candidates = [
+        os.path.join(dataset_base, "ground_truth", f"parler_ans_{agg_mode}.txt"),
+        os.path.join(dataset_base, "ground_truth", "parler_ans.txt")
+    ]
+    ans_file_path = next((p for p in ans_candidates if os.path.exists(p)), None)
+    if not ans_file_path:
+        raise FileNotFoundError(f"未找到 ans 文件于: {dataset_base}/ground_truth/")
 
-# 根据 agg_mode 预加载源数据
-if agg_mode == "sum":
-    source_data = gt._load_and_prepare_sources(agg_mode="sum", sum_on=sum_on, sum_col=sum_col)
-else:
-    source_data = gt._load_and_prepare_sources(agg_mode="count")
-
-# =======================================================
-# 【修改2】：读取 parler_ans.txt，通过空格分割获取第一列的名称
-# =======================================================
-target_queries = []
-if os.path.exists(ans_file_path):
-    with open(ans_file_path, "r") as f:
+    target_queries = []
+    with open(ans_file_path, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
-            if not line:
-                continue  # 跳过空行
-            
-            query_name = line.split()[0]
-            
-            # 虽然示例中已经带了 .graph，但加上这行可以防止个别遗漏
-            if not query_name.endswith(".graph"):
-                query_name = f"{query_name}.graph"
-                
-            target_queries.append(query_name)
-else:
-    raise FileNotFoundError(f"未找到 ans 文件: {ans_file_path}")
+            if not line: continue
+            qname = line.split()[0]
+            if not qname.endswith(".graph"):
+                qname = f"{qname}.graph"
+            target_queries.append(qname)
 
-print(f"✅ 从 parler_ans.txt 中共提取了 {len(target_queries)} 个待计算查询。")
+    print(f"[*] 成功加载 {len(target_queries)} 个待计算查询 (读取自 {os.path.basename(ans_file_path)})")
 
-all_T_true = {}
+    # 4. 循环计算 T_true
+    all_T_true = {}
+    target_labels = cfg["sum_labels"]
 
-# ==========================================
-# 3. 循环计算 GT (遍历 target_queries)
-# ==========================================
-for qbase_graph in tqdm(target_queries, desc=f"GT {agg_mode.upper()}"):
-    
-    # 拼接匹配结果文件的绝对路径 (例如 query_3_120.graph_matches.csv)
-    gt_path = os.path.join(gt.gt_dir, f"{qbase_graph}_matches.csv")
-    
-    # 如果这个查询根本没有匹配结果文件，跳过并记为 0.0
-    if not os.path.exists(gt_path):
-        all_T_true[qbase_graph] = 0.0 
-        continue
+    for qbase_graph in tqdm(target_queries, desc=f"Computing T_true ({agg_mode.upper()})"):
+        gt_candidates_file = [
+            os.path.join(dataset_base, "ground_truth", "structure_result", f"{qbase_graph}_matches.csv"),
+            os.path.join(dataset_base, "ground_truth", f"{qbase_graph}_matches.csv")
+        ]
+        gt_path = next((p for p in gt_candidates_file if os.path.exists(p)), None)
 
-    qconf = core.get(qbase_graph)
-    if not qconf:
-        all_T_true[qbase_graph] = 0.0
-        continue
+        if not gt_path:
+            all_T_true[qbase_graph] = 0.0
+            continue
 
-    # 在 core_nodes_config 中搜集当前查询图对应的目标节点映射
-    target_uids = []
-    for lbl in target_labels:
-        uids = qconf.get(str(lbl)) or qconf.get(int(lbl))
-        if uids:
-            target_uids.extend(uids)
+        qconf = core.get(qbase_graph)
+        if not qconf:
+            all_T_true[qbase_graph] = 0.0
+            continue
 
-    if not target_uids and agg_mode == "sum":
-        raise ValueError(f"{qbase_graph}: 没有在核心配置中找到属于 {target_labels} 的计算目标！")
+        target_uids = []
+        for lbl in target_labels:
+            uids = qconf.get(str(lbl)) or qconf.get(int(lbl))
+            if uids: target_uids.extend(uids)
 
-    sum_match_cols = [f"u{int(uid)}" for uid in target_uids] if target_uids else None
+        if not target_uids and agg_mode == "sum":
+            all_T_true[qbase_graph] = 0.0
+            continue
 
-    # 执行底层 T_true 计算
-    t_val = gt._compute_multi_predicate_polars(
-        gt_path=gt_path,
-        core_nodes_config=core,      
-        source_data=source_data,
-        prob_threshold=0.5,
-        agg_mode=agg_mode,
-        sum_on=sum_on if agg_mode == "sum" else None,
-        sum_col=sum_col if agg_mode == "sum" else None,
-        sum_match_col=sum_match_cols,
-    )
-    all_T_true[qbase_graph] = float(t_val)
+        sum_match_cols = [f"u{int(uid)}" for uid in target_uids] if target_uids else None
 
-# ==========================================
-# 4. 导出 JSON
-# ==========================================
-base, ext = os.path.splitext(gt.cache_path)
+        t_val = gt._compute_multi_predicate_polars(
+            gt_path=gt_path,
+            core_nodes_config=core,
+            source_data=source_data,
+            prob_threshold=0.5,
+            agg_mode=agg_mode,
+            sum_on=cfg["sum_on"] if agg_mode == "sum" else None,
+            sum_col=cfg["sum_col"] if agg_mode == "sum" else None,
+            sum_match_col=sum_match_cols,
+        )
+        all_T_true[qbase_graph] = float(t_val)
 
-if agg_mode == "sum":
-    safe_sum_col = str(sum_col).replace("/", "_").replace(":", "_")
-    out_path = f"{base}_sum_{sum_on}_{safe_sum_col}{ext}"
-else:
-    out_path = f"{base}_count{ext}"
+    # 5. 导出 JSON 真值文件
+    out_dir = os.path.join(dataset_base, "results")
+    os.makedirs(out_dir, exist_ok=True)
+    out_json_path = os.path.join(out_dir, f"T_true_{cfg['post_oracle_col']}_{cfg['comment_oracle_col']}_{agg_mode}.json")
 
-os.makedirs(os.path.dirname(out_path), exist_ok=True)
-with open(out_path, "w") as f:
-    json.dump(all_T_true, f, indent=4)
+    with open(out_json_path, "w", encoding="utf-8") as f:
+        json.dump(all_T_true, f, indent=4, ensure_ascii=False)
 
-print(f"[DONE] {agg_mode.upper()} GT 已保存到: {out_path}")
-print(f"[INFO] 共处理 queries: {len(all_T_true)}")
+    print(f"✅ [完成] {dataset} ({agg_mode.upper()}) T_true 已成功保存至:\n👉 {out_json_path}\n")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Compute T_true Ground Truth for Subgraph Matching")
+    # 默认值使用自动解析出的 DEFAULT_PROJECT_ROOT，他人无需传此参数也能自适应运行
+    parser.add_argument("--base_dir", default=DEFAULT_PROJECT_ROOT, help="项目根目录")
+    parser.add_argument("--dataset", required=True, choices=["amazon", "parler", "parler-E"], help="数据集名称")
+    parser.add_argument("--agg_mode", required=True, choices=["count", "sum"], help="聚合模式")
+    args = parser.parse_args()
+
+    compute_dataset_ground_truth(base_dir=args.base_dir, dataset=args.dataset, agg_mode=args.agg_mode)

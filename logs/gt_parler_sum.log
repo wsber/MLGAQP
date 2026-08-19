@@ -1,0 +1,12 @@
+======================================================================
+🚀 开始计算 Ground Truth (SUM) | 数据集: parler
+   • 项目根目录: /home/wangshuo/projects/PROXY
+   • 数据集路径: /home/wangshuo/projects/PROXY/datasets/parler
+   • 谓词 Oracle: ML1_oracle2_probability & ML2_oracle2_probability
+   • 求和目标: 表=post, 列=upvotes, 作用Label=[1]
+======================================================================
+[*] 成功加载 0 个待计算查询 (读取自 parler_ans.txt)
+Computing T_true (SUM): 0it [00:00, ?it/s]Computing T_true (SUM): 0it [00:00, ?it/s]
+✅ [完成] parler (SUM) T_true 已成功保存至:
+👉 /home/wangshuo/projects/PROXY/datasets/parler/results/T_true_ML1_oracle2_probability_ML2_oracle2_probability_sum.json
+

@@ -33,7 +33,7 @@ class GroundTruthManager:
 
         # --- 集中管理所有路径 ---
         # self.base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
-        self.base_path = f"/home/wangshuo/resource/datasets/{parent_dataset}/{dataset_name}"
+        self.base_path = f"../../../datasets/{parent_dataset}"
         
         safe_post = post_oracle_col.replace("/", "_")
         safe_comment = comment_oracle_col.replace("/", "_")
@@ -45,8 +45,7 @@ class GroundTruthManager:
         self.gt_dir = os.path.join(self.base_path, "ground_truth", "structure_result")
         self.core_config_path = os.path.join(self.base_path, "data_graph", "core_nodes_config.json")
         self.id_mapping_path = os.path.join(self.base_path, "data_graph", "id_mapping.csv")
-        # self.post_csv_path = os.path.join(self.base_path, "csv_data", "post.csv")
-        # self.comment_csv_path = os.path.join(self.base_path, "csv_data", "comment.csv")
+
         self.table1_csv_path = os.path.join(self.base_path, "csv_data", f"{self.table1}.csv")
         self.table2_csv_path = os.path.join(self.base_path, "csv_data", f"{self.table2}.csv")
 
