@@ -1,0 +1,1 @@
+/home/wangshuo/software/gcc-12.3.0-install/bin/g++ -fPIC  -std=c++11 -O3 -g -Wall -march=native -pthread -g -Wl,--dependency-file=CMakeFiles/graph.dir/link.d -shared -Wl,-soname,libgraph.so -o libgraph.so CMakeFiles/graph.dir/graph.cpp.o

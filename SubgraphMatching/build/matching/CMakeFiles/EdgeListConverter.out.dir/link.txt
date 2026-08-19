@@ -1,0 +1,1 @@
+/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -std=c++11 -O3 -g -Wall -march=native -pthread -g -Wl,--dependency-file=CMakeFiles/EdgeListConverter.out.dir/link.d CMakeFiles/EdgeListConverter.out.dir/EdgeListToCSR.cpp.o -o EdgeListConverter.out
