@@ -222,11 +222,16 @@ chmod +x *.sh
 # Generates all results for RQ4. Visualize in `pythonProject/src/RQs_plots/RQ4:Ablation.ipynb`.
 ./run_RQ4.sh
 
-#  baseline : Fastest-Oracle Generates `Fastest-Oracle` results for RQ1&RQ2
+#  baseline : Fastest-Oracle Generates `Fastest-Oracle` results for RQ1&RQ2. Visualize in `pythonProject/src/RQs_plots/RQ1&RQ2.ipynb` 
 ./run_Fastest-Oracle.sh
 
+#  baseline - in rebuttal:  Projection space + ABAE. Visualize in `pythonProject/src/RQs_plots/Rebuttal_exp_result.ipynb` 
+./run_Pro_Abae.sh
 
-# 4. Exe Single workload test
+#  baseline - in rebuttal:  Projection space + cascade filter (SUPG.ScaleDoc style). Visualize in `pythonProject/src/RQs_plots/Rebuttal_exp_result.ipynb` 
+./run_Pro_Cacade_Filter.sh 
+
+# 4. Execuate Single workload test
 
 ./run_parler_count.sh
 ./run_parler_sum.sh
@@ -249,11 +254,10 @@ chmod +x *.sh
 ---
 
 ---
-## The following content is still under testing and adjustment, while the sh script for running all results related to PROXY has been completed above.
-## 2. Step-by-Step Pipeline
+## The following content is still under testing and adjustment, above is complete.
 
 If you prefer to inspect individual pipeline stages, reproduce specific Research Questions (RQs), or execute standalone baselines, follow **Steps 2.1 through 2.6** sequentially.
-
+<!-- 
 ### 2.1. Compute Ground Truth (EXACT)
 
 Obtain exact query answers free of sampling noise by performing exhaustive subgraph matching followed by Oracle verification *(it is recommended to skip this step and directly use the provided GT files)*.
@@ -459,8 +463,8 @@ Generate publication-quality vector PDF figures and perform statistical hypothes
 
 ---
 
-### 2.6. Theoretical Performance Upper Bound (`WEE`)
-Compute the asymptotic bounds and Worst-case Execution Efficiency (WEE) metrics:
+### 2.6. Theoretical Performance Upper Bound (`WEE`) -->
+<!-- Compute the asymptotic bounds and Worst-case Execution Efficiency (WEE) metrics:
 ```bash
 python pythonProject/src/algorithms/WEE.py --dataset dataset_test
-```
+``` -->

@@ -1,8 +1,140 @@
-[2026-08-19 05:12:19] [Task 1] 启动 Parler-E COUNT 评估...
-[2026-08-19 05:12:19] [Task 1] ⚡ 检测到已存在物化目录: /home/wangshuo/projects/PROXY/datasets/parler-E/results/aggregated_results_count，跳过 Step 1 权重物化！
-[2026-08-19 05:12:19] [Task 1] [Step 2/2] 开始执行 COUNT 模式分层重要性采样...
+[2026-08-19 06:26:29] [Task 1] 启动 Parler-E COUNT 评估...
+[2026-08-19 06:26:29] [Task 1] ⚡ 检测到已存在物化目录: /home/wangshuo/projects/PROXY/datasets/parler-E/results/aggregated_results_count，跳过 Step 1 权重物化！
+[2026-08-19 06:26:29] [Task 1] [Step 2/2] 开始执行 COUNT 模式分层重要性采样...
 
 ========== 启动采样评估 [parler-E | COUNT] ==========
 [*] 执行的方法集合: ['8_POSSA']
 [*] 输出文件路径: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/allocation_strategy_comparison_count.csv
-Sampling (parler-E-count):   0%|          | 0/113 [00:00<?, ?it/s]Sampling (parler-E-count):   1%|          | 1/113 [00:30<57:09, 30.62s/it]Sampling (parler-E-count):   3%|▎         | 3/113 [00:36<18:20, 10.01s/it]Sampling (parler-E-count):   4%|▎         | 4/113 [00:36<11:57,  6.59s/it]Sampling (parler-E-count):   4%|▍         | 5/113 [00:36<08:13,  4.57s/it]Sampling (parler-E-count):   5%|▌         | 6/113 [00:39<06:47,  3.81s/it]Sampling (parler-E-count):   6%|▌         | 7/113 [00:39<05:00,  2.84s/it]Sampling (parler-E-count):   7%|▋         | 8/113 [00:41<04:28,  2.56s/it]Sampling (parler-E-count):   8%|▊         | 9/113 [00:57<11:35,  6.69s/it]Sampling (parler-E-count):   9%|▉         | 10/113 [01:10<14:42,  8.56s/it]Sampling (parler-E-count):  11%|█         | 12/113 [01:17<10:28,  6.22s/it]Sampling (parler-E-count):  12%|█▏        | 13/113 [01:19<08:28,  5.09s/it]Sampling (parler-E-count):  12%|█▏        | 14/113 [01:27<09:55,  6.01s/it]Sampling (parler-E-count):  13%|█▎        | 15/113 [01:29<07:54,  4.84s/it]Sampling (parler-E-count):  14%|█▍        | 16/113 [01:34<07:48,  4.83s/it]Sampling (parler-E-count):  15%|█▌        | 17/113 [01:39<07:45,  4.85s/it]Sampling (parler-E-count):  16%|█▌        | 18/113 [01:49<10:03,  6.35s/it]Sampling (parler-E-count):  17%|█▋        | 19/113 [02:03<13:30,  8.63s/it]Sampling (parler-E-count):  18%|█▊        | 20/113 [02:07<11:20,  7.32s/it]Sampling (parler-E-count):  19%|█▊        | 21/113 [02:10<09:06,  5.94s/it]Sampling (parler-E-count):  19%|█▉        | 22/113 [02:12<07:17,  4.80s/it]Sampling (parler-E-count):  20%|██        | 23/113 [02:15<06:34,  4.39s/it]Sampling (parler-E-count):  21%|██        | 24/113 [02:15<04:36,  3.11s/it]Sampling (parler-E-count):  22%|██▏       | 25/113 [02:23<06:21,  4.33s/it]Sampling (parler-E-count):  23%|██▎       | 26/113 [02:23<04:40,  3.23s/it]Sampling (parler-E-count):  24%|██▍       | 27/113 [02:26<04:28,  3.13s/it]Sampling (parler-E-count):  25%|██▍       | 28/113 [02:28<03:52,  2.73s/it]Sampling (parler-E-count):  26%|██▌       | 29/113 [02:28<02:44,  1.96s/it]Sampling (parler-E-count):  27%|██▋       | 31/113 [02:31<02:24,  1.76s/it]Sampling (parler-E-count):  28%|██▊       | 32/113 [02:31<01:51,  1.37s/it]Sampling (parler-E-count):  29%|██▉       | 33/113 [02:37<03:22,  2.54s/it]Sampling (parler-E-count):  30%|███       | 34/113 [02:54<08:19,  6.32s/it]Sampling (parler-E-count):  31%|███       | 35/113 [03:00<08:16,  6.37s/it]Sampling (parler-E-count):  32%|███▏      | 36/113 [03:03<06:47,  5.29s/it]Sampling (parler-E-count):  33%|███▎      | 37/113 [03:04<05:11,  4.10s/it]Sampling (parler-E-count):  34%|███▎      | 38/113 [03:05<03:55,  3.14s/it]Sampling (parler-E-count):  35%|███▍      | 39/113 [03:06<03:08,  2.55s/it]Sampling (parler-E-count):  35%|███▌      | 40/113 [03:08<02:57,  2.43s/it]Sampling (parler-E-count):  36%|███▋      | 41/113 [03:09<02:17,  1.91s/it]Sampling (parler-E-count):  37%|███▋      | 42/113 [03:16<04:19,  3.65s/it]Sampling (parler-E-count):  38%|███▊      | 43/113 [03:18<03:27,  2.97s/it]Sampling (parler-E-count):  40%|███▉      | 45/113 [03:23<03:04,  2.71s/it]Sampling (parler-E-count):  41%|████      | 46/113 [03:25<02:58,  2.67s/it]Sampling (parler-E-count):  42%|████▏     | 47/113 [03:29<03:10,  2.88s/it]Sampling (parler-E-count):  42%|████▏     | 48/113 [03:31<02:50,  2.62s/it]Sampling (parler-E-count):  43%|████▎     | 49/113 [03:33<02:44,  2.58s/it]Sampling (parler-E-count):  44%|████▍     | 50/113 [03:34<02:10,  2.07s/it]Sampling (parler-E-count):  45%|████▌     | 51/113 [03:34<01:38,  1.59s/it]Sampling (parler-E-count):  46%|████▌     | 52/113 [03:34<01:11,  1.17s/it]Sampling (parler-E-count):  47%|████▋     | 53/113 [03:35<01:00,  1.01s/it]Sampling (parler-E-count):  48%|████▊     | 54/113 [03:40<02:00,  2.04s/it]Sampling (parler-E-count):  49%|████▊     | 55/113 [03:43<02:14,  2.32s/it]Sampling (parler-E-count):  50%|████▉     | 56/113 [03:49<03:19,  3.51s/it]Sampling (parler-E-count):  50%|█████     | 57/113 [03:51<02:55,  3.14s/it]Sampling (parler-E-count):  51%|█████▏    | 58/113 [04:05<05:49,  6.35s/it]Sampling (parler-E-count):  52%|█████▏    | 59/113 [04:07<04:28,  4.97s/it]Sampling (parler-E-count):  53%|█████▎    | 60/113 [04:09<03:33,  4.02s/it]
+Sampling (parler-E-count):   0%|          | 0/113 [00:00<?, ?it/s]Sampling (parler-E-count):   1%|          | 1/113 [00:30<56:36, 30.33s/it]Sampling (parler-E-count):   2%|▏         | 2/113 [00:31<24:36, 13.30s/it]Sampling (parler-E-count):   3%|▎         | 3/113 [00:37<17:53,  9.76s/it]Sampling (parler-E-count):   4%|▎         | 4/113 [00:37<11:12,  6.17s/it]Sampling (parler-E-count):   4%|▍         | 5/113 [00:38<07:12,  4.01s/it]Sampling (parler-E-count):   5%|▌         | 6/113 [00:40<05:55,  3.32s/it]Sampling (parler-E-count):   6%|▌         | 7/113 [00:40<04:09,  2.36s/it]Sampling (parler-E-count):   7%|▋         | 8/113 [00:54<10:25,  5.96s/it]Sampling (parler-E-count):   8%|▊         | 9/113 [00:55<08:04,  4.66s/it]Sampling (parler-E-count):   9%|▉         | 10/113 [01:11<13:47,  8.04s/it]Sampling (parler-E-count):  10%|▉         | 11/113 [01:17<12:30,  7.36s/it]Sampling (parler-E-count):  11%|█         | 12/113 [01:17<08:52,  5.27s/it]Sampling (parler-E-count):  12%|█▏        | 13/113 [01:21<08:10,  4.90s/it]Sampling (parler-E-count):  12%|█▏        | 14/113 [01:27<08:17,  5.03s/it]Sampling (parler-E-count):  13%|█▎        | 15/113 [01:33<08:47,  5.39s/it]Sampling (parler-E-count):  14%|█▍        | 16/113 [01:39<09:12,  5.70s/it]Sampling (parler-E-count):  15%|█▌        | 17/113 [01:48<10:22,  6.48s/it]Sampling (parler-E-count):  16%|█▌        | 18/113 [01:51<08:35,  5.43s/it]Sampling (parler-E-count):  17%|█▋        | 19/113 [02:06<13:10,  8.41s/it]Sampling (parler-E-count):  18%|█▊        | 20/113 [02:11<11:19,  7.31s/it]Sampling (parler-E-count):  19%|█▊        | 21/113 [02:14<09:06,  5.94s/it]Sampling (parler-E-count):  19%|█▉        | 22/113 [02:16<07:13,  4.76s/it]Sampling (parler-E-count):  20%|██        | 23/113 [02:19<06:20,  4.23s/it]Sampling (parler-E-count):  21%|██        | 24/113 [02:19<04:40,  3.15s/it]Sampling (parler-E-count):  22%|██▏       | 25/113 [02:24<05:19,  3.63s/it]Sampling (parler-E-count):  23%|██▎       | 26/113 [02:26<04:47,  3.30s/it]Sampling (parler-E-count):  24%|██▍       | 27/113 [02:30<04:54,  3.43s/it]Sampling (parler-E-count):  25%|██▍       | 28/113 [02:32<04:16,  3.01s/it]Sampling (parler-E-count):  26%|██▌       | 29/113 [02:34<03:34,  2.55s/it]Sampling (parler-E-count):  27%|██▋       | 30/113 [02:34<02:37,  1.90s/it]Sampling (parler-E-count):  27%|██▋       | 31/113 [02:34<01:53,  1.38s/it]Sampling (parler-E-count):  28%|██▊       | 32/113 [02:42<04:18,  3.20s/it]Sampling (parler-E-count):  29%|██▉       | 33/113 [03:02<11:13,  8.41s/it]Sampling (parler-E-count):  30%|███       | 34/113 [03:04<08:17,  6.30s/it]Sampling (parler-E-count):  31%|███       | 35/113 [03:07<06:52,  5.29s/it]Sampling (parler-E-count):  32%|███▏      | 36/113 [03:07<04:56,  3.85s/it]Sampling (parler-E-count):  33%|███▎      | 37/113 [03:09<04:21,  3.44s/it]Sampling (parler-E-count):  34%|███▎      | 38/113 [03:10<03:04,  2.46s/it]Sampling (parler-E-count):  35%|███▍      | 39/113 [03:11<02:42,  2.20s/it]Sampling (parler-E-count):  35%|███▌      | 40/113 [03:12<02:18,  1.90s/it]Sampling (parler-E-count):  36%|███▋      | 41/113 [03:16<02:48,  2.34s/it]Sampling (parler-E-count):  37%|███▋      | 42/113 [03:22<04:13,  3.57s/it]Sampling (parler-E-count):  38%|███▊      | 43/113 [03:23<03:05,  2.65s/it]Sampling (parler-E-count):  39%|███▉      | 44/113 [03:24<02:25,  2.11s/it]Sampling (parler-E-count):  40%|███▉      | 45/113 [03:28<03:12,  2.83s/it]Sampling (parler-E-count):  41%|████      | 46/113 [03:31<03:04,  2.75s/it]Sampling (parler-E-count):  42%|████▏     | 48/113 [03:35<02:35,  2.39s/it]Sampling (parler-E-count):  43%|████▎     | 49/113 [03:37<02:33,  2.39s/it]Sampling (parler-E-count):  44%|████▍     | 50/113 [03:37<01:54,  1.82s/it]Sampling (parler-E-count):  45%|████▌     | 51/113 [03:38<01:40,  1.62s/it]Sampling (parler-E-count):  46%|████▌     | 52/113 [03:39<01:27,  1.44s/it]Sampling (parler-E-count):  47%|████▋     | 53/113 [03:41<01:25,  1.42s/it]Sampling (parler-E-count):  48%|████▊     | 54/113 [03:43<01:34,  1.60s/it]Sampling (parler-E-count):  49%|████▊     | 55/113 [03:43<01:16,  1.32s/it]Sampling (parler-E-count):  50%|████▉     | 56/113 [03:48<02:09,  2.28s/it]Sampling (parler-E-count):  50%|█████     | 57/113 [03:53<02:50,  3.04s/it]Sampling (parler-E-count):  51%|█████▏    | 58/113 [04:09<06:26,  7.02s/it]Sampling (parler-E-count):  52%|█████▏    | 59/113 [04:11<04:55,  5.47s/it]Sampling (parler-E-count):  53%|█████▎    | 60/113 [04:12<03:33,  4.03s/it]Sampling (parler-E-count):  54%|█████▍    | 61/113 [04:14<02:58,  3.44s/it]Sampling (parler-E-count):  55%|█████▍    | 62/113 [04:24<04:35,  5.40s/it]Sampling (parler-E-count):  56%|█████▌    | 63/113 [04:26<03:36,  4.33s/it]Sampling (parler-E-count):  57%|█████▋    | 64/113 [04:30<03:34,  4.38s/it]Sampling (parler-E-count):  58%|█████▊    | 65/113 [04:31<02:43,  3.41s/it]Sampling (parler-E-count):  58%|█████▊    | 66/113 [04:33<02:11,  2.79s/it]Sampling (parler-E-count):  59%|█████▉    | 67/113 [04:36<02:17,  2.98s/it]Sampling (parler-E-count):  60%|██████    | 68/113 [04:40<02:34,  3.43s/it]Sampling (parler-E-count):  61%|██████    | 69/113 [04:45<02:50,  3.88s/it]Sampling (parler-E-count):  62%|██████▏   | 70/113 [04:50<02:57,  4.14s/it]Sampling (parler-E-count):  63%|██████▎   | 71/113 [04:54<02:53,  4.13s/it]Sampling (parler-E-count):  64%|██████▎   | 72/113 [04:56<02:14,  3.28s/it]Sampling (parler-E-count):  65%|██████▍   | 73/113 [04:56<01:38,  2.47s/it]Sampling (parler-E-count):  65%|██████▌   | 74/113 [04:56<01:08,  1.76s/it]Sampling (parler-E-count):  66%|██████▋   | 75/113 [04:57<00:52,  1.38s/it]Sampling (parler-E-count):  67%|██████▋   | 76/113 [04:57<00:38,  1.04s/it]Sampling (parler-E-count):  68%|██████▊   | 77/113 [04:59<00:42,  1.19s/it]Sampling (parler-E-count):  69%|██████▉   | 78/113 [05:02<01:06,  1.91s/it]Sampling (parler-E-count):  70%|██████▉   | 79/113 [05:03<00:55,  1.64s/it]Sampling (parler-E-count):  71%|███████   | 80/113 [05:05<00:54,  1.65s/it]Sampling (parler-E-count):  72%|███████▏  | 81/113 [05:06<00:49,  1.54s/it]Sampling (parler-E-count):  73%|███████▎  | 82/113 [05:08<00:55,  1.80s/it]Sampling (parler-E-count):  73%|███████▎  | 83/113 [05:09<00:41,  1.39s/it]Sampling (parler-E-count):  74%|███████▍  | 84/113 [05:15<01:24,  2.92s/it]Sampling (parler-E-count):  75%|███████▌  | 85/113 [05:18<01:18,  2.81s/it]Sampling (parler-E-count):  76%|███████▌  | 86/113 [05:18<00:57,  2.11s/it]Sampling (parler-E-count):  77%|███████▋  | 87/113 [05:27<01:47,  4.14s/it]Sampling (parler-E-count):  78%|███████▊  | 88/113 [05:37<02:22,  5.70s/it]Sampling (parler-E-count):  79%|███████▉  | 89/113 [05:40<01:59,  4.99s/it]Sampling (parler-E-count):  80%|███████▉  | 90/113 [05:41<01:24,  3.69s/it]Sampling (parler-E-count):  81%|████████  | 91/113 [05:42<01:05,  2.99s/it]Sampling (parler-E-count):  81%|████████▏ | 92/113 [05:42<00:44,  2.13s/it]Sampling (parler-E-count):  82%|████████▏ | 93/113 [05:45<00:49,  2.47s/it]Sampling (parler-E-count):  83%|████████▎ | 94/113 [05:51<01:05,  3.45s/it]Sampling (parler-E-count):  85%|████████▍ | 96/113 [05:52<00:36,  2.12s/it]Sampling (parler-E-count):  86%|████████▌ | 97/113 [05:53<00:27,  1.69s/it]Sampling (parler-E-count):  87%|████████▋ | 98/113 [05:56<00:33,  2.25s/it]Sampling (parler-E-count):  88%|████████▊ | 99/113 [05:57<00:25,  1.82s/it]Sampling (parler-E-count):  88%|████████▊ | 100/113 [05:57<00:18,  1.39s/it]Sampling (parler-E-count):  89%|████████▉ | 101/113 [06:02<00:26,  2.21s/it]Sampling (parler-E-count):  90%|█████████ | 102/113 [06:07<00:35,  3.19s/it]Sampling (parler-E-count):  91%|█████████ | 103/113 [06:19<00:57,  5.80s/it]Sampling (parler-E-count):  92%|█████████▏| 104/113 [06:24<00:49,  5.55s/it]Sampling (parler-E-count):  93%|█████████▎| 105/113 [06:26<00:36,  4.50s/it]Sampling (parler-E-count):  94%|█████████▍| 106/113 [06:31<00:32,  4.59s/it]Sampling (parler-E-count):  95%|█████████▍| 107/113 [06:38<00:31,  5.25s/it]Sampling (parler-E-count):  96%|█████████▌| 108/113 [06:44<00:27,  5.41s/it]Sampling (parler-E-count):  96%|█████████▋| 109/113 [06:45<00:16,  4.06s/it]Sampling (parler-E-count):  97%|█████████▋| 110/113 [06:50<00:13,  4.44s/it]Sampling (parler-E-count):  98%|█████████▊| 111/113 [07:37<00:34, 17.27s/it]Sampling (parler-E-count):  99%|█████████▉| 112/113 [07:50<00:16, 16.01s/it]Sampling (parler-E-count): 100%|██████████| 113/113 [08:14<00:00, 18.38s/it]Sampling (parler-E-count): 100%|██████████| 113/113 [08:14<00:00,  4.38s/it]
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=26, Reduced K from 5 to 2
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=45, Reduced K from 5 to 4
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=42, Reduced K from 5 to 4
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=27, Reduced K from 5 to 2
+[Auto-Tune] Budget=27, Reduced K from 5 to 2
+[Auto-Tune] Budget=27, Reduced K from 5 to 2
+[Auto-Tune] Budget=27, Reduced K from 5 to 2
+[Auto-Tune] Budget=27, Reduced K from 5 to 2
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=15, Reduced K from 5 to 1
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=25, Reduced K from 5 to 2
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=30, Reduced K from 5 to 3
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=47, Reduced K from 5 to 4
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=13, Reduced K from 5 to 1
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=39, Reduced K from 5 to 3
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=18, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=11, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=16, Reduced K from 5 to 1
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=34, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=36, Reduced K from 5 to 3
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=22, Reduced K from 5 to 2
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=44, Reduced K from 5 to 4
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=32, Reduced K from 5 to 3
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=23, Reduced K from 5 to 2
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=49, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Auto-Tune] Budget=41, Reduced K from 5 to 4
+[Done] 评估完成，已保存至: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/allocation_strategy_comparison_count.csv
+[2026-08-19 06:34:46] [Task 1] ✅ Parler-E COUNT 执行完毕！

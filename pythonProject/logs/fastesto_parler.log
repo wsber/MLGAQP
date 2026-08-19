@@ -1,0 +1,212 @@
+======================================================================
+ 🚀 FaSTest-Oracle 批量实验启动 | 总任务数: 2 | 并发模式: False
+======================================================================
+
+[任务启动] 数据集: parler | 模式: COUNT
+🚀 正在运行: /home/wangshuo/projects/PROXY/cProject/build/Fastest -d parler --ROOT_LABEL 1 --SAMPLE_BUDGET 60000 --BASE_DIR /home/wangshuo/projects/PROXY/datasets --ESTIMATE_WITH_PREDICATE --POST_ORACLE_COL ML1_oracle2_probability --COMMENT_ORACLE_COL ML2_oracle2_probability --AGG_FUNC count --MULTI_PROXY_PROB ML1_proxy4b_probability --BUDGET_CURVE_IN /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/allocation_strategy_comparison_count.csv --FASTESTO_BUDGET_CURVE --FASTESTO_RUNS 5 --FASTESTO_BUDGET_CURVE_OUT /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/FastestO_budget_curve_count.csv --ORACLE_TABLE1 post --ORACLE_TABLE2 comment
+
+[CLI] Root label set to 1
+[CLI] Sample budget set to 60000
+[CLI] Base Dir set to /home/wangshuo/projects/PROXY/datasets
+[CLI] Mode: Estimate with Predicate enabled.
+[CLI] Post Oracle Col: ML1_oracle2_probability
+[CLI] Comment Oracle Col: ML2_oracle2_probability
+[CLI] Multi Proxy Prob Dir Name: ML1_proxy4b_probability
+[CLI] Budget curve input: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/allocation_strategy_comparison_count.csv
+[CLI] FastestO budget curve enabled.
+[CLI] FastestO runs set to 5
+[CLI] FastestO budget curve output: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/FastestO_budget_curve_count.csv
+[info] SAMPLE_BUDGET:60000
+[Info] Cleared old estimate file: /home/wangshuo/projects/PROXY/datasets/parler/results/in_estimateW_result_count.txt
+[Info] Cleared old FastestO curve file: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/FastestO_budget_curve_count.csv
+[info] args:0x7ffffcc57118
+[info] summary_run1_path:/home/wangshuo/projects/PROXY/datasets/parler/results/result_summarys/ML1_proxy4b_probability/results_summary_run_1.csv
+[Info] Reading core nodes configuration from: /home/wangshuo/projects/PROXY/datasets/parler/data_graph/core_nodes_config.json
+[Info] Loaded core query-node configs for 246 queries.
+[Info] Loaded predicate-label configs for 246 queries.
+[infor] root label1
+Constructing Candidate Space: 12 24
+[info] Query Size:246
+[Info] Initializing Oracle Manager from: /home/wangshuo/projects/PROXY/datasets/parler
+[Info] Loaded ID Mapping size: 195812
+[Info] Loading Oracle 1 from /home/wangshuo/projects/PROXY/datasets/parler/csv_data/post.csv col: ML1_oracle2_probability
+[Info] Loading Oracle 2 from /home/wangshuo/projects/PROXY/datasets/parler/csv_data/comment.csv col: ML2_oracle2_probability
+[Info] OracleManager Ready. Total vertices with probability: 154470
+[Warning] Summary file not found: /home/wangshuo/projects/PROXY/datasets/parler/results/result_summarys/ML1_proxy4b_probability/results_summary_run_1.csv
+[Info] Loaded budget curve entries from /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/allocation_strategy_comparison_count.csv
+
+Start Processing (Multi-Predicate) /home/wangshuo/projects/PROXY/datasets/parler/query_graph/query_cycle_4_0.graph
+[Info] Using explicit query nodes for predicates: 1 
+[Info] FOIS_nrs base budget not found, will rely strictly on Curve CSV.
+[Info] Using user-specified root label 1 -> query node 1
+  [FastestO Curve] run=1 frac=0.01 budget_n=500 est=327366
+  [FastestO Curve] run=1 frac=0.05 budget_n=500 est=384831
+  [FastestO Curve] run=1 frac=0.075 budget_n=500 est=438427
+  [FastestO Curve] run=1 frac=0.1 budget_n=614 est=387065
+  [FastestO Curve] run=1 frac=0.15 budget_n=500 est=395612
+  [FastestO Curve] run=1 frac=0.2 budget_n=500 est=375560
+  [FastestO Curve] run=1 frac=0.3 budget_n=500 est=369024
+  [FastestO Curve] run=1 frac=0.4 budget_n=500 est=390804
+  [FastestO Curve] run=1 frac=0.5 budget_n=500 est=334964
+  [FastestO Curve] run=1 frac=0.6 budget_n=500 est=404755
+  [FastestO Curve] run=1 frac=0.7 budget_n=500 est=378173
+  [FastestO Curve] run=1 frac=0.8 budget_n=500 est=373414
+  [FastestO Curve] run=1 frac=0.9 budget_n=500 est=386431
+  [FastestO Curve] run=2 frac=0.01 budget_n=500 est=386417
+  [FastestO Curve] run=2 frac=0.05 budget_n=500 est=358597
+  [FastestO Curve] run=2 frac=0.075 budget_n=500 est=459415
+  [FastestO Curve] run=2 frac=0.1 budget_n=614 est=375184
+  [FastestO Curve] run=2 frac=0.15 budget_n=500 est=419525
+  [FastestO Curve] run=2 frac=0.2 budget_n=500 est=357404
+  [FastestO Curve] run=2 frac=0.3 budget_n=500 est=365979
+  [FastestO Curve] run=2 frac=0.4 budget_n=500 est=411830
+  [FastestO Curve] run=2 frac=0.5 budget_n=500 est=391793
+  [FastestO Curve] run=2 frac=0.6 budget_n=500 est=392364
+  [FastestO Curve] run=2 frac=0.7 budget_n=500 est=414350
+  [FastestO Curve] run=2 frac=0.8 budget_n=500 est=355186
+  [FastestO Curve] run=2 frac=0.9 budget_n=500 est=426095
+  [FastestO Curve] run=3 frac=0.01 budget_n=500 est=328516
+  [FastestO Curve] run=3 frac=0.05 budget_n=500 est=368066
+  [FastestO Curve] run=3 frac=0.075 budget_n=500 est=378971
+  [FastestO Curve] run=3 frac=0.1 budget_n=614 est=407597
+  [FastestO Curve] run=3 frac=0.15 budget_n=500 est=393788
+  [FastestO Curve] run=3 frac=0.2 budget_n=500 est=443419
+  [FastestO Curve] run=3 frac=0.3 budget_n=500 est=356099
+  [FastestO Curve] run=3 frac=0.4 budget_n=500 est=352754
+  [FastestO Curve] run=3 frac=0.5 budget_n=500 est=385726
+  [FastestO Curve] run=3 frac=0.6 budget_n=500 est=369187
+  [FastestO Curve] run=3 frac=0.7 budget_n=500 est=384064
+  [FastestO Curve] run=3 frac=0.8 budget_n=500 est=426206
+  [FastestO Curve] run=3 frac=0.9 budget_n=500 est=373109
+  [FastestO Curve] run=4 frac=0.01 budget_n=500 est=339404
+  [FastestO Curve] run=4 frac=0.05 budget_n=500 est=350725
+  [FastestO Curve] run=4 frac=0.075 budget_n=500 est=415710
+  [FastestO Curve] run=4 frac=0.1 budget_n=614 est=373673
+  [FastestO Curve] run=4 frac=0.15 budget_n=500 est=390860
+  [FastestO Curve] run=4 frac=0.2 budget_n=500 est=316032
+  [FastestO Curve] run=4 frac=0.3 budget_n=500 est=446534
+  [FastestO Curve] run=4 frac=0.4 budget_n=500 est=326882
+  [FastestO Curve] run=4 frac=0.5 budget_n=500 est=357807
+  [FastestO Curve] run=4 frac=0.6 budget_n=500 est=364099
+  [FastestO Curve] run=4 frac=0.7 budget_n=500 est=354032
+  [FastestO Curve] run=4 frac=0.8 budget_n=500 est=364293
+  [FastestO Curve] run=4 frac=0.9 budget_n=500 est=349172
+  [FastestO Curve] run=5 frac=0.01 budget_n=500 est=352497
+  [FastestO Curve] run=5 frac=0.05 budget_n=500 est=354130
+  [FastestO Curve] run=5 frac=0.075 budget_n=500 est=390398
+  [FastestO Curve] run=5 frac=0.1 budget_n=614 est=429872
+  [FastestO Curve] run=5 frac=0.15 budget_n=500 est=410095
+  [FastestO Curve] run=5 frac=0.2 budget_n=500 est=365162
+  [FastestO Curve] run=5 frac=0.3 budget_n=500 est=387900
+  [FastestO Curve] run=5 frac=0.4 budget_n=500 est=355272
+  [FastestO Curve] run=5 frac=0.5 budget_n=500 est=360127
+  [FastestO Curve] run=5 frac=0.6 budget_n=500 est=401165
+  [FastestO Curve] run=5 frac=0.7 budget_n=500 est=372294
+  [FastestO Curve] run=5 frac=0.8 budget_n=500 est=376951
+  [FastestO Curve] run=5 frac=0.9 budget_n=500 est=359859
+  [Result] #CandTree           : 4.206e+06
+  [Result] #TreeTrials         : 1344
+  [Result] #TreeSuccess        : 115
+  [Result] #UniqueOracleNodes  : 500.0000
+  [Result] Truth               : 4079965.0000
+  [Result] Est                 : 359858.8728
+  [Result] logQError           : -1.0545
+  [Result] TreeCountTime       : 115.9373
+  [Result] QueryTime           : 2.0917
+/home/wangshuo/projects/PROXY/datasets/parler/query_graph/query_cycle_4_0.graph Finished!
+
+Start Processing (Multi-Predicate) /home/wangshuo/projects/PROXY/datasets/parler/query_graph/query_cycle_4_1.graph
+[Info] Using explicit query nodes for predicates: 1 
+[Info] FOIS_nrs base budget not found, will rely strictly on Curve CSV.
+[Info] Using user-specified root label 1 -> query node 1
+  [FastestO Curve] run=1 frac=0.01 budget_n=500 est=406999
+  [FastestO Curve] run=1 frac=0.05 budget_n=500 est=344616
+  [FastestO Curve] run=1 frac=0.075 budget_n=500 est=333243
+  [FastestO Curve] run=1 frac=0.1 budget_n=616 est=356954
+  [FastestO Curve] run=1 frac=0.15 budget_n=500 est=380684
+  [FastestO Curve] run=1 frac=0.2 budget_n=500 est=383695
+  [FastestO Curve] run=1 frac=0.3 budget_n=500 est=418412
+  [FastestO Curve] run=1 frac=0.4 budget_n=500 est=391224
+  [FastestO Curve] run=1 frac=0.5 budget_n=500 est=425552
+  [FastestO Curve] run=1 frac=0.6 budget_n=500 est=416085
+  [FastestO Curve] run=1 frac=0.7 budget_n=500 est=365852
+  [FastestO Curve] run=1 frac=0.8 budget_n=500 est=342595
+  [FastestO Curve] run=1 frac=0.9 budget_n=500 est=392102
+  [FastestO Curve] run=2 frac=0.01 budget_n=500 est=355625
+  [FastestO Curve] run=2 frac=0.05 budget_n=500 est=426004
+  [FastestO Curve] run=2 frac=0.075 budget_n=500 est=346311
+  [FastestO Curve] run=2 frac=0.1 budget_n=616 est=378333
+  [FastestO Curve] run=2 frac=0.15 budget_n=500 est=416249
+  [FastestO Curve] run=2 frac=0.2 budget_n=500 est=379274
+  [FastestO Curve] run=2 frac=0.3 budget_n=500 est=375875
+  [FastestO Curve] run=2 frac=0.4 budget_n=500 est=402598
+  [FastestO Curve] run=2 frac=0.5 budget_n=500 est=433780
+  [FastestO Curve] run=2 frac=0.6 budget_n=500 est=404989
+  [FastestO Curve] run=2 frac=0.7 budget_n=500 est=400539
+  [FastestO Curve] run=2 frac=0.8 budget_n=500 est=356251
+  [FastestO Curve] run=2 frac=0.9 budget_n=500 est=417305
+  [FastestO Curve] run=3 frac=0.01 budget_n=500 est=383155
+  [FastestO Curve] run=3 frac=0.05 budget_n=500 est=425358
+  [FastestO Curve] run=3 frac=0.075 budget_n=500 est=372578
+  [FastestO Curve] run=3 frac=0.1 budget_n=616 est=378286
+  [FastestO Curve] run=3 frac=0.15 budget_n=500 est=364389
+  [FastestO Curve] run=3 frac=0.2 budget_n=500 est=419640
+  [FastestO Curve] run=3 frac=0.3 budget_n=500 est=353467
+  [FastestO Curve] run=3 frac=0.4 budget_n=500 est=388582
+  [FastestO Curve] run=3 frac=0.5 budget_n=500 est=344099
+  [FastestO Curve] run=3 frac=0.6 budget_n=500 est=364634
+  [FastestO Curve] run=3 frac=0.7 budget_n=500 est=374824
+  [FastestO Curve] run=3 frac=0.8 budget_n=500 est=433022
+  [FastestO Curve] run=3 frac=0.9 budget_n=500 est=391151
+  [FastestO Curve] run=4 frac=0.01 budget_n=500 est=388499
+  [FastestO Curve] run=4 frac=0.05 budget_n=500 est=348416
+  [FastestO Curve] run=4 frac=0.075 budget_n=500 est=385786
+  [FastestO Curve] run=4 frac=0.1 budget_n=616 est=343754
+  [FastestO Curve] run=4 frac=0.15 budget_n=500 est=404333
+  [FastestO Curve] run=4 frac=0.2 budget_n=500 est=380029
+  [FastestO Curve] run=4 frac=0.3 budget_n=500 est=368151
+  [FastestO Curve] run=4 frac=0.4 budget_n=500 est=406063
+  [FastestO Curve] run=4 frac=0.5 budget_n=500 est=438647
+  [FastestO Curve] run=4 frac=0.6 budget_n=500 est=384979
+  [FastestO Curve] run=4 frac=0.7 budget_n=500 est=354032
+  [FastestO Curve] run=4 frac=0.8 budget_n=500 est=369999
+  [FastestO Curve] run=4 frac=0.9 budget_n=500 est=371991
+  [FastestO Curve] run=5 frac=0.01 budget_n=500 est=365287
+  [FastestO Curve] run=5 frac=0.05 budget_n=500 est=355174
+  [FastestO Curve] run=5 frac=0.075 budget_n=500 est=372304
+  [FastestO Curve] run=5 frac=0.1 budget_n=616 est=340213
+  [FastestO Curve] run=5 frac=0.15 budget_n=500 est=441637
+  [FastestO Curve] run=5 frac=0.2 budget_n=500 est=368451
+  [FastestO Curve] run=5 frac=0.3 budget_n=500 est=327366
+  [FastestO Curve] run=5 frac=0.4 budget_n=500 est=370637
+  [FastestO Curve] run=5 frac=0.5 budget_n=500 est=395507
+  [FastestO Curve] run=5 frac=0.6 budget_n=500 est=348502
+  [FastestO Curve] run=5 frac=0.7 budget_n=500 est=351028
+  [FastestO Curve] run=5 frac=0.8 budget_n=500 est=353528
+  [FastestO Curve] run=5 frac=0.9 budget_n=500 est=384078
+  [Result] #CandTree           : 4.206e+06
+  [Result] #TreeTrials         : 1314
+  [Result] #TreeSuccess        : 120
+  [Result] #UniqueOracleNodes  : 500.0000
+  [Result] Truth               : 4079965.0000
+  [Result] Est                 : 384078.0822
+  [Result] logQError           : -1.0262
+  [Result] TreeCountTime       : 121.9621
+  [Result] QueryTime           : 2.0271
+/home/wangshuo/projects/PROXY/datasets/parler/query_graph/query_cycle_4_1.graph Finished!
+
+Start Processing (Multi-Predicate) /home/wangshuo/projects/PROXY/datasets/parler/query_graph/query_cycle_4_10.graph
+[Info] Using explicit query nodes for predicates: 0 
+[Info] FOIS_nrs base budget not found, will rely strictly on Curve CSV.
+Traceback (most recent call last):
+  File "/home/wangshuo/projects/PROXY/pythonProject/src/baseline/FASTEST-ORACLE.py", line 187, in <module>
+    main()
+  File "/home/wangshuo/projects/PROXY/pythonProject/src/baseline/FASTEST-ORACLE.py", line 180, in main
+    results = [run_single_dataset_task(t) for t in task_list]
+  File "/home/wangshuo/projects/PROXY/pythonProject/src/baseline/FASTEST-ORACLE.py", line 180, in <listcomp>
+    results = [run_single_dataset_task(t) for t in task_list]
+  File "/home/wangshuo/projects/PROXY/pythonProject/src/baseline/FASTEST-ORACLE.py", line 133, in run_single_dataset_task
+    code, output = runner.run(
+  File "/home/wangshuo/projects/PROXY/pythonProject/src/Structure_first/graph_sample.py", line 92, in run
+    for line in proc.stdout:
+KeyboardInterrupt

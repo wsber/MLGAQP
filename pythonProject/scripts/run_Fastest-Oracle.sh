@@ -26,7 +26,7 @@ if [ -n "$CONDA_PREFIX" ]; then
     export LD_LIBRARY_PATH="${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH}"
 fi
 
-LOG_DIR="${PROJECT_ROOT}/logs"
+LOG_DIR="${PROJECT_ROOT}/pythonProject/logs"
 mkdir -p "${LOG_DIR}"
 
 # 脚本与可执行文件真实路径

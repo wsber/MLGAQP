@@ -1,90 +1,136 @@
 import os
+# ==============================================================================
+# 必须置于最顶端：防止 ProcessPoolExecutor 与 NumPy/BLAS 发生多线程死锁
+# ==============================================================================
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+
 import ast
 import json
 import math
 import csv
+import random
 import argparse
 import numpy as np
 import pandas as pd
-from typing import Dict, Tuple
+from typing import Dict, Tuple, List
 from tqdm import tqdm
 import concurrent.futures
 
-# python PRO-ABAE.py   --parent_dataset amazon_data   --dataset_name amazon_extend   --ablation_csv /home/wangshuo/resource/datasets/amazon_data/amazon_extend/results/efficiency/allocation_strategy_comparison_ablation_sum.csv   --t1_proxy ML3_proxy2_probability   --t1_oracle ML3_oracle2_probability   --t2_proxy ML2_proxy2_probability   --t2_oracle ML2_oracle1_probability   --workers 16   --out_csv Projection_ABae_amazon_sum.csv
-
-"""
-python PRO-ABAE.py \
-  --parent_dataset parler_data \
-  --dataset_name dataset_test \
-  --ablation_csv /home/wangshuo/resource/datasets/parler_data/dataset_test/results/efficiency/allocation_strategy_comparison_ablation_sum.csv \
-  --t1_proxy ML1_proxy4b_probability \
-  --t1_oracle ML1_oracle2_probability \
-  --t2_proxy ML2_proxy1_probability \
-  --t2_oracle ML2_oracle2_probability \
-  --workers 16 \
-  --out_csv Projection_ABae_parler_sum.csv
-  
-"""
-
 class ProjectionABaeSampler:
-    def __init__(self, df: pd.DataFrame, T_true: float = None, K: int = 5,
-                 post_proxy: str = "ML1_proxy4b_probability",
-                 comment_proxy: str = "ML2_proxy1_probability",
-                 post_oracle: str = "ML1_oracle2_probability",
-                 comment_oracle: str = "ML2_oracle2_probability"):
+    def __init__(self, df: pd.DataFrame, config: dict, T_true: float = None, K: int = 5):
         self.T_true = T_true
         self.K = K
-        self.instances = self._prepare_instances(df, post_proxy, comment_proxy, post_oracle, comment_oracle)
+        self.config = config
+        # 极低内存占用预处理
+        self.instances = self._prepare_instances(df)
 
-    def _prepare_instances(self, df: pd.DataFrame, p_proxy_col: str, c_proxy_col: str,
-                           p_oracle_col: str, c_oracle_col: str) -> pd.DataFrame:
-        if df.empty: return pd.DataFrame()
+    def _prepare_instances(self, df: pd.DataFrame) -> pd.DataFrame:
+        if df.empty: 
+            return pd.DataFrame()
         df = df.copy()
+        
         weight_col = "estimateW" if "estimateW" in df.columns else "a"
         df.rename(columns={weight_col: "a"}, inplace=True)
         df["a"] = pd.to_numeric(df["a"], errors="coerce").fillna(0.0)
 
-        def safe_extract_list(val):
-            if pd.isna(val) or val == "": return []
-            if isinstance(val, str):
-                if val.strip() in ["", "nan", "[]"]: return []
-                try:
-                    res = json.loads(val.replace("'", '"'))
-                    return res if isinstance(res, list) else [res]
-                except Exception:
-                    try:
-                        res = ast.literal_eval(val)
-                        return res if isinstance(res, list) else [res]
-                    except Exception: return []
-            return []
+        def fast_parse_num_list(val):
+            if pd.isna(val): return []
+            if isinstance(val, (list, tuple)): return [float(x) for x in val if pd.notna(x)]
+            if isinstance(val, (int, float)): return [float(val)]
+            s = str(val).strip()
+            if not s or s in ("[]", "nan", "None"): return []
+            if s.startswith('[') and s.endswith(']'):
+                s = s[1:-1].strip()
+                if not s: return []
+                res = []
+                for x in s.split(','):
+                    x = x.strip().strip("'\"")
+                    if x:
+                        try: res.append(float(x))
+                        except ValueError: pass
+                return res
+            try: return [float(s)]
+            except ValueError: return []
 
-        def to_num_list(lst):
-            return [float(x) for x in lst if pd.notna(x)]
+        def compute_proxy_prod(val_str):
+            lst = fast_parse_num_list(val_str)
+            if not lst: return 1.0
+            return float(np.prod(lst))
 
-        id1_col = "post_id_list" if "post_id_list" in df.columns else "product_id_list"
-        id2_col = "comment_id_list" if "comment_id_list" in df.columns else "review_id_list"
-        df["t1_ids"] = df[id1_col].apply(safe_extract_list) if id1_col in df.columns else [[] for _ in range(len(df))]
-        df["t2_ids"] = df[id2_col].apply(safe_extract_list) if id2_col in df.columns else [[] for _ in range(len(df))]
+        p_proxy_col = self.config.get("t1_proxy")
+        c_proxy_col = self.config.get("t2_proxy")
 
-        p_proxy_list = df[p_proxy_col].apply(safe_extract_list).apply(to_num_list) if p_proxy_col in df.columns else df["a"].apply(lambda x: [])
-        c_proxy_list = df[c_proxy_col].apply(safe_extract_list).apply(to_num_list) if c_proxy_col in df.columns else df["a"].apply(lambda x: [])
+        p_proxies = df[p_proxy_col].apply(compute_proxy_prod) if (p_proxy_col and p_proxy_col in df.columns) else 1.0
+        c_proxies = df[c_proxy_col].apply(compute_proxy_prod) if (c_proxy_col and c_proxy_col in df.columns) else 1.0
 
-        df["proxy"] = p_proxy_list.apply(lambda l: float(np.prod(l)) if len(l)>0 else 1.0) * \
-                      c_proxy_list.apply(lambda l: float(np.prod(l)) if len(l)>0 else 1.0)
+        df["proxy"] = p_proxies * c_proxies
 
-        df["t1_oracle_probs"] = df[p_oracle_col].apply(safe_extract_list).apply(to_num_list) if p_oracle_col in df.columns else df["a"].apply(lambda x: [])
-        df["t2_oracle_probs"] = df[c_oracle_col].apply(safe_extract_list).apply(to_num_list) if c_oracle_col in df.columns else df["a"].apply(lambda x: [])
+        # 仅保留核心轻量列，释放显存与内存
+        cols_to_keep = ["a", "proxy"]
+        optional_cols = [
+            self.config.get("t1_oracle"), self.config.get("t2_oracle"), 
+            "post_id_list", "product_id_list", "comment_id_list", "review_id_list"
+        ]
+        for c in optional_cols:
+            if c and c in df.columns:
+                cols_to_keep.append(c)
 
-        instances = df[df["a"] > 0].reset_index(drop=True)
-        return instances
+        return df[df["a"] > 0][cols_to_keep].reset_index(drop=True)
 
     def _eval_oracle_strict(self, row: pd.Series, oracle_cache: Dict, budget_used: int, budget_limit: int) -> Tuple[int, int, bool]:
-        t1_ids, t2_ids = row.get("t1_ids", []), row.get("t2_ids", [])
-        t1_probs, t2_probs = row.get("t1_oracle_probs", []), row.get("t2_oracle_probs", [])
+        """【即时解析机制】只在调用 Oracle 时才解析当前行"""
+        def fast_parse_id_list(val):
+            if pd.isna(val): return []
+            if isinstance(val, (list, tuple)): return [str(x) for x in val]
+            if isinstance(val, (int, float)): return [str(int(val))] if not np.isnan(val) else []
+            s = str(val).strip()
+            if not s or s in ("[]", "nan", "None"): return []
+            if s.startswith('[') and s.endswith(']'):
+                s = s[1:-1].strip()
+                if not s: return []
+                return [x.strip().strip("'\"") for x in s.split(',') if x.strip()]
+            return [s]
+
+        def fast_parse_num_list(val):
+            if pd.isna(val): return []
+            if isinstance(val, (list, tuple)): return [float(x) for x in val if pd.notna(x)]
+            if isinstance(val, (int, float)): return [float(val)]
+            s = str(val).strip()
+            if not s or s in ("[]", "nan", "None"): return []
+            if s.startswith('[') and s.endswith(']'):
+                s = s[1:-1].strip()
+                if not s: return []
+                res = []
+                for x in s.split(','):
+                    x = x.strip().strip("'\"")
+                    if x:
+                        try: res.append(float(x))
+                        except ValueError: pass
+                return res
+            try: return [float(s)]
+            except ValueError: return []
+
+        id1_col = "post_id_list" if "post_id_list" in row else "product_id_list"
+        id2_col = "comment_id_list" if "comment_id_list" in row else "review_id_list"
+
+        t1_ids = fast_parse_id_list(row.get(id1_col))
+        t2_ids = fast_parse_id_list(row.get(id2_col))
+        
+        t1_probs = fast_parse_num_list(row.get(self.config.get("t1_oracle")))
+        t2_probs = fast_parse_num_list(row.get(self.config.get("t2_oracle")))
 
         nodes_to_check = []
-        for nid, prob in zip(t1_ids, t1_probs): nodes_to_check.append(("T1", str(nid), prob))
-        for nid, prob in zip(t2_ids, t2_probs): nodes_to_check.append(("T2", str(nid), prob))
+        for idx, prob in enumerate(t1_probs): 
+            nid = t1_ids[idx] if idx < len(t1_ids) else f"t1_{idx}"
+            nodes_to_check.append(("T1", str(nid), prob))
+            
+        for idx, prob in enumerate(t2_probs): 
+            nid = t2_ids[idx] if idx < len(t2_ids) else f"t2_{idx}"
+            nodes_to_check.append(("T2", str(nid), prob))
 
         calls = 0
         for t_name, nid, o_prob in nodes_to_check:
@@ -106,77 +152,169 @@ class ProjectionABaeSampler:
 
     def stratify_by_proxy_quantile(self, df: pd.DataFrame, K: int) -> pd.DataFrame:
         df = df.copy()
+        # 按期望贡献 proxy * a 分层，保证层内方差极小
+        exp_contrib = df["proxy"] * df["a"]
         try:
-            df["stratum"] = pd.qcut(df["proxy"], K, labels=False, duplicates="drop")
+            df["stratum"] = pd.qcut(exp_contrib, K, labels=False, duplicates="drop")
         except Exception:
-            df["stratum"] = pd.cut(df["proxy"].rank(method="first"), bins=K, labels=False)
+            df["stratum"] = pd.cut(exp_contrib.rank(method="first"), bins=K, labels=False)
         df["stratum"] = df["stratum"].fillna(0).astype(int)
         return df
 
-    def run_abae_sum(self, target_budget_frac: float = 0.1, pilot_ratio: float = 0.0, budget_B: int = 500, random_seed: int = 42) -> Dict:
+    def run_abae_sum(self, target_budget_frac: float = 0.1, pilot_ratio: float = 0.1, budget_B: int = 500, random_seed: int = 42) -> Dict:
+        """
+        【严格无偏的两阶段 Pilot + Cost-Aware Neyman 分配采样】
+        1. Stage 1: Uniform Pilot 获取经验方差与平均成本。
+        2. Stage 2: Cost-Aware Neyman 动态配额，层内 Uniform 抽取剩余样本。
+        3. 估计量: 严格两阶段 Horvitz-Thompson 展开: T_hat = sum(Pilot) + (N_rem / n2) * sum(Stage2)
+        """
         if self.instances.empty:
             return {"T_hat_sum": 0.0, "ARE": 0.0, "Signed_RE": 0.0, "oracle_cost": 0}
 
         rng = np.random.default_rng(random_seed)
-
         df = self.stratify_by_proxy_quantile(self.instances, self.K)
         N_total_pop = len(df)
         
+        # 1. 预算划分
+        N_rows_budget = max(1, int(math.floor(target_budget_frac * N_total_pop)))
+        # 当 pilot_ratio > 0 时启用 Pilot；若为 0 则默认每层至少抽 2 个做方差估计
+        N1_pilot = max(self.K * 2, int(math.floor(N_rows_budget * (pilot_ratio if pilot_ratio > 0 else 0.1))))
+        N1_pilot = min(N1_pilot, N_rows_budget)
+        N2_stage2 = max(0, N_rows_budget - N1_pilot)
+
         oracle_cache = {}
         total_budget_used = 0
         budget_exhausted = False
 
         strata_groups = dict(list(df.groupby("stratum")))
-        
-        # 为每层建立打乱后的数据迭代器
-        shuffled_grps = {k: grp.sample(frac=1.0, random_state=random_seed+k) for k, grp in strata_groups.items()}
-        grp_iters = {k: shuffled_grps[k].iterrows() for k in strata_groups}
-        
-        samples = {k: [] for k in strata_groups}
-        active_strata = list(strata_groups.keys())
+        actual_K = len(strata_groups)
+        n1_per_stratum = max(1, N1_pilot // actual_K)
+
+        pilot_stats = {}
+        pilot_y_vals = {k: [] for k in strata_groups}
+        pilot_sampled_indices = {k: [] for k in strata_groups}
 
         # =================================================================
-        # 极简无偏采样：全局轮询抽取，直到预算耗尽或数据抽空
+        # Stage 1: Pilot 采样 (Uniform)
         # =================================================================
-        while active_strata and not budget_exhausted:
-            rng.shuffle(active_strata) # 随机化遍历顺序，防顺序依赖偏差
+        for k, grp in strata_groups.items():
+            Nk = len(grp)
+            n1_k = min(n1_per_stratum, Nk)
             
-            for k in list(active_strata):
+            sampled_grp = grp.sample(n=n1_k, random_state=rng.integers(0, 1 << 30))
+            pilot_sampled_indices[k] = sampled_grp.index.tolist()
+            
+            cost_vals = []
+            for _, row in sampled_grp.iterrows():
                 if budget_exhausted: break
+                is_valid, calls, is_out = self._eval_oracle_strict(row, oracle_cache, total_budget_used, budget_B)
+                if is_out:
+                    budget_exhausted = True
+                    break
                 
-                try:
-                    idx, row = next(grp_iters[k])
-                    is_valid, calls, is_out = self._eval_oracle_strict(row, oracle_cache, total_budget_used, budget_B)
-                    
-                    if is_out:
-                        budget_exhausted = True
-                        break # 触碰熔断线，丢弃当前无效采样，保证无偏
-                        
-                    total_budget_used += calls
-                    samples[k].append(row["a"] * is_valid)
-                    
-                except StopIteration:
-                    active_strata.remove(k) # 当前层抽空了
+                total_budget_used += calls
+                pilot_y_vals[k].append(row["a"] * is_valid)
+                cost_vals.append(calls)
+            
+            y_vals = pilot_y_vals[k]
+            sigma_hat_k = np.std(y_vals, ddof=1) if len(y_vals) > 1 else 0.0
+            mean_cost_k = np.mean(cost_vals) if len(cost_vals) > 0 else 1.0
+            
+            # 方差平滑保底：若 pilot 未命中正样本，用 proxy*a 的先验方差保底
+            if sigma_hat_k <= 1e-6:
+                prior_sigma = float(np.std(grp["a"] * grp["proxy"]))
+                if prior_sigma <= 1e-6:
+                    prior_sigma = float(np.mean(grp["a"] * grp["proxy"])) * 0.5 + 1e-4
+                smoothed_sigma = max(prior_sigma, 1e-4)
+            else:
+                smoothed_sigma = sigma_hat_k
+            
+            pilot_stats[k] = {
+                "Nk": Nk, 
+                "n1": len(y_vals),
+                "smoothed_sigma": smoothed_sigma, 
+                "mean_cost": max(mean_cost_k, 0.1)
+            }
 
-        # ==========================================
-        # === Final Stratified Estimation (SUM) ===
-        # ==========================================
+        # =================================================================
+        # Stage 2: Cost-Aware Neyman 分配
+        # =================================================================
+        alloc_stage2 = {k: 0 for k in strata_groups}
+        if not budget_exhausted and N2_stage2 > 0:
+            alloc_weights = {
+                k: ((st["Nk"] - st["n1"]) * st["smoothed_sigma"]) / math.sqrt(st["mean_cost"]) 
+                for k, st in pilot_stats.items()
+            }
+            sum_w = sum(alloc_weights.values())
+            if sum_w > 0:
+                for k in pilot_stats:
+                    ratio = alloc_weights[k] / sum_w
+                    alloc_stage2[k] = int(math.floor(N2_stage2 * ratio))
+            else:
+                for k in pilot_stats:
+                    alloc_stage2[k] = N2_stage2 // actual_K
+
+            # 余数分配
+            rem = N2_stage2 - sum(alloc_stage2.values())
+            if rem > 0 and sum_w > 0:
+                remainders = {k: (N2_stage2 * (alloc_weights[k] / sum_w) - alloc_stage2[k]) for k in pilot_stats}
+                for k in sorted(remainders, key=remainders.get, reverse=True):
+                    if rem <= 0: break
+                    rem_len = pilot_stats[k]["Nk"] - pilot_stats[k]["n1"]
+                    if alloc_stage2[k] < rem_len:
+                        alloc_stage2[k] += 1
+                        rem -= 1
+
+        stage2_pool = []
+        if not budget_exhausted:
+            for k, grp in strata_groups.items():
+                remaining_grp = grp.drop(index=pilot_sampled_indices[k], errors="ignore")
+                n2_k = min(alloc_stage2.get(k, 0), len(remaining_grp))
+                if n2_k > 0:
+                    sampled_grp = remaining_grp.sample(n=n2_k, random_state=rng.integers(0, 1 << 30))
+                    for _, row in sampled_grp.iterrows():
+                        stage2_pool.append((k, row))
+            
+            # 全局打乱以防止按层串行截断引起的偏差
+            random.seed(random_seed)
+            random.shuffle(stage2_pool)
+
+        stage2_y_vals = {k: [] for k in strata_groups}
+        for k, row in stage2_pool:
+            if budget_exhausted: break
+            is_valid, calls, is_out = self._eval_oracle_strict(row, oracle_cache, total_budget_used, budget_B)
+            if is_out:
+                budget_exhausted = True
+                break 
+            total_budget_used += calls
+            stage2_y_vals[k].append(row["a"] * is_valid)
+
+        # =================================================================
+        # 严格无偏两阶段 Horvitz-Thompson 展开估计
+        # =================================================================
         total_sum_hat = 0.0
-        sampled_N = 0  
 
         for k, grp in strata_groups.items():
             Nk = len(grp)
-            y_list = samples[k]
-            nk_total = len(y_list)
-
-            if nk_total > 0:
-                mean_y_k = np.mean(y_list)
-                total_sum_hat += mean_y_k * Nk
-                sampled_N += Nk
+            p_vals = pilot_y_vals[k]
+            s2_vals = stage2_y_vals[k]
+            
+            n1_k = len(p_vals)
+            n2_k = len(s2_vals)
+            
+            if n1_k == 0:
+                continue
                 
-        # Stratum Collapsing / Scaling：补偿由于预算过低导致某些层 0 采样的负偏差
-        if 0 < sampled_N < N_total_pop:
-            total_sum_hat = total_sum_hat * (N_total_pop / sampled_N)
+            y1_sum = sum(p_vals)
+            if n2_k > 0:
+                # 严格无偏：已抽 Pilot 确定值 + 剩余部分乘以 Stage2 样本均值
+                y2_mean = sum(s2_vals) / n2_k
+                t_hat_k = y1_sum + (Nk - n1_k) * y2_mean
+            else:
+                # 若第二阶段未抽到/预算耗尽，退化为第一阶段的扩张估计
+                t_hat_k = (Nk / n1_k) * y1_sum
+                
+            total_sum_hat += t_hat_k
 
         t_true_safe = self.T_true if self.T_true and self.T_true > 0 else 1e-9
         signed_re = (total_sum_hat - t_true_safe) / t_true_safe
@@ -189,9 +327,9 @@ class ProjectionABaeSampler:
             "oracle_cost": int(total_budget_used)
         }
 
-def process_single_task(fname, run_id, agg_dir, gt_map, query_budgets, args_dict):
+def process_single_task(fname, run_id, agg_dir, gt_map, query_budgets, config, pilot_ratio):
     try:
-        q_clean = fname.replace("aggregated_list_", "").replace(".csv", "")
+        q_clean = fname.replace("aggregated_list_", "").replace("aggregated_wide_", "").replace(".csv", "")
         q_basename = q_clean + ".graph"
         T_true = gt_map.get(q_clean)
 
@@ -201,17 +339,12 @@ def process_single_task(fname, run_id, agg_dir, gt_map, query_budgets, args_dict
         filepath = os.path.join(agg_dir, fname)
         df = pd.read_csv(filepath)
 
-        sampler = ProjectionABaeSampler(
-            df=df, T_true=T_true, K=args_dict["K"],
-            post_proxy=args_dict["t1_proxy"], comment_proxy=args_dict["t2_proxy"],
-            post_oracle=args_dict["t1_oracle"], comment_oracle=args_dict["t2_oracle"]
-        )
-
-        seed = (abs(hash(q_basename)) % 99999999) + run_id
+        sampler = ProjectionABaeSampler(df=df, config=config, T_true=T_true, K=config["K"])
+        seed = (abs(hash(q_basename)) % 99999999) + run_id * 10007
 
         res = sampler.run_abae_sum(
-            target_budget_frac=args_dict["budget_frac"],
-            pilot_ratio=0.0, # 强制关闭 pilot，只用一条无偏轮询
+            target_budget_frac=config["budget_frac"],
+            pilot_ratio=pilot_ratio,  
             budget_B=budget_B,
             random_seed=seed
         )
@@ -228,42 +361,73 @@ def process_single_task(fname, run_id, agg_dir, gt_map, query_budgets, args_dict
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset_name", required=True)
-    parser.add_argument("--parent_dataset", default="parler_data")
-    parser.add_argument("--ablation_csv", required=True)
-    parser.add_argument("--t1_proxy", default="ML1_proxy4b_probability")
-    parser.add_argument("--t2_proxy", default="ML2_proxy1_probability")
-    parser.add_argument("--t1_oracle", default="ML1_oracle2_probability")
-    parser.add_argument("--t2_oracle", default="ML2_oracle2_probability")
-    
+    parser.add_argument("--base_dir", default="/home/wangshuo/projects/PROXY")
+    parser.add_argument("--dataset", default="parler")
+    parser.add_argument("--agg_mode", choices=["count", "sum"], default="count")
     parser.add_argument("--budget_frac", type=float, default=0.1)
+    parser.add_argument("--pilot_ratio", type=float, default=0.1)  # 默认使用 10% 做 Pilot
     parser.add_argument("--K", type=int, default=5)
-    parser.add_argument("--runs", type=int, default=4)
+    parser.add_argument("--runs", type=int, default=10)
     parser.add_argument("--workers", type=int, default=16)
-    parser.add_argument("--out_csv", default="Projection_ABae_results_sum.csv")
+    parser.add_argument("--out_csv", default="Projection_ABae_results_count.csv")
     args = parser.parse_args()
 
-    base_path = f"/home/wangshuo/resource/datasets/{args.parent_dataset}/{args.dataset_name}"
-    agg_dir = os.path.join(base_path, "results", "aggregated_results")
-    out_csv_path = os.path.join(base_path, "results", "efficiency", args.out_csv)
+    config = {
+        "K": args.K,
+        "budget_frac": args.budget_frac,
+        "t1_proxy": "ML1_proxy4b_probability",
+        "t2_proxy": "ML2_proxy1_probability",
+        "t1_oracle": "ML1_oracle2_probability",
+        "t2_oracle": "ML2_oracle2_probability"
+    }
 
-    gt_sum_path = os.path.join(base_path, "results", "T_true_ML3_oracle2_probability_ML2_oracle1_probability_sum.json")
-    if not os.path.exists(gt_sum_path):
-        gt_sum_path = os.path.join(base_path, "results", "T_true_ML1_oracle2_probability_ML2_oracle2_probability_sum.json")
+    if "amazon" in args.dataset:
+        config.update({
+            "t1_proxy": "ML3_proxy2_probability", "t2_proxy": "ML2_proxy2_probability",
+            "t1_oracle": "ML3_oracle2_probability", "t2_oracle": "ML2_oracle1_probability"
+        })
+
+    dataset_path = os.path.join(args.base_dir, "datasets", args.dataset)
+    results_dir = os.path.join(dataset_path, "results")
     
-    with open(gt_sum_path, 'r') as f: gt_dict = json.load(f)
+    agg_dir = os.path.join(results_dir, f"aggregated_results_{args.agg_mode}")
+    if not os.path.exists(agg_dir): 
+        agg_dir = os.path.join(results_dir, "aggregated_results")
+        
+    ablation_csv_path = os.path.join(results_dir, "efficiency", f"allocation_strategy_comparison_ablation_{args.agg_mode}.csv")
+    if not os.path.exists(ablation_csv_path): 
+        ablation_csv_path = os.path.join(results_dir, "efficiency", f"allocation_strategy_comparison_{args.agg_mode}.csv")
+        
+    out_csv_path = os.path.join(results_dir, "efficiency", args.out_csv)
+
+    gt_cands = [
+        os.path.join(results_dir, f"T_true_ML3_oracle2_probability_ML2_oracle1_probability_{args.agg_mode}.json"),
+        os.path.join(results_dir, f"T_true_ML1_oracle2_probability_ML2_oracle2_probability_{args.agg_mode}.json")
+    ]
+    gt_path = next((p for p in gt_cands if os.path.exists(p)), None)
+
+    if not gt_path: 
+        print(f"[Error] 未找到对应的 Ground Truth 文件: {results_dir}")
+        return
+
+    print("=" * 65)
+    print(f"🚀 启动无偏 Projection-ABae 基线 (Pilot={args.pilot_ratio*100}% | Cost-Aware Neyman 分配)")
+    print(f"   数据集: {args.dataset} | 模式: {args.agg_mode.upper()} | Runs: {args.runs}")
+    print("=" * 65)
+
+    with open(gt_path, 'r') as f: 
+        gt_dict = json.load(f)
     gt_map = {str(k).replace(".graph", ""): float(v) for k, v in gt_dict.items() if v is not None and v > 0}
 
     query_budgets = {}
-    with open(args.ablation_csv, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            frac = float(row.get('budget_frac', 0))
-            if abs(frac - args.budget_frac) < 1e-4 and row.get('method') in ['POSS', '8_POSSA']:
-                q_name = row['query_basename'].strip()
-                cost = int(float(row['oracle_cost']))
-                query_budgets.setdefault(q_name, []).append(cost)
-    query_budgets = {q: int(round(sum(c)/len(c))) for q, c in query_budgets.items()}
+    if os.path.exists(ablation_csv_path):
+        with open(ablation_csv_path, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                frac = float(row.get('budget_frac', 0))
+                if abs(frac - args.budget_frac) < 1e-4 and row.get('method') in ['POSS', '8_POSSA']:
+                    query_budgets.setdefault(row['query_basename'].strip(), []).append(int(float(row['oracle_cost'])))
+        query_budgets = {q: int(round(sum(c)/len(c))) for q, c in query_budgets.items()}
 
     agg_files = sorted([f for f in os.listdir(agg_dir) if f.startswith("aggregated_list_") and f.endswith(".csv")])
 
@@ -273,22 +437,18 @@ def main():
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
 
-    args_dict = vars(args)
     completed_cnt = 0
     total_tasks = len(agg_files) * args.runs
 
-    print(f"🚀 开始多进程独立评估 Strict Unbiased Baseline (Workers = {args.workers}, Runs per query = {args.runs})...\n")
+    print(f"🚀 开始多进程独立评估 (Workers = {args.workers}, Tasks = {total_tasks})...\n")
 
     with concurrent.futures.ProcessPoolExecutor(max_workers=args.workers) as executor:
-        futures = {}
-        for fname in agg_files:
-            for run_id in range(1, args.runs + 1):
-                future = executor.submit(process_single_task, fname, run_id, agg_dir, gt_map, query_budgets, args_dict)
-                futures[future] = (fname, run_id)
+        futures = {executor.submit(process_single_task, fname, r, agg_dir, gt_map, query_budgets, config, args.pilot_ratio): (fname, r) 
+                   for fname in agg_files for r in range(1, args.runs + 1)}
 
         for future in tqdm(concurrent.futures.as_completed(futures), total=total_tasks, desc="Evaluating", ncols=100):
             res = future.result()
-            if res is not None:
+            if res:
                 with open(out_csv_path, 'a', newline='', encoding='utf-8') as f:
                     writer = csv.DictWriter(f, fieldnames=fieldnames)
                     writer.writerow(res)
@@ -300,9 +460,8 @@ def main():
         mean_sre = res_df['Signed_RE'].mean()
         mean_are = res_df['ARE'].mean()
         print("\n" + "=" * 65)
-        print(f"📊 Strict Unbiased Baseline 最终评估")
+        print(f"📊 Projection-ABae (Pilot + Neyman) 无偏最终评估")
         print("=" * 65)
-        print(f"有效评估记录数 : {len(res_df)}")
         print(f"1. 带符号误差均值 (Mean Signed RE): {mean_sre:.4f} ({mean_sre*100:.2f}%)")
         print(f"2. 绝对误差均值   (Mean ARE)      : {mean_are:.4f} ({mean_are*100:.2f}%)")
         print("=" * 65)

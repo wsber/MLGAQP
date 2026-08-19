@@ -9,15 +9,7 @@ import pandas as pd
 from tqdm import tqdm
 import concurrent.futures
 
-
-# python PROJ-Cascade-Filter.py   --parent_dataset amazon   --agg-mode sum   --ablation_csv ../../../datasets/amazon/results/efficiency/allocation_strategy_comparison_sum.csv   --table1 product   --table1_proxy ML3_proxy2_probability   --table1_oracle ML3_oracle2_probability   --t1_ids post_id_list   --t1_low 0.4   --t1_high 0.6   --table2 review   --table2_proxy ML2_proxy2_probability   --table2_oracle ML2_oracle1_probability   --t2_ids comment_id_list   --t2_low 0.2   --t2_high 0.3   --num_workers 16   --out_csv Pro_Double_Truncation_amazon_sum.csv
-
-# python PROJ-Cascade-Filter.py   --parent_dataset amazon   --agg-mode count   --ablation_csv ../../../datasets/amazon/results/efficiency/allocation_strategy_comparison_count.csv   --table1 product   --table1_proxy ML3_proxy2_probability   --table1_oracle ML3_oracle2_probability   --t1_ids post_id_list   --t1_low 0.4   --t1_high 0.6   --table2 review   --table2_proxy ML2_proxy2_probability   --table2_oracle ML2_oracle1_probability   --t2_ids comment_id_list   --t2_low 0.2   --t2_high 0.3   --num_workers 16   --out_csv Pro_Double_Truncation_amazon_count.csv
-
-
-# python PROJ-Cascade-Filter.py   --parent_dataset parler   --agg-mode sum   --ablation_csv ../../../datasets/parler/results/efficiency/allocation_strategy_comparison_sum.csv   --table1 product   --table1_proxy ML1_proxy4b_probability   --table1_oracle ML1_oracle2_probability   --t1_ids post_id_list   --t1_low 0.3   --t1_high 0.95   --table2 review   --table2_proxy ML2_proxy1_probability   --table2_oracle ML2_oracle2_probability   --t2_ids comment_id_list   --t2_low 0.2   --t2_high 0.3   --num_workers 16   --out_csv Pro_Double_Truncation_parler_sum.csv
-
-# python PROJ-Cascade-Filter.py   --parent_dataset parler-E   --agg-mode sum   --ablation_csv ../../../datasets/parler-E/results/efficiency/allocation_strategy_comparison_sum.csv   --table1 product   --table1_proxy ML1_proxy4b_probability   --table1_oracle ML1_oracle2_probability   --t1_ids post_id_list   --t1_low 0.3   --t1_high 0.9   --table2 review   --table2_proxy ML2_proxy1_probability   --table2_oracle ML2_oracle2_probability   --t2_ids comment_id_list   --t2_low 0.2   --t2_high 0.3   --num_workers 16   --out_csv Pro_Double_Truncation_parler-E_sum.csv
+# python PROJ-Cascade-Filter.py   --parent_dataset amazon_data   --dataset amazon_extend   --ablation_csv /home/wangshuo/resource/datasets/amazon_data/amazon_extend/results/efficiency/allocation_strategy_comparison_ablation_sum.csv   --table1 product   --table1_proxy ML3_proxy2_probability   --table1_oracle ML3_oracle2_probability   --t1_ids post_id_list   --t1_low 0.4   --t1_high 0.6   --table2 review   --table2_proxy ML2_proxy2_probability   --table2_oracle ML2_oracle1_probability   --t2_ids comment_id_list   --t2_low 0.4   --t2_high 0.6   --num_workers 16   --out_csv Core_Double_Truncation_amazon_sum.csv
 
 def safe_extract_list(val):
     """【极速且稳健版】：支持标量与列表，不强制转 float 防止 ID 报错"""
@@ -251,27 +243,24 @@ def process_single_file(fname, agg_dir, query_budgets, args_dict):
 def main():
     parser = argparse.ArgumentParser(description="Double Truncation Baseline on Core Instances")
     parser.add_argument("--parent_dataset", default="amazon_data")
-    parser.add_argument("--dataset", help="数据集 (e.g., amazon_extend)")
+    parser.add_argument("--dataset", required=True, help="数据集 (e.g., amazon_extend)")
     parser.add_argument("--fastest_bin", default="") 
     parser.add_argument("--ablation_csv", required=True, help="消融实验 CSV 文件路径")
     
-    # 聚合模式参数（默认为 count，支持 --agg-mode 或 --agg_mode）
-    parser.add_argument("--agg-mode", "--agg_mode", dest="agg_mode", default="count", help="聚合模式 (如 count, sum 等)")
-
     # 兼容长短参数
     parser.add_argument("--table1", default="product")
     parser.add_argument("--t1_proxy", "--table1_proxy", dest="t1_proxy", default="ML3_proxy2_probability")
     parser.add_argument("--t1_oracle", "--table1_oracle", dest="t1_oracle", default="ML3_oracle2_probability")
     parser.add_argument("--t1_ids", "--table1_ids", dest="t1_ids", default="post_id_list")
-    parser.add_argument("--t1_low", type=float, default=0.4)
-    parser.add_argument("--t1_high", type=float, default=0.6)
+    parser.add_argument("--t1_low", type=float, default=0.2)
+    parser.add_argument("--t1_high", type=float, default=0.3)
 
     parser.add_argument("--table2", default="review")
     parser.add_argument("--t2_proxy", "--table2_proxy", dest="t2_proxy", default="ML2_proxy2_probability")
     parser.add_argument("--t2_oracle", "--table2_oracle", dest="t2_oracle", default="ML2_oracle1_probability")
     parser.add_argument("--t2_ids", "--table2_ids", dest="t2_ids", default="comment_id_list")
-    parser.add_argument("--t2_low", type=float, default=0.4)
-    parser.add_argument("--t2_high", type=float, default=0.6)
+    parser.add_argument("--t2_low", type=float, default=0.2)
+    parser.add_argument("--t2_high", type=float, default=0.3)
 
     parser.add_argument("--sum_col", default="price")
     parser.add_argument("--sum_label", default="12")
@@ -285,9 +274,8 @@ def main():
     query_budgets = load_query_budgets(args.ablation_csv, target_frac=0.1)
     print(f"[+] 成功匹配 {len(query_budgets)} 个查询预算。")
 
-    base_dir = f"/home/wangshuo/projects/PROXY/datasets/{args.parent_dataset}"
-    # 路径动态添加 agg_mode 后缀
-    agg_dir = os.path.join(base_dir, "results", f"aggregated_results_{args.agg_mode}")
+    base_dir = f"/home/wangshuo/resource/datasets/{args.parent_dataset}/{args.dataset}"
+    agg_dir = os.path.join(base_dir, "results", "aggregated_results")
     if not os.path.exists(agg_dir):
         print(f"[Error] 找不到目录: {agg_dir}")
         return
@@ -313,7 +301,7 @@ def main():
     args_dict = vars(args)
     completed_cnt = 0
 
-    print(f"🚀 开始多进程极速评估 (Workers = {args.num_workers}, Agg-Mode = {args.agg_mode})...\n")
+    print(f"🚀 开始多进程极速评估 (Workers = {args.num_workers})...\n")
 
     with concurrent.futures.ProcessPoolExecutor(max_workers=args.num_workers) as executor:
         futures = {
