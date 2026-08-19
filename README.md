@@ -206,24 +206,6 @@ chmod +x *.sh
 
 # 3. Execute the one-click script
 
-./run_all_proxy_experiments.sh
-(Run all sh files in parallel)
-
-OR
-
-./run_parler_count.sh
-./run_parler_sum.sh
-
-./run_parler_e_count.sh
-./run_parler_e_sum.sh
-
-./run_amazon_count.sh
-./run_amazon_sum.sh
-
-./run_all_avg.sh
-
-#  baseline : Fastest-Oracle
-./run_Fastest-Oracle.sh
 
 # RQ-Specific Reproduction Scripts (RQ1 – RQ4)
 
@@ -240,6 +222,22 @@ OR
 # Generates all results for RQ4. Visualize in `pythonProject/src/RQs_plots/RQ4:Ablation.ipynb`.
 ./run_RQ4.sh
 
+#  baseline : Fastest-Oracle Generates `Fastest-Oracle` results for RQ1&RQ2
+./run_Fastest-Oracle.sh
+
+
+# 4. Exe Single workload test
+
+./run_parler_count.sh
+./run_parler_sum.sh
+
+./run_parler_e_count.sh
+./run_parler_e_sum.sh
+
+./run_amazon_count.sh
+./run_amazon_sum.sh
+
+./run_all_avg.sh
 ```
 
 

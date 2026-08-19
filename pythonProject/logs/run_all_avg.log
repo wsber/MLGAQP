@@ -6,16 +6,10 @@ bash: /home/wangshuo/software/anaconda3/lib/libtinfo.so.6: no version informatio
 >>> 1. Processing Parler (dataset_three)...
 
 [Processing CSV] 开始计算 allocation_strategy_comparison 的 AVG 结果...
-  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/allocation_strategy_comparison_avg.csv (行数: 3690)
-
-[Processing CSV] 开始计算 allocation_strategy_comparison_ablation 的 AVG 结果...
-  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/allocation_strategy_comparison_ablation_avg.csv (行数: 6150)
-
-[Processing CSV] 开始计算 FastestO_budget_curve 的 AVG 结果...
-  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/FastestO_budget_curve_avg.csv (行数: 15990)
-
-[Processing CSV] 开始计算 Exact_structureO_budget_curve 的 AVG 结果...
-  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/Exact_structureO_budget_curve_avg.csv (行数: 17220)
+[Warning] merge 后交集为空! 无共同查询。
+[Warning] sum CSV 不存在: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/allocation_strategy_comparison_ablation_sum.csv，跳过此项。
+[Warning] sum CSV 不存在: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/FastestO_budget_curve_sum.csv，跳过此项。
+[Warning] sum CSV 不存在: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/Exact_structureO_budget_curve_sum.csv，跳过此项。
 [Warning] sum CSV 不存在: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/Projection_ABae_results_sum.csv，跳过此项。
 [Warning] sum CSV 不存在: /home/wangshuo/projects/PROXY/datasets/parler/results/efficiency/PSF_results_sum.csv，跳过此项。
 
@@ -25,13 +19,13 @@ bash: /home/wangshuo/software/anaconda3/lib/libtinfo.so.6: no version informatio
 >>> 2. Processing Parler-E (dataset_test)...
 
 [Processing CSV] 开始计算 allocation_strategy_comparison 的 AVG 结果...
-  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/allocation_strategy_comparison_avg.csv (行数: 565)
+[Warning] merge 后交集为空! 无共同查询。
 
 [Processing CSV] 开始计算 allocation_strategy_comparison_ablation 的 AVG 结果...
-  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/allocation_strategy_comparison_ablation_avg.csv (行数: 2825)
+  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/allocation_strategy_comparison_ablation_avg.csv (行数: 2260)
 
 [Processing CSV] 开始计算 FastestO_budget_curve 的 AVG 结果...
-  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/FastestO_budget_curve_avg.csv (行数: 2938)
+  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/FastestO_budget_curve_avg.csv (行数: 3380)
 
 [Processing CSV] 开始计算 Exact_structureO_budget_curve 的 AVG 结果...
   -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/parler-E/results/efficiency/Exact_structureO_budget_curve_avg.csv (行数: 7910)
@@ -44,13 +38,13 @@ bash: /home/wangshuo/software/anaconda3/lib/libtinfo.so.6: no version informatio
 >>> 3. Processing Amazon (amazon_extend)...
 
 [Processing CSV] 开始计算 allocation_strategy_comparison 的 AVG 结果...
-  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/allocation_strategy_comparison_avg.csv (行数: 905)
+  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/allocation_strategy_comparison_avg.csv (行数: 35)
 
 [Processing CSV] 开始计算 allocation_strategy_comparison_ablation 的 AVG 结果...
-  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/allocation_strategy_comparison_ablation_avg.csv (行数: 4525)
+  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/allocation_strategy_comparison_ablation_avg.csv (行数: 3655)
 
 [Processing CSV] 开始计算 FastestO_budget_curve 的 AVG 结果...
-  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/FastestO_budget_curve_avg.csv (行数: 11765)
+  -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/FastestO_budget_curve_avg.csv (行数: 3185)
 
 [Processing CSV] 开始计算 Exact_structureO_budget_curve 的 AVG 结果...
   -> [DONE] 生成 CSV: /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/Exact_structureO_budget_curve_avg.csv (行数: 12670)
