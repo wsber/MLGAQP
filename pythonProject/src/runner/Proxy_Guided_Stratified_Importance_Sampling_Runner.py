@@ -17,7 +17,7 @@ from tqdm import tqdm
 import argparse
 
 import warnings
-warnings.simplefilter(action='ignore', category='FutureWarning')
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 # 自动定位项目根目录
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -72,7 +72,7 @@ def _process_comparison_single_file(
     target_ticks: list,
     run_times: int,
     config: dict,
-    selected_methods: list  # 【修改点 1】：动态接收需要执行的方法列表
+    selected_methods: list 
 ):
     """子进程工作函数"""
     if agg_file.startswith("aggregated_list_"):
@@ -89,6 +89,9 @@ def _process_comparison_single_file(
 
     filepath = os.path.join(aggregated_dir, agg_file)
     
+    # =========================================================
+    # 【已修复】：严格按照 proxy_sample.py 的真实签名传参
+    # =========================================================
     try:
         sampler = ProxyStratifiedSampler(
             csv_path=filepath,
@@ -100,7 +103,8 @@ def _process_comparison_single_file(
             T_true=T_true,
             total_budget_frac=1.0 
         )
-    except Exception:
+    except Exception as e:
+        print(f"\n[初始化错误] {query_basename}: {e}")
         return []
 
     if sampler.posts.empty:
@@ -118,7 +122,6 @@ def _process_comparison_single_file(
         "8_POSSA": sampler.run_possa,
     }
 
-    # 【修改点 2】：根据参数动态构建 methods_map
     methods_map = {m: ALL_AVAILABLE_METHODS[m] for m in selected_methods if m in ALL_AVAILABLE_METHODS}
     methods_requiring_pilot = {"1_Proxy_Imp_Pilot", "2_ProxyE_Imp_Pilot"}
     
@@ -152,7 +155,7 @@ def _process_comparison_single_file(
                         "method": method_name
                     }
                     file_records.append(record)
-                except Exception:
+                except Exception as e:
                     pass
                     
     return file_records
@@ -165,6 +168,8 @@ def _parse_ticks(ticks_str: str):
         ticks = [float(x.strip()) for x in ticks_str.split(",") if x.strip() != ""]
     except ValueError:
         raise ValueError(f"Invalid ticks string: {ticks_str}")
+    if not ticks:
+        raise ValueError("ticks is empty")
     return ticks
 
 
@@ -177,8 +182,8 @@ def run_allocation_strategy_comparison(
     target_ticks: list = None,
     agg_mode_init: str = "count",
     base_dir: str = DEFAULT_PROJECT_ROOT,
-    selected_methods: list = ["8_POSSA"],  # 默认仅 8_POSSA
-    out_csv_name: str = None               # 自定义输出名
+    selected_methods: list = ["8_POSSA"],  # 默认仅 8_POSSA，完美契合 RQ1~RQ3
+    out_csv_name: str = None               
 ):
     if target_ticks is None:
         TARGET_TICKS = [0.01, 0.05, 0.075, 0.1, 0.125, 0.15, 0.2]
@@ -204,7 +209,6 @@ def run_allocation_strategy_comparison(
     output_dir = os.path.join(base_path, "results", "efficiency")
     os.makedirs(output_dir, exist_ok=True)
     
-    # 动态确定输出文件名
     if out_csv_name:
         output_csv = os.path.join(output_dir, out_csv_name)
     else:
@@ -273,14 +277,14 @@ if __name__ == "__main__":
     parser.add_argument("--target_ticks", type=str, default="0.1")
     parser.add_argument("--base_dir", type=str, default=DEFAULT_PROJECT_ROOT)
     
-    # 【新增参数】：控制跑哪些方法，默认只跑 8_POSSA（完全不影响 RQ1~RQ3）
+    # 默认只跑 8_POSSA（完全不影响 RQ1~RQ3）
     parser.add_argument(
         "--methods",
         type=str,
         default="8_POSSA",
         help="方法列表，如 '8_POSSA', 'all', 或 'UN,PO,WO,MAB,8_POSSA'"
     )
-    # 【新增参数】：自定义输出文件名
+    # 自定义输出文件名
     parser.add_argument(
         "--out_csv_name",
         type=str,
@@ -291,7 +295,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     ticks = _parse_ticks(args.target_ticks)
 
-    # 解析需要运行的方法
     if args.methods.lower() == "all":
         methods_to_run = ["UN", "PO", "WO", "MAB", "8_POSSA"]
     else:
