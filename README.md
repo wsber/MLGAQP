@@ -154,15 +154,15 @@ PROXY/
 │       └── RQS-plot/                                # Visualization and plotting scripts for paper figures (RQ1 ~ RQ4)
 │
 ├── scripts/                                    # [Automation Scripts] One-click benchmark & reproduction shell scripts
-│   ├── run_RQ1.sh                              # RQ1: End-to-end efficiency and runtime breakdown benchmark      [updated]
-│   ├── run_RQ2.sh                              # RQ2: Accuracy convergence across budget ticks (COUNT, SUM, AVG) [updated]
-│   ├── run_RQ3.sh                              # RQ3: Proxy quality sensitivity and robustness ablation          [updated]
-│   ├── run_RQ4.sh                              # RQ4: Allocation strategy ablation (UN, PO, WO, MAB, POSS)       [updated]
-│   ├── run_fastesto_all.sh                     # Baseline: Parallel FaSTest-Oracle budget curve runner           [updated]
-│   ├── run_parler_{count,sum}.sh               # Modular one-click scripts for Parler (Single Predicate)         [updated]
-│   ├── run_parler_e_{count,sum}.sh             # Modular one-click scripts for Parler-E (Multi-Predicate)        [updated]
-│   └── run_amazon_{count,sum}.sh               # Modular one-click scripts for Amazon (multi-modality Graph)     [updated]
-│   ├── run_all_avg.sh                          # Offline ratio-based AVG synthesis from COUNT and SUM results    [updated]
+│   ├── run_RQ1.sh                              # [updated] RQ1: PROXY End-to-end efficiency and runtime breakdown benchmark      
+│   ├── run_RQ2.sh                              # [updated] RQ2: PROXY Accuracy convergence across budget ticks (COUNT, SUM, AVG) 
+│   ├── run_RQ3.sh                              # [updated] RQ3: Proxy quality sensitivity and robustness ablation          
+│   ├── run_RQ4.sh                              # [updated] RQ4: Allocation strategy ablation (UN, PO, WO, MAB, POSS)       
+│   ├── run_fastesto_all.sh                     # [updated] RQ1: Baseline: Parallel FaSTest-Oracle budget curve runner           
+│   ├── run_parler_{count,sum}.sh               # [updated] Modular one-click scripts for Parler (Single Predicate)         
+│   ├── run_parler_e_{count,sum}.sh             # [updated] Modular one-click scripts for Parler-E (Multi-Predicate)        
+│   └── run_amazon_{count,sum}.sh               # [updated] Modular one-click scripts for Amazon (multi-modality Graph)     
+│   ├── run_all_avg.sh                          # [updated] Offline ratio-based AVG synthesis from COUNT and SUM results    
 └── ...                                         # [updating]
 ```
 
