@@ -1,5 +1,3 @@
-以下是为您翻译的英文文档，已按照学术开源代码库的专业规范与习惯表达进行微调：
-
 ***
 
 # Proxy-Guided Sampling for Approximate Graph Aggregation with Machine Learning Predicates
@@ -126,18 +124,18 @@ The project is structured with a high-performance **C++ sampling engine (`cProje
 
 ```text
 PROXY/
-├── cProject/                                   # [C++ Core Engine] CS construction, tree sampling, and semantic projection weight estimation
+├── cProject/                                   # [updated] [C++ Core Engine] CS construction, tree sampling, and semantic projection weight estimation 
 │   ├── build/                                  # Precompiled binary directory (contains the compiled 'Fastest' executable)
 │   ├── driver/                                 # C++ entry point (subgraph-cardinality-estimation.cc)
 │   ├── lib/                                    # Graph data structures, CS builder, uniform tree sampler, etc.
 │   └── CMakeLists.txt                          # CMake configuration file
 │
-├── datasets/                                   # [Data & Results Storage] Data graphs, query graphs, and results for the three workloads
+├── datasets/                                   # [updated] [Data & Results Storage] Data graphs, query graphs, and results for the three workloads
 │   ├── parler/                                 # Parler single-predicate workload (data_graph / query_graph / ground_truth / results)
 │   ├── parler-e/                               # Parler-E multi-predicate expanded workload
 │   └── amazon/                                 # Amazon multimodal heterogeneous graph workload
 │
-├── Model/                                      # [ML Model Repository] Oracle and Proxy model weights and configs
+├── Model/                                      # [Updating] [ML Model Repository] Oracle and Proxy model weights and configs
 │
 ├── pythonProject/                              # [Python Experimental Framework] PROXY sampling algorithms, baseline evaluations, and plotting
 │   └── src/
@@ -153,10 +151,19 @@ PROXY/
 │       ├── runner/                             # Execution Runners
 │       │   └── ...                             # Execution scripts interfacing C++ and Python modules
 │       │
-│       └── RQS/                                # Visualization and plotting scripts for paper figures (RQ1 ~ RQ4)
+│       └── RQS-plot/                                # Visualization and plotting scripts for paper figures (RQ1 ~ RQ4)
 │
-├── scripts/                                    # [Automation Scripts] One-click reproduction shell scripts (run_all_experiments.sh, etc.)
-└── ...                                         # Auxiliary utility scripts and configuration files
+├── scripts/                                    # [Automation Scripts] One-click benchmark & reproduction shell scripts
+│   ├── run_RQ1.sh                              # RQ1: End-to-end efficiency and runtime breakdown benchmark      [updated]
+│   ├── run_RQ2.sh                              # RQ2: Accuracy convergence across budget ticks (COUNT, SUM, AVG) [updated]
+│   ├── run_RQ3.sh                              # RQ3: Proxy quality sensitivity and robustness ablation          [updated]
+│   ├── run_RQ4.sh                              # RQ4: Allocation strategy ablation (UN, PO, WO, MAB, POSS)       [updated]
+│   ├── run_fastesto_all.sh                     # Baseline: Parallel FaSTest-Oracle budget curve runner           [updated]
+│   ├── run_parler_{count,sum}.sh               # Modular one-click scripts for Parler (Single Predicate)         [updated]
+│   ├── run_parler_e_{count,sum}.sh             # Modular one-click scripts for Parler-E (Multi-Predicate)        [updated]
+│   └── run_amazon_{count,sum}.sh               # Modular one-click scripts for Amazon (multi-modality Graph)     [updated]
+│   ├── run_all_avg.sh                          # Offline ratio-based AVG synthesis from COUNT and SUM results    [updated]
+└── ...                                         # [updating]
 ```
 
 ---
