@@ -1,2 +1,3 @@
 dataset_name,method,agg_mode,num_queries,mean_are,avg_total_cost
-dataset_test,WO,sum,113,0.07417158690629436,3317.4159292035397
+parler-E,WO,sum,113,0.08009259017944145,3322.6814159292035
+dataset_test,WO,sum,113,0.08009259017944145,3322.6814159292035

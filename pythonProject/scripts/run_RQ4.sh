@@ -33,7 +33,7 @@ if [ -n "$CONDA_PREFIX" ]; then
     export LD_LIBRARY_PATH="${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH}"
 fi
 
-LOG_DIR="${PROJECT_ROOT}/logs"
+LOG_DIR="${PROJECT_ROOT}"
 mkdir -p "${LOG_DIR}"
 
 # 2. 实验参数配置
@@ -135,27 +135,27 @@ run_amazon_sum() {
 # ------------------------------------------------------------------------------
 echo -e "\n[*] 正在启动后台并发任务..."
 
-run_parler_count   > "${LOG_DIR}/pythonProject/rq4_parler_count.log" 2>&1 &
+run_parler_count   > "${LOG_DIR}/pythonProject/logs/RQ4_parler_count.log" 2>&1 &
 PID_P_COUNT=$!
-echo "  • [PID $PID_P_COUNT] Parler COUNT 消融 -> logs/rq4_parler_count.log"
+echo "  • [PID $PID_P_COUNT] Parler COUNT 消融 -> logs/RQ4_parler_count.log"
 
-run_parler_sum     > "${LOG_DIR}/pythonProject/rq4_parler_sum.log" 2>&1 &
+run_parler_sum     > "${LOG_DIR}/pythonProject/logs/RQ4_parler_sum.log" 2>&1 &
 PID_P_SUM=$!
-echo "  • [PID $PID_P_SUM] Parler SUM 消融 -> logs/rq4_parler_sum.log"
+echo "  • [PID $PID_P_SUM] Parler SUM 消融 -> logs/RQ4_parler_sum.log"
 
-run_parler_e_count > "${LOG_DIR}/pythonProject/rq4_parler_e_count.log" 2>&1 &
+run_parler_e_count > "${LOG_DIR}/pythonProject/logs/RQ4_parler_e_count.log" 2>&1 &
 PID_PE_COUNT=$!
 echo "  • [PID $PID_PE_COUNT] Parler-E COUNT 消融 -> logs/rq4_parler_e_count.log"
 
-run_parler_e_sum   > "${LOG_DIR}/pythonProject/rq4_parler_e_sum.log" 2>&1 &
+run_parler_e_sum   > "${LOG_DIR}/pythonProject/logs/RQ4_parler_e_sum.log" 2>&1 &
 PID_PE_SUM=$!
 echo "  • [PID $PID_PE_SUM] Parler-E SUM 消融 -> logs/rq4_parler_e_sum.log"
 
-run_amazon_count   > "${LOG_DIR}/pythonProject/rq4_amazon_count.log" 2>&1 &
+run_amazon_count   > "${LOG_DIR}/pythonProject/logs/RQ4_amazon_count.log" 2>&1 &
 PID_A_COUNT=$!
 echo "  • [PID $PID_A_COUNT] Amazon COUNT 消融 -> logs/rq4_amazon_count.log"
 
-run_amazon_sum     > "${LOG_DIR}/pythonProject/rq4_amazon_sum.log" 2>&1 &
+run_amazon_sum     > "${LOG_DIR}/pythonProject/logs/RQ4_amazon_sum.log" 2>&1 &
 PID_A_SUM=$!
 echo "  • [PID $PID_A_SUM] Amazon SUM 消融 -> logs/rq4_amazon_sum.log"
 

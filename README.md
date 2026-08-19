@@ -222,8 +222,12 @@ chmod +x *.sh
 # Generates all results for RQ4. Visualize in `pythonProject/src/RQs_plots/RQ4:Ablation.ipynb`.
 ./run_RQ4.sh
 
+
 #  baseline : Fastest-Oracle Generates `Fastest-Oracle` results for RQ1&RQ2. Visualize in `pythonProject/src/RQs_plots/RQ1&RQ2.ipynb` 
 ./run_Fastest-Oracle.sh
+
+#  baseline : Weight Estimation Error (WEE) Floor
+./run_WEE.sh
 
 #  baseline - in rebuttal:  Projection space + ABAE. Visualize in `pythonProject/src/RQs_plots/Rebuttal_exp_result.ipynb` 
 ./run_Pro_Abae.sh

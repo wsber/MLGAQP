@@ -620,7 +620,7 @@ int32_t main(int argc, char *argv[]) {
     bool run_fastesto_budget_curve = false;
     int fastesto_runs = 1; // 默认只跑一次（可通过 CLI 修改）
     // std::vector<double> fastesto_budget_fracs = {0.01,0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5};
-    std::vector<double> fastesto_budget_fracs = {0.01,0.05, 0.075,0.1, 0.15, 0.2,0.3, 0.4, 0.5,0.6,0.7,0.8,0.9};
+    std::vector<double> fastesto_budget_fracs = {0.01,0.05, 0.075,0.1, 0.15, 0.2,0.3, 0.4, 0.5,0.6,0.7,0.8};
     std::string fastesto_budget_curve_path;
 
     std::string post_oracle_col = "ML1_oracle2_probability"; 
