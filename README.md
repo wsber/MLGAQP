@@ -2,7 +2,7 @@
 
 # Proxy-Guided Sampling for Approximate Graph Aggregation with Machine Learning Predicates
 
-# Evaluation & Reproduction Guide ( V-0.7.1 Continuously Updated...)
+# Evaluation & Reproduction Guide ( V-0.7.2 Continuously Updated...)
 
 This repository provides the complete code and configuration required to reproduce all experimental results reported in the paper. Users can choose to **fully automate the reproduction via a master script** or **execute the pipeline step-by-step by module**.
 
@@ -194,7 +194,7 @@ If you wish to evaluate or debug a specific dataset without running the entire m
 #### Example: Parler (`COUNT` Mode)
 The script `run_parler_count.sh` automates the end-to-end workflow on the **Parler** workload in `COUNT` mode:
 1. **Step 1 (Offline Projection & Materialization):** Invokes the C++ engine to perform uniform tree sampling, estimate projection extension weights $\hat{w}(\psi)$, and materialize the compact core instance space.
-2. **Step 2 (Online POSSA Sampling):** Executes proxy-guided stratified importance sampling across budget gradients $\alpha \in [1\%, 90\%]$ with 5 independent runs per tick.
+2. **Step 2 (Online Proxy Sampling):** Executes proxy-guided stratified importance sampling across budget gradients $\alpha \in [1\%, 90\%]$ with 5 independent runs per tick.
 
 ```bash
 # 1. Activate conda environment
