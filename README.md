@@ -2,7 +2,7 @@
 
 # Proxy-Guided Sampling for Approximate Graph Aggregation with Machine Learning Predicates
 
-# Evaluation & Reproduction Guide ( V-0.9 Continuously Updated...)
+# Evaluation & Reproduction Guide ( V-0.95 Continuously Updated...)
 
 This repository provides the complete code and configuration required to reproduce all experimental results reported in the paper. Users can choose to **fully automate the reproduction via a master script** or **execute the pipeline step-by-step by module**.
 
@@ -167,6 +167,17 @@ PROXY/
 ```
 
 ---
+
+
+
+
+
+> ⚠️ **IMPORTANT NOTE FOR REPRODUCIBILITY:**
+>
+> All pre-computed exact cardinalities and ground truth mappings (`results/T_true_*. json`) are **already packaged in this repository by default**, allowing you to immediately run all downstream sampling and approximation benchmarks (RQ1–RQ4).
+>
+> **However, if you wish to generate the ground truth from scratch or reproduce the exact enumeration baseline (ENUM / EXACT):**
+> Exact subgraph matching is NP-hard and involves massive memory and CPU overhead (can take several hours per workload).  We provide an **interactive, single-workload generator** `run_ground_truth_matching.sh` to safely execute exact matching one dataset at a time:
 
 ## 1. One-Click Reproduction
 
