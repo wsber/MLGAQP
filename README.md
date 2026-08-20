@@ -154,11 +154,17 @@ PROXY/
 │       └── RQS-plot/                                # Visualization and plotting scripts for paper figures (RQ1 ~ RQ4)
 │
 ├── scripts/                                    # [Automation Scripts] One-click benchmark & reproduction shell scripts
+│   ├── run_get_all_structural_matching.sh      # [updated] Exact subgraph match: get all structural_matching         
 │   ├── run_RQ1.sh                              # [updated] RQ1: PROXY End-to-end efficiency and runtime breakdown benchmark      
 │   ├── run_RQ2.sh                              # [updated] RQ2: PROXY Accuracy convergence across budget ticks (COUNT, SUM, AVG) 
 │   ├── run_RQ3.sh                              # [updated] RQ3: Proxy quality sensitivity and robustness ablation          
-│   ├── run_RQ4.sh                              # [updated] RQ4: Allocation strategy ablation (UN, PO, WO, MAB, POSS)       
-│   ├── run_fastesto_all.sh                     # [updated] RQ1&RQ2: Baseline: Parallel FaSTest-Oracle budget curve runner           
+│   ├── run_RQ4.sh                              # [updated] RQ4: Allocation strategy ablation (UN, PO, WO, MAB, POSS)
+│   ├── run_all_gt.sh                           # [updated] Ground Truth caculate
+│   ├── run_ENUM.sh                             # [updated] RQ1&RQ2: Baseline: Alog 1 in paper        
+│   ├── run_Fastest-Oracle.sh                   # [updated] RQ1&RQ2: Baseline: Parallel FaSTest-Oracle  runner
+│   ├── run_WEE.sh.sh                           # [updated] RQ2:     Baseline : Weight Estimation Error (WEE) Floor   
+│   ├── run_Pro_Abae.sh.sh                      # [updated] Rebuttal: Baseline: Projection space + ABAE.   
+│   ├── run_Pro_Cacade_Filter.sh                # [updated] Rebuttal: Baseline: Projection space + cascade filter (SUPG.ScaleDoc style)              
 │   ├── run_parler_{count,sum}.sh               # [updated] Modular one-click scripts for Parler (Single Predicate)         
 │   ├── run_parler_e_{count,sum}.sh             # [updated] Modular one-click scripts for Parler-E (Multi-Predicate)        
 │   └── run_amazon_{count,sum}.sh               # [updated] Modular one-click scripts for Amazon (multi-modality Graph)     
