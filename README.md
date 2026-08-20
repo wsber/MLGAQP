@@ -272,15 +272,22 @@ chmod +x *.sh
 
 **Generated Output File:**
   ```text
-  datasets/parler/results/efficiency/allocation_strategy_comparison_count.csv
+  eg. datasets/parler/results:
+
+  1. /efficiency/allocation_strategy_comparison_count.csv: The Proxy result file stores the estimated values and the number of oracle calls for each query at each sampling rate, and is used for RQ1&RQ2 
+
+  2. FastestO_budget_curve_count.csv: Important baseline FASTEST-ORACLE results for RQ1&RQ2
+
+  3.allocation_strategy_comparison_ablation_count.csv: The ablation experiment result file stores the estimated values at each sampling rate queried under each ablation experiment, which is used for RQ4
+  
   ```
 
 ---
 
 ---
-## The following content is still under testing and adjustment, above is complete.
+## The following are the experimental details that are being sorted out and supplemented. All the above content is now ready and can fully reproduce the experiments in the paper and the supplementary experiments in rebuttal..
 
-If you prefer to inspect individual pipeline stages, reproduce specific Research Questions (RQs), or execute standalone baselines, follow **Steps 2.1 through 2.6** sequentially.
+<!-- If you prefer to inspect individual pipeline stages, reproduce specific Research Questions (RQs), or execute standalone baselines, follow **Steps 2.1 through 2.6** sequentially. -->
 <!-- 
 ### 2.1. Compute Ground Truth (EXACT)
 
