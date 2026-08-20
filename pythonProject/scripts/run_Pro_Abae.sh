@@ -54,6 +54,7 @@ echo "==========================================================================
 run_task() {
     local dataset=$1
     local agg_mode=$2
+    local out_filename="Projection_ABae_${dataset}_${agg_mode}.csv"
     
     "$PYTHON_EXEC" "${PYTHON_SCRIPT}" \
         --base_dir "${PROJECT_ROOT}" \
@@ -62,7 +63,8 @@ run_task() {
         --budget_frac ${BUDGET_FRAC} \
         --pilot_ratio ${PILOT_RATIO} \
         --runs ${RUN_TIMES} \
-        --workers ${WORKERS}
+        --workers ${WORKERS} \
+        --out_csv "${out_filename}"
 }
 
 # ------------------------------------------------------------------------------

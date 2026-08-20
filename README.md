@@ -133,7 +133,7 @@ PROXY/
 ├── datasets/                                   # [updated] [Data & Results Storage] Data graphs, query graphs, and results for the three workloads
 │   ├── parler/                                 # Parler single-predicate workload (data_graph / query_graph / ground_truth / results)
 │   ├── parler-e/                               # Parler-E multi-predicate expanded workload
-│   └── amazon/                                 # Amazon multimodal heterogeneous graph workload
+│   └── amazon/                                 # Amazon multimodal Multi-Modal graph workload
 │
 ├── Model/                                      # [Updating] [ML Model Repository] Oracle and Proxy model weights and configs
 │
@@ -151,7 +151,7 @@ PROXY/
 │       ├── runner/                             # Execution Runners
 │       │   └── ...                             # Execution scripts interfacing C++ and Python modules
 │       │
-│       └── RQS-plot/                                # Visualization and plotting scripts for paper figures (RQ1 ~ RQ4)
+│       └── RQS-plot/                           # Visualization and plotting scripts for paper figures (RQ1 ~ RQ4)
 │
 ├── scripts/                                    # [Automation Scripts] One-click benchmark & reproduction shell scripts
 │   ├── run_get_all_structural_matching.sh      # [updated] Exact subgraph match: get all structural_matching         
@@ -169,7 +169,7 @@ PROXY/
 │   ├── run_parler_e_{count,sum}.sh             # [updated] Modular one-click scripts for Parler-E (Multi-Predicate)        
 │   └── run_amazon_{count,sum}.sh               # [updated] Modular one-click scripts for Amazon (multi-modality Graph)     
 │   ├── run_all_avg.sh                          # [updated] Offline ratio-based AVG synthesis from COUNT and SUM results    
-└── ...                                         # [updating]
+└── ...                                         
 ```
 
 ---

@@ -1,13 +1,4 @@
 import os
-# ==============================================================================
-# 必须置于最顶端：防止 ProcessPoolExecutor 与 NumPy/BLAS 发生多线程死锁
-# ==============================================================================
-os.environ["OMP_NUM_THREADS"] = "1"
-os.environ["MKL_NUM_THREADS"] = "1"
-os.environ["OPENBLAS_NUM_THREADS"] = "1"
-os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
-os.environ["NUMEXPR_NUM_THREADS"] = "1"
-
 import ast
 import json
 import math
@@ -16,7 +7,7 @@ import random
 import argparse
 import numpy as np
 import pandas as pd
-from typing import Dict, Tuple, List
+from typing import Dict, Tuple
 from tqdm import tqdm
 import concurrent.futures
 
@@ -25,7 +16,6 @@ class ProjectionABaeSampler:
         self.T_true = T_true
         self.K = K
         self.config = config
-        # 极低内存占用预处理
         self.instances = self._prepare_instances(df)
 
     def _prepare_instances(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -69,7 +59,6 @@ class ProjectionABaeSampler:
 
         df["proxy"] = p_proxies * c_proxies
 
-        # 仅保留核心轻量列，释放显存与内存
         cols_to_keep = ["a", "proxy"]
         optional_cols = [
             self.config.get("t1_oracle"), self.config.get("t2_oracle"), 
@@ -82,7 +71,6 @@ class ProjectionABaeSampler:
         return df[df["a"] > 0][cols_to_keep].reset_index(drop=True)
 
     def _eval_oracle_strict(self, row: pd.Series, oracle_cache: Dict, budget_used: int, budget_limit: int) -> Tuple[int, int, bool]:
-        """【即时解析机制】只在调用 Oracle 时才解析当前行"""
         def fast_parse_id_list(val):
             if pd.isna(val): return []
             if isinstance(val, (list, tuple)): return [str(x) for x in val]
@@ -152,7 +140,6 @@ class ProjectionABaeSampler:
 
     def stratify_by_proxy_quantile(self, df: pd.DataFrame, K: int) -> pd.DataFrame:
         df = df.copy()
-        # 按期望贡献 proxy * a 分层，保证层内方差极小
         exp_contrib = df["proxy"] * df["a"]
         try:
             df["stratum"] = pd.qcut(exp_contrib, K, labels=False, duplicates="drop")
@@ -162,12 +149,6 @@ class ProjectionABaeSampler:
         return df
 
     def run_abae_sum(self, target_budget_frac: float = 0.1, pilot_ratio: float = 0.1, budget_B: int = 500, random_seed: int = 42) -> Dict:
-        """
-        【严格无偏的两阶段 Pilot + Cost-Aware Neyman 分配采样】
-        1. Stage 1: Uniform Pilot 获取经验方差与平均成本。
-        2. Stage 2: Cost-Aware Neyman 动态配额，层内 Uniform 抽取剩余样本。
-        3. 估计量: 严格两阶段 Horvitz-Thompson 展开: T_hat = sum(Pilot) + (N_rem / n2) * sum(Stage2)
-        """
         if self.instances.empty:
             return {"T_hat_sum": 0.0, "ARE": 0.0, "Signed_RE": 0.0, "oracle_cost": 0}
 
@@ -175,9 +156,7 @@ class ProjectionABaeSampler:
         df = self.stratify_by_proxy_quantile(self.instances, self.K)
         N_total_pop = len(df)
         
-        # 1. 预算划分
         N_rows_budget = max(1, int(math.floor(target_budget_frac * N_total_pop)))
-        # 当 pilot_ratio > 0 时启用 Pilot；若为 0 则默认每层至少抽 2 个做方差估计
         N1_pilot = max(self.K * 2, int(math.floor(N_rows_budget * (pilot_ratio if pilot_ratio > 0 else 0.1))))
         N1_pilot = min(N1_pilot, N_rows_budget)
         N2_stage2 = max(0, N_rows_budget - N1_pilot)
@@ -194,9 +173,6 @@ class ProjectionABaeSampler:
         pilot_y_vals = {k: [] for k in strata_groups}
         pilot_sampled_indices = {k: [] for k in strata_groups}
 
-        # =================================================================
-        # Stage 1: Pilot 采样 (Uniform)
-        # =================================================================
         for k, grp in strata_groups.items():
             Nk = len(grp)
             n1_k = min(n1_per_stratum, Nk)
@@ -220,7 +196,6 @@ class ProjectionABaeSampler:
             sigma_hat_k = np.std(y_vals, ddof=1) if len(y_vals) > 1 else 0.0
             mean_cost_k = np.mean(cost_vals) if len(cost_vals) > 0 else 1.0
             
-            # 方差平滑保底：若 pilot 未命中正样本，用 proxy*a 的先验方差保底
             if sigma_hat_k <= 1e-6:
                 prior_sigma = float(np.std(grp["a"] * grp["proxy"]))
                 if prior_sigma <= 1e-6:
@@ -236,9 +211,6 @@ class ProjectionABaeSampler:
                 "mean_cost": max(mean_cost_k, 0.1)
             }
 
-        # =================================================================
-        # Stage 2: Cost-Aware Neyman 分配
-        # =================================================================
         alloc_stage2 = {k: 0 for k in strata_groups}
         if not budget_exhausted and N2_stage2 > 0:
             alloc_weights = {
@@ -254,7 +226,6 @@ class ProjectionABaeSampler:
                 for k in pilot_stats:
                     alloc_stage2[k] = N2_stage2 // actual_K
 
-            # 余数分配
             rem = N2_stage2 - sum(alloc_stage2.values())
             if rem > 0 and sum_w > 0:
                 remainders = {k: (N2_stage2 * (alloc_weights[k] / sum_w) - alloc_stage2[k]) for k in pilot_stats}
@@ -275,7 +246,6 @@ class ProjectionABaeSampler:
                     for _, row in sampled_grp.iterrows():
                         stage2_pool.append((k, row))
             
-            # 全局打乱以防止按层串行截断引起的偏差
             random.seed(random_seed)
             random.shuffle(stage2_pool)
 
@@ -289,9 +259,6 @@ class ProjectionABaeSampler:
             total_budget_used += calls
             stage2_y_vals[k].append(row["a"] * is_valid)
 
-        # =================================================================
-        # 严格无偏两阶段 Horvitz-Thompson 展开估计
-        # =================================================================
         total_sum_hat = 0.0
 
         for k, grp in strata_groups.items():
@@ -307,11 +274,9 @@ class ProjectionABaeSampler:
                 
             y1_sum = sum(p_vals)
             if n2_k > 0:
-                # 严格无偏：已抽 Pilot 确定值 + 剩余部分乘以 Stage2 样本均值
                 y2_mean = sum(s2_vals) / n2_k
                 t_hat_k = y1_sum + (Nk - n1_k) * y2_mean
             else:
-                # 若第二阶段未抽到/预算耗尽，退化为第一阶段的扩张估计
                 t_hat_k = (Nk / n1_k) * y1_sum
                 
             total_sum_hat += t_hat_k
@@ -340,6 +305,7 @@ def process_single_task(fname, run_id, agg_dir, gt_map, query_budgets, config, p
         df = pd.read_csv(filepath)
 
         sampler = ProjectionABaeSampler(df=df, config=config, T_true=T_true, K=config["K"])
+        
         seed = (abs(hash(q_basename)) % 99999999) + run_id * 10007
 
         res = sampler.run_abae_sum(
@@ -365,11 +331,13 @@ def main():
     parser.add_argument("--dataset", default="parler")
     parser.add_argument("--agg_mode", choices=["count", "sum"], default="count")
     parser.add_argument("--budget_frac", type=float, default=0.1)
-    parser.add_argument("--pilot_ratio", type=float, default=0.1)  # 默认使用 10% 做 Pilot
+    parser.add_argument("--pilot_ratio", type=float, default=0.1)  
     parser.add_argument("--K", type=int, default=5)
     parser.add_argument("--runs", type=int, default=10)
     parser.add_argument("--workers", type=int, default=16)
-    parser.add_argument("--out_csv", default="Projection_ABae_results_count.csv")
+    
+    # 将 default 设为 None，我们在下面动态赋予它正确的名字
+    parser.add_argument("--out_csv", default=None)
     args = parser.parse_args()
 
     config = {
@@ -387,6 +355,9 @@ def main():
             "t1_oracle": "ML3_oracle2_probability", "t2_oracle": "ML2_oracle1_probability"
         })
 
+    # =========================================================================
+    # 严格的路径顺序定义（彻底修复 UnboundLocalError）
+    # =========================================================================
     dataset_path = os.path.join(args.base_dir, "datasets", args.dataset)
     results_dir = os.path.join(dataset_path, "results")
     
@@ -398,7 +369,13 @@ def main():
     if not os.path.exists(ablation_csv_path): 
         ablation_csv_path = os.path.join(results_dir, "efficiency", f"allocation_strategy_comparison_{args.agg_mode}.csv")
         
-    out_csv_path = os.path.join(results_dir, "efficiency", args.out_csv)
+    # 动态确定输出的文件名和路径
+    if args.out_csv:
+        out_csv_name = args.out_csv
+    else:
+        out_csv_name = f"Projection_ABae_{args.dataset}_{args.agg_mode}.csv"
+        
+    out_csv_path = os.path.join(results_dir, "efficiency", out_csv_name)
 
     gt_cands = [
         os.path.join(results_dir, f"T_true_ML3_oracle2_probability_ML2_oracle1_probability_{args.agg_mode}.json"),
@@ -411,7 +388,7 @@ def main():
         return
 
     print("=" * 65)
-    print(f"🚀 启动无偏 Projection-ABae 基线 (Pilot={args.pilot_ratio*100}% | Cost-Aware Neyman 分配)")
+    print(f"🚀 启动无偏 Projection-ABae 基线 (Pilot={args.pilot_ratio*100}% | Cost-Aware 分配 | 无偏行配额)")
     print(f"   数据集: {args.dataset} | 模式: {args.agg_mode.upper()} | Runs: {args.runs}")
     print("=" * 65)
 
@@ -460,7 +437,7 @@ def main():
         mean_sre = res_df['Signed_RE'].mean()
         mean_are = res_df['ARE'].mean()
         print("\n" + "=" * 65)
-        print(f"📊 Projection-ABae (Pilot + Neyman) 无偏最终评估")
+        print(f"📊 Projection-ABae 无偏最终评估")
         print("=" * 65)
         print(f"1. 带符号误差均值 (Mean Signed RE): {mean_sre:.4f} ({mean_sre*100:.2f}%)")
         print(f"2. 绝对误差均值   (Mean ARE)      : {mean_are:.4f} ({mean_are*100:.2f}%)")
