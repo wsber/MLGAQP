@@ -8,24 +8,15 @@
 #       4. 所有任务执行日志实时输出至 logs/ 目录
 # ==============================================================================
 
-# 1. 基础环境与全局路径 (已消除绝对路径)
+# 1. 基础环境与全局路径
 # ==============================================================================
-# [修改1] 动态获取路径：获取当前脚本所在的绝对路径 (PROXY/pythonProject/scripts)
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PYTHON_EXEC="/home/wangshuo/software/anaconda3/envs/proxy/bin/python"
+source /home/wangshuo/software/anaconda3/etc/profile.d/conda.sh
+conda activate proxy
 
-# [修改2] 动态推导根目录：项目根目录 PROXY 是脚本目录的上一级的上一级 (../../)
-PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
-
-# [修改3] 动态获取 Python：要求用户在外部激活 conda 环境，而不是硬编码个人机器上的 conda 路径
-PYTHON_EXEC=$(command -v python)
-if [ -z "$PYTHON_EXEC" ]; then
-    echo "❌ 错误: 未找到 Python，请确保执行脚本前已激活虚拟环境 (例如: conda activate proxy)！"
-    exit 1
-fi
-
+PROJECT_ROOT="/home/wangshuo/projects/PROXY"
 export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH}"
 
-# 保留原有的动态链接库设置逻辑（非常好的实践，依赖 $CONDA_PREFIX）
 if [ -n "$CONDA_PREFIX" ]; then
     export LD_LIBRARY_PATH="${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH}"
 fi
@@ -49,7 +40,6 @@ SYNTHESIZE_AVG="${PROJECT_ROOT}/pythonProject/src/runner/AVG_Runner.py"
 echo "=============================================================================="
 echo "🚀 开始 RQ2 核心性能评估流水线 (并发执行 + 智能跳过已物化数据)"
 echo "工作目录   : ${PROJECT_ROOT}"
-echo "Python环境 : ${PYTHON_EXEC}"
 echo "采样率梯度 : ${TARGET_TICKS}"
 echo "日志目录   : ${LOG_DIR}"
 echo "=============================================================================="
@@ -209,16 +199,15 @@ EXIT_CODE_SUM=$?
 wait $PID_AMAZON_SUM
 EXIT_CODE_AMAZON=$?
 
-# [修改4] 修复了原报错提示中的日志文件名不对应问题
 # 检查子任务退出状态
 if [ $EXIT_CODE_COUNT -ne 0 ] || [ $EXIT_CODE_SUM -ne 0 ]; then
     echo "❌ 错误: Parler-E 的 COUNT 或 SUM 阶段执行异常失败，终止后续 AVG 合成！"
-    echo "请查看对应日志: ${LOG_DIR}/RQ2_parler_e_count.log 或 ${LOG_DIR}/RQ2_parler_e_sum.log"
+    echo "请查看对应日志: ${LOG_DIR}/parler_e_count.log 或 ${LOG_DIR}/parler_e_sum.log"
     exit 1
 fi
 
 if [ $EXIT_CODE_AMAZON -ne 0 ]; then
-    echo "⚠️ 警告: Amazon SUM 执行出现异常，请检查日志: ${LOG_DIR}/RQ2_amazon_sum.log"
+    echo "⚠️ 警告: Amazon SUM 执行出现异常，请检查日志: ${LOG_DIR}/amazon_sum.log"
 fi
 
 echo -e "\n[$(date '+%Y-%m-%d %H:%M:%S')] ✅ 所有并行任务已完成！"
