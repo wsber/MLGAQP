@@ -4,13 +4,7 @@
 # 作用: 一键并行执行所有数据集的 Projection-ABae 基线实验 (COUNT & SUM)
 # ==============================================================================
 
-PYTHON_EXEC="/home/wangshuo/software/anaconda3/envs/proxy/bin/python"
-source /home/wangshuo/software/anaconda3/etc/profile.d/conda.sh
-conda activate proxy
-
-set -e
-
-# 1. 自动精准定位项目根目录
+# 1. 自动精准定位项目根目录 (自适应相对路径)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [ -d "${SCRIPT_DIR}/../../pythonProject" ]; then
     PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
@@ -19,6 +13,15 @@ elif [ -d "${SCRIPT_DIR}/../pythonProject" ]; then
 else
     PROJECT_ROOT="${SCRIPT_DIR}"
 fi
+
+# 2. 动态获取外部激活的 Python 环境
+PYTHON_EXEC=$(command -v python)
+if [ -z "$PYTHON_EXEC" ]; then
+    echo "❌ 错误: 未找到 Python，请确保执行脚本前已激活正确的虚拟环境 (如: conda activate proxy)！"
+    exit 1
+fi
+
+set -e
 
 export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH}"
 
@@ -91,7 +94,7 @@ run_task "amazon" "sum" > "${LOG_DIR}/proj_abae_amazon_sum.log" 2>&1 &
 PID_A_SUM=$!
 echo "  • [PID $PID_A_SUM] Amazon SUM 已启动"
 
-echo -e "\n[*] 等待所有 Projection-ABae 任务完成 (可使用 'tail -f logs/proj_abae_*.log' 查看进度)..."
+echo -e "\n[*] 等待所有 Projection-ABae 任务完成 (可使用 'tail -f ${LOG_DIR}/proj_abae_*.log' 查看进度)..."
 
 wait $PID_P_COUNT $PID_P_SUM $PID_PE_COUNT $PID_PE_SUM $PID_A_COUNT $PID_A_SUM
 

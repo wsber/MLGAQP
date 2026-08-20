@@ -10,22 +10,16 @@
 
 # 1. 基础环境与全局路径
 # ==============================================================================
-PYTHON_EXEC="/home/wangshuo/software/anaconda3/envs/proxy/bin/python"
-source /home/wangshuo/software/anaconda3/etc/profile.d/conda.sh
-conda activate proxy
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+PYTHON_EXEC=$(command -v python)
+if [ -z "$PYTHON_EXEC" ]; then
+    echo "❌ 错误: 未找到 Python，请确保执行脚本前已激活虚拟环境！"
+    exit 1
+fi
 
 set -e
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# 自动解析真实项目根目录 (.../PROXY)
-if [ -d "${SCRIPT_DIR}/../../pythonProject" ]; then
-    PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
-elif [ -d "${SCRIPT_DIR}/../pythonProject" ]; then
-    PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-else
-    PROJECT_ROOT="${SCRIPT_DIR}"
-fi
 
 export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH}"
 
@@ -33,16 +27,14 @@ if [ -n "$CONDA_PREFIX" ]; then
     export LD_LIBRARY_PATH="${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH}"
 fi
 
-LOG_DIR="${PROJECT_ROOT}"
+LOG_DIR="${PROJECT_ROOT}/pythonProject/logs"
 mkdir -p "${LOG_DIR}"
 
 # 2. 实验参数配置
 # ==============================================================================
 RUN_TIMES=5
 MAX_WORKERS=16
-# 消融实验通常聚焦在关键预算点 (如 10%)，若需全梯度可替换为完整梯度
 TARGET_TICKS="0.1"
-# TARGET_TICKS="0.01,0.05,0.075,0.1,0.125,0.15,0.2,0.3,0.4,0.5,0.6,0.7,0.8"
 
 RUNNER_SAMPLER="${PROJECT_ROOT}/pythonProject/src/runner/Proxy_Guided_Stratified_Importance_Sampling_Runner.py"
 
@@ -58,7 +50,6 @@ echo "==========================================================================
 # 3. 定义 6 大独立并行任务
 # ------------------------------------------------------------------------------
 
-# 任务 1: Parler COUNT 消融
 run_parler_count() {
     "$PYTHON_EXEC" "${RUNNER_SAMPLER}" \
         -d 0 --agg_mode count \
@@ -70,7 +61,6 @@ run_parler_count() {
         --out_csv_name "allocation_strategy_comparison_ablation_count.csv"
 }
 
-# 任务 2: Parler SUM 消融
 run_parler_sum() {
     "$PYTHON_EXEC" "${RUNNER_SAMPLER}" \
         -d 0 --agg_mode sum \
@@ -82,9 +72,8 @@ run_parler_sum() {
         --out_csv_name "allocation_strategy_comparison_ablation_sum.csv"
 }
 
-# 任务 3: Parler-E COUNT 消融
 run_parler_e_count() {
-    "$PYTHON_EXEC" "${RUNNER_STEP1:-$RUNNER_SAMPLER}" \
+    "$PYTHON_EXEC" "${RUNNER_SAMPLER}" \
         -d 1 --agg_mode count \
         --target_ticks "${TARGET_TICKS}" \
         --run_times ${RUN_TIMES} \
@@ -94,7 +83,6 @@ run_parler_e_count() {
         --out_csv_name "allocation_strategy_comparison_ablation_count.csv"
 }
 
-# 任务 4: Parler-E SUM 消融
 run_parler_e_sum() {
     "$PYTHON_EXEC" "${RUNNER_SAMPLER}" \
         -d 1 --agg_mode sum \
@@ -106,7 +94,6 @@ run_parler_e_sum() {
         --out_csv_name "allocation_strategy_comparison_ablation_sum.csv"
 }
 
-# 任务 5: Amazon COUNT 消融
 run_amazon_count() {
     "$PYTHON_EXEC" "${RUNNER_SAMPLER}" \
         -d 2 --agg_mode count \
@@ -118,7 +105,6 @@ run_amazon_count() {
         --out_csv_name "allocation_strategy_comparison_ablation_count.csv"
 }
 
-# 任务 6: Amazon SUM 消融
 run_amazon_sum() {
     "$PYTHON_EXEC" "${RUNNER_SAMPLER}" \
         -d 2 --agg_mode sum \
@@ -135,29 +121,29 @@ run_amazon_sum() {
 # ------------------------------------------------------------------------------
 echo -e "\n[*] 正在启动后台并发任务..."
 
-run_parler_count   > "${LOG_DIR}/pythonProject/logs/RQ4_parler_count.log" 2>&1 &
+run_parler_count   > "${LOG_DIR}/RQ4_parler_count.log" 2>&1 &
 PID_P_COUNT=$!
 echo "  • [PID $PID_P_COUNT] Parler COUNT 消融 -> logs/RQ4_parler_count.log"
 
-run_parler_sum     > "${LOG_DIR}/pythonProject/logs/RQ4_parler_sum.log" 2>&1 &
+run_parler_sum     > "${LOG_DIR}/RQ4_parler_sum.log" 2>&1 &
 PID_P_SUM=$!
 echo "  • [PID $PID_P_SUM] Parler SUM 消融 -> logs/RQ4_parler_sum.log"
 
-run_parler_e_count > "${LOG_DIR}/pythonProject/logs/RQ4_parler_e_count.log" 2>&1 &
+run_parler_e_count > "${LOG_DIR}/RQ4_parler_e_count.log" 2>&1 &
 PID_PE_COUNT=$!
-echo "  • [PID $PID_PE_COUNT] Parler-E COUNT 消融 -> logs/rq4_parler_e_count.log"
+echo "  • [PID $PID_PE_COUNT] Parler-E COUNT 消融 -> logs/RQ4_parler_e_count.log"
 
-run_parler_e_sum   > "${LOG_DIR}/pythonProject/logs/RQ4_parler_e_sum.log" 2>&1 &
+run_parler_e_sum   > "${LOG_DIR}/RQ4_parler_e_sum.log" 2>&1 &
 PID_PE_SUM=$!
-echo "  • [PID $PID_PE_SUM] Parler-E SUM 消融 -> logs/rq4_parler_e_sum.log"
+echo "  • [PID $PID_PE_SUM] Parler-E SUM 消融 -> logs/RQ4_parler_e_sum.log"
 
-run_amazon_count   > "${LOG_DIR}/pythonProject/logs/RQ4_amazon_count.log" 2>&1 &
+run_amazon_count   > "${LOG_DIR}/RQ4_amazon_count.log" 2>&1 &
 PID_A_COUNT=$!
-echo "  • [PID $PID_A_COUNT] Amazon COUNT 消融 -> logs/rq4_amazon_count.log"
+echo "  • [PID $PID_A_COUNT] Amazon COUNT 消融 -> logs/RQ4_amazon_count.log"
 
-run_amazon_sum     > "${LOG_DIR}/pythonProject/logs/RQ4_amazon_sum.log" 2>&1 &
+run_amazon_sum     > "${LOG_DIR}/RQ4_amazon_sum.log" 2>&1 &
 PID_A_SUM=$!
-echo "  • [PID $PID_A_SUM] Amazon SUM 消融 -> logs/rq4_amazon_sum.log"
+echo "  • [PID $PID_A_SUM] Amazon SUM 消融 -> logs/RQ4_amazon_sum.log"
 
 echo -e "\n[*] 等待所有 RQ4 消融任务执行完成..."
 

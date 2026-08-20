@@ -1,24 +1,19 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# 脚本名称: run_fastesto_all.sh
+# 脚本名称: run_Fastesto_Oracle.sh
 # 作用: 一键后台并发跑完所有数据集的 FaSTest-Oracle 基线曲线实验
 # ==============================================================================
 
-PYTHON_EXEC="/home/wangshuo/software/anaconda3/envs/proxy/bin/python"
-source /home/wangshuo/software/anaconda3/etc/profile.d/conda.sh
-conda activate proxy
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+PYTHON_EXEC=$(command -v python)
+if [ -z "$PYTHON_EXEC" ]; then
+    echo "❌ 错误: 未找到 Python，请确保执行脚本前已激活虚拟环境！"
+    exit 1
+fi
 
 set -e
-
-# 定位项目根目录 (自动追溯到 /home/wangshuo/projects/PROXY)
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if [ -d "${SCRIPT_DIR}/../../pythonProject" ]; then
-    PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
-elif [ -d "${SCRIPT_DIR}/../pythonProject" ]; then
-    PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-else
-    PROJECT_ROOT="${SCRIPT_DIR}"
-fi
 
 export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH}"
 
@@ -31,7 +26,6 @@ mkdir -p "${LOG_DIR}"
 
 # 脚本与可执行文件真实路径
 RUNNER_SCRIPT="${PROJECT_ROOT}/pythonProject/src/baseline/FASTEST-ORACLE.py"
-# 【关键修正点】：指定你最新的 C++ build 目录
 BUILD_DIR="${PROJECT_ROOT}/cProject/build"
 
 echo "=============================================================================="
@@ -41,7 +35,6 @@ echo "C++ 目录   : ${BUILD_DIR}"
 echo "日志目录   : ${LOG_DIR}"
 echo "=============================================================================="
 
-# 1. Parler 任务 (COUNT & SUM)
 run_parler() {
     "$PYTHON_EXEC" "${RUNNER_SCRIPT}" \
         --dataset parler \
@@ -50,7 +43,6 @@ run_parler() {
         --build_dir "${BUILD_DIR}"
 }
 
-# 2. Parler-E 任务 (COUNT & SUM)
 run_parler_e() {
     "$PYTHON_EXEC" "${RUNNER_SCRIPT}" \
         --dataset parler-E \
@@ -59,7 +51,6 @@ run_parler_e() {
         --build_dir "${BUILD_DIR}"
 }
 
-# 3. Amazon 任务 (COUNT & SUM)
 run_amazon() {
     "$PYTHON_EXEC" "${RUNNER_SCRIPT}" \
         --dataset amazon \

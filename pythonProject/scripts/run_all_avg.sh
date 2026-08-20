@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# 脚本名称: run_all_avg_synthesis.sh
+# 脚本名称: run_all_avg.sh
 # 作用: 一键合成 Parler, Parler-E, Amazon 三个数据集的 AVG 实验结果与真值
 # ==============================================================================
 
-# 环境配置 (如有需要可取消注释激活 conda 环境)
-# source /home/wangshuo/software/anaconda3/etc/profile.d/conda.sh
-# conda activate proxy
-PYTHON_EXEC="/home/wangshuo/software/anaconda3/envs/proxy/bin/python"
-SCRIPT_PATH="/home/wangshuo/projects/PROXY/pythonProject/src/runner/AVG_Runner.py"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+PYTHON_EXEC=$(command -v python)
+if [ -z "$PYTHON_EXEC" ]; then
+    echo "❌ 错误: 未找到 Python，请确保执行脚本前已激活虚拟环境！"
+    exit 1
+fi
+
+export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH}"
+
+SCRIPT_PATH="${PROJECT_ROOT}/pythonProject/src/runner/AVG_Runner.py"
 
 echo "========================================================================="
 echo "🚀 开始执行所有数据集的 AVG 离线合成流水线..."
+echo "工作目录: ${PROJECT_ROOT}"
 echo "========================================================================="
 
 # 1. Parler 数据集

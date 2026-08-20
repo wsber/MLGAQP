@@ -4,12 +4,6 @@
 # 作用: 一键并行执行所有数据集的 PROJ-Cascade-Filter (Double Truncation) 基线实验 (COUNT & SUM)
 # ==============================================================================
 
-PYTHON_EXEC="/home/wangshuo/software/anaconda3/envs/proxy/bin/python"
-source /home/wangshuo/software/anaconda3/etc/profile.d/conda.sh
-conda activate proxy
-
-set -e
-
 # 1. 自动定位项目根目录
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [ -d "${SCRIPT_DIR}/../../pythonProject" ]; then
@@ -19,6 +13,15 @@ elif [ -d "${SCRIPT_DIR}/../pythonProject" ]; then
 else
     PROJECT_ROOT="${SCRIPT_DIR}"
 fi
+
+# 2. 动态获取外部激活的 Python 环境
+PYTHON_EXEC=$(command -v python)
+if [ -z "$PYTHON_EXEC" ]; then
+    echo "❌ 错误: 未找到 Python，请确保执行脚本前已激活正确的虚拟环境 (如: conda activate proxy)！"
+    exit 1
+fi
+
+set -e
 
 export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH}"
 
@@ -74,17 +77,18 @@ run_task() {
             --out_csv "${out_csv}"
 
     elif [ "$dataset" == "parler" ] || [ "$dataset" == "parler-E" ]; then
+        # 【修改提示】: 已修正此处原脚本的 Bug (原版错误写成了 product/review)
         "$PYTHON_EXEC" "${PYTHON_SCRIPT}" \
             --parent_dataset "${dataset}" \
             --agg-mode "${agg_mode}" \
             --ablation_csv "${ablation_csv}" \
-            --table1 "product" \
+            --table1 "post" \
             --table1_proxy "ML1_proxy4b_probability" \
             --table1_oracle "ML1_oracle2_probability" \
             --t1_ids "post_id_list" \
             --t1_low 0.7 \
             --t1_high 0.9 \
-            --table2 "review" \
+            --table2 "comment" \
             --table2_proxy "ML2_proxy1_probability" \
             --table2_oracle "ML2_oracle2_probability" \
             --t2_ids "comment_id_list" \

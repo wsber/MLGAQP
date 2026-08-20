@@ -1,24 +1,19 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# 脚本名称: run_all_t_true.sh
+# 脚本名称: run_all_gt.sh
 # 作用: 全并发生产 Amazon, Parler, Parler-E 的 COUNT 和 SUM 真实基数 (Ground Truth)
 # ==============================================================================
 
-PYTHON_EXEC="/home/wangshuo/software/anaconda3/envs/proxy/bin/python"
-source /home/wangshuo/software/anaconda3/etc/profile.d/conda.sh
-conda activate proxy
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+PYTHON_EXEC=$(command -v python)
+if [ -z "$PYTHON_EXEC" ]; then
+    echo "❌ 错误: 未找到 Python，请确保执行脚本前已激活虚拟环境！"
+    exit 1
+fi
 
 set -e
-
-# 动态解析项目根目录
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if [ -d "${SCRIPT_DIR}/../../pythonProject" ]; then
-    PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
-elif [ -d "${SCRIPT_DIR}/../pythonProject" ]; then
-    PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-else
-    PROJECT_ROOT="${SCRIPT_DIR}"
-fi
 
 export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH}"
 
@@ -45,7 +40,6 @@ run_gt_task() {
 # ------------------------------------------------------------------------------
 echo -e "\n[*] 正在启动 6 项真值生产任务..."
 
-# 1. Amazon
 run_gt_task "amazon" "count" > "${LOG_DIR}/gt_amazon_count.log" 2>&1 &
 PID_A_COUNT=$!
 echo "  • [PID $PID_A_COUNT] Amazon COUNT  -> logs/gt_amazon_count.log"
@@ -54,7 +48,6 @@ run_gt_task "amazon" "sum"   > "${LOG_DIR}/gt_amazon_sum.log" 2>&1 &
 PID_A_SUM=$!
 echo "  • [PID $PID_A_SUM] Amazon SUM    -> logs/gt_amazon_sum.log"
 
-# 2. Parler
 run_gt_task "parler" "count" > "${LOG_DIR}/gt_parler_count.log" 2>&1 &
 PID_P_COUNT=$!
 echo "  • [PID $PID_P_COUNT] Parler COUNT  -> logs/gt_parler_count.log"
@@ -63,7 +56,6 @@ run_gt_task "parler" "sum"   > "${LOG_DIR}/gt_parler_sum.log" 2>&1 &
 PID_P_SUM=$!
 echo "  • [PID $PID_P_SUM] Parler SUM    -> logs/gt_parler_sum.log"
 
-# 3. Parler-E
 run_gt_task "parler-E" "count" > "${LOG_DIR}/gt_parler_e_count.log" 2>&1 &
 PID_PE_COUNT=$!
 echo "  • [PID $PID_PE_COUNT] Parler-E COUNT -> logs/gt_parler_e_count.log"

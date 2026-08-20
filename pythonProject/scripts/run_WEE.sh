@@ -1,24 +1,19 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# 脚本名称: run_all_wo_eval.sh
+# 脚本名称: run_WEE.sh
 # 作用: 并行执行所有数据集在 COUNT 和 SUM 下的 WO (Weight Only) 基准评估
 # ==============================================================================
 
-PYTHON_EXEC="/home/wangshuo/software/anaconda3/envs/proxy/bin/python"
-source /home/wangshuo/software/anaconda3/etc/profile.d/conda.sh
-conda activate proxy
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+PYTHON_EXEC=$(command -v python)
+if [ -z "$PYTHON_EXEC" ]; then
+    echo "❌ 错误: 未找到 Python，请确保执行脚本前已激活虚拟环境！"
+    exit 1
+fi
 
 set -e
-
-# 定位当前项目的根目录 (即 .../PROXY)
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if [ -d "${SCRIPT_DIR}/../../pythonProject" ]; then
-    PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
-elif [ -d "${SCRIPT_DIR}/../pythonProject" ]; then
-    PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-else
-    PROJECT_ROOT="${SCRIPT_DIR}"
-fi
 
 export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH}"
 
@@ -34,7 +29,6 @@ echo "🚀 启动 WO Baseline 全数据集并发评估"
 echo "项目根目录 : ${PROJECT_ROOT}"
 echo "=============================================================================="
 
-# 1. Amazon (SUM & COUNT)
 run_amazon() {
     local mode=$1
     echo "[*] Amazon ${mode^^}..."
@@ -51,7 +45,6 @@ run_amazon() {
         --workers ${MAX_WORKERS}
 }
 
-# 2. Parler (SUM & COUNT)
 run_parler() {
     local mode=$1
     echo "[*] Parler ${mode^^}..."
@@ -68,7 +61,6 @@ run_parler() {
         --workers ${MAX_WORKERS}
 }
 
-# 3. Parler-E (SUM & COUNT)
 run_parler_e() {
     local mode=$1
     echo "[*] Parler-E ${mode^^}..."

@@ -6,9 +6,12 @@
 
 set -e
 
-# 动态定位项目根目录
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-LOG_DIR="${PROJECT_ROOT}/logs"
+# 动态定位脚本本身所在目录及项目根目录
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+# 与 RQ2 保持一致，日志统一存放至 pythonProject/logs
+LOG_DIR="${PROJECT_ROOT}/pythonProject/logs"
 mkdir -p "${LOG_DIR}"
 
 echo "=============================================================================="
@@ -21,11 +24,14 @@ run_bg() {
     SCRIPT_NAME=$1
     MODULE_DESC=$2
     LOG_FILE="${LOG_DIR}/${SCRIPT_NAME%.sh}.log"
-    SCRIPT_PATH="${PROJECT_ROOT}/scripts/${SCRIPT_NAME}"
+    
+    # 动态定位子脚本路径
+    SCRIPT_PATH="${SCRIPT_DIR}/${SCRIPT_NAME}"
     
     chmod +x "${SCRIPT_PATH}"
     echo "[$(date +'%H:%M:%S')] ⚡ [后台启动] ${MODULE_DESC}"
-    echo "   -> 脚本: scripts/${SCRIPT_NAME} | 日志: logs/${SCRIPT_NAME%.sh}.log"
+    echo "   -> 脚本: ${SCRIPT_PATH}"
+    echo "   -> 日志: ${LOG_FILE}"
     
     # 核心：使用 & 符号将任务打入后台并发执行
     bash "${SCRIPT_PATH}" > "${LOG_FILE}" 2>&1 &
@@ -44,7 +50,7 @@ run_bg "run_amazon_count.sh"   "Amazon   [COUNT] 评估"
 run_bg "run_amazon_sum.sh"     "Amazon   [SUM]   评估"
 
 echo -e "\n⏳ 6 个任务已全部转入后台并行运行中！"
-echo "💡 提示：你可以打开新终端输入 'htop' 或 'tail -f logs/run_amazon_sum.log' 查看实时动态。"
+echo "💡 提示：你可以打开新终端输入 'htop' 或 'tail -f ${LOG_DIR}/run_amazon_sum.log' 查看实时动态。"
 echo "⏳ 正在等待这 6 个实验全部并发结束 (通过 wait 阻塞等待)..."
 
 # 关键：wait 会阻塞等待上面 6 个后台任务全部完成！
@@ -57,13 +63,16 @@ echo -e "\n✅ [阶段 1/2] 恭喜！所有 6 个 COUNT 与 SUM 实验已全部�
 # ------------------------------------------------------------------------------
 echo -e "\n🚀 >>> [阶段 2/2] 开始执行全数据集的 AVG 比率离线合成... <<<"
 
-AVG_SCRIPT="${PROJECT_ROOT}/scripts/run_all_avg.sh"
+AVG_SCRIPT="${SCRIPT_DIR}/run_all_avg.sh"
 AVG_LOG="${LOG_DIR}/run_all_avg.log"
 
-chmod +x "${AVG_SCRIPT}"
-bash "${AVG_SCRIPT}" > "${AVG_LOG}" 2>&1
-
-echo "✅ [阶段 2/2] 全数据集 AVG 离线合成已顺利完成！"
+if [ -f "${AVG_SCRIPT}" ]; then
+    chmod +x "${AVG_SCRIPT}"
+    bash "${AVG_SCRIPT}" > "${AVG_LOG}" 2>&1
+    echo "✅ [阶段 2/2] 全数据集 AVG 离线合成已顺利完成！日志: ${AVG_LOG}"
+else
+    echo "⚠️ 警告: 未找到合成脚本 ${AVG_SCRIPT}，跳过此步。"
+fi
 
 echo -e "\n=============================================================================="
 echo "🎉 所有实验全线告捷！全部数据已安全落盘至 datasets/*/results/efficiency/ 目录！"
