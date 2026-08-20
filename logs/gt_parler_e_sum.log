@@ -6,7 +6,7 @@
    • 求和目标: 表=post, 列=upvotes, 作用Label=[2]
 ======================================================================
 [*] 成功加载 113 个待计算查询 (读取自 parler_ans.txt)
-Computing T_true (SUM):   0%|          | 0/113 [00:00<?, ?it/s]Computing T_true (SUM): 100%|██████████| 113/113 [00:00<00:00, 47310.48it/s]
+Computing T_true (SUM):   0%|          | 0/113 [00:00<?, ?it/s]Computing T_true (SUM): 100%|██████████| 113/113 [00:00<00:00, 47141.07it/s]
 ✅ [完成] parler-E (SUM) T_true 已成功保存至:
 👉 /home/wangshuo/projects/PROXY/datasets/parler-E/results/T_true_ML1_oracle2_probability_ML2_oracle2_probability_sum.json
 
