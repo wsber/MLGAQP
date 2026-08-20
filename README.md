@@ -252,7 +252,8 @@ chmod +x *.sh
 #  baseline : Weight Estimation Error (WEE) Floor
 ./run_WEE.sh
 
-#  baseline - in rebuttal:  Projection space + ABAE. Visualize in `pythonProject/src/RQs_plots/Rebuttal_exp_result.ipynb` 
+#  baseline - in rebuttal:  Projection space + ABAE. Visualize in `pythonProject/src/RQs_plots/Rebuttal_exp_result.ipynb`
+#  After rebttual, the method was systematically improved. The method ARE was improved to some extent, but it still lagged behind PROXY
 ./run_Pro_Abae.sh
 
 #  baseline - in rebuttal:  Projection space + cascade filter (SUPG.ScaleDoc style). Visualize in `pythonProject/src/RQs_plots/Rebuttal_exp_result.ipynb` 

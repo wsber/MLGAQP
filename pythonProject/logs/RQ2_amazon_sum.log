@@ -1,990 +1,0 @@
-[2026-08-20 08:46:47] [Task 3] 启动 Amazon SUM 评估...
-[2026-08-20 08:46:47] [Task 3] ⚡ 检测到已存在物化目录: /home/wangshuo/projects/PROXY/datasets/amazon/results/aggregated_results_sum，跳过 Step 1 权重物化！
-[2026-08-20 08:46:47] [Task 3] [Step 2/2] 开始执行 SUM 模式分层重要性采样...
-
-========== 启动采样评估 [amazon | SUM] ==========
-[*] 执行的方法集合: ['8_POSSA']
-[*] 输出文件路径: /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/allocation_strategy_comparison_sum.csv
-Sampling (amazon-sum):   0%|          | 0/181 [00:00<?, ?it/s]Sampling (amazon-sum):   1%|          | 1/181 [00:27<1:21:58, 27.32s/it]Sampling (amazon-sum):   2%|▏         | 3/181 [00:29<23:02,  7.77s/it]  Sampling (amazon-sum):   2%|▏         | 4/181 [00:30<16:28,  5.58s/it]Sampling (amazon-sum):   4%|▍         | 8/181 [00:30<05:28,  1.90s/it]Sampling (amazon-sum):   6%|▌         | 10/181 [00:31<03:50,  1.35s/it]Sampling (amazon-sum):   7%|▋         | 12/181 [00:31<02:50,  1.01s/it]Sampling (amazon-sum):   7%|▋         | 13/181 [00:32<02:31,  1.11it/s]Sampling (amazon-sum):   8%|▊         | 14/181 [00:32<02:02,  1.36it/s]Sampling (amazon-sum):   8%|▊         | 15/181 [00:33<02:24,  1.15it/s]Sampling (amazon-sum):   9%|▉         | 16/181 [00:36<04:01,  1.46s/it]Sampling (amazon-sum):   9%|▉         | 17/181 [00:39<04:43,  1.73s/it]Sampling (amazon-sum):  10%|▉         | 18/181 [00:40<04:37,  1.71s/it]Sampling (amazon-sum):  10%|█         | 19/181 [00:41<03:36,  1.34s/it]Sampling (amazon-sum):  11%|█         | 20/181 [00:41<02:58,  1.11s/it]Sampling (amazon-sum):  12%|█▏        | 22/181 [00:43<02:42,  1.02s/it]Sampling (amazon-sum):  13%|█▎        | 23/181 [00:43<02:08,  1.23it/s]Sampling (amazon-sum):  13%|█▎        | 24/181 [00:51<06:26,  2.46s/it]Sampling (amazon-sum):  14%|█▍        | 25/181 [00:52<05:22,  2.07s/it]Sampling (amazon-sum):  14%|█▍        | 26/181 [00:52<04:00,  1.55s/it]Sampling (amazon-sum):  15%|█▍        | 27/181 [00:54<04:10,  1.63s/it]Sampling (amazon-sum):  15%|█▌        | 28/181 [00:54<03:16,  1.28s/it]Sampling (amazon-sum):  16%|█▌        | 29/181 [00:59<06:05,  2.40s/it]Sampling (amazon-sum):  17%|█▋        | 30/181 [00:59<04:29,  1.78s/it]Sampling (amazon-sum):  18%|█▊        | 32/181 [01:00<02:27,  1.01it/s]Sampling (amazon-sum):  18%|█▊        | 33/181 [01:00<02:18,  1.07it/s]Sampling (amazon-sum):  19%|█▉        | 34/181 [01:01<02:21,  1.04it/s]Sampling (amazon-sum):  19%|█▉        | 35/181 [01:02<01:55,  1.27it/s]Sampling (amazon-sum):  20%|██        | 37/181 [01:03<01:45,  1.36it/s]Sampling (amazon-sum):  21%|██        | 38/181 [01:05<02:19,  1.02it/s]Sampling (amazon-sum):  22%|██▏       | 39/181 [01:05<01:56,  1.22it/s]Sampling (amazon-sum):  22%|██▏       | 40/181 [01:06<01:45,  1.34it/s]Sampling (amazon-sum):  23%|██▎       | 41/181 [01:06<01:24,  1.66it/s]Sampling (amazon-sum):  23%|██▎       | 42/181 [01:07<01:51,  1.25it/s]Sampling (amazon-sum):  24%|██▍       | 44/181 [01:09<01:47,  1.28it/s]Sampling (amazon-sum):  25%|██▍       | 45/181 [01:09<01:46,  1.28it/s]Sampling (amazon-sum):  26%|██▌       | 47/181 [01:10<01:07,  1.98it/s]Sampling (amazon-sum):  28%|██▊       | 50/181 [01:10<00:42,  3.06it/s]Sampling (amazon-sum):  28%|██▊       | 51/181 [01:10<00:39,  3.31it/s]Sampling (amazon-sum):  29%|██▊       | 52/181 [01:11<00:42,  3.06it/s]Sampling (amazon-sum):  29%|██▉       | 53/181 [01:11<00:46,  2.74it/s]Sampling (amazon-sum):  30%|██▉       | 54/181 [01:14<01:58,  1.07it/s]Sampling (amazon-sum):  30%|███       | 55/181 [01:14<01:30,  1.39it/s]Sampling (amazon-sum):  31%|███       | 56/181 [01:14<01:13,  1.71it/s]Sampling (amazon-sum):  32%|███▏      | 58/181 [01:18<02:28,  1.21s/it]Sampling (amazon-sum):  33%|███▎      | 59/181 [01:20<02:49,  1.39s/it]Sampling (amazon-sum):  33%|███▎      | 60/181 [01:24<04:08,  2.05s/it]Sampling (amazon-sum):  34%|███▎      | 61/181 [01:25<03:24,  1.70s/it]Sampling (amazon-sum):  34%|███▍      | 62/181 [01:25<02:30,  1.26s/it]Sampling (amazon-sum):  35%|███▍      | 63/181 [01:29<04:05,  2.08s/it]Sampling (amazon-sum):  35%|███▌      | 64/181 [01:29<02:57,  1.52s/it]Sampling (amazon-sum):  36%|███▌      | 65/181 [01:32<03:30,  1.82s/it]Sampling (amazon-sum):  36%|███▋      | 66/181 [01:33<03:11,  1.66s/it]Sampling (amazon-sum):  37%|███▋      | 67/181 [01:34<02:26,  1.29s/it]Sampling (amazon-sum):  38%|███▊      | 68/181 [01:34<02:08,  1.14s/it]Sampling (amazon-sum):  38%|███▊      | 69/181 [01:35<02:07,  1.14s/it]Sampling (amazon-sum):  39%|███▊      | 70/181 [01:36<01:32,  1.20it/s]Sampling (amazon-sum):  39%|███▉      | 71/181 [01:36<01:15,  1.46it/s]Sampling (amazon-sum):  40%|███▉      | 72/181 [01:37<01:18,  1.39it/s]Sampling (amazon-sum):  40%|████      | 73/181 [01:37<01:17,  1.39it/s]Sampling (amazon-sum):  41%|████      | 74/181 [01:38<01:08,  1.56it/s]Sampling (amazon-sum):  41%|████▏     | 75/181 [01:38<00:54,  1.95it/s]Sampling (amazon-sum):  43%|████▎     | 77/181 [01:39<00:43,  2.37it/s]Sampling (amazon-sum):  43%|████▎     | 78/181 [01:41<01:26,  1.19it/s]Sampling (amazon-sum):  44%|████▎     | 79/181 [01:42<01:20,  1.26it/s]Sampling (amazon-sum):  44%|████▍     | 80/181 [01:42<01:09,  1.45it/s]Sampling (amazon-sum):  45%|████▍     | 81/181 [01:45<02:27,  1.47s/it]Sampling (amazon-sum):  45%|████▌     | 82/181 [01:46<01:52,  1.14s/it]Sampling (amazon-sum):  46%|████▋     | 84/181 [01:48<01:47,  1.11s/it]Sampling (amazon-sum):  47%|████▋     | 85/181 [01:49<01:52,  1.18s/it]Sampling (amazon-sum):  48%|████▊     | 86/181 [01:56<04:19,  2.73s/it]Sampling (amazon-sum):  48%|████▊     | 87/181 [01:57<03:27,  2.21s/it]Sampling (amazon-sum):  49%|████▊     | 88/181 [01:58<02:54,  1.87s/it]Sampling (amazon-sum):  49%|████▉     | 89/181 [01:59<02:30,  1.63s/it]Sampling (amazon-sum):  50%|████▉     | 90/181 [02:00<02:07,  1.41s/it]Sampling (amazon-sum):  50%|█████     | 91/181 [02:01<01:40,  1.12s/it]Sampling (amazon-sum):  51%|█████     | 92/181 [02:01<01:23,  1.07it/s]Sampling (amazon-sum):  51%|█████▏    | 93/181 [02:04<02:17,  1.56s/it]Sampling (amazon-sum):  52%|█████▏    | 94/181 [02:05<01:54,  1.32s/it]Sampling (amazon-sum):  52%|█████▏    | 95/181 [02:07<02:22,  1.66s/it]Sampling (amazon-sum):  53%|█████▎    | 96/181 [02:10<02:53,  2.04s/it]Sampling (amazon-sum):  54%|█████▎    | 97/181 [02:14<03:28,  2.49s/it]Sampling (amazon-sum):  54%|█████▍    | 98/181 [02:14<02:31,  1.82s/it]Sampling (amazon-sum):  55%|█████▍    | 99/181 [02:16<02:20,  1.72s/it]Sampling (amazon-sum):  55%|█████▌    | 100/181 [02:17<02:10,  1.62s/it]Sampling (amazon-sum):  56%|█████▌    | 101/181 [02:19<02:22,  1.78s/it]Sampling (amazon-sum):  56%|█████▋    | 102/181 [02:19<01:46,  1.35s/it]Sampling (amazon-sum):  57%|█████▋    | 103/181 [02:20<01:21,  1.04s/it]Sampling (amazon-sum):  57%|█████▋    | 104/181 [02:20<01:00,  1.27it/s]Sampling (amazon-sum):  58%|█████▊    | 105/181 [02:22<01:31,  1.21s/it]Sampling (amazon-sum):  59%|█████▊    | 106/181 [02:28<03:26,  2.75s/it]Sampling (amazon-sum):  59%|█████▉    | 107/181 [02:29<02:43,  2.21s/it]Sampling (amazon-sum):  60%|█████▉    | 108/181 [02:33<03:06,  2.55s/it]Sampling (amazon-sum):  60%|██████    | 109/181 [02:33<02:24,  2.00s/it]Sampling (amazon-sum):  61%|██████    | 110/181 [02:34<01:55,  1.63s/it]Sampling (amazon-sum):  61%|██████▏   | 111/181 [02:36<01:48,  1.55s/it]Sampling (amazon-sum):  62%|██████▏   | 112/181 [02:37<01:49,  1.59s/it]Sampling (amazon-sum):  62%|██████▏   | 113/181 [02:39<01:51,  1.63s/it]Sampling (amazon-sum):  63%|██████▎   | 114/181 [02:42<02:15,  2.02s/it]Sampling (amazon-sum):  64%|██████▎   | 115/181 [02:48<03:41,  3.36s/it]Sampling (amazon-sum):  64%|██████▍   | 116/181 [02:53<03:56,  3.65s/it]Sampling (amazon-sum):  65%|██████▍   | 117/181 [02:53<02:57,  2.77s/it]Sampling (amazon-sum):  65%|██████▌   | 118/181 [02:54<02:19,  2.21s/it]Sampling (amazon-sum):  66%|██████▌   | 119/181 [02:56<02:06,  2.04s/it]Sampling (amazon-sum):  66%|██████▋   | 120/181 [02:59<02:19,  2.29s/it]Sampling (amazon-sum):  67%|██████▋   | 122/181 [02:59<01:18,  1.32s/it]Sampling (amazon-sum):  68%|██████▊   | 123/181 [03:02<01:30,  1.55s/it]Sampling (amazon-sum):  69%|██████▉   | 125/181 [03:03<01:04,  1.16s/it]Sampling (amazon-sum):  70%|██████▉   | 126/181 [03:03<00:54,  1.01it/s]Sampling (amazon-sum):  70%|███████   | 127/181 [03:05<01:05,  1.21s/it]Sampling (amazon-sum):  71%|███████   | 128/181 [03:07<01:08,  1.30s/it]Sampling (amazon-sum):  71%|███████▏  | 129/181 [03:09<01:29,  1.73s/it]Sampling (amazon-sum):  72%|███████▏  | 130/181 [03:14<02:02,  2.40s/it]Sampling (amazon-sum):  72%|███████▏  | 131/181 [03:17<02:14,  2.69s/it]Sampling (amazon-sum):  73%|███████▎  | 132/181 [03:17<01:36,  1.96s/it]Sampling (amazon-sum):  73%|███████▎  | 133/181 [03:18<01:11,  1.49s/it]Sampling (amazon-sum):  74%|███████▍  | 134/181 [03:18<00:53,  1.14s/it]Sampling (amazon-sum):  75%|███████▍  | 135/181 [03:18<00:39,  1.17it/s]Sampling (amazon-sum):  75%|███████▌  | 136/181 [03:18<00:33,  1.35it/s]Sampling (amazon-sum):  76%|███████▌  | 137/181 [03:19<00:28,  1.54it/s]Sampling (amazon-sum):  76%|███████▌  | 138/181 [03:19<00:21,  2.00it/s]Sampling (amazon-sum):  77%|███████▋  | 139/181 [03:22<00:49,  1.18s/it]Sampling (amazon-sum):  77%|███████▋  | 140/181 [03:23<00:46,  1.14s/it]Sampling (amazon-sum):  78%|███████▊  | 142/181 [03:27<00:59,  1.52s/it]Sampling (amazon-sum):  79%|███████▉  | 143/181 [03:28<00:53,  1.42s/it]Sampling (amazon-sum):  80%|███████▉  | 144/181 [03:28<00:41,  1.11s/it]Sampling (amazon-sum):  80%|████████  | 145/181 [03:31<00:52,  1.45s/it]Sampling (amazon-sum):  81%|████████  | 146/181 [03:34<01:06,  1.89s/it]Sampling (amazon-sum):  81%|████████  | 147/181 [03:36<01:06,  1.96s/it]Sampling (amazon-sum):  82%|████████▏ | 148/181 [03:36<00:50,  1.53s/it]Sampling (amazon-sum):  82%|████████▏ | 149/181 [03:37<00:44,  1.40s/it]Sampling (amazon-sum):  83%|████████▎ | 150/181 [03:39<00:49,  1.60s/it]Sampling (amazon-sum):  83%|████████▎ | 151/181 [03:43<01:03,  2.10s/it]Sampling (amazon-sum):  84%|████████▍ | 152/181 [03:45<01:00,  2.09s/it]Sampling (amazon-sum):  85%|████████▍ | 153/181 [03:46<00:50,  1.79s/it]Sampling (amazon-sum):  85%|████████▌ | 154/181 [03:50<01:10,  2.59s/it]Sampling (amazon-sum):  86%|████████▌ | 155/181 [03:56<01:30,  3.50s/it]Sampling (amazon-sum):  86%|████████▌ | 156/181 [03:57<01:09,  2.78s/it]Sampling (amazon-sum):  87%|████████▋ | 157/181 [03:59<01:01,  2.56s/it]Sampling (amazon-sum):  87%|████████▋ | 158/181 [04:08<01:39,  4.34s/it]Sampling (amazon-sum):  88%|████████▊ | 159/181 [04:08<01:10,  3.18s/it]Sampling (amazon-sum):  88%|████████▊ | 160/181 [04:10<01:01,  2.94s/it]Sampling (amazon-sum):  89%|████████▉ | 161/181 [04:11<00:43,  2.20s/it]Sampling (amazon-sum):  90%|████████▉ | 162/181 [04:11<00:30,  1.61s/it]Sampling (amazon-sum):  90%|█████████ | 163/181 [04:12<00:22,  1.25s/it]Sampling (amazon-sum):  91%|█████████ | 165/181 [04:14<00:20,  1.28s/it]Sampling (amazon-sum):  92%|█████████▏| 166/181 [04:15<00:17,  1.19s/it]Sampling (amazon-sum):  92%|█████████▏| 167/181 [04:17<00:21,  1.51s/it]Sampling (amazon-sum):  93%|█████████▎| 168/181 [04:18<00:15,  1.19s/it]Sampling (amazon-sum):  93%|█████████▎| 169/181 [04:21<00:20,  1.70s/it]Sampling (amazon-sum):  94%|█████████▍| 170/181 [04:23<00:20,  1.84s/it]Sampling (amazon-sum):  94%|█████████▍| 171/181 [04:26<00:21,  2.13s/it]Sampling (amazon-sum):  95%|█████████▌| 172/181 [04:26<00:15,  1.68s/it]Sampling (amazon-sum):  96%|█████████▌| 173/181 [04:33<00:24,  3.03s/it]Sampling (amazon-sum):  96%|█████████▌| 174/181 [04:52<00:55,  7.90s/it]Sampling (amazon-sum):  97%|█████████▋| 175/181 [04:56<00:40,  6.73s/it]Sampling (amazon-sum):  97%|█████████▋| 176/181 [05:15<00:52, 10.47s/it]Sampling (amazon-sum):  98%|█████████▊| 177/181 [05:17<00:31,  7.78s/it]Sampling (amazon-sum):  98%|█████████▊| 178/181 [05:17<00:16,  5.63s/it]Sampling (amazon-sum):  99%|█████████▉| 179/181 [05:31<00:16,  8.14s/it]Sampling (amazon-sum):  99%|█████████▉| 180/181 [06:03<00:15, 15.02s/it]Sampling (amazon-sum): 100%|██████████| 181/181 [06:03<00:00, 10.67s/it]Sampling (amazon-sum): 100%|██████████| 181/181 [06:03<00:00,  2.01s/it]
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=19, Reduced K from 5 to 1
-[Auto-Tune] Budget=19, Reduced K from 5 to 1
-[Auto-Tune] Budget=19, Reduced K from 5 to 1
-[Auto-Tune] Budget=19, Reduced K from 5 to 1
-[Auto-Tune] Budget=19, Reduced K from 5 to 1
-[Auto-Tune] Budget=28, Reduced K from 5 to 2
-[Auto-Tune] Budget=28, Reduced K from 5 to 2
-[Auto-Tune] Budget=28, Reduced K from 5 to 2
-[Auto-Tune] Budget=28, Reduced K from 5 to 2
-[Auto-Tune] Budget=28, Reduced K from 5 to 2
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=27, Reduced K from 5 to 2
-[Auto-Tune] Budget=27, Reduced K from 5 to 2
-[Auto-Tune] Budget=27, Reduced K from 5 to 2
-[Auto-Tune] Budget=27, Reduced K from 5 to 2
-[Auto-Tune] Budget=27, Reduced K from 5 to 2
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=33, Reduced K from 5 to 3
-[Auto-Tune] Budget=33, Reduced K from 5 to 3
-[Auto-Tune] Budget=33, Reduced K from 5 to 3
-[Auto-Tune] Budget=33, Reduced K from 5 to 3
-[Auto-Tune] Budget=33, Reduced K from 5 to 3
-[Auto-Tune] Budget=45, Reduced K from 5 to 4
-[Auto-Tune] Budget=45, Reduced K from 5 to 4
-[Auto-Tune] Budget=45, Reduced K from 5 to 4
-[Auto-Tune] Budget=45, Reduced K from 5 to 4
-[Auto-Tune] Budget=45, Reduced K from 5 to 4
-[Auto-Tune] Budget=16, Reduced K from 5 to 1
-[Auto-Tune] Budget=16, Reduced K from 5 to 1
-[Auto-Tune] Budget=16, Reduced K from 5 to 1
-[Auto-Tune] Budget=16, Reduced K from 5 to 1
-[Auto-Tune] Budget=16, Reduced K from 5 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=42, Reduced K from 5 to 4
-[Auto-Tune] Budget=42, Reduced K from 5 to 4
-[Auto-Tune] Budget=42, Reduced K from 5 to 4
-[Auto-Tune] Budget=42, Reduced K from 5 to 4
-[Auto-Tune] Budget=42, Reduced K from 5 to 4
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=3, Reduced K from 3 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=31, Reduced K from 5 to 3
-[Auto-Tune] Budget=31, Reduced K from 5 to 3
-[Auto-Tune] Budget=31, Reduced K from 5 to 3
-[Auto-Tune] Budget=31, Reduced K from 5 to 3
-[Auto-Tune] Budget=31, Reduced K from 5 to 3
-[Auto-Tune] Budget=42, Reduced K from 5 to 4
-[Auto-Tune] Budget=42, Reduced K from 5 to 4
-[Auto-Tune] Budget=42, Reduced K from 5 to 4
-[Auto-Tune] Budget=42, Reduced K from 5 to 4
-[Auto-Tune] Budget=42, Reduced K from 5 to 4
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=10, Reduced K from 5 to 1
-[Auto-Tune] Budget=10, Reduced K from 5 to 1
-[Auto-Tune] Budget=10, Reduced K from 5 to 1
-[Auto-Tune] Budget=10, Reduced K from 5 to 1
-[Auto-Tune] Budget=10, Reduced K from 5 to 1
-[Auto-Tune] Budget=15, Reduced K from 5 to 1
-[Auto-Tune] Budget=15, Reduced K from 5 to 1
-[Auto-Tune] Budget=15, Reduced K from 5 to 1
-[Auto-Tune] Budget=15, Reduced K from 5 to 1
-[Auto-Tune] Budget=15, Reduced K from 5 to 1
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=33, Reduced K from 5 to 3
-[Auto-Tune] Budget=33, Reduced K from 5 to 3
-[Auto-Tune] Budget=33, Reduced K from 5 to 3
-[Auto-Tune] Budget=33, Reduced K from 5 to 3
-[Auto-Tune] Budget=33, Reduced K from 5 to 3
-[Auto-Tune] Budget=44, Reduced K from 5 to 4
-[Auto-Tune] Budget=44, Reduced K from 5 to 4
-[Auto-Tune] Budget=44, Reduced K from 5 to 4
-[Auto-Tune] Budget=44, Reduced K from 5 to 4
-[Auto-Tune] Budget=44, Reduced K from 5 to 4
-[Auto-Tune] Budget=49, Reduced K from 5 to 4
-[Auto-Tune] Budget=49, Reduced K from 5 to 4
-[Auto-Tune] Budget=49, Reduced K from 5 to 4
-[Auto-Tune] Budget=49, Reduced K from 5 to 4
-[Auto-Tune] Budget=49, Reduced K from 5 to 4
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=11, Reduced K from 5 to 1
-[Auto-Tune] Budget=11, Reduced K from 5 to 1
-[Auto-Tune] Budget=11, Reduced K from 5 to 1
-[Auto-Tune] Budget=11, Reduced K from 5 to 1
-[Auto-Tune] Budget=11, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=17, Reduced K from 5 to 1
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=29, Reduced K from 5 to 2
-[Auto-Tune] Budget=29, Reduced K from 5 to 2
-[Auto-Tune] Budget=29, Reduced K from 5 to 2
-[Auto-Tune] Budget=29, Reduced K from 5 to 2
-[Auto-Tune] Budget=29, Reduced K from 5 to 2
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=38, Reduced K from 5 to 3
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=27, Reduced K from 5 to 2
-[Auto-Tune] Budget=27, Reduced K from 5 to 2
-[Auto-Tune] Budget=27, Reduced K from 5 to 2
-[Auto-Tune] Budget=27, Reduced K from 5 to 2
-[Auto-Tune] Budget=27, Reduced K from 5 to 2
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=2, Reduced K from 2 to 1
-[Auto-Tune] Budget=12, Reduced K from 5 to 1
-[Auto-Tune] Budget=12, Reduced K from 5 to 1
-[Auto-Tune] Budget=12, Reduced K from 5 to 1
-[Auto-Tune] Budget=12, Reduced K from 5 to 1
-[Auto-Tune] Budget=12, Reduced K from 5 to 1
-[Auto-Tune] Budget=18, Reduced K from 5 to 1
-[Auto-Tune] Budget=18, Reduced K from 5 to 1
-[Auto-Tune] Budget=18, Reduced K from 5 to 1
-[Auto-Tune] Budget=18, Reduced K from 5 to 1
-[Auto-Tune] Budget=18, Reduced K from 5 to 1
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=47, Reduced K from 5 to 4
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=20, Reduced K from 5 to 2
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=30, Reduced K from 5 to 3
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=40, Reduced K from 5 to 4
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=37, Reduced K from 5 to 3
-[Auto-Tune] Budget=37, Reduced K from 5 to 3
-[Auto-Tune] Budget=37, Reduced K from 5 to 3
-[Auto-Tune] Budget=37, Reduced K from 5 to 3
-[Auto-Tune] Budget=37, Reduced K from 5 to 3
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=41, Reduced K from 5 to 4
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=36, Reduced K from 5 to 3
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=48, Reduced K from 5 to 4
-[Auto-Tune] Budget=18, Reduced K from 5 to 1
-[Auto-Tune] Budget=18, Reduced K from 5 to 1
-[Auto-Tune] Budget=18, Reduced K from 5 to 1
-[Auto-Tune] Budget=18, Reduced K from 5 to 1
-[Auto-Tune] Budget=18, Reduced K from 5 to 1
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=5, Reduced K from 5 to 1
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=26, Reduced K from 5 to 2
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=39, Reduced K from 5 to 3
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=22, Reduced K from 5 to 2
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=21, Reduced K from 5 to 2
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=32, Reduced K from 5 to 3
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=43, Reduced K from 5 to 4
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=37, Reduced K from 5 to 3
-[Auto-Tune] Budget=37, Reduced K from 5 to 3
-[Auto-Tune] Budget=37, Reduced K from 5 to 3
-[Auto-Tune] Budget=37, Reduced K from 5 to 3
-[Auto-Tune] Budget=37, Reduced K from 5 to 3
-[Auto-Tune] Budget=49, Reduced K from 5 to 4
-[Auto-Tune] Budget=49, Reduced K from 5 to 4
-[Auto-Tune] Budget=49, Reduced K from 5 to 4
-[Auto-Tune] Budget=49, Reduced K from 5 to 4
-[Auto-Tune] Budget=49, Reduced K from 5 to 4
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=35, Reduced K from 5 to 3
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=25, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=24, Reduced K from 5 to 2
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=4, Reduced K from 4 to 1
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=23, Reduced K from 5 to 2
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=34, Reduced K from 5 to 3
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Auto-Tune] Budget=46, Reduced K from 5 to 4
-[Done] 评估完成，已保存至: /home/wangshuo/projects/PROXY/datasets/amazon/results/efficiency/allocation_strategy_comparison_sum.csv
-[2026-08-20 08:52:53] [Task 3] ✅ Amazon SUM 执行完毕！

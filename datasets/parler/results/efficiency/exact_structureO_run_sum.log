@@ -1,0 +1,14 @@
+2026-08-20 07:23:12,796 [INFO] [*] 成功加载真实值配置文件: T_true_ML1_oracle2_probability_ML2_oracle2_probability_sum.json (包含 246 个查询)
+2026-08-20 07:23:13,138 [INFO] [*] dataset=parler, queries=246, workers=16
+2026-08-20 07:23:13,138 [INFO] [*] agg_mode=sum, sum_on=post, sum_col=upvotes
+2026-08-20 07:26:23,340 [INFO] [*] 成功加载真实值配置文件: T_true_ML1_oracle2_probability_ML2_oracle2_probability_sum.json (包含 246 个查询)
+2026-08-20 07:26:23,688 [INFO] [*] dataset=parler, queries=246, workers=16
+2026-08-20 07:26:23,689 [INFO] [*] agg_mode=sum, sum_on=post, sum_col=upvotes
+2026-08-20 07:35:45,387 [INFO] [*] 成功找到 sum_nodes_config: /home/wangshuo/projects/PROXY/datasets/parler/data_graph/sum_nodes_config.json
+2026-08-20 07:35:45,389 [INFO] [*] 成功加载真实值配置文件: T_true_ML1_oracle2_probability_ML2_oracle2_probability_sum.json (包含 246 个查询)
+2026-08-20 07:35:45,737 [INFO] [*] dataset=parler, queries=246, workers=16
+2026-08-20 07:35:45,737 [INFO] [*] agg_mode=sum, sum_on=post, sum_col=upvotes
+2026-08-20 09:16:47,303 [INFO] [*] 成功找到 sum_nodes_config: /home/wangshuo/projects/PROXY/datasets/parler/data_graph/sum_nodes_config.json
+2026-08-20 09:16:47,304 [INFO] [*] 成功加载真实值配置文件: T_true_ML1_oracle2_probability_ML2_oracle2_probability_sum.json (包含 246 个查询)
+2026-08-20 09:16:47,648 [INFO] [*] dataset=parler, queries=246, workers=16
+2026-08-20 09:16:47,648 [INFO] [*] agg_mode=sum, sum_on=post, sum_col=upvotes

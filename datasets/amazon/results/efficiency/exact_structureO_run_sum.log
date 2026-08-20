@@ -1,0 +1,38 @@
+2026-08-20 06:42:38,093 [INFO] ============================================================
+2026-08-20 06:42:38,093 [INFO] Task Started: dataset=amazon_extend, agg_mode=sum
+2026-08-20 06:42:38,093 [INFO] Log file will be saved to: ../../../datasets/amazon/results/efficiency/exact_structureO_run_sum.log
+2026-08-20 06:42:38,093 [INFO] ============================================================
+2026-08-20 06:42:38,093 [INFO] [*] 自动找到 sum_nodes_config: ../../../datasets/amazon/data_graph/sum_nodes_config.json
+2026-08-20 06:42:38,093 [INFO] [*] 成功加载真实值配置文件: T_true_ML3_oracle2_probability_ML2_oracle1_probability_sum.json (包含 181 个查询)
+2026-08-20 06:42:43,496 [INFO] [*] dataset=amazon_extend, queries=181, workers=63
+2026-08-20 06:42:43,496 [INFO] [*] agg_mode=sum, sum_on=product, sum_col=price
+2026-08-20 07:03:48,147 [INFO] ============================================================
+2026-08-20 07:03:48,147 [INFO] Task Started: dataset=amazon_extend, agg_mode=sum
+2026-08-20 07:03:48,147 [INFO] Log file will be saved to: ../../../datasets/amazon/results/efficiency/exact_structureO_run_sum.log
+2026-08-20 07:03:48,147 [INFO] ============================================================
+2026-08-20 07:03:48,147 [INFO] [*] 自动找到 sum_nodes_config: ../../../datasets/amazon/data_graph/sum_nodes_config.json
+2026-08-20 07:03:48,148 [INFO] [*] 成功加载真实值配置文件: T_true_ML3_oracle2_probability_ML2_oracle1_probability_sum.json (包含 181 个查询)
+2026-08-20 07:03:53,673 [INFO] [*] dataset=amazon_extend, queries=181, workers=63
+2026-08-20 07:03:53,673 [INFO] [*] agg_mode=sum, sum_on=product, sum_col=price
+2026-08-20 07:10:37,065 [INFO] ============================================================
+2026-08-20 07:10:37,065 [INFO] Task Started: dataset=amazon_extend, agg_mode=sum
+2026-08-20 07:10:37,065 [INFO] Log file will be saved to: ../../../datasets/amazon/results/efficiency/exact_structureO_run_sum.log
+2026-08-20 07:10:37,065 [INFO] ============================================================
+2026-08-20 07:10:37,065 [INFO] [*] 自动找到 sum_nodes_config: ../../../datasets/amazon/data_graph/sum_nodes_config.json
+2026-08-20 07:10:37,066 [INFO] [*] 成功加载真实值配置文件: T_true_ML3_oracle2_probability_ML2_oracle1_probability_sum.json (包含 181 个查询)
+2026-08-20 07:10:42,452 [INFO] [*] dataset=amazon_extend, queries=181, workers=63
+2026-08-20 07:10:42,453 [INFO] [*] agg_mode=sum, sum_on=product, sum_col=price
+2026-08-20 07:23:12,796 [INFO] [*] 成功加载真实值配置文件: T_true_ML3_oracle2_probability_ML2_oracle1_probability_sum.json (包含 181 个查询)
+2026-08-20 07:23:18,343 [INFO] [*] dataset=amazon, queries=181, workers=16
+2026-08-20 07:23:18,343 [INFO] [*] agg_mode=sum, sum_on=product, sum_col=price
+2026-08-20 07:26:23,331 [INFO] [*] 成功加载真实值配置文件: T_true_ML3_oracle2_probability_ML2_oracle1_probability_sum.json (包含 181 个查询)
+2026-08-20 07:26:28,778 [INFO] [*] dataset=amazon, queries=181, workers=16
+2026-08-20 07:26:28,779 [INFO] [*] agg_mode=sum, sum_on=product, sum_col=price
+2026-08-20 07:35:45,387 [INFO] [*] 成功找到 sum_nodes_config: /home/wangshuo/projects/PROXY/datasets/amazon/data_graph/sum_nodes_config.json
+2026-08-20 07:35:45,389 [INFO] [*] 成功加载真实值配置文件: T_true_ML3_oracle2_probability_ML2_oracle1_probability_sum.json (包含 181 个查询)
+2026-08-20 07:35:51,751 [INFO] [*] dataset=amazon, queries=181, workers=16
+2026-08-20 07:35:51,753 [INFO] [*] agg_mode=sum, sum_on=product, sum_col=price
+2026-08-20 09:16:47,261 [INFO] [*] 成功找到 sum_nodes_config: /home/wangshuo/projects/PROXY/datasets/amazon/data_graph/sum_nodes_config.json
+2026-08-20 09:16:47,262 [INFO] [*] 成功加载真实值配置文件: T_true_ML3_oracle2_probability_ML2_oracle1_probability_sum.json (包含 181 个查询)
+2026-08-20 09:16:52,610 [INFO] [*] dataset=amazon, queries=181, workers=16
+2026-08-20 09:16:52,611 [INFO] [*] agg_mode=sum, sum_on=product, sum_col=price

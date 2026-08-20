@@ -4,11 +4,11 @@ __pycache__/
 .venv/
 venv/
 .ipynb_checkpoints/
-*.csv
+# *.csv
 *.json
 *.pdf
-*.log
-# datasets/*/results/efficiency
+# *.log
+datasets/*/results/efficiency
 datasets/*/results/aggregated_results_count
 datasets/*/results/aggregated_results_sum
 datasets/*/results/structure_estimate_count

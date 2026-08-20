@@ -1,0 +1,12 @@
+2026-08-20 07:23:12,796 [INFO] [*] 成功加载真实值配置文件: T_true_ML1_oracle2_probability_ML2_oracle2_probability_count.json (包含 246 个查询)
+2026-08-20 07:23:13,139 [INFO] [*] dataset=parler, queries=246, workers=16
+2026-08-20 07:23:13,139 [INFO] [*] agg_mode=count, sum_on=None, sum_col=None
+2026-08-20 07:26:23,333 [INFO] [*] 成功加载真实值配置文件: T_true_ML1_oracle2_probability_ML2_oracle2_probability_count.json (包含 246 个查询)
+2026-08-20 07:26:23,684 [INFO] [*] dataset=parler, queries=246, workers=16
+2026-08-20 07:26:23,684 [INFO] [*] agg_mode=count, sum_on=None, sum_col=None
+2026-08-20 07:35:45,388 [INFO] [*] 成功加载真实值配置文件: T_true_ML1_oracle2_probability_ML2_oracle2_probability_count.json (包含 246 个查询)
+2026-08-20 07:35:45,743 [INFO] [*] dataset=parler, queries=246, workers=16
+2026-08-20 07:35:45,743 [INFO] [*] agg_mode=count, sum_on=None, sum_col=None
+2026-08-20 09:16:47,294 [INFO] [*] 成功加载真实值配置文件: T_true_ML1_oracle2_probability_ML2_oracle2_probability_count.json (包含 246 个查询)
+2026-08-20 09:16:47,638 [INFO] [*] dataset=parler, queries=246, workers=16
+2026-08-20 09:16:47,638 [INFO] [*] agg_mode=count, sum_on=None, sum_col=None
