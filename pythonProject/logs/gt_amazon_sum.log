@@ -6,7 +6,9 @@
    • 求和目标: 表=product, 列=price, 作用Label=[12]
 ======================================================================
 [*] 成功加载 181 个待计算查询 (读取自 parler_ans_sum.txt)
-Computing T_true (SUM):   0%|          | 0/181 [00:00<?, ?it/s]Computing T_true (SUM): 100%|██████████| 181/181 [00:00<00:00, 47353.36it/s]
-✅ [完成] amazon (SUM) T_true 已成功保存至:
+[断点续跑] 检测到已有文件，已完成 181/181 条，自动跳过已计算项！
+Computing T_true (SUM):   0%|          | 0/181 [00:00<?, ?it/s]Computing T_true (SUM): 100%|██████████| 181/181 [00:00<00:00, 778634.90it/s]
+
+✅ [全部完成] amazon (SUM) T_true 已实时完整保存至:
 👉 /home/wangshuo/projects/PROXY/datasets/amazon/results/T_true_ML3_oracle2_probability_ML2_oracle1_probability_sum.json
 

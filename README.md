@@ -168,7 +168,10 @@ PROXY/
 
 ---
 
+## 1. One-Click Reproduction
 
+
+You can reproduce the experimental results either by running the master all-in-one script across all datasets or by executing dedicated workload-specific one-click scripts.
 
 > ⚠️ **IMPORTANT NOTE FOR REPRODUCIBILITY:**
 >
@@ -180,12 +183,13 @@ PROXY/
 ```bash
 cd pythonProject/scripts
 chmod +x *.sh
-./run_all_proxy_experiments.sh
+# Get structural matching for all queries in the dataset (without Oracle verification, i.e., ML predicate validation). Only one workload can be selected and run at a time.
+./run_get_all_structural_matching.sh
+
+# EXACT: Obtain GroundTruth
+./run_all_gt.sh
+
 ```
-## 1. One-Click Reproduction
-
-You can reproduce the experimental results either by running the master all-in-one script across all datasets or by executing dedicated workload-specific one-click scripts.
-
 ---
 
 ### 1.1. Master Script (All Workloads & Aggregations)

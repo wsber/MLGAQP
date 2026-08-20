@@ -1,0 +1,13 @@
+======================================================================
+🚀 开始计算 Ground Truth (COUNT) | 数据集: parler
+   • 项目根目录: /home/wangshuo/projects/PROXY
+   • 数据集路径: /home/wangshuo/projects/PROXY/datasets/parler
+   • 谓词 Oracle: ML1_oracle2_probability & ML2_oracle2_probability
+======================================================================
+[*] 成功加载 246 个待计算查询 (读取自 parler_ans.txt)
+[断点续跑] 检测到已有文件，已完成 246/246 条，自动跳过已计算项！
+Computing T_true (COUNT):   0%|          | 0/246 [00:00<?, ?it/s]Computing T_true (COUNT): 100%|██████████| 246/246 [00:00<00:00, 849217.11it/s]
+
+✅ [全部完成] parler (COUNT) T_true 已实时完整保存至:
+👉 /home/wangshuo/projects/PROXY/datasets/parler/results/T_true_ML1_oracle2_probability_ML2_oracle2_probability_count.json
+

@@ -45,6 +45,7 @@ def compute_dataset_ground_truth(base_dir: str, dataset: str, agg_mode: str):
     if not cfg:
         raise ValueError(f"未受支持的数据集: {dataset}，可选: {list(DATASET_PRESETS.keys())}")
 
+    # 动态拼接当前数据集根路径
     dataset_base = os.path.join(base_dir, "datasets", dataset)
     print("=" * 70)
     print(f"🚀 开始计算 Ground Truth ({agg_mode.upper()}) | 数据集: {dataset}")
@@ -65,9 +66,11 @@ def compute_dataset_ground_truth(base_dir: str, dataset: str, agg_mode: str):
         base_dir=base_dir
     )
 
-    # 动态覆盖路径，防止相对路径在不同执行目录下失效
+    # =========================================================================
+    # 【核心防御】：动态覆盖所有路径，特别补全了 id_mapping_path！
+    # =========================================================================
     gt.base_path = dataset_base
-    gt.id_mapping_path = os.path.join(dataset_base, "data_graph", "id_mapping.csv")
+    gt.id_mapping_path = os.path.join(dataset_base, "data_graph", "id_mapping.csv") # <--- 彻底解决问题！
     gt.csv_dir = os.path.join(dataset_base, "csv_data")
     gt.t1_csv_path = os.path.join(dataset_base, "csv_data", f"{cfg['table1']}.csv")
     gt.t2_csv_path = os.path.join(dataset_base, "csv_data", f"{cfg['table2']}.csv")
@@ -75,6 +78,7 @@ def compute_dataset_ground_truth(base_dir: str, dataset: str, agg_mode: str):
     if hasattr(gt, 'table2_csv_path'): gt.table2_csv_path = gt.t2_csv_path
     gt.gt_dir = os.path.join(dataset_base, "ground_truth", "structure_result")
     gt.results_dir = os.path.join(dataset_base, "results")
+    # =========================================================================
 
     # 1. 动态定位 core_nodes_config 文件
     core_candidates = [
@@ -115,35 +119,11 @@ def compute_dataset_ground_truth(base_dir: str, dataset: str, agg_mode: str):
 
     print(f"[*] 成功加载 {len(target_queries)} 个待计算查询 (读取自 {os.path.basename(ans_file_path)})")
 
-    # =========================================================================
-    # 【修改点 1】：提前确定输出 JSON 路径，并读取已有缓存实现“断点续跑”
-    # =========================================================================
-    out_dir = os.path.join(dataset_base, "results")
-    os.makedirs(out_dir, exist_ok=True)
-    out_json_path = os.path.join(out_dir, f"T_true_{cfg['post_oracle_col']}_{cfg['comment_oracle_col']}_{agg_mode}.json")
-
+    # 4. 循环计算 T_true
     all_T_true = {}
-    if os.path.exists(out_json_path):
-        try:
-            with open(out_json_path, "r", encoding="utf-8") as f:
-                loaded = json.load(f)
-            if isinstance(loaded, dict):
-                all_T_true = loaded
-                print(f"[断点续跑] 检测到已有文件，已完成 {len(all_T_true)}/{len(target_queries)} 条，自动跳过已计算项！")
-        except Exception:
-            all_T_true = {}
-
     target_labels = cfg["sum_labels"]
 
-    # 4. 循环计算 T_true 并实时写盘
     for qbase_graph in tqdm(target_queries, desc=f"Computing T_true ({agg_mode.upper()})"):
-        
-        # =====================================================================
-        # 【修改点 2】：跳过已经计算过的 Query
-        # =====================================================================
-        if qbase_graph in all_T_true:
-            continue
-
         gt_candidates_file = [
             os.path.join(dataset_base, "ground_truth", "structure_result", f"{qbase_graph}_matches.csv"),
             os.path.join(dataset_base, "ground_truth", f"{qbase_graph}_matches.csv")
@@ -152,16 +132,11 @@ def compute_dataset_ground_truth(base_dir: str, dataset: str, agg_mode: str):
 
         if not gt_path:
             all_T_true[qbase_graph] = 0.0
-            # 即使为 0 也实时保存
-            with open(out_json_path, "w", encoding="utf-8") as f:
-                json.dump(all_T_true, f, indent=4, ensure_ascii=False)
             continue
 
         qconf = core.get(qbase_graph)
         if not qconf:
             all_T_true[qbase_graph] = 0.0
-            with open(out_json_path, "w", encoding="utf-8") as f:
-                json.dump(all_T_true, f, indent=4, ensure_ascii=False)
             continue
 
         target_uids = []
@@ -171,8 +146,6 @@ def compute_dataset_ground_truth(base_dir: str, dataset: str, agg_mode: str):
 
         if not target_uids and agg_mode == "sum":
             all_T_true[qbase_graph] = 0.0
-            with open(out_json_path, "w", encoding="utf-8") as f:
-                json.dump(all_T_true, f, indent=4, ensure_ascii=False)
             continue
 
         sum_match_cols = [f"u{int(uid)}" for uid in target_uids] if target_uids else None
@@ -189,13 +162,15 @@ def compute_dataset_ground_truth(base_dir: str, dataset: str, agg_mode: str):
         )
         all_T_true[qbase_graph] = float(t_val)
 
-        # =====================================================================
-        # 【修改点 3】：每算完一个 Query，立刻写入 JSON 文件（即时落盘）
-        # =====================================================================
-        with open(out_json_path, "w", encoding="utf-8") as f:
-            json.dump(all_T_true, f, indent=4, ensure_ascii=False)
+    # 5. 导出 JSON 真值文件
+    out_dir = os.path.join(dataset_base, "results")
+    os.makedirs(out_dir, exist_ok=True)
+    out_json_path = os.path.join(out_dir, f"T_true_{cfg['post_oracle_col']}_{cfg['comment_oracle_col']}_{agg_mode}.json")
 
-    print(f"\n✅ [全部完成] {dataset} ({agg_mode.upper()}) T_true 已实时完整保存至:\n👉 {out_json_path}\n")
+    with open(out_json_path, "w", encoding="utf-8") as f:
+        json.dump(all_T_true, f, indent=4, ensure_ascii=False)
+
+    print(f"✅ [完成] {dataset} ({agg_mode.upper()}) T_true 已成功保存至:\n👉 {out_json_path}\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Compute T_true Ground Truth for Subgraph Matching")

@@ -4,6 +4,10 @@ import pandas as pd
 import polars as pl
 from typing import Dict, List
 from tqdm import tqdm
+from pathlib import Path
+
+CURRENT_FILE_DIR = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_FILE_DIR, "../../.."))
 
 class GroundTruthManager:
     """
@@ -18,7 +22,8 @@ class GroundTruthManager:
                  comment_oracle_col: str = "ML2_oracle2_probability",
                  parent_dataset: str = "parler_data",
                  table1: str = "post",      
-                 table2: str = "comment"):
+                 table2: str = "comment",
+                 base_dir: str = None):
         """
         初始化 GroundTruthManager。
 
@@ -33,7 +38,10 @@ class GroundTruthManager:
 
         # --- 集中管理所有路径 ---
         # self.base_path = f"/home/wangshuo/resource/datasets/parler_data/{dataset_name}"
-        self.base_path = f"../../../datasets/{parent_dataset}"
+        # self.base_path = f"../../../datasets/{parent_dataset}"
+        root_path = base_dir if base_dir else DEFAULT_PROJECT_ROOT
+        dataset_folder = parent_dataset if parent_dataset else dataset_name
+        self.base_path = os.path.join(root_path, "datasets", dataset_folder)
         
         safe_post = post_oracle_col.replace("/", "_")
         safe_comment = comment_oracle_col.replace("/", "_")

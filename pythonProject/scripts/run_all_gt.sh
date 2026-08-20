@@ -22,7 +22,7 @@ fi
 
 export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH}"
 
-LOG_DIR="${PROJECT_ROOT}/logs"
+LOG_DIR="${PROJECT_ROOT}/pythonProject/logs"
 mkdir -p "${LOG_DIR}"
 
 SCRIPT_PATH="${PROJECT_ROOT}/pythonProject/src/baseline/EXACT.py"
