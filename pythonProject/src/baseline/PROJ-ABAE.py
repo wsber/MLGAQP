@@ -3,13 +3,65 @@ import ast
 import json
 import math
 import csv
-import random
 import argparse
 import numpy as np
 import pandas as pd
-from typing import Dict, Tuple
+from typing import Dict, Tuple, List
 from tqdm import tqdm
 import concurrent.futures
+import random
+
+# ==============================================================================
+# 必须置于最顶端：防止 ProcessPoolExecutor 与 NumPy/BLAS 发生多线程冲突卡死
+# ==============================================================================
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+
+# 极速近似解析 Proxy，用于分层权重（告别 eval 的极高内存开销）
+def fast_approx_proxy(s):
+    if pd.isna(s): return 1.0
+    if isinstance(s, (int, float)): return float(s)
+    s = str(s).strip()
+    if not s or s in ('[]', 'nan', 'None'): return 1.0
+    s = s.replace('[', '').replace(']', '').replace("'", "").replace('"', '')
+    if not s: return 1.0
+    p = 1.0
+    for x in s.split(','):
+        x = x.strip()
+        if x:
+            try: p *= float(x)
+            except ValueError: pass
+    return p
+
+# 抽中样本时再做精确解析（懒加载）
+def fast_parse_id_list(val):
+    if pd.isna(val): return []
+    if isinstance(val, (list, tuple)): return [str(x) for x in val]
+    if isinstance(val, (int, float)): return [str(int(val))] if not np.isnan(val) else []
+    s = str(val).strip()
+    if not s or s in ("[]", "nan", "None"): return []
+    s = s.replace('[', '').replace(']', '').replace("'", "").replace('"', '')
+    if not s: return []
+    return [x.strip() for x in s.split(',') if x.strip()]
+
+def fast_parse_num_list(val):
+    if pd.isna(val): return []
+    if isinstance(val, (list, tuple)): return [float(x) for x in val if pd.notna(x)]
+    if isinstance(val, (int, float)): return [float(val)]
+    s = str(val).strip()
+    if not s or s in ("[]", "nan", "None"): return []
+    s = s.replace('[', '').replace(']', '').replace("'", "").replace('"', '')
+    if not s: return []
+    res = []
+    for x in s.split(','):
+        x = x.strip()
+        if x:
+            try: res.append(float(x))
+            except ValueError: pass
+    return res
 
 class ProjectionABaeSampler:
     def __init__(self, df: pd.DataFrame, config: dict, T_true: float = None, K: int = 5):
@@ -19,95 +71,37 @@ class ProjectionABaeSampler:
         self.instances = self._prepare_instances(df)
 
     def _prepare_instances(self, df: pd.DataFrame) -> pd.DataFrame:
-        if df.empty: 
-            return pd.DataFrame()
+        if df.empty: return pd.DataFrame()
         df = df.copy()
         
         weight_col = "estimateW" if "estimateW" in df.columns else "a"
         df.rename(columns={weight_col: "a"}, inplace=True)
         df["a"] = pd.to_numeric(df["a"], errors="coerce").fillna(0.0)
 
-        def fast_parse_num_list(val):
-            if pd.isna(val): return []
-            if isinstance(val, (list, tuple)): return [float(x) for x in val if pd.notna(x)]
-            if isinstance(val, (int, float)): return [float(val)]
-            s = str(val).strip()
-            if not s or s in ("[]", "nan", "None"): return []
-            if s.startswith('[') and s.endswith(']'):
-                s = s[1:-1].strip()
-                if not s: return []
-                res = []
-                for x in s.split(','):
-                    x = x.strip().strip("'\"")
-                    if x:
-                        try: res.append(float(x))
-                        except ValueError: pass
-                return res
-            try: return [float(s)]
-            except ValueError: return []
-
-        def compute_proxy_prod(val_str):
-            lst = fast_parse_num_list(val_str)
-            if not lst: return 1.0
-            return float(np.prod(lst))
-
         p_proxy_col = self.config.get("t1_proxy")
         c_proxy_col = self.config.get("t2_proxy")
 
-        p_proxies = df[p_proxy_col].apply(compute_proxy_prod) if (p_proxy_col and p_proxy_col in df.columns) else 1.0
-        c_proxies = df[c_proxy_col].apply(compute_proxy_prod) if (c_proxy_col and c_proxy_col in df.columns) else 1.0
+        # 仅对 proxy 列做极速解析，生成分层特征
+        p_proxies = df[p_proxy_col].apply(fast_approx_proxy) if (p_proxy_col and p_proxy_col in df.columns) else 1.0
+        c_proxies = df[c_proxy_col].apply(fast_approx_proxy) if (c_proxy_col and c_proxy_col in df.columns) else 1.0
 
         df["proxy"] = p_proxies * c_proxies
 
-        cols_to_keep = ["a", "proxy"]
-        optional_cols = [
-            self.config.get("t1_oracle"), self.config.get("t2_oracle"), 
-            "post_id_list", "product_id_list", "comment_id_list", "review_id_list"
-        ]
-        for c in optional_cols:
-            if c and c in df.columns:
-                cols_to_keep.append(c)
+        # 保留极少量的原始字符串列，绝不提前拆 list，彻底释放内存
+        id1_col = "post_id_list" if "post_id_list" in df.columns else "product_id_list"
+        id2_col = "comment_id_list" if "comment_id_list" in df.columns else "review_id_list"
+        self.id1_col, self.id2_col = id1_col, id2_col
 
-        return df[df["a"] > 0][cols_to_keep].reset_index(drop=True)
+        cols_to_keep = ["a", "proxy", id1_col, id2_col]
+        for c in [self.config.get("t1_oracle"), self.config.get("t2_oracle")]:
+            if c and c in df.columns: cols_to_keep.append(c)
+
+        return df[df["a"] > 0][list(set(cols_to_keep))].reset_index(drop=True)
 
     def _eval_oracle_strict(self, row: pd.Series, oracle_cache: Dict, budget_used: int, budget_limit: int) -> Tuple[int, int, bool]:
-        def fast_parse_id_list(val):
-            if pd.isna(val): return []
-            if isinstance(val, (list, tuple)): return [str(x) for x in val]
-            if isinstance(val, (int, float)): return [str(int(val))] if not np.isnan(val) else []
-            s = str(val).strip()
-            if not s or s in ("[]", "nan", "None"): return []
-            if s.startswith('[') and s.endswith(']'):
-                s = s[1:-1].strip()
-                if not s: return []
-                return [x.strip().strip("'\"") for x in s.split(',') if x.strip()]
-            return [s]
-
-        def fast_parse_num_list(val):
-            if pd.isna(val): return []
-            if isinstance(val, (list, tuple)): return [float(x) for x in val if pd.notna(x)]
-            if isinstance(val, (int, float)): return [float(val)]
-            s = str(val).strip()
-            if not s or s in ("[]", "nan", "None"): return []
-            if s.startswith('[') and s.endswith(']'):
-                s = s[1:-1].strip()
-                if not s: return []
-                res = []
-                for x in s.split(','):
-                    x = x.strip().strip("'\"")
-                    if x:
-                        try: res.append(float(x))
-                        except ValueError: pass
-                return res
-            try: return [float(s)]
-            except ValueError: return []
-
-        id1_col = "post_id_list" if "post_id_list" in row else "product_id_list"
-        id2_col = "comment_id_list" if "comment_id_list" in row else "review_id_list"
-
-        t1_ids = fast_parse_id_list(row.get(id1_col))
-        t2_ids = fast_parse_id_list(row.get(id2_col))
-        
+        """【懒加载验证】：抽中了才解析这几行，毫秒级响应"""
+        t1_ids = fast_parse_id_list(row.get(self.id1_col))
+        t2_ids = fast_parse_id_list(row.get(self.id2_col))
         t1_probs = fast_parse_num_list(row.get(self.config.get("t1_oracle")))
         t2_probs = fast_parse_num_list(row.get(self.config.get("t2_oracle")))
 
@@ -157,7 +151,7 @@ class ProjectionABaeSampler:
         N_total_pop = len(df)
         
         N_rows_budget = max(1, int(math.floor(target_budget_frac * N_total_pop)))
-        N1_pilot = max(self.K * 2, int(math.floor(N_rows_budget * (pilot_ratio if pilot_ratio > 0 else 0.1))))
+        N1_pilot = max(self.K * 2, int(math.floor(N_rows_budget * pilot_ratio)))
         N1_pilot = min(N1_pilot, N_rows_budget)
         N2_stage2 = max(0, N_rows_budget - N1_pilot)
 
@@ -173,6 +167,7 @@ class ProjectionABaeSampler:
         pilot_y_vals = {k: [] for k in strata_groups}
         pilot_sampled_indices = {k: [] for k in strata_groups}
 
+        # --- Stage 1: Pilot ---
         for k, grp in strata_groups.items():
             Nk = len(grp)
             n1_k = min(n1_per_stratum, Nk)
@@ -198,33 +193,23 @@ class ProjectionABaeSampler:
             
             if sigma_hat_k <= 1e-6:
                 prior_sigma = float(np.std(grp["a"] * grp["proxy"]))
-                if prior_sigma <= 1e-6:
-                    prior_sigma = float(np.mean(grp["a"] * grp["proxy"])) * 0.5 + 1e-4
+                if prior_sigma <= 1e-6: prior_sigma = float(np.mean(grp["a"] * grp["proxy"])) * 0.5 + 1e-4
                 smoothed_sigma = max(prior_sigma, 1e-4)
             else:
                 smoothed_sigma = sigma_hat_k
             
-            pilot_stats[k] = {
-                "Nk": Nk, 
-                "n1": len(y_vals),
-                "smoothed_sigma": smoothed_sigma, 
-                "mean_cost": max(mean_cost_k, 0.1)
-            }
+            pilot_stats[k] = {"Nk": Nk, "n1": len(y_vals), "smoothed_sigma": smoothed_sigma, "mean_cost": max(mean_cost_k, 0.1)}
 
+        # --- Stage 2: Allocation & Sampling ---
         alloc_stage2 = {k: 0 for k in strata_groups}
         if not budget_exhausted and N2_stage2 > 0:
-            alloc_weights = {
-                k: ((st["Nk"] - st["n1"]) * st["smoothed_sigma"]) / math.sqrt(st["mean_cost"]) 
-                for k, st in pilot_stats.items()
-            }
+            alloc_weights = {k: ((st["Nk"] - st["n1"]) * st["smoothed_sigma"]) / math.sqrt(st["mean_cost"]) 
+                             for k, st in pilot_stats.items()}
             sum_w = sum(alloc_weights.values())
             if sum_w > 0:
-                for k in pilot_stats:
-                    ratio = alloc_weights[k] / sum_w
-                    alloc_stage2[k] = int(math.floor(N2_stage2 * ratio))
+                for k in pilot_stats: alloc_stage2[k] = int(math.floor(N2_stage2 * (alloc_weights[k] / sum_w)))
             else:
-                for k in pilot_stats:
-                    alloc_stage2[k] = N2_stage2 // actual_K
+                for k in pilot_stats: alloc_stage2[k] = N2_stage2 // actual_K
 
             rem = N2_stage2 - sum(alloc_stage2.values())
             if rem > 0 and sum_w > 0:
@@ -245,7 +230,6 @@ class ProjectionABaeSampler:
                     sampled_grp = remaining_grp.sample(n=n2_k, random_state=rng.integers(0, 1 << 30))
                     for _, row in sampled_grp.iterrows():
                         stage2_pool.append((k, row))
-            
             random.seed(random_seed)
             random.shuffle(stage2_pool)
 
@@ -259,18 +243,15 @@ class ProjectionABaeSampler:
             total_budget_used += calls
             stage2_y_vals[k].append(row["a"] * is_valid)
 
+        # --- Final Estimation ---
         total_sum_hat = 0.0
-
         for k, grp in strata_groups.items():
             Nk = len(grp)
             p_vals = pilot_y_vals[k]
             s2_vals = stage2_y_vals[k]
-            
             n1_k = len(p_vals)
             n2_k = len(s2_vals)
-            
-            if n1_k == 0:
-                continue
+            if n1_k == 0: continue
                 
             y1_sum = sum(p_vals)
             if n2_k > 0:
@@ -278,7 +259,6 @@ class ProjectionABaeSampler:
                 t_hat_k = y1_sum + (Nk - n1_k) * y2_mean
             else:
                 t_hat_k = (Nk / n1_k) * y1_sum
-                
             total_sum_hat += t_hat_k
 
         t_true_safe = self.T_true if self.T_true and self.T_true > 0 else 1e-9
@@ -286,19 +266,18 @@ class ProjectionABaeSampler:
         are = abs(total_sum_hat - t_true_safe) / t_true_safe
 
         return {
-            "T_hat_sum": float(total_sum_hat),
-            "ARE": float(are),
-            "Signed_RE": float(signed_re),
-            "oracle_cost": int(total_budget_used)
+            "T_hat_sum": float(total_sum_hat), "ARE": float(are),
+            "Signed_RE": float(signed_re), "oracle_cost": int(total_budget_used)
         }
 
-def process_single_task(fname, run_id, agg_dir, gt_map, query_budgets, config, pilot_ratio):
+def process_file_all_runs(fname, agg_dir, gt_map, query_budgets, config, pilot_ratio, runs):
+    """【合并 I/O 优化】：读取一次文件，连续跑 10 次 run_id"""
     try:
         q_clean = fname.replace("aggregated_list_", "").replace("aggregated_wide_", "").replace(".csv", "")
         q_basename = q_clean + ".graph"
         T_true = gt_map.get(q_clean)
 
-        if T_true is None: return None
+        if T_true is None: return []
 
         budget_B = query_budgets.get(q_basename, 500)
         filepath = os.path.join(agg_dir, fname)
@@ -306,24 +285,25 @@ def process_single_task(fname, run_id, agg_dir, gt_map, query_budgets, config, p
 
         sampler = ProjectionABaeSampler(df=df, config=config, T_true=T_true, K=config["K"])
         
-        seed = (abs(hash(q_basename)) % 99999999) + run_id * 10007
-
-        res = sampler.run_abae_sum(
-            target_budget_frac=config["budget_frac"],
-            pilot_ratio=pilot_ratio,  
-            budget_B=budget_B,
-            random_seed=seed
-        )
-
-        return {
-            "query_basename": q_basename, "run_id": run_id,
-            "T_hat_abae": res["T_hat_sum"], "T_true": T_true,
-            "Signed_RE": res["Signed_RE"], "ARE": res["ARE"],
-            "oracle_cost": res["oracle_cost"], "budget_limit_B": budget_B
-        }
+        results = []
+        for run_id in range(1, runs + 1):
+            seed = (abs(hash(q_basename)) % 99999999) + run_id * 10007
+            res = sampler.run_abae_sum(
+                target_budget_frac=config["budget_frac"],
+                pilot_ratio=pilot_ratio,  
+                budget_B=budget_B,
+                random_seed=seed
+            )
+            results.append({
+                "query_basename": q_basename, "run_id": run_id,
+                "T_hat_abae": res["T_hat_sum"], "T_true": T_true,
+                "Signed_RE": res["Signed_RE"], "ARE": res["ARE"],
+                "oracle_cost": res["oracle_cost"], "budget_limit_B": budget_B
+            })
+        return results
     except Exception as e:
-        print(f"\n[Error] 处理文件 {fname} (Run {run_id}) 失败: {e}")
-        return None
+        print(f"\n[Error] 处理 {fname} 失败: {e}")
+        return []
 
 def main():
     parser = argparse.ArgumentParser()
@@ -335,18 +315,14 @@ def main():
     parser.add_argument("--K", type=int, default=5)
     parser.add_argument("--runs", type=int, default=10)
     parser.add_argument("--workers", type=int, default=16)
-    
-    # 将 default 设为 None，我们在下面动态赋予它正确的名字
-    parser.add_argument("--out_csv", default=None)
+    parser.add_argument("--out_csv", default="Projection_ABae_results_count.csv")
     args = parser.parse_args()
 
     config = {
         "K": args.K,
         "budget_frac": args.budget_frac,
-        "t1_proxy": "ML1_proxy4b_probability",
-        "t2_proxy": "ML2_proxy1_probability",
-        "t1_oracle": "ML1_oracle2_probability",
-        "t2_oracle": "ML2_oracle2_probability"
+        "t1_proxy": "ML1_proxy4b_probability", "t2_proxy": "ML2_proxy1_probability",
+        "t1_oracle": "ML1_oracle2_probability", "t2_oracle": "ML2_oracle2_probability"
     }
 
     if "amazon" in args.dataset:
@@ -355,27 +331,16 @@ def main():
             "t1_oracle": "ML3_oracle2_probability", "t2_oracle": "ML2_oracle1_probability"
         })
 
-    # =========================================================================
-    # 严格的路径顺序定义（彻底修复 UnboundLocalError）
-    # =========================================================================
     dataset_path = os.path.join(args.base_dir, "datasets", args.dataset)
     results_dir = os.path.join(dataset_path, "results")
     
     agg_dir = os.path.join(results_dir, f"aggregated_results_{args.agg_mode}")
-    if not os.path.exists(agg_dir): 
-        agg_dir = os.path.join(results_dir, "aggregated_results")
+    if not os.path.exists(agg_dir): agg_dir = os.path.join(results_dir, "aggregated_results")
         
     ablation_csv_path = os.path.join(results_dir, "efficiency", f"allocation_strategy_comparison_ablation_{args.agg_mode}.csv")
-    if not os.path.exists(ablation_csv_path): 
-        ablation_csv_path = os.path.join(results_dir, "efficiency", f"allocation_strategy_comparison_{args.agg_mode}.csv")
+    if not os.path.exists(ablation_csv_path): ablation_csv_path = os.path.join(results_dir, "efficiency", f"allocation_strategy_comparison_{args.agg_mode}.csv")
         
-    # 动态确定输出的文件名和路径
-    if args.out_csv:
-        out_csv_name = args.out_csv
-    else:
-        out_csv_name = f"Projection_ABae_{args.dataset}_{args.agg_mode}.csv"
-        
-    out_csv_path = os.path.join(results_dir, "efficiency", out_csv_name)
+    out_csv_path = os.path.join(results_dir, "efficiency", args.out_csv)
 
     gt_cands = [
         os.path.join(results_dir, f"T_true_ML3_oracle2_probability_ML2_oracle1_probability_{args.agg_mode}.json"),
@@ -384,7 +349,7 @@ def main():
     gt_path = next((p for p in gt_cands if os.path.exists(p)), None)
 
     if not gt_path: 
-        print(f"[Error] 未找到对应的 Ground Truth 文件: {results_dir}")
+        print(f"[Error] 未找到 Ground Truth: {results_dir}")
         return
 
     print("=" * 65)
@@ -392,8 +357,7 @@ def main():
     print(f"   数据集: {args.dataset} | 模式: {args.agg_mode.upper()} | Runs: {args.runs}")
     print("=" * 65)
 
-    with open(gt_path, 'r') as f: 
-        gt_dict = json.load(f)
+    with open(gt_path, 'r') as f: gt_dict = json.load(f)
     gt_map = {str(k).replace(".graph", ""): float(v) for k, v in gt_dict.items() if v is not None and v > 0}
 
     query_budgets = {}
@@ -415,20 +379,18 @@ def main():
         writer.writeheader()
 
     completed_cnt = 0
-    total_tasks = len(agg_files) * args.runs
+    print(f"🚀 开始多进程独立评估 (Workers = {args.workers}, Tasks = {len(agg_files)} Files * {args.runs} Runs)...\n")
 
-    print(f"🚀 开始多进程独立评估 (Workers = {args.workers}, Tasks = {total_tasks})...\n")
-
+    # 【核心优化】：按文件粒度派发任务，子进程内部跑 10 次 run_id
     with concurrent.futures.ProcessPoolExecutor(max_workers=args.workers) as executor:
-        futures = {executor.submit(process_single_task, fname, r, agg_dir, gt_map, query_budgets, config, args.pilot_ratio): (fname, r) 
-                   for fname in agg_files for r in range(1, args.runs + 1)}
+        futures = {executor.submit(process_file_all_runs, fname, agg_dir, gt_map, query_budgets, config, args.pilot_ratio, args.runs): fname for fname in agg_files}
 
-        for future in tqdm(concurrent.futures.as_completed(futures), total=total_tasks, desc="Evaluating", ncols=100):
-            res = future.result()
-            if res:
+        for future in tqdm(concurrent.futures.as_completed(futures), total=len(agg_files), desc="Evaluating Files", ncols=100):
+            res_list = future.result()
+            if res_list:
                 with open(out_csv_path, 'a', newline='', encoding='utf-8') as f:
                     writer = csv.DictWriter(f, fieldnames=fieldnames)
-                    writer.writerow(res)
+                    writer.writerows(res_list)
                     f.flush() 
                 completed_cnt += 1
                 
