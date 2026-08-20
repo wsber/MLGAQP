@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/wangshuo/projects/SubgraphMatching/build/cmake_install.cmake",
+		"/home/wangshuo/projects/SubgraphMatching/build/graph/cmake_install.cmake",
+		"/home/wangshuo/projects/SubgraphMatching/build/matching/cmake_install.cmake",
+		"/home/wangshuo/projects/SubgraphMatching/build/utility/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

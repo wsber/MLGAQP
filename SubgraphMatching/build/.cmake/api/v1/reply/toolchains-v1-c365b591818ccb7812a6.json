@@ -1,0 +1,118 @@
+{
+	"kind" : "toolchains",
+	"toolchains" : 
+	[
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"/home/wangshuo/software/gcc-12.3.0-install/lib/gcc/x86_64-pc-linux-gnu/12.3.0/include",
+						"/usr/local/include",
+						"/home/wangshuo/software/gcc-12.3.0-install/include",
+						"/home/wangshuo/software/gcc-12.3.0-install/lib/gcc/x86_64-pc-linux-gnu/12.3.0/include-fixed",
+						"/usr/include/x86_64-linux-gnu",
+						"/usr/include"
+					],
+					"linkDirectories" : 
+					[
+						"/home/wangshuo/software/gcc-12.3.0-install/lib/gcc/x86_64-pc-linux-gnu/12.3.0",
+						"/home/wangshuo/software/gcc-12.3.0-install/lib64",
+						"/lib/x86_64-linux-gnu",
+						"/lib64",
+						"/usr/lib/x86_64-linux-gnu",
+						"/usr/lib64",
+						"/home/wangshuo/software/gcc-12.3.0-install/lib"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : 
+					[
+						"gcc",
+						"gcc_s",
+						"c",
+						"gcc",
+						"gcc_s"
+					]
+				},
+				"path" : "/home/wangshuo/software/gcc-12.3.0-install/bin/gcc",
+				"version" : "12.3.0"
+			},
+			"language" : "C",
+			"sourceFileExtensions" : 
+			[
+				"c",
+				"m"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"/home/wangshuo/software/gcc-12.3.0-install/include/c++/12.3.0",
+						"/home/wangshuo/software/gcc-12.3.0-install/include/c++/12.3.0/x86_64-pc-linux-gnu",
+						"/home/wangshuo/software/gcc-12.3.0-install/include/c++/12.3.0/backward",
+						"/home/wangshuo/software/gcc-12.3.0-install/lib/gcc/x86_64-pc-linux-gnu/12.3.0/include",
+						"/usr/local/include",
+						"/home/wangshuo/software/gcc-12.3.0-install/include",
+						"/home/wangshuo/software/gcc-12.3.0-install/lib/gcc/x86_64-pc-linux-gnu/12.3.0/include-fixed",
+						"/usr/include/x86_64-linux-gnu",
+						"/usr/include"
+					],
+					"linkDirectories" : 
+					[
+						"/home/wangshuo/software/gcc-12.3.0-install/lib/gcc/x86_64-pc-linux-gnu/12.3.0",
+						"/home/wangshuo/software/gcc-12.3.0-install/lib64",
+						"/lib/x86_64-linux-gnu",
+						"/lib64",
+						"/usr/lib/x86_64-linux-gnu",
+						"/usr/lib64",
+						"/home/wangshuo/software/gcc-12.3.0-install/lib"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : 
+					[
+						"stdc++",
+						"m",
+						"gcc_s",
+						"gcc",
+						"c",
+						"gcc_s",
+						"gcc"
+					]
+				},
+				"path" : "/home/wangshuo/software/gcc-12.3.0-install/bin/g++",
+				"version" : "12.3.0"
+			},
+			"language" : "CXX",
+			"sourceFileExtensions" : 
+			[
+				"C",
+				"M",
+				"c++",
+				"cc",
+				"cpp",
+				"cxx",
+				"mm",
+				"mpp",
+				"CPP",
+				"ixx",
+				"cppm",
+				"ccm",
+				"cxxm",
+				"c++m"
+			]
+		}
+	],
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}

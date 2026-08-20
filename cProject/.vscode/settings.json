@@ -1,0 +1,116 @@
+{
+    "files.associations": {
+        "any": "cpp",
+        "array": "cpp",
+        "atomic": "cpp",
+        "bit": "cpp",
+        "cctype": "cpp",
+        "charconv": "cpp",
+        "chrono": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "codecvt": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "exception": "cpp",
+        "algorithm": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "numeric": "cpp",
+        "optional": "cpp",
+        "random": "cpp",
+        "ratio": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "format": "cpp",
+        "fstream": "cpp",
+        "initializer_list": "cpp",
+        "iomanip": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "new": "cpp",
+        "numbers": "cpp",
+        "ostream": "cpp",
+        "span": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "typeinfo": "cpp",
+        "variant": "cpp",
+        "strstream": "cpp",
+        "cfenv": "cpp",
+        "complex": "cpp",
+        "condition_variable": "cpp",
+        "source_location": "cpp",
+        "mutex": "cpp",
+        "semaphore": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp",
+        "cinttypes": "cpp",
+        "stdfloat": "cpp"
+    },
+
+    "cmake.cmakePath": "/home/wangshuo/software/anaconda3/bin/cmake",
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.generator": "Unix Makefiles",
+    
+    "cmake.configureSettings": {
+        "CMAKE_C_COMPILER": "/home/wangshuo/software/gcc-12.3.0-install/bin/gcc",
+        "CMAKE_CXX_COMPILER": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++",
+        // ✅ 3️⃣：使用系统 make 或 conda make 均可
+        // 如果你用 `conda install make`，则可以改成:
+        "CMAKE_MAKE_PROGRAM": "/home/wangshuo/software/anaconda3/bin/make",
+        // ✅ 4️⃣：下面所有库路径都改为 conda 环境目录
+        "GSL_INCLUDE_DIR": "/home/wangshuo/software/anaconda3/include",
+        "GSL_LIBRARY": "/home/wangshuo/software/anaconda3/lib/libgsl.so",
+        "GSL_CBLAS_LIBRARY": "/home/wangshuo/software/anaconda3/lib/libgslcblas.so",
+        "BOOST_ROOT": "/home/wangshuo/software/anaconda3",
+        "BOOST_INCLUDEDIR": "/home/wangshuo/software/anaconda3/include",
+        "BOOST_LIBRARYDIR": "/home/wangshuo/software/anaconda3/lib"
+    },
+
+    "cmake.configureEnvironment": {
+        "PATH": "/home/wangshuo/software/anaconda3/bin:/home/wangshuo/software/gcc-12.3.0-install/bin:/usr/bin:${env:PATH}",
+        "LD_LIBRARY_PATH": "/home/wangshuo/software/anaconda3/lib:${env:LD_LIBRARY_PATH}"
+    },
+
+    // ✅ 6️⃣：如果 make 使用 conda 版本，也改这里
+    "cmake.cmakeBuildProgram": "/home/wangshuo/software/anaconda3/bin/make",
+
+    "remote.SSH.remotePlatform": {
+        "10.70.10.208": "linux",
+        "10.70.13.184": "linux",
+        "10.70.30.222": "linux"
+    },
+
+    "terminal.integrated.shellArgs.linux": ["-l"],
+    "remote.SSH.useLocalServer": false,
+
+    "cmake.debugConfig": {
+        "MIMode": "gdb",
+        "miDebuggerPath": "/home/wangshuo/software/anaconda3/bin/gdb"
+    }
+}
+

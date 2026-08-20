@@ -1,0 +1,110 @@
+[
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/graph",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++ -Dgraph_EXPORTS -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -fPIC -o CMakeFiles/graph.dir/graph.cpp.o -c /home/wangshuo/projects/SubgraphMatching/graph/graph.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/graph/graph.cpp",
+  "output": "graph/CMakeFiles/graph.dir/graph.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/matching",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -o CMakeFiles/SubgraphMatching.out.dir/matchingcommand.cpp.o -c /home/wangshuo/projects/SubgraphMatching/matching/matchingcommand.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/matching/matchingcommand.cpp",
+  "output": "matching/CMakeFiles/SubgraphMatching.out.dir/matchingcommand.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/matching",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -o CMakeFiles/SubgraphMatching.out.dir/FilterVertices.cpp.o -c /home/wangshuo/projects/SubgraphMatching/matching/FilterVertices.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/matching/FilterVertices.cpp",
+  "output": "matching/CMakeFiles/SubgraphMatching.out.dir/FilterVertices.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/matching",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -o CMakeFiles/SubgraphMatching.out.dir/BuildTable.cpp.o -c /home/wangshuo/projects/SubgraphMatching/matching/BuildTable.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/matching/BuildTable.cpp",
+  "output": "matching/CMakeFiles/SubgraphMatching.out.dir/BuildTable.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/matching",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -o CMakeFiles/SubgraphMatching.out.dir/GenerateQueryPlan.cpp.o -c /home/wangshuo/projects/SubgraphMatching/matching/GenerateQueryPlan.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/matching/GenerateQueryPlan.cpp",
+  "output": "matching/CMakeFiles/SubgraphMatching.out.dir/GenerateQueryPlan.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/matching",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -o CMakeFiles/SubgraphMatching.out.dir/EvaluateQuery.cpp.o -c /home/wangshuo/projects/SubgraphMatching/matching/EvaluateQuery.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/matching/EvaluateQuery.cpp",
+  "output": "matching/CMakeFiles/SubgraphMatching.out.dir/EvaluateQuery.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/matching",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -o CMakeFiles/SubgraphMatching.out.dir/GenerateFilteringPlan.cpp.o -c /home/wangshuo/projects/SubgraphMatching/matching/GenerateFilteringPlan.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/matching/GenerateFilteringPlan.cpp",
+  "output": "matching/CMakeFiles/SubgraphMatching.out.dir/GenerateFilteringPlan.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/matching",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -o CMakeFiles/SubgraphMatching.out.dir/StudyPerformance.cpp.o -c /home/wangshuo/projects/SubgraphMatching/matching/StudyPerformance.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/matching/StudyPerformance.cpp",
+  "output": "matching/CMakeFiles/SubgraphMatching.out.dir/StudyPerformance.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/matching",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -o CMakeFiles/GraphConverter.out.dir/GraphConverter.cpp.o -c /home/wangshuo/projects/SubgraphMatching/matching/GraphConverter.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/matching/GraphConverter.cpp",
+  "output": "matching/CMakeFiles/GraphConverter.out.dir/GraphConverter.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/matching",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -o CMakeFiles/EdgeListConverter.out.dir/EdgeListToCSR.cpp.o -c /home/wangshuo/projects/SubgraphMatching/matching/EdgeListToCSR.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/matching/EdgeListToCSR.cpp",
+  "output": "matching/CMakeFiles/EdgeListConverter.out.dir/EdgeListToCSR.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/matching",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -o CMakeFiles/ReassignLabel.dir/ReassignLabel.cpp.o -c /home/wangshuo/projects/SubgraphMatching/matching/ReassignLabel.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/matching/ReassignLabel.cpp",
+  "output": "matching/CMakeFiles/ReassignLabel.dir/ReassignLabel.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/matching",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++  -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -o CMakeFiles/SelectEdge.dir/SelectEdge.cpp.o -c /home/wangshuo/projects/SubgraphMatching/matching/SelectEdge.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/matching/SelectEdge.cpp",
+  "output": "matching/CMakeFiles/SelectEdge.dir/SelectEdge.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/utility",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++ -Dutility_EXPORTS -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -fPIC -o CMakeFiles/utility.dir/graphoperations.cpp.o -c /home/wangshuo/projects/SubgraphMatching/utility/graphoperations.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/utility/graphoperations.cpp",
+  "output": "utility/CMakeFiles/utility.dir/graphoperations.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/utility",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++ -Dutility_EXPORTS -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -fPIC -o CMakeFiles/utility.dir/commandparser.cpp.o -c /home/wangshuo/projects/SubgraphMatching/utility/commandparser.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/utility/commandparser.cpp",
+  "output": "utility/CMakeFiles/utility.dir/commandparser.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/utility",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++ -Dutility_EXPORTS -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -fPIC -o CMakeFiles/utility.dir/computesetintersection.cpp.o -c /home/wangshuo/projects/SubgraphMatching/utility/computesetintersection.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/utility/computesetintersection.cpp",
+  "output": "utility/CMakeFiles/utility.dir/computesetintersection.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/utility",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++ -Dutility_EXPORTS -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -fPIC -o CMakeFiles/utility.dir/bitsetoperation.cpp.o -c /home/wangshuo/projects/SubgraphMatching/utility/bitsetoperation.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/utility/bitsetoperation.cpp",
+  "output": "utility/CMakeFiles/utility.dir/bitsetoperation.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/utility",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++ -Dutility_EXPORTS -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -fPIC -o CMakeFiles/utility.dir/han/intersection_algos.cpp.o -c /home/wangshuo/projects/SubgraphMatching/utility/han/intersection_algos.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/utility/han/intersection_algos.cpp",
+  "output": "utility/CMakeFiles/utility.dir/han/intersection_algos.cpp.o"
+},
+{
+  "directory": "/home/wangshuo/projects/SubgraphMatching/build/utility",
+  "command": "/home/wangshuo/software/gcc-12.3.0-install/bin/g++ -Dutility_EXPORTS -I/home/wangshuo/projects/SubgraphMatching  -std=c++11 -O3 -g -Wall -march=native -pthread -g -fPIC -o CMakeFiles/utility.dir/han/utils/util.cpp.o -c /home/wangshuo/projects/SubgraphMatching/utility/han/utils/util.cpp",
+  "file": "/home/wangshuo/projects/SubgraphMatching/utility/han/utils/util.cpp",
+  "output": "utility/CMakeFiles/utility.dir/han/utils/util.cpp.o"
+}
+]
