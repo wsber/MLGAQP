@@ -85,9 +85,9 @@ Query graphs $Q$ are generated via **Random Walks** on the data graph, with aggr
   * **`Parler` / `Parler-E`:** The `upvotes` attribute of a `post` vertex.
   * **`Amazon`:** The `price` or `rating` attribute of a `product` vertex.
 * **Query Scale & Predicate Configurations:**
-  * **`Parler`:** Contains **245** single-predicate queries ($|V(Q)| \in [4, 8]$, $k=1$), with the predicate randomly assigned to 1 `post` or `comment` vertex.
-  * **`Parler-E`:** Contains **115** multi-predicate composite queries ($|V(Q)| \in [4, 8]$, $k \ge 2$), with predicates simultaneously assigned to at least 1 `post` vertex and at least 1 `comment` vertex.
-  * **`Amazon`:** Contains **750** multimodal composite multi-predicate queries ($|V(Q)| \in [3, 8]$, $k \ge 2$), with predicates assigned to at least 1 `product` image vertex and at least 1 `review` text vertex.
+  * **`Parler`:** Contains **~245** single-predicate queries ($|V(Q)| \in [4, 8]$, $k=1$), with the predicate randomly assigned to 1 `post` or `comment` vertex.
+  * **`Parler-E`:** Contains **~115** multi-predicate composite queries ($|V(Q)| \in [4, 8]$, $k \ge 2$), with predicates simultaneously assigned to at least 1 `post` vertex and at least 1 `comment` vertex.
+  * **`Amazon`:** Contains **~750** multimodal composite multi-predicate queries ($|V(Q)| \in [3, 8]$, $k \ge 2$), with predicates assigned to at least 1 `product` image vertex and at least 1 `review` text vertex.
 
 ---
 
