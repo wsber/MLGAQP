@@ -1,3 +1,4 @@
 dataset_name,method,agg_mode,num_queries,mean_are,avg_total_cost
 amazon,WO,sum,181,0.019544726145270287,1047.9944751381215
 amazon_extend,WO,sum,181,0.019544726145270287,1047.9944751381215
+amazon_extend,WO,sum,181,0.01946118905735503,1047.7016574585634

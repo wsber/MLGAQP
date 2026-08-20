@@ -1,3 +1,4 @@
 dataset_name,method,agg_mode,num_queries,mean_are,avg_total_cost
 parler-E,WO,sum,113,0.08009259017944145,3322.6814159292035
 dataset_test,WO,sum,113,0.08009259017944145,3322.6814159292035
+dataset_test,WO,sum,113,0.07842916854392026,3317.1238938053098

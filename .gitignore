@@ -4,6 +4,11 @@ __pycache__/
 .venv/
 venv/
 .ipynb_checkpoints/
+*.csv
+*.json
+*.pdf
+*.log
+# datasets/*/results/efficiency
 datasets/*/results/aggregated_results_count
 datasets/*/results/aggregated_results_sum
 datasets/*/results/structure_estimate_count
@@ -14,6 +19,4 @@ datasets/*/ground_truth/structure_result
 # parler_data/
 # amazon_data/
 # datasets/
-# *.csv
-*.json
-*.pdf
+
