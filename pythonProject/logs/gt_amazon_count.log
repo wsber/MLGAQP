@@ -1,13 +1,0 @@
-======================================================================
-🚀 开始计算 Ground Truth (COUNT) | 数据集: amazon
-   • 项目根目录: /home/wangshuo/projects/PROXY
-   • 数据集路径: /home/wangshuo/projects/PROXY/datasets/amazon
-   • 谓词 Oracle: ML3_oracle2_probability & ML2_oracle1_probability
-======================================================================
-[*] 成功加载 764 个待计算查询 (读取自 parler_ans_count.txt)
-[断点续跑] 检测到已有文件，已完成 764/764 条，自动跳过已计算项！
-Computing T_true (COUNT):   0%|          | 0/764 [00:00<?, ?it/s]Computing T_true (COUNT): 100%|██████████| 764/764 [00:00<00:00, 869356.55it/s]
-
-✅ [全部完成] amazon (COUNT) T_true 已实时完整保存至:
-👉 /home/wangshuo/projects/PROXY/datasets/amazon/results/T_true_ML3_oracle2_probability_ML2_oracle1_probability_count.json
-

@@ -2,7 +2,7 @@
 
 # Proxy-Guided Sampling for Approximate Graph Aggregation with Machine Learning Predicates
 
-# Evaluation & Reproduction Guide ( V-0.95 Continuously Updated...)
+# Evaluation & Reproduction Guide ( V-0.99 Continuously Updated...)
 
 This repository provides the complete code and configuration required to reproduce all experimental results reported in the paper. Users can choose to **fully automate the reproduction via a master script** or **execute the pipeline step-by-step by module**.
 
@@ -170,7 +170,6 @@ PROXY/
 
 ## 1. One-Click Reproduction
 
-
 You can reproduce the experimental results either by running the master all-in-one script across all datasets or by executing dedicated workload-specific one-click scripts.
 
 > ⚠️ **IMPORTANT NOTE FOR REPRODUCIBILITY:**
@@ -189,6 +188,8 @@ chmod +x *.sh
 # EXACT: Obtain GroundTruth
 ./run_all_gt.sh
 
+# Baseline ENUM: For details, please refer to Algorithm One in Paper
+./run_enum.sh
 ```
 ---
 
@@ -221,9 +222,7 @@ cd pythonProject/scripts
 # 2. Grant execution permission
 chmod +x *.sh
 
-
 # 3. Execute the one-click script
-
 
 # RQ-Specific Reproduction Scripts (RQ1 – RQ4)
 
@@ -252,6 +251,9 @@ chmod +x *.sh
 
 #  baseline - in rebuttal:  Projection space + cascade filter (SUPG.ScaleDoc style). Visualize in `pythonProject/src/RQs_plots/Rebuttal_exp_result.ipynb` 
 ./run_Pro_Cacade_Filter.sh 
+
+
+./run_all_avg.sh
 
 # 4. Execuate Single workload test
 

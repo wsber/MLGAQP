@@ -2,25 +2,16 @@ import os
 import re
 import json
 import zlib
-import sys
-import argparse
-import traceback
-import logging
-from pathlib import Path
-from typing import Dict, List, Tuple
-from concurrent.futures import ProcessPoolExecutor, as_completed
 import numpy as np
 import pandas as pd
 import polars as pl
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from typing import Dict, List, Tuple
+import sys
+import argparse
 from tqdm.auto import tqdm
-
-# =========================================================================
-# 1. 动态自动定位项目根目录
-# =========================================================================
-CURRENT_FILE_DIR = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_FILE_DIR, "../../.."))
-if DEFAULT_PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, DEFAULT_PROJECT_ROOT)
+import traceback
+import logging  
 
 PROB_THRESHOLD = 0.5
 
@@ -38,6 +29,7 @@ WORKER_SUM_COL = None
 
 def stable_seed(text: str) -> int:
     return zlib.adler32(text.encode("utf-8")) & 0xFFFFFFFF
+
 
 def load_role_resources(base_dir: str, role_rules: Dict[str, dict], agg_mode: str, sum_on: str, sum_col: str):
     idmap_path = os.path.join(base_dir, "data_graph", "id_mapping.csv")
@@ -103,9 +95,9 @@ def load_role_resources(base_dir: str, role_rules: Dict[str, dict], agg_mode: st
     return id_to_meta, oracle_prob_maps, value_map
 
 def load_json_config(file_path: str):
-    if not file_path or not os.path.exists(file_path):
+    if not os.path.exists(file_path):
         return None
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, "r") as f:
         return json.load(f)
 
 def locate_gt_path(gt_dir: str, qbase: str):
@@ -116,12 +108,13 @@ def locate_gt_path(gt_dir: str, qbase: str):
         os.path.join(gt_dir, qbase),
     ]
     for p in candidates:
-        if os.path.exists(p): return p
+        if os.path.exists(p):
+            return p
 
-    if os.path.exists(gt_dir):
-        for fname in os.listdir(gt_dir):
-            p = os.path.join(gt_dir, fname)
-            if qbase in fname and os.path.isfile(p): return p
+    for fname in os.listdir(gt_dir):
+        p = os.path.join(gt_dir, fname)
+        if qbase in fname and os.path.isfile(p):
+            return p
     return None
 
 def resolve_match_cols(qbase: str, gt_columns: List[str], config: Dict):
@@ -146,7 +139,8 @@ def resolve_match_cols(qbase: str, gt_columns: List[str], config: Dict):
     cols = [f"u{vid}" for vid in vids]
     return [c for c in cols if c in gt_columns]
 
-def init_worker(base_dir: str, prob_threshold: float, agg_mode: str, sum_on: str, sum_col: str, sum_cfg_path: str, core_cfg_path: str, role_rules: dict):
+def init_worker(base_dir: str, prob_threshold: float, agg_mode: str, sum_on: str, sum_col: str, sum_cfg_path: str, role_rules: dict):
+    
     os.environ["POLARS_MAX_THREADS"] = "1"
     
     global WORKER_ID_TO_META, WORKER_ORACLE_PROB_MAPS, WORKER_CORE_CFG, WORKER_SUM_CFG
@@ -161,9 +155,8 @@ def init_worker(base_dir: str, prob_threshold: float, agg_mode: str, sum_on: str
         base_dir, role_rules, agg_mode, sum_on, sum_col
     )
     
-    WORKER_CORE_CFG = load_json_config(core_cfg_path)
+    WORKER_CORE_CFG = load_json_config(os.path.join(base_dir, "data_graph", "core_nodes_config_sum.json"))
     
-    # 【核心修复】：在子进程中正确加载 sum_nodes_config.json
     if agg_mode == "sum" and sum_cfg_path:
         WORKER_SUM_CFG = load_json_config(sum_cfg_path)
     else:
@@ -189,7 +182,9 @@ def eval_row_short_circuit(
 
         role = meta["type"]
         if role not in role_rules: continue
+
         items.append((role, meta["orig_id"], int(role_rules[role]["cost"])))
+
 
     role_names = list(role_rules.keys())
     role_priority = {r: i for i, r in enumerate(role_names)}
@@ -199,6 +194,7 @@ def eval_row_short_circuit(
 
     for role, orig_id, cost in items:
         key = (role, orig_id)
+
         if key in oracle_cache:
             ok = oracle_cache[key]
         else:
@@ -209,6 +205,7 @@ def eval_row_short_circuit(
             ok = prob > prob_threshold
             oracle_cache[key] = ok
             budget_left -= cost
+
             calls[role] += 1
 
         if not ok: return 0, calls, budget_left
@@ -227,26 +224,21 @@ def process_one_query(qbase: str, tasks: List[dict], gt_dir: str, seed: int, max
         core_cols = resolve_match_cols(qbase, preview_cols, WORKER_CORE_CFG)
         if not core_cols: return []
 
-        # =========================================================================
-        # 【核心修复】：优先使用 sum_nodes_config.json 解析出求和节点列 (例如 u2)
-        # =========================================================================
         sum_cols = []
         if WORKER_AGG_MODE == "sum":
             if WORKER_SUM_CFG and (qbase in WORKER_SUM_CFG or qbase+".graph" in WORKER_SUM_CFG):
                 cfg_entry = WORKER_SUM_CFG.get(qbase) or WORKER_SUM_CFG.get(qbase+".graph")
                 vids = []
                 for lbl, v_list in cfg_entry.items():
-                    if isinstance(v_list, list):
-                        vids.extend(v_list)
-                    else:
-                        vids.append(v_list)
-                sum_cols = [f"u{vid}" for vid in vids if f"u{vid}" in preview_cols]
+                    vids.extend(v_list)
+                sum_cols = [f"u{vid}" for vid in vids]
             else:
-                # 兼容回退方案
                 if len(core_cols) == 1:
                     sum_cols = [core_cols[0]]
                 else:
-                    sum_cols = core_cols
+                    return [] 
+
+            sum_cols = [c for c in sum_cols if c in preview_cols]
 
         all_cols_to_load = list(set(core_cols + sum_cols))
         if not all_cols_to_load: return []
@@ -256,6 +248,7 @@ def process_one_query(qbase: str, tasks: List[dict], gt_dir: str, seed: int, max
         except Exception: return []
 
         if exact_df.height == 0: return []
+        
         
         exact_np = exact_df.to_numpy()
         N_exact = exact_np.shape[0]
@@ -348,12 +341,13 @@ def process_one_query(qbase: str, tasks: List[dict], gt_dir: str, seed: int, max
                 f"n_{r1}": calls_total[r1],
                 f"n_{r2}": calls_total[r2],
                 "oracle_cost": oracle_cost,
-                "method": "Exact_structureO",
+                "method": f"Exact_structureO",
             })
 
         return results
     except Exception as e:
-        logging.error(f"[Worker 错误] {qbase} 处理失败:\n{traceback.format_exc()}")
+        
+        logging.error(f"[Worker 致命错误] {qbase} 处理失败:\n{traceback.format_exc()}")
         return []
 
 def run_exact_structure_uniform_baseline(
@@ -377,59 +371,39 @@ def run_exact_structure_uniform_baseline(
     sum_col: str = None,
     sum_nodes_config: str = None
 ):
-    dataset_base_path = os.path.join(base_dir, "datasets", dataset_name)
-    gt_dir = os.path.join(dataset_base_path, "ground_truth", "structure_result")
-    results_dir = os.path.join(dataset_base_path, "results", "efficiency")
+    gt_dir = os.path.join(base_dir, "ground_truth", "structure_result")
+    results_dir = os.path.join(base_dir, "results", "efficiency")
 
     if source_alloc_csv is None:
-        source_alloc_csv = os.path.join(results_dir, f"allocation_strategy_comparison_{agg_mode}.csv")
+        if agg_mode == "sum":
+            source_alloc_csv = os.path.join(results_dir, f"allocation_strategy_comparison_sum.csv")
+        else:
+            source_alloc_csv = os.path.join(results_dir, "allocation_strategy_comparison_count.csv")
             
     if out_csv is None:
-        out_csv = os.path.join(results_dir, f"Exact_structureO_budget_curve_{agg_mode}.csv")
+        if agg_mode == "sum":
+            out_csv = os.path.join(results_dir, f"Exact_structureO_budget_curve_sum.csv")
+        else:
+            out_csv = os.path.join(results_dir, "Exact_structureO_budget_curve_count.csv")
 
-    # =========================================================================
-    # 【核心修复 1】：准确定位 datasets/{dataset}/data_graph/ 下的配置文件
-    # =========================================================================
-    data_graph_dir = os.path.join(dataset_base_path, "data_graph")
-
-    # 1. 匹配 core_nodes_config
-    if "amazon" in dataset_name.lower():
-        core_cfg_candidates = [
-            os.path.join(data_graph_dir, f"core_nodes_config_{agg_mode}.json"),
-            os.path.join(data_graph_dir, "core_nodes_config.json")
-        ]
-    else:
-        core_cfg_candidates = [
-            os.path.join(data_graph_dir, "core_nodes_config.json"),
-            os.path.join(data_graph_dir, f"core_nodes_config_{agg_mode}.json")
-        ]
-    core_cfg_path = next((p for p in core_cfg_candidates if os.path.exists(p)), None)
-
-    # 2. 匹配 sum_nodes_config.json (准确定位到当前数据集的 data_graph 目录下！)
     if agg_mode == "sum" and not sum_nodes_config:
-        default_sum_cfg = os.path.join(data_graph_dir, "sum_nodes_config.json")
+        default_sum_cfg = os.path.join(base_dir, "data_graph", "sum_nodes_config.json")
         if os.path.exists(default_sum_cfg):
             sum_nodes_config = default_sum_cfg
-            logging.info(f"[*] 成功找到 sum_nodes_config: {sum_nodes_config}")
+            logging.info(f"[*] 自动找到 sum_nodes_config: {sum_nodes_config}")
         else:
-            logging.warning(f"[警告] 未在 {data_graph_dir} 找到 sum_nodes_config.json，将回退为核心节点。")
+            logging.warning("[警告] 未提供 --sum_nodes_config，如果你的查询包含多个 sum 节点，结果将不准确。")
 
-    # 3. 动态匹配 T_true JSON 文件路径
-    o1_col = role_rules[r1]["oracle_col"].replace("/", "_")
-    o2_col = role_rules[r2]["oracle_col"].replace("/", "_")
+    t_true_filename = f"T_true_ML3_oracle2_probability_ML2_oracle1_probability_{agg_mode}.json"
+    # t_true_filename = f"T_true_ML1_oracle2_probability_ML2_oracle2_probability_{agg_mode}.json"
+    t_true_json_path = os.path.join(base_dir, "results", t_true_filename)
     
-    t_true_candidates = [
-        os.path.join(dataset_base_path, "results", f"T_true_{o1_col}_{o2_col}_{agg_mode}.json"),
-        os.path.join(dataset_base_path, "results", f"T_true_{o1_col}_{o2_col}.json")
-    ]
-    t_true_json_path = next((p for p in t_true_candidates if os.path.exists(p)), None)
-    
-    if not t_true_json_path or not os.path.exists(t_true_json_path):
-        raise FileNotFoundError(f"找不到指定的 T_true 缓存文件于: {dataset_base_path}/results/")
+    if not os.path.exists(t_true_json_path):
+        raise FileNotFoundError(f"找不到指定的 T_true 缓存文件: {t_true_json_path}")
         
-    with open(t_true_json_path, "r", encoding="utf-8") as f:
+    with open(t_true_json_path, "r") as f:
         t_true_map = json.load(f)
-    logging.info(f"[*] 成功加载真实值配置文件: {os.path.basename(t_true_json_path)} (包含 {len(t_true_map)} 个查询)")
+    logging.info(f"[*] 成功加载真实值配置文件: {t_true_filename} (包含 {len(t_true_map)} 个查询)")
 
     source_df = pd.read_csv(source_alloc_csv)
     source_df = source_df[source_df["method"] == target_method].copy()
@@ -478,11 +452,10 @@ def run_exact_structure_uniform_baseline(
     os.makedirs(os.path.dirname(out_csv), exist_ok=True)
     pd.DataFrame(columns=headers).to_csv(out_csv, index=False)
 
-    # 【修复】：把定位准确的 sum_nodes_config 路径正式传进每个 Worker
     with ProcessPoolExecutor(
         max_workers=max_workers,
         initializer=init_worker,
-        initargs=(dataset_base_path, prob_threshold, agg_mode, sum_on, sum_col, sum_nodes_config, core_cfg_path, role_rules),
+        initargs=(base_dir, prob_threshold, agg_mode, sum_on, sum_col, sum_nodes_config, role_rules),
     ) as executor:
         future_to_qbase = {}
         for qbase, tasks in tasks_by_query.items():
@@ -498,19 +471,19 @@ def run_exact_structure_uniform_baseline(
             )
             future_to_qbase[fut] = qbase
 
-        for fut in tqdm(as_completed(future_to_qbase), total=len(future_to_qbase), desc=f"Evaluating Exact_structureO ({dataset_name}-{agg_mode})", dynamic_ncols=True):
+        for fut in tqdm(as_completed(future_to_qbase), total=len(future_to_qbase), desc="Queries", dynamic_ncols=True):
             qbase = future_to_qbase[fut]
             try:
                 recs = fut.result()
                 if recs:
                     pd.DataFrame(recs, columns=headers).to_csv(out_csv, mode='a', header=False, index=False)
             except Exception as e:
+                
                 logging.error(f"[WARN] worker抛出异常: {qbase} | {e}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Exact_structureO baseline (count/sum)")
-    parser.add_argument("--base_dir", type=str, default=DEFAULT_PROJECT_ROOT, help="项目根目录")
-    parser.add_argument("--dataset_name", type=str, default="amazon", choices=["amazon", "parler", "parler-E"]) 
+    parser.add_argument("--dataset_name", type=str, default="amazon_extend") 
     parser.add_argument("--source_alloc_csv", type=str, default=None)
     parser.add_argument("--out_csv", type=str, default=None)
     parser.add_argument("--target_method", type=str, default="8_POSSA")
@@ -520,45 +493,33 @@ if __name__ == "__main__":
     parser.add_argument("--prob_threshold", type=float, default=0.5)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--max_trials", type=int, default=None)
-    parser.add_argument("--max_workers", type=int, default=16)
+    parser.add_argument("--max_workers", type=int, default=None)
     
     parser.add_argument("--agg_mode", type=str, default="sum", choices=["count", "sum"])
-    parser.add_argument("--sum_on", type=str, default=None)
-    parser.add_argument("--sum_col", type=str, default=None)
+    parser.add_argument("--sum_on", type=str, default="product", help="Column name mapping (e.g., 'post' or 'product')")
+    parser.add_argument("--sum_col", type=str, default="price", help="Column name to sum, e.g., 'upvotes' or 'price'")
     parser.add_argument("--sum_nodes_config", type=str, default=None)
     
     args = parser.parse_args()
 
-    # 动态设定默认参数
+    
     if "amazon" in args.dataset_name.lower():
+        data_domain = "amazon"
         r1, r2 = "product", "review"
-        t1_oracle = "ML3_oracle2_probability"
-        t2_oracle = "ML2_oracle1_probability"
         if args.agg_mode == "sum" and not args.sum_on:
             args.sum_on = "product"
-            args.sum_col = "price"
-    elif args.dataset_name.lower() == "parler-e":
+            args.sum_col = "average_rating"
+    else:
+        data_domain = "parler"
         r1, r2 = "post", "comment"
-        t1_oracle = "ML1_oracle2_probability"
-        t2_oracle = "ML2_oracle2_probability"
-        if args.agg_mode == "sum" and not args.sum_on:
-            args.sum_on = "post"
-            args.sum_col = "upvotes"
-    else: # parler
-        r1, r2 = "post", "comment"
-        t1_oracle = "ML1_oracle2_probability"
-        t2_oracle = "ML2_oracle2_probability"
         if args.agg_mode == "sum" and not args.sum_on:
             args.sum_on = "post"
             args.sum_col = "upvotes"
 
-    DYNAMIC_ROLE_RULES = {
-        r1: {"cost": args.c1, "oracle_col": t1_oracle},
-        r2: {"cost": args.c2, "oracle_col": t2_oracle},
-    }
-
-    dataset_base = os.path.join(args.base_dir, "datasets", args.dataset_name)
-    log_dir = os.path.join(dataset_base, "results", "efficiency")
+    BASE_DIR = f"../../../datasets/{data_domain}"
+    
+    
+    log_dir = os.path.join(BASE_DIR, "results", "efficiency")
     os.makedirs(log_dir, exist_ok=True)
     log_file_path = os.path.join(log_dir, f"exact_structureO_run_{args.agg_mode}.log")
     
@@ -571,14 +532,32 @@ if __name__ == "__main__":
         ]
     )
     
+    logging.info("=" * 60)
+    logging.info(f"Task Started: dataset={args.dataset_name}, agg_mode={args.agg_mode}")
+    logging.info(f"Log file will be saved to: {log_file_path}")
+    logging.info("=" * 60)
+    
+    DYNAMIC_ROLE_RULES = {
+        r1: {"cost": args.c1, "oracle_col": "ML3_oracle2_probability"},
+        r2: {"cost": args.c2, "oracle_col": "ML2_oracle1_probability"},
+    }
+
+    # DYNAMIC_ROLE_RULES = {
+    #     r1: {"cost": args.c1, "oracle_col": "ML1_oracle2_probability"},
+    #     r2: {"cost": args.c2, "oracle_col": "ML2_oracle2_probability"},
+    # }
+
     if args.target_budget_fracs.strip() == "":
         fracs = None
     else:
         fracs = [float(x.strip()) for x in args.target_budget_fracs.split(",") if x.strip()]
         
+    if args.agg_mode == "sum" and (args.sum_on is None or args.sum_col is None):
+        parser.error("--agg_mode='sum' 要求必须同时指定 --sum_on 和 --sum_col")
+
     run_exact_structure_uniform_baseline(
         dataset_name=args.dataset_name,
-        base_dir=args.base_dir,
+        base_dir=BASE_DIR,
         role_rules=DYNAMIC_ROLE_RULES,
         r1=r1,
         r2=r2,
