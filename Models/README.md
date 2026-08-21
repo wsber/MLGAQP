@@ -55,16 +55,21 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 ---
 
 ### 1.3 NLI - Base Backbone Fine-tuned Models (Fine-tuned from Base Architectures)
-> Fine-tuned from scratch on task-sampled data starting from pure encoder/pretrained base architectures.
 
-| Model ID | Hugging Face Backbone & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Fine-tuning Configuration |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Proxy1_base** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 11.3M | vs O1: 0.7469<br>vs O2: 0.6629 | 0.9133 / 0.3786<br>0.8552 / 0.5616 | 0.8993 / 0.4286<br>0.8606 / 0.5468 | $32 \times (50 \sim 160)$ | - |
-| **Proxy2_base** | [`distilbert/distilbert-base-uncased`](https://huggingface.co/distilbert/distilbert-base-uncased) | 66M | vs O1: 0.7856<br>vs O2: 0.7049 | 0.8951 / 0.5773<br>0.8429 / 0.7220 | 0.9130 / 0.4745<br>0.8909 / 0.5488<br>0.8236 / 0.7066 | $32 \times (45 \sim 140)$ | - |
-| **Proxy3_base** | [`microsoft/deberta-v3-large`](https://huggingface.co/microsoft/deberta-v3-large) | 0.435B | - | - | - | $32 \times (7 \sim 16)$ | - |
-| **Proxy4_base** ⭐ | [`microsoft/deberta-v3-base`](https://huggingface.co/microsoft/deberta-v3-base) | 184M | vs O1: 0.8512<br>vs O2: 0.7716 | 0.9445 / 0.6227<br>0.9253 / 0.7004 | 0.9733 / 0.4639<br>0.9617 / 0.5432<br>0.9166 / 0.7235 | $32 \times (17 \sim 30)$ | Epoch = 8 |
-| **Proxy5_base** | [`microsoft/deberta-v3-small`](https://huggingface.co/microsoft/deberta-v3-small) | 142M | - | - | - | - | - |
-| **Proxy6_base** | [`microsoft/deberta-v3-xsmall`](https://huggingface.co/microsoft/deberta-v3-xsmall) | 70M | vs O1: 0.8093<br>vs O2: 0.7298 | 0.9445 / 0.5172<br>0.8725 / 0.7243 | 0.9279 / 0.4714<br>0.9103 / 0.5482<br>0.8508 / 0.7474 | $32 \times (18 \sim 32)$ | Epoch = 20 |
+> **Note:**  
+> - **HuggingFace Base Backbone & Link**: Official pretrained weights from HuggingFace, **not fine-tuned** on the NLI task.  
+> - **Our Fine-tuned Model & Link**: We fine-tuned these models from the corresponding base backbone on NLI task data.  
+> - Currently uploaded: [`wsber123/deberta-v3-base-binary`](https://huggingface.co/wsber123/deberta-v3-base-binary).  
+>   The remaining fine-tuned models are being uploaded and the links will be added as soon as they are available.
+
+| Model ID | HuggingFace Base Backbone & Link (Pretrained Only) | Our Fine-tuned Model & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Fine-tuning Configuration |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Proxy1_base** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 🚀 Uploading soon | 11.3M | vs O1: 0.7469<br>vs O2: 0.6629 | 0.9133 / 0.3786<br>0.8552 / 0.5616 | 0.8993 / 0.4286<br>0.8606 / 0.5468 | $32 \times (50 \sim 160)$ | - |
+| **Proxy2_base** | [`distilbert/distilbert-base-uncased`](https://huggingface.co/distilbert/distilbert-base-uncased) | 🚀 Uploading soon | 66M | vs O1: 0.7856<br>vs O2: 0.7049 | 0.8951 / 0.5773<br>0.8429 / 0.7220 | 0.9130 / 0.4745<br>0.8909 / 0.5488<br>0.8236 / 0.7066 | $32 \times (45 \sim 140)$ | - |
+| **Proxy3_base** | [`microsoft/deberta-v3-large`](https://huggingface.co/microsoft/deberta-v3-large) | 🚀 Uploading soon | 0.435B | - | - | - | $32 \times (7 \sim 16)$ | - |
+| **Proxy4_base** ⭐ | [`microsoft/deberta-v3-base`](https://huggingface.co/microsoft/deberta-v3-base) | [`wsber123/deberta-v3-base-binary`](https://huggingface.co/wsber123/deberta-v3-base-binary) ✅ | 184M | vs O1: 0.8512<br>vs O2: 0.7716 | 0.9445 / 0.6227<br>0.9253 / 0.7004 | 0.9733 / 0.4639<br>0.9617 / 0.5432<br>0.9166 / 0.7235 | $32 \times (17 \sim 30)$ | Epoch = 8 |
+| **Proxy5_base** | [`microsoft/deberta-v3-small`](https://huggingface.co/microsoft/deberta-v3-small) | 🚀 Uploading soon | 142M | - | - | - | - | - |
+| **Proxy6_base** | [`microsoft/deberta-v3-xsmall`](https://huggingface.co/microsoft/deberta-v3-xsmall) | 🚀 Uploading soon | 70M | vs O1: 0.8093<br>vs O2: 0.7298 | 0.9445 / 0.5172<br>0.8725 / 0.7243 | 0.9279 / 0.4714<br>0.9103 / 0.5482<br>0.8508 / 0.7474 | $32 \times (18 \sim 32)$ | Epoch = 20 |
 
 ---
 
