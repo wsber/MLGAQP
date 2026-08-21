@@ -36,8 +36,10 @@ PYTHON_SCRIPT="${PROJECT_ROOT}/pythonProject/src/baseline/PROJ-ABAE.py"
 
 # 全局运行参数
 RUN_TIMES=10      
-WORKERS=16        
-BUDGET_FRAC=0.1  
+WORKERS=16
+# \Psi sampling budget fraction 
+BUDGET_FRAC=0.1
+#pilot ratio   
 PILOT_RATIO=0.1  
 
 echo "=============================================================================="

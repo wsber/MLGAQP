@@ -6,7 +6,7 @@ venv/
 .ipynb_checkpoints/
 *.csv
 # *.json
-*.pdf
+# *.pdf
 *.log
 datasets/*/results/efficiency
 datasets/*/results/aggregated_results_count
