@@ -39,7 +39,7 @@ run_task() {
             --agg-mode "${agg_mode}" \
             --ablation_csv "${ablation_csv}" \
             --table1 "product" --table1_proxy "ML3_proxy2_probability" --table1_oracle "ML3_oracle2_probability" \
-            --t1_ids "post_id_list" --t1_low 0.2 --t1_high 0.4 \
+            --t1_ids "post_id_list" --t1_low 0.3 --t1_high 0.4 \
             --table2 "review" --table2_proxy "ML2_proxy2_probability" --table2_oracle "ML2_oracle1_probability" \
             --t2_ids "comment_id_list" --t2_low 0.1 --t2_high 0.2 \
             --num_workers ${WORKERS} --out_csv "${out_csv}"
