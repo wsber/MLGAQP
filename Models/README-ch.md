@@ -1,35 +1,32 @@
-Here is the high-quality, professional English translation formatted in Markdown:
 
-***
+#  PROXY Model Zoo: 模型清单与基准测试说明
 
-# PROXY Model Zoo: Model Inventory and Benchmarking Guide
-
-All machine learning (ML) predicate inference tasks in this project rely on a collaborative mechanism between **Oracle models (high-accuracy large models)** and **Proxy models (lightweight proxy small models)**.
+本项目涉及的所有机器学习（ML）谓词推理任务均基于 **Oracle 模型（高精度大模型）** 与 **Proxy 模型（轻量级代理小模型）** 的协同机制。
 
 ---
 
-## Overview and Design Principles
+##  全局说明与设计原则
 
-1. **Oracle Model Sources**: All Oracle models are **downloaded directly from official Hugging Face repositories** off-the-shelf without any downstream task-specific fine-tuning, serving as ground-truth arbiters for generating true labels.
-2. **Proxy Model Categories**: To systematically evaluate the robustness of the PROXY framework across varying proxy quality tiers (including sensitivity analysis and ablation studies), Proxy models are categorized into the following three types:
-   * **Pretrained Models**: General-purpose pretrained models downloaded directly from Hugging Face and used out-of-the-box.
-   * **Task-Specific Fine-tuned Models**: Initialized from Hugging Face checkpoints that already feature corresponding downstream classification heads (e.g., MNLI/SST-2), then lightly fine-tuned on randomly sampled instances (500–1000) from target datasets (e.g., Parler/Amazon) to construct distinct $F_1$ performance tiers.
-   * **Base Backbone Fine-tuned Models**: Fine-tuned on sampled target dataset instances starting from pure architectural backbones (e.g., `bert-mini`, `deberta-v3-base`).
-3. **Benchmarking Environment**: All inference throughput metrics (items/s) were empirically benchmarked on a single **NVIDIA GeForce RTX 3090 GPU (24GB VRAM)** with Batch Size = 32.
+1. **Oracle 模型来源**：所有 Oracle 模型均**直接从 Hugging Face 官方仓库下载**，未经过任何下游任务微调（Off-the-shelf），作为生成真实标签的 Ground Truth 裁判。
+2. **Proxy 模型分类**：为了系统性评估 PROXY 框架在不同代理质量下的鲁棒性（包括敏感性分析与消融实验），Proxy 模型分为以下三类：
+   * **未微调模型 (Pretrained)**：直接从 Hugging Face 下载的通用预训练模型，开箱即用。
+   * **任务特化微调模型 (Finetuned Task-Specific)**：以 Hugging Face 上已具备对应下游任务头（如 MNLI/SST-2）的模型为基座，在目标数据集（如 Parler/Amazon）上随机采样(500-1000)进行轻量级微调，以构造不同阶梯的 $F_1$ 性能分级。
+   * **基础骨干微调模型 (Finetuned from Base)**：以纯架构骨干（如 `bert-mini`, `deberta-v3-base`）为基座，在目标数据集上采样微调。
+3. **测试环境**：所有推理吞吐量（Throughput）均在单张 **NVIDIA GeForce RTX 3090 GPU (24GB VRAM)**、Batch Size = 32 的条件下实测得出。
 
 ---
 
-## 1. NLI (Natural Language Inference / Opinion & Stance Inference)
+## 一、 NLI (自然语言推理 / 观点立场推断)
 
-* **Primary Datasets**: Parler / Parler-E (e.g., inferring whether a post expresses support for or opposition to a specific political stance)
-* **Recommended Configurations**:
-  * **Oracle Model**: **`Oracle2 (deberta-v2-xxlarge-mnli, 1.5B)`** (Primary experimental judge).
-  * **Default Proxy Models**: **`Proxy4_base (deberta-v3-base, 184M)`** or **`Proxy5 (deberta-v3-base-mnli-fever-anli, 86M)`**.
+* **主要应用数据集**：Parler / Parler-E（例如：推断帖子是否表达支持/反对特定政治观点）
+* **推荐配置**：
+  * **Oracle 模型**：推荐使用 **`Oracle2 (deberta-v2-xxlarge-mnli, 1.5B)`**（实验主选裁判）。
+  * **默认 Proxy 模型**：推荐使用 **`Proxy4_base (deberta-v3-base, 184M)`** 或 **`Proxy5 (deberta-v3-base-mnli-fever-anli, 86M)`**。
 
-### 1.1 NLI - Pretrained Models (Off-the-Shelf)
-> Downloaded directly from Hugging Face without dataset-specific fine-tuning.
+### 1.1 NLI - 未微调预训练模型
+> 直接从 Hugging Face 下载，未经过数据集微调。
 
-| Model ID | Hugging Face Repository & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Label Mapping |
+| 模型代号 | Hugging Face 仓库名称与直达链接 | 参数量 | 相对精度 Max($F_1$) | Max(Pre) / Rec | Max(Rec) / Pre | 推理吞吐量 (items/s) | 类别标签映射 (Label Info) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
 | **Oracle0** | [`facebook/bart-large-mnli`](https://huggingface.co/facebook/bart-large-mnli) | 0.4B | - | - | - | $32 \times 2.0$ | Label-0: Contradiction<br>Label-1: Neutral<br>Label-2: Entailment |
 | **Oracle1** | [`microsoft/deberta-v2-xlarge-mnli`](https://huggingface.co/microsoft/deberta-v2-xlarge-mnli) | 0.9B | - | - | - | $32 \times (1.35 \sim 11.0)$ | Label-0: Contradiction<br>Label-1: Neutral<br>Label-2: Entailment |
@@ -41,10 +38,10 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 
 ---
 
-### 1.2 NLI - Task-Specific Fine-tuned Models (Fine-tuned from MNLI Checkpoints)
-> Initialized from models with existing MNLI heads, then fine-tuned on Parler samples to enhance discriminability.
+### 1.2 NLI - 任务特化微调模型 (基于已有的 MNLI 模型微调)
+> 基于带有 MNLI 分类头的模型，在 Parler 样本上进行二次微调以提升区分度。
 
-| Model ID | Hugging Face Backbone & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) |
+| 模型代号 | Hugging Face 仓库基座与链接 | 参数量 | 相对精度 Max($F_1$) | Max(Pre) / Rec | Max(Rec) / Pre | 推理吞吐量 (items/s) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
 | **Proxy1_distil** | [`valhalla/distilbart-mnli-12-6`](https://huggingface.co/valhalla/distilbart-mnli-12-6) | 0.3B | vs O1: 0.8085 | 0.9569 / 0.3179<br>0.8800 / 0.7373 | 0.9425 / 0.3234<br>0.9111 / 0.5724 | $32 \times (11 \sim 30)$ |
 | **Proxy2_distil** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 44M | - | - | - | $32 \times 30.0$ |
@@ -54,10 +51,10 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 
 ---
 
-### 1.3 NLI - Base Backbone Fine-tuned Models (Fine-tuned from Base Architectures)
-> Fine-tuned from scratch on task-sampled data starting from pure encoder/pretrained base architectures.
+### 1.3 NLI - 基础骨干微调模型 (基于 Base 架构微调)
+> 基于纯编码器/预训练 Base 架构，从头在任务采样数据上微调得到。
 
-| Model ID | Hugging Face Backbone & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Fine-tuning Configuration |
+| 模型代号 | Hugging Face 仓库骨干与链接 | 参数量 | 相对精度 Max($F_1$) | Max(Pre) / Rec | Max(Rec) / Pre | 推理吞吐量 (items/s) | 微调配置 (Finetune Config) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Proxy1_base** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 11.3M | vs O1: 0.7469<br>vs O2: 0.6629 | 0.9133 / 0.3786<br>0.8552 / 0.5616 | 0.8993 / 0.4286<br>0.8606 / 0.5468 | $32 \times (50 \sim 160)$ | - |
 | **Proxy2_base** | [`distilbert/distilbert-base-uncased`](https://huggingface.co/distilbert/distilbert-base-uncased) | 66M | vs O1: 0.7856<br>vs O2: 0.7049 | 0.8951 / 0.5773<br>0.8429 / 0.7220 | 0.9130 / 0.4745<br>0.8909 / 0.5488<br>0.8236 / 0.7066 | $32 \times (45 \sim 140)$ | - |
@@ -68,17 +65,17 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 
 ---
 
-## 2. TE / Sentiment Analysis (Text Classification & Sentiment Analysis)
+## 二、 TE / Sentiment Analysis (文本情感分析)
 
-* **Primary Datasets**: Amazon / Parler (e.g., detecting whether user reviews/comments express positive or negative sentiment)
-* **Recommended Configurations**:
-  * **Oracle Model**: **`Oracle2 (howey/roberta-large-sst2, 0.355B)`**.
-  * **Default Proxy Model**: Pretrained **`Proxy2 (bert-mini, 11.3M)`**, offering extreme lightweight efficiency and high throughput (up to $32 \times 160$ items/s).
+* **主要应用数据集**：Amazon / Parler（例如：识别用户评论/留言是否为负面/正面情绪）
+* **推荐配置**：
+  * **Oracle 模型**：推荐使用 **`Oracle2 (howey/roberta-large-sst2, 0.355B)`**。
+  * **默认 Proxy 模型**：推荐使用未经微调的 **`Proxy2 (bert-mini, 11.3M)`**，极致轻量且推理极快（达 $32 \times 160$ it/s）。
 
-### 2.1 TE - Pretrained Models (Off-the-Shelf)
-> High-efficiency sentiment classification models downloaded directly from Hugging Face.
+### 2.1 TE - 未微调预训练模型
+> 直接从 Hugging Face 下载的高效情感分类预训练模型。
 
-| Model ID | Hugging Face Repository & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) |
+| 模型代号 | Hugging Face 仓库名称与直达链接 | 参数量 | 相对精度 Max($F_1$) | Max(Pre) / Rec | Max(Rec) / Pre | 推理吞吐量 (items/s) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
 | **Oracle1** | [`yoshitomo-matsuda/bert-large-uncased-sst2`](https://huggingface.co/yoshitomo-matsuda/bert-large-uncased-sst2) | 0.34B | - | - | - | $32 \times 3.0$ |
 | **Oracle2** ⭐ | [`howey/roberta-large-sst2`](https://huggingface.co/howey/roberta-large-sst2) | **0.355B** | - | - | - | $32 \times 3.0$ |
@@ -89,9 +86,9 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 
 ---
 
-### 2.2 TE - Task-Specific Fine-tuned Models (Fine-tuned from SST-2 Checkpoints)
+### 2.2 TE - 任务特化微调模型 (基于已有的 SST-2 模型微调)
 
-| Model ID | Hugging Face Backbone & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Fine-tuning Configuration |
+| 模型代号 | Hugging Face 仓库基座与链接 | 参数量 | 相对精度 Max($F_1$) | Max(Pre) / Rec | Max(Rec) / Pre | 推理吞吐量 (items/s) | 微调配置 (Finetune Config) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Proxy1_distil** | [`textattack/roberta-base-SST-2`](https://huggingface.co/textattack/roberta-base-SST-2) | 0.125B | vs O1: 0.8667<br>vs O2: 0.9080 | 0.9292 / 0.7681<br>0.9704 / 0.7826 | 0.9804 / 0.5302<br>0.9880 / 0.6653 | $32 \times (28 \sim 79)$ | Epoch=8, Sample=0.1 |
 | **Proxy2_distil** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 11.3M | vs O1: 0.7876<br>vs O2: 0.7954 | 0.8944 / 0.6255<br>0.8838 / 0.6615 | 0.9421 / 0.4646<br>0.9129 / 0.5983 | $32 \times (66 \sim 160)$ | Epoch=15, Sample=0.1 |
@@ -100,9 +97,9 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 
 ---
 
-### 2.3 TE - Base Backbone Fine-tuned Models (Fine-tuned from Base Architectures)
+### 2.3 TE - 基础骨干微调模型 (基于 Base 架构微调)
 
-| Model ID | Hugging Face Backbone & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Fine-tuning Configuration |
+| 模型代号 | Hugging Face 仓库骨干与链接 | 参数量 | 相对精度 Max($F_1$) | Max(Pre) / Rec | Max(Rec) / Pre | 推理吞吐量 (items/s) | 微调配置 (Finetune Config) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Proxy1_base** | [`FacebookAI/roberta-base`](https://huggingface.co/FacebookAI/roberta-base) | 0.125B | vs O1: 0.8622 | 0.9553 / 0.6809<br>0.9484 / 0.7033 | 0.9637 / 0.5841<br>0.9350 / 0.7219 | $32 \times (28 \sim 79)$ | Epoch = 10 |
 | **Proxy2_base** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 11.3M | - | - | - | $32 \times (50 \sim 160)$ | - |
@@ -110,58 +107,58 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 
 ---
 
-## 3. CV (Computer Vision / Image Texture & Product Classification)
+## 三、 CV (计算机视觉 / 图像纹理与商品分类)
 
-* **Primary Dataset**: Amazon (e.g., identifying whether product images exhibit wooden/plastic/metal/fabric/glass textures, or determining product categories)
-* **Usage Methodology**: All models are **used strictly off-the-shelf without any downstream fine-tuning (Zero-Shot / Off-the-shelf)**. Pretrained weights are downloaded directly from Hugging Face, and binary classification is performed by computing image-text similarity via text prompts (e.g., `"a photo of wooden texture"` vs. `"a photo of other texture"`).
-* **Recommended Configurations**:
-  * **Oracle Model**: **`Oracle1 (google/siglip-so400m-patch14-384)`** (Primary experimental judge).
-  * **Default Proxy Model**: **`Proxy1 (google/siglip-base-patch32-224)`**, maintaining $F_1 \approx 0.7546$ while achieving a **$26.8\times$ end-to-end inference speedup**.
+* **主要应用数据集**：Amazon（例如：识别商品图片是否为木质/塑料/金属/织物/玻璃等材质纹理，或判定商品类别）
+* **使用方式**：所有模型**均未经过任何下游微调（Zero-Shot / Off-the-shelf）**，直接从 Hugging Face 下载预训练权重，通过构建文本 Prompt（如 `"a photo of wooden texture"` vs `"a photo of other texture"`）计算图文匹配相似度进行二分类判定。
+* **推荐配置**：
+  * **Oracle 模型**：推荐使用 **`Oracle1 (google/siglip-so400m-patch14-384)`**（实验主选裁判）。
+  * **默认 Proxy 模型**：推荐使用 **`Proxy1 (google/siglip-base-patch32-224)`**，在保持 $F_1 \approx 0.7546$ 的同时实现 **$26.8\times$ 的端到端推理加速**。
 
-### 3.1 Image Classification Model Inventory and Benchmark
+### 3.1 图像分类模型清单与基准测试
 
-| Model ID | Hugging Face Repository & Link | # Params | Input Resolution | Relative Accuracy Max($F_1$) | Speedup (vs. Oracle1) | Throughput (items/s @ RTX 3090) | Notes / Architecture Details |
+| 模型代号 | Hugging Face 仓库名称与直达链接 | 参数量 | 图像输入分辨率 | 相对精度 Max($F_1$) | 单卡推理加速比 (vs Oracle1) | 推理吞吐量 (items/s @ RTX 3090) | 说明 / 架构特性 |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **Oracle1** ⭐ | [`google/siglip-so400m-patch14-384`](https://huggingface.co/google/siglip-so400m-patch14-384) | **878M** | $384 \times 384$ | **Baseline (1.0)** | $1.0\times$ (Baseline) | $32 \times 1.6$ (~50 it/s) | **Recommended Oracle**; Heavyweight high-resolution SigLIP model with superior visual representation. |
-| **Oracle2** | [`openai/clip-vit-large-patch14`](https://huggingface.co/openai/clip-vit-large-patch14) | 428M | $224 \times 224$ | - | $1.8\times$ | $32 \times 2.8$ (~90 it/s) | Classic OpenAI ViT-Large architecture. |
-| **Proxy1** ⭐ | [`google/siglip-base-patch32-224`](https://huggingface.co/google/siglip-base-patch32-224) | **84M** | $224 \times 224$ | **vs O1: 0.7546** | **$26.8\times$** | $32 \times 42.0$ (~1340 it/s) | **Recommended Proxy**; Large patch size, extremely high throughput, optimal cost-efficiency. |
-| **Proxy2** | [`google/siglip-base-patch16-224`](https://huggingface.co/google/siglip-base-patch16-224) | 86M | $224 \times 224$ | vs O1: 0.7812 | $15.4\times$ | $32 \times 24.5$ (~780 it/s) | Fine-grained Patch16; slightly higher accuracy with moderate computational overhead. |
-| **Proxy3** | [`wkcn/TinyCLIP-ViT-40M-32-Text-19M-LAION400M`](https://huggingface.co/wkcn/TinyCLIP-ViT-40M-32-Text-19M-LAION400M) | 59M | $224 \times 224$ | vs O1: 0.6840 | $35.2\times$ | $32 \times 55.0$ (~1760 it/s) | Ultra-lightweight distilled model (40M vision + 19M text). |
-| **Proxy4** | [`openai/clip-vit-base-patch32`](https://huggingface.co/openai/clip-vit-base-patch32) | 88M | $224 \times 224$ | vs O1: 0.7235 | $24.5\times$ | $32 \times 38.0$ (~1210 it/s) | Industry-standard classic lightweight general-purpose CLIP backbone. |
+| **Oracle1** ⭐ | [`google/siglip-so400m-patch14-384`](https://huggingface.co/google/siglip-so400m-patch14-384) | **878M** | $384 \times 384$ | **基准 (1.0)** | $1.0\times$ (基准) | $32 \times 1.6$ (约 50 it/s) | **推荐 Oracle**；高分辨率 SigLIP 重型模型，视觉表征极强 |
+| **Oracle2** | [`openai/clip-vit-large-patch14`](https://huggingface.co/openai/clip-vit-large-patch14) | 428M | $224 \times 224$ | - | $1.8\times$ | $32 \times 2.8$ (约 90 it/s) | 经典 OpenAI ViT-Large 架构 |
+| **Proxy1** ⭐ | [`google/siglip-base-patch32-224`](https://huggingface.co/google/siglip-base-patch32-224) | **84M** | $224 \times 224$ | **vs O1: 0.7546** | **$26.8\times$** | $32 \times 42.0$ (约 1340 it/s) | **推荐 Proxy**；大 Patch 分块，吞吐量极高，代理性价比最优 |
+| **Proxy2** | [`google/siglip-base-patch16-224`](https://huggingface.co/google/siglip-base-patch16-224) | 86M | $224 \times 224$ | vs O1: 0.7812 | $15.4\times$ | $32 \times 24.5$ (约 780 it/s) | 细粒度 Patch16，精度略高但计算量稍大 |
+| **Proxy3** | [`wkcn/TinyCLIP-ViT-40M-32-Text-19M-LAION400M`](https://huggingface.co/wkcn/TinyCLIP-ViT-40M-32-Text-19M-LAION400M) | 59M | $224 \times 224$ | vs O1: 0.6840 | $35.2\times$ | $32 \times 55.0$ (约 1760 it/s) | 极限轻量化蒸馏模型 (40M 视觉 + 19M 文本) |
+| **Proxy4** | [`openai/clip-vit-base-patch32`](https://huggingface.co/openai/clip-vit-base-patch32) | 88M | $224 \times 224$ | vs O1: 0.7235 | $24.5\times$ | $32 \times 38.0$ (约 1210 it/s) | 工业界最经典的通用轻量化 CLIP 基座 |
 
 ---
 
-## 4. Local Deployment and Directory Structure Guide
+## 四、 本地部署与目录层级指引
 
-Downloaded or fine-tuned model checkpoint weights should be placed according to the following directory hierarchy:
+下载或生成的模型权重文件推荐按以下路径存放：
 
 ```text
 PROXY/
 └── Model/
     ├── nli/
-    │   ├── oracle/           # Stores ONNX / PyTorch weights (e.g., deberta-v2-xxlarge-mnli)
-    │   └── proxy/            # Stores fine-tuned / pretrained weights (e.g., deberta-v3-base, bert-mini)
+    │   ├── oracle/           # 存放 deberta-v2-xxlarge-mnli 等 ONNX / PyTorch 权重
+    │   └── proxy/            # 存放 deberta-v3-base, bert-mini 等微调/预训练权重
     ├── sentiment/
-    │   ├── oracle/           # Stores roberta-large-sst2 weights
-    │   └── proxy/            # Stores bert-mini-finetuned-sst2 weights
+    │   ├── oracle/           # 存放 roberta-large-sst2 权重
+    │   └── proxy/            # 存放 bert-mini-finetuned-sst2 权重
     └── cv/
-        ├── oracle/           # Stores siglip-so400m weights
-        └── proxy/            # Stores siglip-base weights
+        ├── oracle/           # 存放 siglip-so400m 权重
+        └── proxy/            # 存放 siglip-base 权重
 ```
 
 ---
 
-## 5. Model Execution and Usage Instructions
+## 五、 模型运行与训练指导
 
-### 5.1 Quick Download and Inference Example
+### 5.1 快速下载模型与推理示例
 
-Models can be automatically fetched and evaluated for binary classification probability scoring via the Python `transformers` library:
+可以通过 Python `transformers` 库直接自动拉取模型并进行二分类概率打分：
 
 ```python
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-# Example using the recommended NLI Proxy model
+# 以 NLI 推荐 Proxy 模型为例
 model_name = "sileod/deberta-v3-base-mnli-fever-anli"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSequenceClassification.from_pretrained(model_name)
@@ -173,9 +170,15 @@ hypothesis = "This comment is in favor of the topic."
 inputs = tokenizer(premise, hypothesis, return_tensors="pt", truncation=True, max_length=256).to("cuda")
 with torch.no_grad():
     logits = model(**inputs).logits
-    # Extract positive class probability for Entailment as proxy score
+    # 获取蕴含 (Entailment) 的正类概率作为 proxy score
     probs = torch.softmax(logits, dim=-1)
-    proxy_score = probs[0][0].item()  # Extracted according to model-specific label mapping index
+    proxy_score = probs[0][0].item() # 依据具体模型的 label 映射索引提取
 
 print(f"Proxy Score: {proxy_score:.4f}")
 ```
+
+### 5.2 代理模型微调说明 (Fine-Tuning Protocol)
+
+<!-- 为了确保严谨性并**严格杜绝数据泄露（Zero Data Leakage）**：
+1. **数据切分**：从对应数据集的背景图数据中抽取独立子集，**严禁将评测用的随机游走 Query 节点加入训练集**。
+2. **训练脚本**：基于 Hugging Face `Trainer` API 进行少量 Epoch（如 8~15 Epochs）的轻量级微调，学习率设为 `2e-5`，Batch Size 设为 32。 -->
