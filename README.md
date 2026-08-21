@@ -15,7 +15,7 @@ This repository provides the complete code and configuration required to reprodu
 > If you wish to **immediately verify and reproduce all experimental figures (RQ1–RQ4) and statistical significance metrics from the paper**:
 > 1. Launch Jupyter Notebook:
 >    ```bash
->    jupyter notebook pythonProject/src/RQS/RQX.ipynb
+>    jupyter notebook pythonProject/src/RQS_plots/RQX.ipynb
 >    ```
 > 2. Click **`Run`** to directly load the pre-cached data and instantly render all high-resolution vector figures presented in the paper!
 
@@ -163,7 +163,7 @@ PROXY/
 │   ├── run_RQ3.sh                              # [updated] RQ3: Proxy quality sensitivity and robustness ablation          
 │   ├── run_RQ4.sh                              # [updated] RQ4: Allocation strategy ablation (UN, PO, WO, MAB, POSS)
 │   ├── run_all_gt.sh                           # [updated] Ground Truth caculate
-│   ├── run_ENUM.sh                             # [updated] RQ1&RQ2: Baseline: Alog 1 in paper        
+│   ├── run_Enum.sh                             # [updated] RQ1&RQ2: Baseline: Alog 1 in paper        
 │   ├── run_Fastest-Oracle.sh                   # [updated] RQ1&RQ2: Baseline: Parallel FaSTest-Oracle  runner
 │   ├── run_WEE.sh                           # [updated] RQ2:     Baseline : Weight Estimation Error (WEE) Floor   
 │   ├── run_Pro_Abae.sh                      # [updated] Rebuttal: Baseline: Projection space + ABAE.   
@@ -198,7 +198,7 @@ chmod +x *.sh
 ./run_all_gt.sh
 
 # Baseline ENUM: For details, please refer to Algorithm One in Paper
-./run_enum.sh
+./run_Enum.sh
 ```
 ---
 
