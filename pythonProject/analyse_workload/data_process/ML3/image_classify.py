@@ -6,11 +6,11 @@ from tqdm import tqdm
 import torch
 
 # 1. 配置路径
-product_csv_path = "/home/wangshuo/resource/datasets/amazon_data/amazon_extend/csv_data/product_init.csv"
+product_csv_path = "/home/wangshuo/resource/datasets/amazon_data/amazon_extend/csv_data/product.csv"
 image_folder = "/home/fuyiding/dataset/AmazonReviews/homeAndkitchen/pic/images_kcore"
 # model_path = "/home/wangshuo/resource/AIModels/CV/clip-vit-large-patch14"
 model_path = "/home/wangshuo/resource/AIModels/CV/clip-vit-base-patch32"
-output_csv_path = "/home/wangshuo/resource/datasets/amazon_data/amazon_extend/csv_data/product_init.csv"
+output_csv_path = "/home/wangshuo/resource/datasets/amazon_data/amazon_extend/csv_data/product.csv"
 
 # 2. 加载模型
 print("Loading model...")

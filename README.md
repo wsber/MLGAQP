@@ -24,7 +24,18 @@ This repository provides the complete code and configuration required to reprodu
 > ### (2) Technical Report & Supplementary Theoretical Proofs
 > For details regarding the **Case Study** and the **complete theoretical proofs for uniform tree sampling (Tree Sampling Proofs)** mentioned in the paper, please refer to the technical report in the repository root directory: [**`TR.pdf`**](./TR0.1.pdf).
 
-> ### (3) Codebase Design & Workflow Recommendations
+
+
+---
+
+> ### (3) Complete Model Zoo & Benchmark Guide (Oracle vs. Proxy)
+> For detailed architectures, parameter counts, $F_1$ scores, fine-tuning protocols, and throughput benchmarks for all **Natural Language Inference (NLI)**, **Text Emotion/Sentiment Analysis (TE)**, and **Computer Vision (CV)** models on a single RTX 3090 GPU, please refer to our dedicated guide: 
+> 👉 [**`Model Zoo Documentation (./Models/README.md)`**](./Models/README.md)
+
+---
+
+
+> ### (4) Codebase Design & Workflow Recommendations
 > 1. **Reproducibility & Debugging Design**: The codebase is currently in its academic open-source stage. To facilitate state verification at each stage, algorithm logic debugging, and support a complete data reproduction pipeline, the code retains **detailed intermediate result disk-persistence and I/O validation logic**.
 > 2. **Recommended Execution Strategy**:
 >    * **Step 1 (Structural Projection & Weight Materialization)**: Run `Projection_Sampling_and_Weight_Estimation_Runner.py`. This **only needs to be executed once** for each workload and aggregation type (`COUNT` / `SUM`). This step fixes the topological projection space $\hat{\Psi}$ and offline-materializes the structural extension weights $\hat{w}(\psi)$ for all projections.
@@ -33,7 +44,7 @@ This repository provides the complete code and configuration required to reprodu
 
 ---
 
-## (4) Environment Setup
+## (5) Environment Setup
 
 Before running the code, please follow the steps below to set up the Python virtual environment and compile the underlying C++ sampling engine.
 
