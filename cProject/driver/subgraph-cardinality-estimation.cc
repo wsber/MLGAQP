@@ -25,6 +25,7 @@
 #include <algorithm>
 #include <mutex>
 #include <atomic>
+#include <chrono>
 
 using namespace std;
 using namespace GraphLib;
@@ -730,6 +731,9 @@ int32_t main(int argc, char *argv[]) {
 
 
     std::vector<std::pair<std::string, double>> basic_estimates_for_json;
+
+    std::vector<std::pair<std::string, double>> query_execution_times_ms;
+
     CardinalityEstimation::AggFunc agg_func = CardinalityEstimation::AGG_COUNT;
     if (agg_func_str == "sum") agg_func = CardinalityEstimation::AGG_SUM;
     if (parent_dataset == "amazon_data" || dataset.find("amazon") != std::string::npos) {
@@ -852,6 +856,7 @@ int32_t main(int argc, char *argv[]) {
     for (int i = 0; i < pattern_graphs.size(); i++) {
         PatternGraph* P = pattern_graphs[i];
         std::string query_name = query_names[i];
+        std::string query_clean_name = get_filename_only(query_name);
         bool has_custom_labels = query_to_core_labels.count(query_name);
         bool has_core_nodes_cfg = query_to_core_query_nodes.count(query_name);
         bool has_predicate_labels_cfg = query_to_predicate_labels.count(query_name);
@@ -864,10 +869,16 @@ int32_t main(int argc, char *argv[]) {
             std::cout << "\nStart Processing " << query_name << " for core instances with query nodes: ";
             for (int qid : core_query_nodes) std::cout << qid << " ";
             std::cout << std::endl;
+            
+            auto t_start = std::chrono::high_resolution_clock::now();
 
             auto result_pair = (agg_func == CardinalityEstimation::AGG_COUNT)
                 ? estimator.EstimateCoreInstances(P, core_query_nodes)
                 : estimator.EstimateCoreInstancesAgg(P, core_query_nodes, agg_func, sum_label);
+            
+            auto t_end = std::chrono::high_resolution_clock::now();
+            double exec_ms = std::chrono::duration<double, std::milli>(t_end - t_start).count();
+            query_execution_times_ms.push_back({query_clean_name, exec_ms});
 
             // 解包pair得到全局估计值和实例map
             double global_estimate = result_pair.first;
@@ -1040,7 +1051,7 @@ int32_t main(int argc, char *argv[]) {
             results.push_back(query_result);
         }
     }
-    // [New] 将收集到的基础估计结果写入 JSON 文件
+    // 将收集到的基础估计结果写入 JSON 文件
     if (!basic_estimates_for_json.empty()) {
         std::string json_path = results_dir + "basic_estimates" + func_suffix + ".json";
         std::ofstream json_out(json_path);
@@ -1062,5 +1073,61 @@ int32_t main(int argc, char *argv[]) {
         } else {
             std::cerr << "[Error] Cannot open " << json_path << " for writing JSON." << std::endl;
         }
+    }
+
+    // =========================================================================
+    // 输出纯算法精确耗时统计 JSON 文件与终端报表
+    // =========================================================================
+    if (!query_execution_times_ms.empty()) {
+        double total_ms = 0.0;
+        std::vector<double> all_times;
+        for (const auto& item : query_execution_times_ms) {
+            total_ms += item.second;
+            all_times.push_back(item.second);
+        }
+        std::sort(all_times.begin(), all_times.end());
+        double avg_ms = total_ms / all_times.size();
+        double p50_ms = all_times[all_times.size() / 2];
+        double p90_ms = all_times[static_cast<size_t>(all_times.size() * 0.90)];
+        double p95_ms = all_times[static_cast<size_t>(all_times.size() * 0.95)];
+
+        // 保存每查询详细耗时 JSON 文件
+        std::string time_json_path = results_dir + "query_execution_times" + func_suffix + ".json";
+        std::ofstream time_out(time_json_path);
+        if (time_out.is_open()) {
+            time_out << "{\n";
+            time_out << "  \"__SUMMARY__\": {\n";
+            time_out << "    \"total_queries\": " << all_times.size() << ",\n";
+            time_out << "    \"total_time_s\": " << std::fixed << std::setprecision(4) << (total_ms / 1000.0) << ",\n";
+            time_out << "    \"avg_time_ms\": " << std::setprecision(4) << avg_ms << ",\n";
+            time_out << "    \"p50_time_ms\": " << std::setprecision(4) << p50_ms << ",\n";
+            time_out << "    \"p90_time_ms\": " << std::setprecision(4) << p90_ms << ",\n";
+            time_out << "    \"p95_time_ms\": " << std::setprecision(4) << p95_ms << "\n";
+            time_out << "  },\n";
+            time_out << "  \"per_query_ms\": {\n";
+            for (size_t i = 0; i < query_execution_times_ms.size(); ++i) {
+                time_out << "    \"" << query_execution_times_ms[i].first << "\": " 
+                         << std::fixed << std::setprecision(4) << query_execution_times_ms[i].second;
+                if (i < query_execution_times_ms.size() - 1) time_out << ",";
+                time_out << "\n";
+            }
+            time_out << "  }\n";
+            time_out << "}\n";
+            time_out.close();
+            std::cout << "[Info] Detailed execution times saved to JSON: " << time_json_path << std::endl;
+        }
+
+        // 控制台打印学术规范汇总框
+        std::cout << "\n" << std::string(75, '=') << std::endl;
+        std::cout << "⏱️  FaSTest Algorithm Execution Time Summary (Excluding Disk I/O)" << std::endl;
+        std::cout << "   Dataset: " << dataset << " | Mode: " << agg_func_str << " | Queries: " << all_times.size() << std::endl;
+        std::cout << std::string(75, '=') << std::endl;
+        std::cout << "1. Total Time (总纯算法耗时)      : " << std::fixed << std::setprecision(3) << (total_ms / 1000.0) << " s" << std::endl;
+        std::cout << "2. Average Time (平均单查询耗时)  : " << std::setprecision(3) << avg_ms << " ms (" << (avg_ms / 1000.0) << " s)" << std::endl;
+        std::cout << "3. Median Time  (中位数耗时 P50)  : " << std::setprecision(3) << p50_ms << " ms" << std::endl;
+        std::cout << "4. 90th Percentile Time (P90)     : " << std::setprecision(3) << p90_ms << " ms" << std::endl;
+        std::cout << "5. 95th Percentile Time (P95)     : " << std::setprecision(3) << p95_ms << " ms" << std::endl;
+        std::cout << "6. Query Throughput (估算吞吐率)  : " << std::setprecision(2) << (1000.0 / (avg_ms > 0 ? avg_ms : 1.0)) << " queries/sec" << std::endl;
+        std::cout << std::string(75, '=') << "\n" << std::endl;
     }
 }
