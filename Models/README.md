@@ -30,8 +30,12 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
    * **Base Backbone Fine-tuned Models**: Fine-tuned on sampled target dataset instances starting from pure architectural backbones (e.g., `bert-mini`, `deberta-v3-base`).
 3. **Benchmarking Environment**: All inference throughput metrics (items/s) were empirically benchmarked on a single **NVIDIA GeForce RTX 3090 GPU (24GB VRAM)** with Batch Size = 32.
 4. **Scope of Paper Experiments & Extended Model Zoo**: 
-   * **Paper Core Benchmark**: In the paper's reported core experimental evaluations, **only the NLI Base Fine-tuned models (specifically `Proxy4_base` in Section 1.3) are utilized**.
-   * **Extended Suite**: All other fine-tuned variants (in Sections 1.2, 2.2, and 2.3) were **not used in the main paper's reported results**. They are released as part of this extended Model Zoo to give researchers and practitioners complete freedom to substitute, compare, and stress-test arbitrary proxy-oracle accuracy/latency trade-offs.
+   * **Paper Core Benchmark**: In the paper's reported core experimental evaluations, **only the NLI Base Fine-tuned models (specifically `Proxy4_base` in Section 1.3) and the TE Distil model (specifically `Proxy2_distil` in Section 2.2) are utilized**.
+   * **Extended Suite**: All other fine-tuned variants (in Sections 1.2,1.3, 2.2, and 2.3) were **not used in the main paper's reported results**. They are released as part of this extended Model Zoo to give researchers and practitioners complete freedom to substitute, compare, and stress-test arbitrary proxy-oracle accuracy/latency trade-offs.
+
+5. **Metric Definitions & Threshold Tuning (`Max(Prec) / Rec` & `Max(Rec) / Prec`)**:
+   * **`Max(Prec) / Rec`**: By sweeping the proxy decision threshold against Oracle Ground Truth, this metric reports the **maximum Precision** achievable under the constraint of $\text{Recall} > 0.3$ (top line) or $\text{Recall} > 0.5$ (bottom line), paired with the actual **Recall** achieved at that calibrated threshold.
+   * **`Max(Rec) / Prec`**: Symmetrically reports the **maximum Recall** achievable under minimum precision constraints, along with the corresponding **Precision**.
 
 ---
 
@@ -45,7 +49,7 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 ### 1.1 NLI - Pretrained Models (Off-the-Shelf)
 > Downloaded directly from Hugging Face without dataset-specific fine-tuning.
 
-| Model ID | Hugging Face Repository & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Label Mapping |
+| Model ID | Hugging Face Repository & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec >0.3/0.5 | Max(Rec) / Prec >0.3/0.5 | Throughput (items/s) | Label Mapping |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
 | **Oracle0** | [`facebook/bart-large-mnli`](https://huggingface.co/facebook/bart-large-mnli) | 0.4B | - | - | - | $32 \times 2.0$ | Label-0: Contradiction<br>Label-1: Neutral<br>Label-2: Entailment |
 | **Oracle1** | [`microsoft/deberta-v2-xlarge-mnli`](https://huggingface.co/microsoft/deberta-v2-xlarge-mnli) | 0.9B | - | - | - | $32 \times (1.35 \sim 11.0)$ | Label-0: Contradiction<br>Label-1: Neutral<br>Label-2: Entailment |
