@@ -89,9 +89,8 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Proxy1_base** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | [`wsber123/bert-mini`](https://huggingface.co/wsber123/bert-mini/tree/main) ✅ | 11.3M | vs O1: 0.7469<br>vs O2: 0.6629 | 0.9133 / 0.3786<br>0.8552 / 0.5616 | 0.8993 / 0.4286<br>0.8606 / 0.5468 | $32 \times (50 \sim 160)$ | - |
 | **Proxy2_base** | [`distilbert/distilbert-base-uncased`](https://huggingface.co/distilbert/distilbert-base-uncased) | [`wsber123/distilbert-base`](https://huggingface.co/wsber123/distilbert-base/tree/main) ✅ | 66M | vs O1: 0.7856<br>vs O2: 0.7049 | 0.8951 / 0.5773<br>0.8429 / 0.7220 | 0.9130 / 0.4745<br>0.8909 / 0.5488<br>0.8236 / 0.7066 | $32 \times (45 \sim 140)$ | - |
-| **Proxy3_base** | [`microsoft/deberta-v3-large`](https://huggingface.co/microsoft/deberta-v3-large) | 🚀 Uploading soon | 0.435B | - | - | - | $32 \times (7 \sim 16)$ | - |
 | **Proxy4_base** ⭐ | [`microsoft/deberta-v3-base`](https://huggingface.co/microsoft/deberta-v3-base) | [`wsber123/deberta-v3-base-binary`](https://huggingface.co/wsber123/deberta-v3-base-binary) ✅ | 184M | vs O1: 0.8512<br>vs O2: 0.7716 | 0.9445 / 0.6227<br>0.9253 / 0.7004 | 0.9733 / 0.4639<br>0.9617 / 0.5432<br>0.9166 / 0.7235 | $32 \times (17 \sim 30)$ | Epoch = 8 |
-| **Proxy6_base** | [`microsoft/deberta-v3-xsmall`](https://huggingface.co/microsoft/deberta-v3-xsmall) | 🚀 Uploading soon | 70M | vs O1: 0.8093<br>vs O2: 0.7298 | 0.9445 / 0.5172<br>0.8725 / 0.7243 | 0.9279 / 0.4714<br>0.9103 / 0.5482<br>0.8508 / 0.7474 | $32 \times (18 \sim 32)$ | Epoch = 20 |
+| **Proxy6_base** | [`microsoft/deberta-v3-xsmall`](https://huggingface.co/microsoft/deberta-v3-xsmall) | [`wsber123/deberta-v3-xsmall-binary`](https://huggingface.co/wsber123/deberta-v3-xsmall-binary/tree/main) ✅ | 70M | vs O1: 0.8093<br>vs O2: 0.7298 | 0.9445 / 0.5172<br>0.8725 / 0.7243 | 0.9279 / 0.4714<br>0.9103 / 0.5482<br>0.8508 / 0.7474 | $32 \times (18 \sim 32)$ | Epoch = 20 |
 
 ---
 
@@ -100,7 +99,7 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 * **Primary Datasets**: Amazon / Parler (e.g., detecting whether user reviews/comments express positive or negative sentiment)
 * **Recommended Configurations**:
   * **Oracle Model**: **`Oracle2 (howey/roberta-large-sst2, 0.355B)`**.
-  * **Default Proxy Model**: Pretrained **`Proxy2 (bert-mini, 11.3M)`** ⭐, offering extreme lightweight efficiency and high throughput (up to $32 \times 160$ items/s).
+  * **Default Proxy Model**: Pretrained **`Proxy1`** ⭐, offering lightweight efficiency and high throughput (up to $27 \times 78$ items/s).
 * **Usage Declaration**: The fine-tuned models listed in Section 2.2 and Section 2.3 are provided for model zoo completeness; **the core paper experiments utilize the pretrained off-the-shelf `Proxy2` (Section 2.1)**.
 
 ### 2.1 TE - Pretrained Models (Off-the-Shelf)
@@ -110,8 +109,8 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
 | **Oracle1** | [`yoshitomo-matsuda/bert-large-uncased-sst2`](https://huggingface.co/yoshitomo-matsuda/bert-large-uncased-sst2) | 0.34B | - | - | - | $32 \times 3.0$ |
 | **Oracle2** ⭐ | [`howey/roberta-large-sst2`](https://huggingface.co/howey/roberta-large-sst2) | **0.355B** | - | - | - | $32 \times 3.0$ |
-| **Proxy1** | [`textattack/roberta-base-SST-2`](https://huggingface.co/textattack/roberta-base-SST-2) | 0.125B | vs O1: 0.8131<br>vs O2: 0.8819 | 0.8986 / 0.6026<br>0.9520 / 0.7195 | 0.9557 / 0.5414<br>0.9601 / 0.7267<br>0.9339 / 0.8022 | $32 \times (27 \sim 78)$ |
-| **Proxy2** ⭐ | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) *(sst2)* | **11.3M** | vs O1: 0.7207<br>vs O2: 0.7334 | 0.8875 / 0.4442<br>0.8434 / 0.5142 | 0.8914 / 0.4762<br>0.8803 / 0.5070 | $32 \times (50 \sim 160)$ |
+| **Proxy1** ⭐| [`textattack/roberta-base-SST-2`](https://huggingface.co/textattack/roberta-base-SST-2) | 0.125B | vs O1: 0.8131<br>vs O2: 0.8819 | 0.8986 / 0.6026<br>0.9520 / 0.7195 | 0.9557 / 0.5414<br>0.9601 / 0.7267<br>0.9339 / 0.8022 | $32 \times (27 \sim 78)$ |
+| **Proxy2**  | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) *(sst2)* | **11.3M** | vs O1: 0.7207<br>vs O2: 0.7334 | 0.8875 / 0.4442<br>0.8434 / 0.5142 | 0.8914 / 0.4762<br>0.8803 / 0.5070 | $32 \times (50 \sim 160)$ |
 | **Proxy3** | [`huawei-noah/TinyBERT_General_4L_312D`](https://huggingface.co/huawei-noah/TinyBERT_General_4L_312D) | 14M | vs O1: 0.7650 | 0.9610 / 0.3109<br>0.8991 / 0.5036<br>0.7936 / 0.7020 | 0.9615 / 0.4770<br>0.9501 / 0.5013<br>0.8151 / 0.7207 | $32 \times (45 \sim 131)$ |
 | **Proxy4** | [`azizbarank/distilroberta-base-sst2-distilled`](https://huggingface.co/azizbarank/distilroberta-base-sst2-distilled) | 88M | vs O1: 0.7982<br>vs O2: 0.8314 | 0.8951 / 0.6325<br>0.9339 / 0.6155 | 0.9075 / 0.6103<br>0.9024 / 0.7123 | $32 \times (39 \sim 110)$ |
 
@@ -126,7 +125,7 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 | Model ID | HuggingFace Base Checkpoint & Link (Pretrained Only) | Our Fine-tuned Model & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Fine-tuning Configuration |
 | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Proxy1_distil** | [`textattack/roberta-base-SST-2`](https://huggingface.co/textattack/roberta-base-SST-2) | 🚀 Uploading soon | 0.125B | vs O1: 0.8667<br>vs O2: 0.9080 | 0.9292 / 0.7681<br>0.9704 / 0.7826 | 0.9804 / 0.5302<br>0.9880 / 0.6653 | $32 \times (28 \sim 79)$ | Epoch=8, Sample=0.1 |
-| **Proxy2_distil** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 🚀 Uploading soon | 11.3M | vs O1: 0.7876<br>vs O2: 0.7954 | 0.8944 / 0.6255<br>0.8838 / 0.6615 | 0.9421 / 0.4646<br>0.9129 / 0.5983 | $32 \times (66 \sim 160)$ | Epoch=15, Sample=0.1 |
+| **Proxy2_distil** ⭐ | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | [`wsber123/bert-mini-finetuned-sst2`](https://huggingface.co/wsber123/bert-mini-finetuned-sst2/tree/main) | 11.3M | vs O1: 0.7876<br>vs O2: 0.7954 | 0.8944 / 0.6255<br>0.8838 / 0.6615 | 0.9421 / 0.4646<br>0.9129 / 0.5983 | $32 \times (66 \sim 160)$ | Epoch=15, Sample=0.1 |
 | **Proxy3_distil** | [`huawei-noah/TinyBERT_General_4L_312D`](https://huggingface.co/huawei-noah/TinyBERT_General_4L_312D) | 🚀 Uploading soon | 14M | vs O1: 0.8353<br>vs O2: 0.8319 | 0.9643 / 0.4062<br>0.9097 / 0.7064 | 0.9655 / 0.5020<br>0.9163 / 0.7178 | $32 \times (60 \sim 140)$ | Epoch=10, Sample=0.1 |
 | **Proxy4_distil** | [`azizbarank/distilroberta-base-sst2-distilled`](https://huggingface.co/azizbarank/distilroberta-base-sst2-distilled) | 🚀 Uploading soon | 88M | vs O2: 0.8762 | 0.9516 / 0.7449<br>0.9186 / 0.8172 | 0.9646 / 0.7056<br>0.9246 / 0.8045 | $32 \times (50 \sim 125)$ | Epoch=10, Sample=0.1 |
 
