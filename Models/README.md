@@ -99,7 +99,7 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 * **Primary Datasets**: Amazon / Parler (e.g., detecting whether user reviews/comments express positive or negative sentiment)
 * **Recommended Configurations**:
   * **Oracle Model**: **`Oracle2 (howey/roberta-large-sst2, 0.355B)`**.
-  * **Default Proxy Model**: Pretrained **`Proxy1`** ⭐, offering lightweight efficiency and high throughput (up to $27 \times 78$ items/s).
+  * **Default Proxy Model**: Pretrained **`Proxy1`** ⭐, offering lightweight efficiency and high throughput (up to $(27 - 78)$ 32*items/s).
 * **Usage Declaration**: The fine-tuned models listed in Section 2.2 and Section 2.3 are provided for model zoo completeness; **the core paper experiments utilize the pretrained off-the-shelf `Proxy2` (Section 2.1)**.
 
 ### 2.1 TE - Pretrained Models (Off-the-Shelf)
