@@ -1,4 +1,4 @@
-
+Here is the high-quality, professional English translation formatted in Markdown:
 
 ***
 
@@ -8,30 +8,14 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 
 ---
 
-> ### 💡 Important Reproduction Note: Offline Caching vs. Real-Time Inference
-> 
-> To ensure statistical significance, all experimental benchmarks (RQ1–RQ4) evaluate each query over multiple budget ticks with **at least 5 independent repetitions (runs $\ge 5$)**. 
-> 
-> * **Computational & Financial Overhead**: Invoking foundation Oracle models or deep neural Proxy models in real-time during every sampling iteration will incur prohibitive monetary costs (massive token fees) and excessive runtime overhead (hundreds of GPU hours).
-> * **Recommended Reproduction Practice**: 
->   1. **Offline Inference & Caching**: We strongly recommend running each Oracle and Proxy model **once offline** on the target columns of each table in `data_graph/*/csv_data/`, appending the predicted probabilities as new columns in the CSV files.
->   2. **Latency Profiling**: Profile the empirical per-item/per-batch inference latency once on your target hardware.
->   3. **Fast Online Simulation**: During online stratified importance sampling, the algorithms simply look up the pre-cached predictions from the CSV while accounting for the profiled execution time.
-> * **Benefit**: This guarantees **100% mathematical and algorithmic fidelity** while allowing researchers to reproduce all paper results in minutes, even on standard consumer-grade commodity PCs.
-
----
-
 ## Overview and Design Principles
 
 1. **Oracle Model Sources**: All Oracle models are **downloaded directly from official Hugging Face repositories** off-the-shelf without any downstream task-specific fine-tuning, serving as ground-truth arbiters for generating true labels.
 2. **Proxy Model Categories**: To systematically evaluate the robustness of the PROXY framework across varying proxy quality tiers (including sensitivity analysis and ablation studies), Proxy models are categorized into the following three types:
-   * **Pretrained Models (Off-the-shelf)**: General-purpose pretrained models downloaded directly from Hugging Face and used out-of-the-box.
+   * **Pretrained Models**: General-purpose pretrained models downloaded directly from Hugging Face and used out-of-the-box.
    * **Task-Specific Fine-tuned Models**: Initialized from Hugging Face checkpoints that already feature corresponding downstream classification heads (e.g., MNLI/SST-2), then lightly fine-tuned on randomly sampled instances (500–1000) from target datasets (e.g., Parler/Amazon) to construct distinct $F_1$ performance tiers.
    * **Base Backbone Fine-tuned Models**: Fine-tuned on sampled target dataset instances starting from pure architectural backbones (e.g., `bert-mini`, `deberta-v3-base`).
 3. **Benchmarking Environment**: All inference throughput metrics (items/s) were empirically benchmarked on a single **NVIDIA GeForce RTX 3090 GPU (24GB VRAM)** with Batch Size = 32.
-4. **Scope of Paper Experiments & Extended Model Zoo**: 
-   * **Paper Core Benchmark**: In the paper's reported core experimental evaluations, **only the NLI Base Fine-tuned models (specifically `Proxy4_base` in Section 1.3) are utilized**.
-   * **Extended Suite**: All other fine-tuned variants (in Sections 1.2, 2.2, and 2.3) were **not used in the main paper's reported results**. They are released as part of this extended Model Zoo to give researchers and practitioners complete freedom to substitute, compare, and stress-test arbitrary proxy-oracle accuracy/latency trade-offs.
 
 ---
 
@@ -40,7 +24,7 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 * **Primary Datasets**: Parler / Parler-E (e.g., inferring whether a post expresses support for or opposition to a specific political stance)
 * **Recommended Configurations**:
   * **Oracle Model**: **`Oracle2 (deberta-v2-xxlarge-mnli, 1.5B)`** (Primary experimental judge).
-  * **Default Proxy Models**: **`Proxy4_base (deberta-v3-base, 184M)`** ⭐ (Main paper proxy) or **`Proxy5 (deberta-v3-base-mnli-fever-anli, 86M)`**.
+  * **Default Proxy Models**: **`Proxy4_base (deberta-v3-base, 184M)`** or **`Proxy5 (deberta-v3-base-mnli-fever-anli, 86M)`**.
 
 ### 1.1 NLI - Pretrained Models (Off-the-Shelf)
 > Downloaded directly from Hugging Face without dataset-specific fine-tuning.
@@ -58,33 +42,30 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 ---
 
 ### 1.2 NLI - Task-Specific Fine-tuned Models (Fine-tuned from MNLI Checkpoints)
+> Initialized from models with existing MNLI heads, then fine-tuned on Parler samples to enhance discriminability.
 
-> **Note:**  
-> - **HuggingFace Base Checkpoint & Link**: Checkpoints initialized with existing MNLI heads, **before** target dataset fine-tuning.  
-> - **Our Fine-tuned Model & Link**: Secondary fine-tuned on Parler NLI samples to enhance discriminability.  
-> - *(These models are provided for extended exploration and were not used in the paper's main reported results).*
-
-| Model ID | HuggingFace Base Checkpoint & Link (Pretrained Only) | Our Fine-tuned Model & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Proxy1_distil** | [`valhalla/distilbart-mnli-12-6`](https://huggingface.co/valhalla/distilbart-mnli-12-6) | 🚀 Uploading soon | 0.3B | vs O1: 0.8085 | 0.9569 / 0.3179<br>0.8800 / 0.7373 | 0.9425 / 0.3234<br>0.9111 / 0.5724 | $32 \times (11 \sim 30)$ |
-| **Proxy2_distil** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 🚀 Uploading soon | 44M | - | - | - | $32 \times 30.0$ |
-| **Proxy3_distil** | [`distilbert/distilbert-base-uncased-finetuned-mnli`](https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-mnli) | 🚀 Uploading soon | 66M | vs O1: 0.7171 | 0.9068 / 0.3084<br>0.7383 / 0.6939 | 0.8760 / 0.3009<br>0.8207 / 0.5440 | $32 \times (40 \sim 120)$ |
-| **Proxy4_distil** | [`microsoft/deberta-base-mnli`](https://huggingface.co/microsoft/deberta-base-mnli) | 🚀 Uploading soon | 0.125B | vs O1: 0.7936 | 0.9613 / 0.3169<br>0.8400 / 0.7403 | 0.9190 / 0.3217<br>0.8981 / 0.5388 | $32 \times (12 \sim 20)$ |
-| **Proxy5_distil** | [`sileod/deberta-v3-base-mnli-fever-anli`](https://huggingface.co/sileod/deberta-v3-base-mnli-fever-anli) | 🚀 Uploading soon | 86M | vs O1: 0.8064 | 0.9750 / 0.3185<br>0.9103 / 0.5397 | 0.9504 / 0.3115<br>0.9323 / 0.5612 | $32 \times (15 \sim 29)$ |
+| Model ID | Hugging Face Backbone & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: |
+| **Proxy1_distil** | [`valhalla/distilbart-mnli-12-6`](https://huggingface.co/valhalla/distilbart-mnli-12-6) | 0.3B | vs O1: 0.8085 | 0.9569 / 0.3179<br>0.8800 / 0.7373 | 0.9425 / 0.3234<br>0.9111 / 0.5724 | $32 \times (11 \sim 30)$ |
+| **Proxy2_distil** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 44M | - | - | - | $32 \times 30.0$ |
+| **Proxy3_distil** | [`distilbert/distilbert-base-uncased-finetuned-mnli`](https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-mnli) | 66M | vs O1: 0.7171 | 0.9068 / 0.3084<br>0.7383 / 0.6939 | 0.8760 / 0.3009<br>0.8207 / 0.5440 | $32 \times (40 \sim 120)$ |
+| **Proxy4_distil** | [`microsoft/deberta-base-mnli`](https://huggingface.co/microsoft/deberta-base-mnli) | 0.125B | vs O1: 0.7936 | 0.9613 / 0.3169<br>0.8400 / 0.7403 | 0.9190 / 0.3217<br>0.8981 / 0.5388 | $32 \times (12 \sim 20)$ |
+| **Proxy5_distil** | [`sileod/deberta-v3-base-mnli-fever-anli`](https://huggingface.co/sileod/deberta-v3-base-mnli-fever-anli) | 86M | vs O1: 0.8064 | 0.9750 / 0.3185<br>0.9103 / 0.5397 | 0.9504 / 0.3115<br>0.9323 / 0.5612 | $32 \times (15 \sim 29)$ |
 
 ---
 
 ### 1.3 NLI - Base Backbone Fine-tuned Models (Fine-tuned from Base Architectures)
 
 > **Note:**  
-> - **HuggingFace Base Backbone & Link**: Official pretrained backbone weights from HuggingFace, **not fine-tuned** on the NLI task.  
-> - **Our Fine-tuned Model & Link**: Models fine-tuned from the pure base backbone on Parler task data.  
-> - **`Proxy4_base` ⭐ is the primary NLI proxy model evaluated in the paper's experimental results.**
+> - **HuggingFace Base Backbone & Link**: Official pretrained weights from HuggingFace, **not fine-tuned** on the NLI task.  
+> - **Our Fine-tuned Model & Link**: We fine-tuned these models from the corresponding base backbone on NLI task data.  
+> - Currently uploaded: [`wsber123/deberta-v3-base-binary`](https://huggingface.co/wsber123/deberta-v3-base-binary).  
+>   The remaining fine-tuned models are being uploaded and the links will be added as soon as they are available.
 
 | Model ID | HuggingFace Base Backbone & Link (Pretrained Only) | Our Fine-tuned Model & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Fine-tuning Configuration |
 | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Proxy1_base** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | [`wsber123/bert-mini`](https://huggingface.co/wsber123/bert-mini/tree/main) ✅ | 11.3M | vs O1: 0.7469<br>vs O2: 0.6629 | 0.9133 / 0.3786<br>0.8552 / 0.5616 | 0.8993 / 0.4286<br>0.8606 / 0.5468 | $32 \times (50 \sim 160)$ | - |
-| **Proxy2_base** | [`distilbert/distilbert-base-uncased`](https://huggingface.co/distilbert/distilbert-base-uncased) | [`wsber123/distilbert-base`](https://huggingface.co/wsber123/distilbert-base/tree/main) ✅ | 66M | vs O1: 0.7856<br>vs O2: 0.7049 | 0.8951 / 0.5773<br>0.8429 / 0.7220 | 0.9130 / 0.4745<br>0.8909 / 0.5488<br>0.8236 / 0.7066 | $32 \times (45 \sim 140)$ | - |
+| **Proxy2_base** | [`distilbert/distilbert-base-uncased`](https://huggingface.co/distilbert/distilbert-base-uncased) | [`wsber123/bert-mini`](https://huggingface.co/wsber123/distilbert-base/tree/main) ✅  | 66M | vs O1: 0.7856<br>vs O2: 0.7049 | 0.8951 / 0.5773<br>0.8429 / 0.7220 | 0.9130 / 0.4745<br>0.8909 / 0.5488<br>0.8236 / 0.7066 | $32 \times (45 \sim 140)$ | - |
 | **Proxy3_base** | [`microsoft/deberta-v3-large`](https://huggingface.co/microsoft/deberta-v3-large) | 🚀 Uploading soon | 0.435B | - | - | - | $32 \times (7 \sim 16)$ | - |
 | **Proxy4_base** ⭐ | [`microsoft/deberta-v3-base`](https://huggingface.co/microsoft/deberta-v3-base) | [`wsber123/deberta-v3-base-binary`](https://huggingface.co/wsber123/deberta-v3-base-binary) ✅ | 184M | vs O1: 0.8512<br>vs O2: 0.7716 | 0.9445 / 0.6227<br>0.9253 / 0.7004 | 0.9733 / 0.4639<br>0.9617 / 0.5432<br>0.9166 / 0.7235 | $32 \times (17 \sim 30)$ | Epoch = 8 |
 | **Proxy6_base** | [`microsoft/deberta-v3-xsmall`](https://huggingface.co/microsoft/deberta-v3-xsmall) | 🚀 Uploading soon | 70M | vs O1: 0.8093<br>vs O2: 0.7298 | 0.9445 / 0.5172<br>0.8725 / 0.7243 | 0.9279 / 0.4714<br>0.9103 / 0.5482<br>0.8508 / 0.7474 | $32 \times (18 \sim 32)$ | Epoch = 20 |
@@ -96,8 +77,7 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 * **Primary Datasets**: Amazon / Parler (e.g., detecting whether user reviews/comments express positive or negative sentiment)
 * **Recommended Configurations**:
   * **Oracle Model**: **`Oracle2 (howey/roberta-large-sst2, 0.355B)`**.
-  * **Default Proxy Model**: Pretrained **`Proxy2 (bert-mini, 11.3M)`** ⭐, offering extreme lightweight efficiency and high throughput (up to $32 \times 160$ items/s).
-* **Usage Declaration**: The fine-tuned models listed in Section 2.2 and Section 2.3 are provided for model zoo completeness; **the core paper experiments utilize the pretrained off-the-shelf `Proxy2` (Section 2.1)**.
+  * **Default Proxy Model**: Pretrained **`Proxy2 (bert-mini, 11.3M)`**, offering extreme lightweight efficiency and high throughput (up to $32 \times 160$ items/s).
 
 ### 2.1 TE - Pretrained Models (Off-the-Shelf)
 > High-efficiency sentiment classification models downloaded directly from Hugging Face.
@@ -115,30 +95,22 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
 
 ### 2.2 TE - Task-Specific Fine-tuned Models (Fine-tuned from SST-2 Checkpoints)
 
-> **Note:**  
-> - **HuggingFace Base Checkpoint & Link**: Initialized with existing SST-2 classification heads before dataset fine-tuning.  
-> - **Our Fine-tuned Model & Link**: Secondary fine-tuned on task data. *(Released for custom benchmarking; not used in paper core results).*
-
-| Model ID | HuggingFace Base Checkpoint & Link (Pretrained Only) | Our Fine-tuned Model & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Fine-tuning Configuration |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Proxy1_distil** | [`textattack/roberta-base-SST-2`](https://huggingface.co/textattack/roberta-base-SST-2) | 🚀 Uploading soon | 0.125B | vs O1: 0.8667<br>vs O2: 0.9080 | 0.9292 / 0.7681<br>0.9704 / 0.7826 | 0.9804 / 0.5302<br>0.9880 / 0.6653 | $32 \times (28 \sim 79)$ | Epoch=8, Sample=0.1 |
-| **Proxy2_distil** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 🚀 Uploading soon | 11.3M | vs O1: 0.7876<br>vs O2: 0.7954 | 0.8944 / 0.6255<br>0.8838 / 0.6615 | 0.9421 / 0.4646<br>0.9129 / 0.5983 | $32 \times (66 \sim 160)$ | Epoch=15, Sample=0.1 |
-| **Proxy3_distil** | [`huawei-noah/TinyBERT_General_4L_312D`](https://huggingface.co/huawei-noah/TinyBERT_General_4L_312D) | 🚀 Uploading soon | 14M | vs O1: 0.8353<br>vs O2: 0.8319 | 0.9643 / 0.4062<br>0.9097 / 0.7064 | 0.9655 / 0.5020<br>0.9163 / 0.7178 | $32 \times (60 \sim 140)$ | Epoch=10, Sample=0.1 |
-| **Proxy4_distil** | [`azizbarank/distilroberta-base-sst2-distilled`](https://huggingface.co/azizbarank/distilroberta-base-sst2-distilled) | 🚀 Uploading soon | 88M | vs O2: 0.8762 | 0.9516 / 0.7449<br>0.9186 / 0.8172 | 0.9646 / 0.7056<br>0.9246 / 0.8045 | $32 \times (50 \sim 125)$ | Epoch=10, Sample=0.1 |
+| Model ID | Hugging Face Backbone & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Fine-tuning Configuration |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Proxy1_distil** | [`textattack/roberta-base-SST-2`](https://huggingface.co/textattack/roberta-base-SST-2) | 0.125B | vs O1: 0.8667<br>vs O2: 0.9080 | 0.9292 / 0.7681<br>0.9704 / 0.7826 | 0.9804 / 0.5302<br>0.9880 / 0.6653 | $32 \times (28 \sim 79)$ | Epoch=8, Sample=0.1 |
+| **Proxy2_distil** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 11.3M | vs O1: 0.7876<br>vs O2: 0.7954 | 0.8944 / 0.6255<br>0.8838 / 0.6615 | 0.9421 / 0.4646<br>0.9129 / 0.5983 | $32 \times (66 \sim 160)$ | Epoch=15, Sample=0.1 |
+| **Proxy3_distil** | [`huawei-noah/TinyBERT_General_4L_312D`](https://huggingface.co/huawei-noah/TinyBERT_General_4L_312D) | 14M | vs O1: 0.8353<br>vs O2: 0.8319 | 0.9643 / 0.4062<br>0.9097 / 0.7064 | 0.9655 / 0.5020<br>0.9163 / 0.7178 | $32 \times (60 \sim 140)$ | Epoch=10, Sample=0.1 |
+| **Proxy4_distil** | [`azizbarank/distilroberta-base-sst2-distilled`](https://huggingface.co/azizbarank/distilroberta-base-sst2-distilled) | 88M | vs O2: 0.8762 | 0.9516 / 0.7449<br>0.9186 / 0.8172 | 0.9646 / 0.7056<br>0.9246 / 0.8045 | $32 \times (50 \sim 125)$ | Epoch=10, Sample=0.1 |
 
 ---
 
 ### 2.3 TE - Base Backbone Fine-tuned Models (Fine-tuned from Base Architectures)
 
-> **Note:**  
-> - **HuggingFace Base Backbone & Link**: Pure pretrained encoder architectures from HuggingFace.  
-> - **Our Fine-tuned Model & Link**: Models fine-tuned from scratch on task-sampled data. *(Released for custom benchmarking; not used in paper core results).*
-
-| Model ID | HuggingFace Base Backbone & Link (Pretrained Only) | Our Fine-tuned Model & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Fine-tuning Configuration |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Proxy1_base** | [`FacebookAI/roberta-base`](https://huggingface.co/FacebookAI/roberta-base) | 🚀 Uploading soon | 0.125B | vs O1: 0.8622 | 0.9553 / 0.6809<br>0.9484 / 0.7033 | 0.9637 / 0.5841<br>0.9350 / 0.7219 | $32 \times (28 \sim 79)$ | Epoch = 10 |
-| **Proxy2_base** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 🚀 Uploading soon | 11.3M | - | - | - | $32 \times (50 \sim 160)$ | - |
-| **Proxy3_base** | [`huawei-noah/TinyBERT_General_4L_312D`](https://huggingface.co/huawei-noah/TinyBERT_General_4L_312D) | 🚀 Uploading soon | 14M | - | - | - | $32 \times (45 \sim 140)$ | - |
+| Model ID | Hugging Face Backbone & Link | # Params | Relative Accuracy Max($F_1$) | Max(Prec) / Rec | Max(Rec) / Prec | Throughput (items/s) | Fine-tuning Configuration |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Proxy1_base** | [`FacebookAI/roberta-base`](https://huggingface.co/FacebookAI/roberta-base) | 0.125B | vs O1: 0.8622 | 0.9553 / 0.6809<br>0.9484 / 0.7033 | 0.9637 / 0.5841<br>0.9350 / 0.7219 | $32 \times (28 \sim 79)$ | Epoch = 10 |
+| **Proxy2_base** | [`prajjwal1/bert-mini`](https://huggingface.co/prajjwal1/bert-mini) | 11.3M | - | - | - | $32 \times (50 \sim 160)$ | - |
+| **Proxy3_base** | [`huawei-noah/TinyBERT_General_4L_312D`](https://huggingface.co/huawei-noah/TinyBERT_General_4L_312D) | 14M | - | - | - | $32 \times (45 \sim 140)$ | - |
 
 ---
 
