@@ -92,7 +92,7 @@ Experiments are conducted on three real-world attributed/multimodal graph datase
 
 #### Query Generation & Aggregation Constraints
 Query graphs $Q$ are generated via **Random Walks** on the data graph, with aggregate attributes and ML predicates attached:
-* **Query Topologies:** The random walk generation natively produces diverse structural motifs. Due to the high connectivity of the underlying data graphs, **complex cyclic structures dominate the workloads (>90% cycles)**, while trees, paths, and star motifs constitute the remaining minority.
+* **Query Topologies:** The random walk generation produces diverse structural motifs. Due to the high connectivity of the underlying data graphs, **complex cyclic structures dominate the workloads (>90% cycles)**, while trees, paths, and star motifs constitute the remaining minority.
 * **Aggregation Constraints:** To ensure valid `SUM` and `AVG` aggregations over $Q$, each query must contain at least one numeric attribute:
   * **`Parler` / `Parler-E`:** The `upvotes` attribute of a `post` vertex.
   * **`Amazon`:** The `price` or `rating` attribute of a `product` vertex.
