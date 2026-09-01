@@ -175,8 +175,8 @@ def process_single_query(q_name, budget, args, header, vertices, edges, p1_score
 
 def main():
     parser = argparse.ArgumentParser(description="Batch Run Query-Specific AQP Pipeline")
-    parser.add_argument("--parent_dataset", default="amazon_data")
-    parser.add_argument("--dataset", required=True)
+    parser.add_argument("--parent_dataset", default="amazon")
+    # parser.add_argument("--dataset", required=True)
     parser.add_argument("--fastest_bin", required=True)
     parser.add_argument("--ablation_csv", required=True)
     parser.add_argument("--table1", required=True)
@@ -194,7 +194,7 @@ def main():
     parser.add_argument("--workers", type=int, default=8, help="最大并发线程数")
     args = parser.parse_args()
 
-    base_dir = f"/home/wangshuo/resource/datasets/{args.parent_dataset}/{args.dataset}"
+    base_dir = f"/home/hp/PROXY/datasets/{args.parent_dataset}"
     graph_path = os.path.join(base_dir, "data_graph", "parler.graph")
     mapping_path = os.path.join(base_dir, "data_graph", "id_mapping.csv")
     config_path = os.path.join(base_dir, "data_graph", "core_nodes_config.json")
