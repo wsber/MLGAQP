@@ -22,7 +22,7 @@ This repository provides the complete code and configuration required to reprodu
 ---
 
 > ### (2) Technical Report & Supplementary Theoretical Proofs
-> The repository provides an extended technical report ([**`TR.pdf`**](./TR-V0.8.pdf)) to address reviewer feedback and provide complete mathematical derivations, system models, and extended benchmarks.
+> The repository provides an extended technical report ([**`Technical_Report.pdf`**](./Technical_Report_0_9.pdf)) to address reviewer feedback and provide complete mathematical derivations, system models, and extended benchmarks.
 > 
 > **Key Contents & Completed Proofs in TR:**
 > * **Rigorous Proof of Theorem 9 (\textsf{AVG} Consistency & Asymptotic Bias):** Complete mathematical proof establishing true consistency and $\mathcal{O}(m^{-1})$ asymptotic bias under the joint asymptotic regime ($K, m \to \infty, m = o(K)$), utilizing a two-step orthogonal error decomposition and exact ratio algebraic identities.
