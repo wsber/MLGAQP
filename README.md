@@ -222,27 +222,8 @@ chmod +x *.sh
 ```
 ---
 
-### 1.1. Master Script (All Workloads & Aggregations)
+### 1.1. Exp Script (All Workloads & Aggregations)
 To automatically run the entire pipeline (including C++ weight materialization and stratified sampling) across all three workloads (`Parler`, `Parler-E`, `Amazon`) and generate all data required for plotting:
-<!-- 
-```bash
-# Ensure your conda environment is activated
-conda activate iogs
-
-# Grant execute permissions and run the master script
-chmod +x scripts/run_all_experiments.sh
-bash scripts/run_all_experiments.sh
-``` -->
-
----
-
-### 1.2. Workload-Specific One-Click Scripts
-If you wish to evaluate or debug a specific dataset without running the entire multi-hour benchmark suite, dedicated one-click automation scripts are provided.
-
-#### Example: Parler (`COUNT` Mode)
-The script `run_parler_count.sh` automates the end-to-end workflow on the **Parler** workload in `COUNT` mode:
-1. **Step 1 (Offline Projection & Materialization):** Invokes the C++ engine to perform uniform tree sampling, estimate projection extension weights $\hat{w}(\psi)$, and materialize the compact core instance space.
-2. **Step 2 (Online Proxy Sampling):** Executes proxy-guided stratified importance sampling across budget gradients $\alpha \in [1\%, 90\%]$ with 5 independent runs per tick.
 
 ```bash
 # 1. Activate conda environment
@@ -285,7 +266,30 @@ chmod +x *.sh
 
 ./run_all_avg.sh
 
-# 4. Execuate Single workload test
+```
+
+> 📝 **Logging Notice:** 
+> All shell scripts (`.sh`) automatically redirect their runtime outputs, execution traces, and error logs to the **`pythonProject/logs/`** directory (e.g., `pythonProject/logs/<script_name>.log`) for persistent tracking and non-blocking background execution.
+
+
+---
+
+### 1.2. Workload-Specific One-Click Scripts
+If you wish to evaluate or debug a specific dataset without running the entire multi-hour benchmark suite, dedicated one-click automation scripts are provided.
+
+#### Example: Parler (`COUNT` Mode)
+The script `run_parler_count.sh` automates the end-to-end workflow on the **Parler** workload in `COUNT` mode:
+1. **Step 1 (Offline Projection & Materialization):** Invokes the C++ engine to perform uniform tree sampling, estimate projection extension weights $\hat{w}(\psi)$, and materialize the compact core instance space.
+2. **Step 2 (Online Proxy Sampling):** Executes proxy-guided stratified importance sampling across budget gradients $\alpha \in [1\%, 90\%]$ with 5 independent runs per tick.
+
+```bash
+# 1. Activate conda environment
+conda activate iogs
+cd pythonProject/scripts
+# 2. Grant execution permission
+chmod +x *.sh
+
+# 3. Execuate Single workload test
 
 ./run_parler_count.sh
 ./run_parler_sum.sh
