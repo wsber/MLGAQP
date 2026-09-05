@@ -9,7 +9,7 @@ venv/
 *.pdf
 *.log
 datasets/parler-E/results/efficiency
-datasets/amazon/results/efficiency
+# datasets/amazon/results/efficiency
 datasets/*/results/aggregated_results_count
 datasets/*/results/aggregated_results_sum
 datasets/*/results/structure_estimate_count
