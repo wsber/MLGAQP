@@ -222,7 +222,7 @@ chmod +x *.sh
 ```
 ---
 
-### 1.1. Exp Script (All Workloads & Aggregations)
+### 1.1. Exp Scripts (All Workloads & Aggregations)
 To automatically run the entire pipeline (including C++ weight materialization and stratified sampling) across all three workloads (`Parler`, `Parler-E`, `Amazon`) and generate all data required for plotting:
 
 ```bash
