@@ -27,8 +27,8 @@ This repository provides the complete code and configuration required to reprodu
 > **Key Contents & Completed Proofs in TR:**
 > * **Rigorous Proof of Theorem 9 (\textsf{AVG} Consistency & Asymptotic Bias):** Complete mathematical proof establishing true consistency and $\mathcal{O}(m^{-1})$ asymptotic bias under the joint asymptotic regime ($K, m \to \infty, m = o(K)$), utilizing a two-step orthogonal error decomposition and exact ratio algebraic identities.
 > * **Uniform Tree-Sampling Proof:** Complete induction proof demonstrating that top-down sampling over the Candidate Space (CS) summary is strictly uniform ($P(h) = 1/|\Omega|$) and lossless.
-> * **Refined End-to-End Cost Model:** Detailed latency characterization decoupling serial in-memory CPU graph operations ($C_{\text{CS}} + K \cdot c_{\text{tree}} \approx 800\text{--}1000\text{ ms}$ for $K=6,000$) from heavy GPU ML inferences ($m \cdot \bar{c}_{\text{eff}}$).
-> * **Concrete End-to-End Case Study:** Detailed operational walkthrough demonstrating \textsc{Proxy}'s execution flow on multimodal e-commerce graphs.
+> * **Refined End-to-End Cost Model:** Detailed latency characterization decoupling serial in-memory CPU graph operations ($C_{\text{CS}} + K \cdot c_{\text{tree}} \approx 800\text{--}1000\text{ ms}$ for $K=6,0000$) from heavy GPU ML inferences ($m \cdot \bar{c}_{\text{eff}}$).
+> * **Case Study:** Multimodal e-commerce graphs.
 > 
 > *📌 Ongoing Additions (Actively being expanded):* Formal theoretical break-even analysis ($S > 1/(1-\alpha)$), exhaustive workload characterization tables (>90% cyclic query topologies, selectivities, and projection reduction $|\hat{\Psi}|/|\Phi|$), and fine-grained cache-hit profiling.
 
