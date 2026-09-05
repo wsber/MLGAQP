@@ -1,0 +1,4 @@
+dataset_name,method,agg_mode,num_queries,mean_are,avg_total_cost
+parler,WO,count,246,0.018038187180477887,3670.032520325203
+dataset_three,WO,count,246,0.018038187180477887,3670.032520325203
+dataset_three,WO,count,246,0.02093216220886803,3672.508130081301
