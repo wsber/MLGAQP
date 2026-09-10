@@ -54,20 +54,20 @@ This repository provides the complete code and configuration required to reprodu
 
 ---
 
-## (5) Environment Setup
+> ### (5) Environment Setup
 
-Before running the code, please follow the steps below to set up the Python virtual environment and compile the underlying C++ sampling engine.
+> Before running the code, please follow the steps below to set up the Python virtual environment and compile the underlying C++ sampling engine.
 
-### 1. Python Environment (Conda)
-Python 3.10 is recommended:
-```bash
-# 1. Create and activate conda virtual environment
-conda create -n iogs python=3.10 -y
-conda activate iogs
+>### 1. Python Environment (Conda)
+>Python 3.10 is recommended:
+>```bash
+># 1. Create and activate conda virtual environment
+>conda create -n iogs python=3.10 -y
+>conda activate iogs
 
-# 2. Install all dependencies in one click
-pip install -r requirements.txt
-```
+># 2. Install all dependencies in one click
+>pip install -r requirements.txt
+>```
 
 ### 2. C++ Sampling Engine Compilation
 The underlying graph matching and candidate space tree sampling engine is developed in C++20, depending on CMake, Boost, and GSL:
