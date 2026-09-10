@@ -54,35 +54,35 @@ This repository provides the complete code and configuration required to reprodu
 
 ---
 
+
 > ### (5) Environment Setup
-
 > Before running the code, please follow the steps below to set up the Python virtual environment and compile the underlying C++ sampling engine.
-
->### 1. Python Environment (Conda)
->Python 3.10 is recommended:
->```bash
-># 1. Create and activate conda virtual environment
->conda create -n iogs python=3.10 -y
->conda activate iogs
-
-># 2. Install all dependencies in one click
->pip install -r requirements.txt
->```
-
-### 2. C++ Sampling Engine Compilation
-The underlying graph matching and candidate space tree sampling engine is developed in C++20, depending on CMake, Boost, and GSL:
-```bash
-# 1. Install system dependencies (Ubuntu/Debian)
-conda install -c conda-forge cmake gxx_linux-64 boost gsl -y
-
-# 2. Compile to generate the Fastest binary executable (Pre-compiled binaries are included; the steps below demonstrate recompilation)
-cd cProject
-mkdir -p build && cd build
-cmake ..
-make -j$(nproc)
-cd ../..
-```
-*Upon successful compilation, the binary executable will be located at `cProject/build/Fastest`.*
+> 
+> #### 1. Python Environment (Conda)
+> Python 3.10 is recommended:
+> ```bash
+> # 1. Create and activate conda virtual environment
+> conda create -n iogs python=3.10 -y
+> conda activate iogs
+> 
+> # 2. Install all dependencies in one click
+> pip install -r requirements.txt
+> ```
+> 
+> #### 2. C++ Sampling Engine Compilation
+> The underlying graph matching and candidate space tree sampling engine is developed in C++20, depending on CMake, Boost, and GSL:
+> ```bash
+> # 1. Install system dependencies (Ubuntu/Debian)
+> conda install -c conda-forge cmake gxx_linux-64 boost gsl -y
+> 
+> # 2. Compile to generate the Fastest binary executable (Pre-compiled binaries are included; the steps below demonstrate recompilation)
+> cd cProject
+> mkdir -p build && cd build
+> cmake ..
+> make -j$(nproc)
+> cd ../..
+> ```
+> *Upon successful compilation, the binary executable will be located at `cProject/build/Fastest`.*
 
 ---
 
