@@ -28,6 +28,13 @@ All machine learning (ML) predicate inference tasks in this project rely on a co
    * **Pretrained Models (Off-the-shelf)**: General-purpose pretrained models downloaded directly from Hugging Face and used out-of-the-box.
    * **Task-Specific Fine-tuned Models**: Initialized from Hugging Face checkpoints that already feature corresponding downstream classification heads (e.g., MNLI/SST-2), then lightly fine-tuned on randomly sampled instances (500–1000) from target datasets (e.g., Parler/Amazon) to construct distinct $F_1$ performance tiers.
    * **Base Backbone Fine-tuned Models**: Fine-tuned on sampled target dataset instances starting from pure architectural backbones (e.g., `bert-mini`, `deberta-v3-base`).
+
+> **Architectural Highlight: No Post-Hoc Calibration Required**
+> 
+> You will notice that **none of the Proxy models in this repository include a calibration step** (e.g., Temperature Scaling or Platt Scaling). The proxy scores $s(\psi)$ output to the CSV files are pure, raw Softmax/Sigmoid logits. 
+> * **Why?** This intentionally demonstrates the **generality and robustness** of the PROXY framework. Because our system relies on Inverse Probability Weighting (IPW) and defensive $\epsilon$-smoothing, the final approximation is mathematically immune to bias caused by uncalibrated, overconfident neural networks. 
+> * **Benefit for Practitioners**: You can drop in *any* off-the-shelf model from Hugging Face as a proxy without needing to construct held-out validation sets to calibrate its output probabilities. The raw rank-order signals are sufficient to drastically reduce sampling variance.
+
 3. **Benchmarking Environment**: All inference throughput metrics (items/s) were empirically benchmarked on a single **NVIDIA GeForce RTX 3090 GPU (24GB VRAM)** with Batch Size = 32.
 4. **Scope of Paper Experiments & Extended Model Zoo**: 
    * **Paper Core Benchmark**: In the paper's reported core experimental evaluations, **only the NLI Base Fine-tuned models (specifically `Proxy4_base` in Section 1.3) and the TE Distil model (specifically `Proxy2_distil` in Section 2.2) are utilized**.
