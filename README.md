@@ -320,6 +320,4 @@ chmod +x *.sh
 
 ---
 
----
-## The following are the experimental details that are being sorted out and supplemented. All the above content is now ready and can fully reproduce the experiments in the paper and the supplementary experiments in rebuttal..
 
