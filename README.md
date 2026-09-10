@@ -86,13 +86,13 @@ cd ../..
 
 ---
 
-## 0. Experimental Foundation: Datasets & ML Predicate Architecture
+## 1. Experimental Foundation: Datasets & ML Predicate Architecture
 
 Before running experiments, please familiarize yourself with the underlying graph datasets, synthetic query workloads, and machine learning predicate architectures.
 
 ---
 
-### 0.1. Datasets & Query Workloads
+### 1.1. Datasets & Query Workloads
 
 Experiments are conducted on three real-world attributed/multimodal graph datasets:
 
@@ -113,7 +113,7 @@ Query graphs $Q$ are generated via **Random Walks** on the data graph, with aggr
 
 ---
 
-### 0.2. ML Predicates: Oracle vs. Proxy Models
+### 1.2. ML Predicates: Oracle vs. Proxy Models
 
 Each atomic ML predicate $\mathcal{P}_i$ is assigned an **accurate Oracle model** (for exact, unbiased validation) and a **lightweight Proxy model** (for efficient approximate scoring and guiding stratified importance sampling):
 
@@ -128,7 +128,7 @@ Each atomic ML predicate $\mathcal{P}_i$ is assigned an **accurate Oracle model*
 
 ---
 
-### 0.3. Hardware Setup
+### 1.3. Hardware Setup
 
 All experiments were conducted on a high-performance server with the following specifications:
 * **Operating System:** Ubuntu 22.04 LTS
@@ -140,7 +140,7 @@ All experiments were conducted on a high-performance server with the following s
 
 ---
 
-### 0.4. Repository Structure
+### 1.4. Repository Structure
 
 The project is structured with a high-performance **C++ sampling engine (`cProject`)** at the lower level and a **Python proxy-guided sampling framework (`pythonProject`)** at the upper level:
 
@@ -199,7 +199,7 @@ PROXY/
 
 ---
 
-## 1. One-Click Reproduction
+## 2. One-Click Reproduction
 
 You can reproduce the experimental results either by running the master all-in-one script across all datasets or by executing dedicated workload-specific one-click scripts.
 
@@ -224,7 +224,7 @@ chmod +x *.sh
 ```
 ---
 
-### 1.1. Exp Scripts (All Workloads & Aggregations)
+### 2.1. Exp Scripts (All Workloads & Aggregations)
 To automatically run the entire pipeline (including C++ weight materialization and stratified sampling) across all three workloads (`Parler`, `Parler-E`, `Amazon`) and generate all data required for plotting:
 
 ```bash
@@ -276,7 +276,7 @@ chmod +x *.sh
 
 ---
 
-### 1.2. Workload-Specific One-Click Scripts
+### 2.2. Workload-Specific One-Click Scripts
 If you wish to evaluate or debug a specific dataset without running the entire multi-hour benchmark suite, dedicated one-click automation scripts are provided.
 
 #### Example: Parler (`COUNT` Mode)
